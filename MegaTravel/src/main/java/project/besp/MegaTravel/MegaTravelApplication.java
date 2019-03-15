@@ -8,6 +8,7 @@ public class MegaTravelApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MegaTravelApplication.class, args);
+		System.out.println("helloooooooooooo");
 	}
 
 }
