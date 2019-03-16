@@ -4,20 +4,27 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "certificatecsr")
 public class CertificateCSR {
 	
 
 	@Id
 	@GeneratedValue
+    @Column(name = "certificatecsr_id", nullable = false, updatable = false)
 	private Long id;
 	
+	@Column(name = "serial", nullable = true)
+	private long serial;
+
+	@Column(name = "alias", nullable = true)
+	private String alias;
 
 	
-	@Column(nullable = true)
-	private long serial;
-		
+	@Column(name="ocsp_valid", nullable = false)
+	private boolean ocspValid;
 
 	public CertificateCSR() {
 		super();
@@ -75,13 +82,6 @@ public class CertificateCSR {
 		this.ocspValid = ocspValid;
 	}
 
-
-	@Column(nullable = true)
-	private String alias;
-
-	
-	@Column(nullable = false)
-	private boolean ocspValid;
 
 
 }

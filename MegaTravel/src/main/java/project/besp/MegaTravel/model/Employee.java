@@ -1,13 +1,17 @@
 package project.besp.MegaTravel.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "employee")
 public class Employee extends User {
 	
 	@Enumerated(EnumType.STRING)
+    @Column(name="employee_role",nullable=true)
 	public EmployeeRole employeeRole;
 
 	public Employee() {
