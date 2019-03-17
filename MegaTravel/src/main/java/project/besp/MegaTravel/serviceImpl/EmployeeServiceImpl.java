@@ -32,9 +32,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public Employee preuzmiZaposlenog(Long id) {
-		// TODO Auto-generated method stub
-		return employeeRepository.findOne(id);
+	public Employee getEmployee (Long id) {		
+		return employeeRepository.getOne(id);
 	}
 
 }

@@ -9,6 +9,6 @@ public interface EmployeeService {
 	
 	Employee registracijaZaposlenog(Employee z);
 
-	Employee preuzmiZaposlenog(Long id);
+	Employee getEmployee(Long id);
 
 }

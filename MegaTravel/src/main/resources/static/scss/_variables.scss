@@ -1,0 +1,63 @@
+/********************************************************************
+	ZYPOP - HTTPS://ZYPOPWEBTEMPLATES.COM
+	FREE WEB TEMPLATES
+********************************************************************/
+
+
+/**
+This file contains the CSS variables for this template, built on the Bootstrap framework 
+See https://getbootstrap.com/docs/4.0/getting-started/introduction/ for more information
+**/
+
+
+/**
+Font properties
+**/
+$font-family-base: 'Poppins', Arial, 'sans-serif';
+$line-height-base: 2.2 !default;
+
+/**
+Main colours
+**/
+$primary:       #111 !default;
+$secondary:     #456990 !default;
+$body-color:    #999 !default; 
+// Background color of slider and sidebar boxes 
+$content-bg-color: #f8f8f8;
+
+/**
+Change a few bootstrap defaults
+**/
+$component-active-bg: $secondary !default;
+$pagination-active-bg:  $secondary !default;
+$pagination-active-border-color: $secondary !default;
+
+/**
+Carousel settings
+**/
+$carousel-control-width: 2% !default;
+$carousel-control-color: #fff !default;
+$carousel-control-opacity: 1;
+
+
+/**
+Set the max container widths
+**/
+$container-max-widths: (
+  sm: 740px,
+  md: 920px,
+  lg: 1060px,
+  xl: 1280px
+) !default;
+
+
+
+
+/** 
+Uncomment to remove all rounded corners
+or change rounded corners from Bootstrap default values
+**/
+
+$border-radius: 0;
+$border-radius-lg: 0;
+$border-radius-sm: 0;

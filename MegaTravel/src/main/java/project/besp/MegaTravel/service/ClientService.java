@@ -10,7 +10,7 @@ public interface ClientService {
 	
 	Client registracijaKlijentaF(Client k);
 
-	Client preuzmiKlijenta(Long id);
+	Client getClient(Long id);
 
 
 

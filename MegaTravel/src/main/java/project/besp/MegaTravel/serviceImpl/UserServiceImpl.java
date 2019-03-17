@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User login(String userName, String password) {
 		// TODO Auto-generated method stub
-		return null;
+		return userRepository.findByUserNameAndPassword(userName, password);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package project.besp.MegaTravel.data;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "certificatecsr")
-public class CertificateCSR {
+public class CertificateCSR implements Serializable{
 	
 
 	@Id

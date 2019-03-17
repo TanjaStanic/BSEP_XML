@@ -18,7 +18,7 @@ import project.besp.MegaTravel.service.RoleService;
 public class ClientServiceImpl implements ClientService{
 	
 	@Autowired
-	ClientRepository userRepository;
+	ClientRepository clientRepository;
 	
 	@Autowired
 	RoleService roleServis;
@@ -30,7 +30,7 @@ public class ClientServiceImpl implements ClientService{
 		k.role = UserRole.Client;
 		k.roles = new ArrayList<Role>();
 		k.roles.add(roleServis.findOne(Long.valueOf(1)));
-		return userRepository.save(k);
+		return clientRepository.save(k);
 	}
 
 	@Override
@@ -40,12 +40,14 @@ public class ClientServiceImpl implements ClientService{
 		k.role = UserRole.Client;
 		k.roles = new ArrayList<Role>();
 		k.roles.add(roleServis.findOne(Long.valueOf(1)));
-		return userRepository.save(k);
+		return clientRepository.save(k);
 	}
 
 	@Override
-	public Client preuzmiKlijenta(Long id) {
-		return userRepository.findOne(id);
+	public Client getClient(Long id) {
+		return clientRepository.getOne(id);
+		//return clientRepository.findById(id);
+		
 	}
 
 }

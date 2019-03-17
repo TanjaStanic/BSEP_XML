@@ -1,5 +1,6 @@
 package project.besp.MegaTravel.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -7,11 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name = "privilege")
-public class Privilege {
+@Inheritance(strategy=InheritanceType.JOINED)
+public class Privilege implements Serializable{
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
