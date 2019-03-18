@@ -56,6 +56,7 @@ public class EmployeeController {
 			if (it.hasNext()) {
 		
 				System.out.println(operationName);
+				System.out.println(it.next().name.toString());
 				if (it.next().name.toString().equals(operationName))
 					return true;
 			}
