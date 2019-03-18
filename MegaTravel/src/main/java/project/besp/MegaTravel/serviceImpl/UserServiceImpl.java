@@ -22,26 +22,28 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public User login(String userName, String password) {
-		// TODO Auto-generated method stub
+	
 		return userRepository.findByUserNameAndPassword(userName, password);
 	}
 
 	@Override
-	public User save(User k) {
-		// TODO Auto-generated method stub
-		return null;
+	public User save(User u) {
+	
+		return userRepository.save(u);
 	}
 
 	@Override
-	public void promenaLozinke(String l) {
-		// TODO Auto-generated method stub
+	public void promenaLozinke(String p) {
 		
+		User u = (User) session.getAttribute("user");
+		u.password = p;
+		userRepository.save(u);
 	}
 
 	@Override
 	public User preuzmiKorisnika(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return userRepository.getOne(id);
 	}
 
 }

@@ -25,7 +25,7 @@ public class ClientServiceImpl implements ClientService{
 
 	@Override
 	public Client registracijaKlijenta(Client k) {
-		// TODO Auto-generated method stub
+		
 	    k.type = "P";
 		k.role = UserRole.Client;
 		k.roles = new ArrayList<Role>();
@@ -35,7 +35,7 @@ public class ClientServiceImpl implements ClientService{
 
 	@Override
 	public Client registracijaKlijentaF(Client k) {
-		// TODO Auto-generated method stub
+	
 		k.type = "F";
 		k.role = UserRole.Client;
 		k.roles = new ArrayList<Role>();
@@ -45,9 +45,8 @@ public class ClientServiceImpl implements ClientService{
 
 	@Override
 	public Client getClient(Long id) {
-		return clientRepository.getOne(id);
-		//return clientRepository.findById(id);
 		
+		return clientRepository.getOne(id);
 	}
 
 }
