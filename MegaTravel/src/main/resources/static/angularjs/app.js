@@ -8,7 +8,7 @@ bespApp.config(function($routeProvider) {
 
 	$routeProvider.when('/', {
 		templateUrl : 'start.html'
-	}).when('/certificate', {
+	}).when('/generate', {
 		templateUrl : 'generate.html'
 	})
 
