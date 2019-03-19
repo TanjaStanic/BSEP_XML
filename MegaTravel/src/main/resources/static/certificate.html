@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<!-- Main content area -->
+
+<!-- Main CSS --> 
+        <link rel="stylesheet" href="css/style.css">
+
+        <!-- Font Awesome -->
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<div ng-controller="generateController" ng-init="caCertificate()"></div>
+<body ng-app="bespApp" >
+
+        <main class="container">
+            <div class="row">
+                
+                <!-- Main content -->
+                <div class="col-sm-8">
+                    <article>
+
+                        <h3>Certificates</h3>
+
+                        <fieldset>
+                            
+                           <label>Key algorithm?</label>
+			                 <div class="form-group">
+				                  <label class="radio-inline"> <input type="radio" value="DSA"
+				                         	ng-model="cert.keyAlgorithm" required /> DSA
+			                   	</label> <label class="radio-inline"> <input type="radio"
+			           		value="RSA" ng-model="cert.keyAlgorithm" required /> RSA
+				        </label>
+			               </div>
+			               
+			               	<label>Key size?</label>
+		         	<div class="form-group">
+			       	<label class="radio-inline"> <input type="radio" value="512"
+			  		ng-model="cert.keySize" required /> 512
+			        	</label> <label class="radio-inline"> <input type="radio"
+					value="1024" ng-model="cert.keySize" required /> 1024
+			       	</label> <label class="radio-inline"> <input type="radio"
+					value="2048" ng-model="cert.keySize" required /> 2048
+			         	</label> <label class="radio-inline"> <input type="radio"
+					value="4096" ng-model="cert.keySize" required /> 4096
+			      	</label>
+			        </div>
+                            <div class="form-group">
+                                <label for="exampleInputName">Common name</label>
+                                <input type="text" class="form-control" id="exampleInputName">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail">Given name</label>
+                                <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputEmail">Surname</label>
+                                <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputEmail">Organization</label>
+                                <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputEmail">Organization unit</label>
+                                <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputEmail">Country</label>
+                                <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputEmail">Email</label>
+                                <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+                            </div>
+                            
+                            <div class="form-group">
+				<label>Valid from:</label> <input type="date" name="date"
+					ng-Model="cert.validFrom" class="form-control"
+					placeholder="Valid from" />
+			</div>
+			<div class="form-group">
+				<label>Valid to:</label> <input type="date" ng-Model="cert.validTo"
+					class="form-control" placeholder="Valid to" />
+			</div>
+
+			<label>Self assigned?</label>
+			<div class="form-group">
+				<label class="radio-inline"> <input type="radio" value=true
+					ng-model="cert.root" required ng-click="loadIssuers()" /> Yes
+				</label> <label class="radio-inline"> <input type="radio"
+					value=false ng-model="cert.root" required /> No
+				</label>
+			</div>
+
+			<label>Certificate issuer :</label>
+			<div>
+				<select ng-model="cert.issuerName"
+					ng-options="x for x in caCertificate">
+				</select>
+			</div>
+
+			<label ng-show="!uloga">Certification Authority?</label>
+			<div class="form-group" ng-show="!uloga">
+				<label class="radio-inline"> <input type="radio" value=true
+					ng-model="cert.certificationAuthority" required /> Yes
+				</label> <label class="radio-inline"> <input type="radio"
+					value=false ng-model="cert.certificationAuthority" required /> No
+				</label>
+			</div>
+			<div class="form-group">
+				<label>Key alias:</label> <input type="text" name="alias"
+					ng-Model="cert.keyAlias" class="form-control"
+					placeholder="Enter alias" required />
+			</div>
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-success"
+					ng-Click="generateCertificate(cert)">Submit</button>
+			</div>
+                        </fieldset>
+
+                    </article>
+                </div>
+                </div>
+                </main>
+                </body>
+                </div>
+                </html>
+                
+                
