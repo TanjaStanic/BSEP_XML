@@ -134,5 +134,42 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 	      });
 	   }
 	
+$scope.generateCRSCertificate= function(){
+		
+	    generateFactory.generateCRSCertificate($scope.ccrs).then(function(response){
+    		if(response.status == 'OK'){
+    			alert("USPJESNO GENERISANJE!");
+				
+    			$scope.error = false;
+    			//$location.path('/index')
+    			$scope.cert = null;
+    		} else {
+    			$scope.error = true;
+    		}
+    	});
+	}
+	
+	
+    $scope.getCertificate = function(){
+		
+    	generateFactory.getCertificate($scope.serial).then(function(response){
+    		
+    	});
+	}	
+	
+    $scope.delCertificate = function(){
+		
+    	generateFactory.delCertificate($scope.serial).then(function(response){
+    		
+    	});
+	}
+  
+    $scope.statusCertificate = function() {
+    	generateFactory.statusCertificate($scope.serial).then(
+	      function(response) {
+	      $scope.status = response.data; 
+	      });
+	   }
+	
 	
 });

@@ -38,5 +38,14 @@ bespApp.factory('generateFactory', function generateFactory($http) {
 	data.statusCertificate = function(serial) {
 		return $http.get( "/certificate/statusCertificate/" + serial);
 	}
+	
+	data.getCertificate = function(serial) {
+		return $http.get( "/certificate/getCertificate/" + serial);
+	}
+	
+	data.delCertificate = function(serial) {
+		return $http.delete( "/certificate/deleteCertificate/" + serial);
+	}
+	
 	return data;
 });
