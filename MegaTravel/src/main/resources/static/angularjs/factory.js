@@ -20,5 +20,20 @@ bespApp.factory('generateFactory', function generateFactory($http) {
 	data.logout = function(){
 		return $http.get("/user/logout");
 	};
+	data.getAllUsers = function(){
+		return $http.get("/user/getAll");
+	};
+	
+	data.generateCRSCertificate = function(ccrs) {
+		return $http.post( "/certificate/generateCRSCertificate" ,ccrs);
+	};
+	
+	data.caCertificate = function() {
+		return $http.get( "/certificate/getValidCertificates");
+	};
+	
+	data.generateCertificate = function(cert) {
+		return $http.post( "/certificate/generateCertificate" ,cert);
+	}
 	return data;
 });

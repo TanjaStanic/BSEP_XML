@@ -1,5 +1,8 @@
 package project.besp.MegaTravel.serviceImpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +47,12 @@ public class UserServiceImpl implements UserService {
 	public User preuzmiKorisnika(Long id) {
 		
 		return userRepository.getOne(id);
+	}
+
+	@Override
+	public List<User> getAll() {
+		// TODO Auto-generated method stub
+		return userRepository.findAll();
 	}
 
 }

@@ -1,5 +1,8 @@
 package project.besp.MegaTravel.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import project.besp.MegaTravel.model.User;
@@ -14,4 +17,6 @@ public interface UserService {
 	void promenaLozinke(String l);
 	
 	User preuzmiKorisnika(Long id);
+	
+	List<User> getAll();
 }

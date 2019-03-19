@@ -1,5 +1,7 @@
 package project.besp.MegaTravel.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +45,15 @@ public class UserController {
 		User user = null;
 		session.setAttribute("user", user);
 		return new ResponseEntity<User>(HttpStatus.OK);
+	}
+	@GetMapping(path = "/getAll")
+	public ResponseEntity<List<User>> getAllUsers() {
+		User user = null;
+		
+		System.out.println("Number of users: " + userService.getAll().size());
+		
+		//return userService.getAll();
+		session.setAttribute("user", user);
+		return new ResponseEntity<List<User>>(HttpStatus.OK);
 	}
 }

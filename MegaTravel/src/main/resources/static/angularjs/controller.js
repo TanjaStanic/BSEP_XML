@@ -103,5 +103,30 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 			document.getElementById("admimSettings2").style.visibility = "hidden";
 			document.getElementById("admimSettings3").style.visibility = "hidden";
 		});
+	};
+	
+	$scope.caCertificate = function() {
+	    generateFactory.caCertificate().then(
+	      function(response) {
+	       $scope.caCertificate = response.data;
+	      });
+	   }
+	
+	
+	$scope.generateCertificate= function(){
+		
+		generateFactory.generateCertificate($scope.cert).then(function(response){
+    		if(response.status == 200){
+    			alert("USPJESNO GENERISANJE!");
+    			$scope.error = false;
+    			//$location.path('/index');
+    			$scope.cert = null;
+    		} else {
+    			$scope.error = true;
+    		}
+    	});
 	}
+
+	
+	
 });
