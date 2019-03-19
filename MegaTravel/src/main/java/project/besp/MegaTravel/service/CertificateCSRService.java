@@ -7,5 +7,4 @@ import project.besp.MegaTravel.data.CertificateCSR;
 @Service
 public interface CertificateCSRService {
 	CertificateCSR save(CertificateCSR c);
-
 }

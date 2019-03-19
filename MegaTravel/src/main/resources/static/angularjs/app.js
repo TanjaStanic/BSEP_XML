@@ -14,6 +14,10 @@ bespApp.config(function($routeProvider) {
 		templateUrl : 'checkStatus.html'
 	}).when('/generateCRS', {
 		templateUrl : 'generateCRS.html'
+	}).when('/deleteCertificates', {
+		templateUrl : 'deleteCertificate.html'
+	}).when('/search', {
+		templateUrl : 'search.html'
 	})
 
 });

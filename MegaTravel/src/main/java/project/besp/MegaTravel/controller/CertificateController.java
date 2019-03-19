@@ -59,6 +59,7 @@ public class CertificateController {
 	public CertificateGenerator cg = new CertificateGenerator();
 	public KeyStoreWriter ksw = new KeyStoreWriter();
 	public KeyStoreReader ksr = new KeyStoreReader();
+	public CertificateCSRService certificateCSRService;
 
 	@RequestMapping(value = "/getValidCertificates", method = RequestMethod.GET)
 	@ResponseBody
