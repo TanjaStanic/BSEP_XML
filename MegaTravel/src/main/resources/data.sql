@@ -1,4 +1,4 @@
-insert into user(user_name, password, role) values ('admin', 'admin', 'Employee');
+insert into user(user_name, password, role) values ('admin', 'admin', 'Administrator');
 
 insert into user(user_name, password, role) values ('London', '123456', 'Employee');
 insert into user(user_name, password, role) values ('Boston', '123456', 'Employee');
@@ -10,7 +10,6 @@ insert into user(user_name, password, role) values ('office3', '123456', 'Employ
 
 insert into user(user_name, password, role) values ('client', '123456', 'Client');
 
-insert into employee(user_id,employee_role) values (1, 'Administrator');
 insert into employee(user_id,employee_role) values (2, 'Branch');
 insert into employee(user_id,employee_role) values (3, 'Branch');
 insert into employee(user_id,employee_role) values (4, 'Branch');

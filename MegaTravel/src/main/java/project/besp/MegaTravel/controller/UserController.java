@@ -38,5 +38,10 @@ public class UserController {
 		}
 	}
 
-	
+	@GetMapping(path = "/logout")
+	public ResponseEntity<User> logout() {
+		User user = null;
+		session.setAttribute("user", user);
+		return new ResponseEntity<User>(HttpStatus.OK);
+	}
 }

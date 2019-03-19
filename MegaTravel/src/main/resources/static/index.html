@@ -56,29 +56,30 @@
                                 <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                         </li>
 
-                        <li class="nav-item">
+                        <li id="admimSettings1" class="nav-item">
                                     <a class="nav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">Generisanje certifikata</a>                                
                         </li>
 
 
-                        <li class="nav-item">
+                        <li id="admimSettings2" class="nav-item">
                                 <a class="nav-link" href="#">Search</a>
                         </li>
 
-                        <li class="nav-item">
-                                <a class="nav-link" href="#">Withdraw</a>
-                        </li>
-
-                        <li class="nav-item">
+                        <li id="admimSettings3" class="nav-item">
                                 <a class="nav-link" href="#">Check status</a>
                         </li>
                     </ul>
                     
                     <form class="form-inline header-search-form my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="text"  placeholder="Enter username" ng-model="userName">
-                        <input class="form-control mr-sm-2" type="password"  placeholder="Enter password" ng-model="password" >
+                        <input id="username" class="form-control mr-sm-2" type="text"  placeholder="Enter username" ng-model="userName">
+                        <input id="password" class="form-control mr-sm-2" type="password"  placeholder="Enter password" ng-model="password" >
                         
-                        <button class="btn btn-secondary my-2 my-sm-0" type="submit" ng-click="loginClick()">Loguj se</button>
+                        <button id = "loginButton" class="btn btn-secondary my-2 my-sm-0" type="submit" ng-click="loginClick()">Prijavi se</button>
+                        
+                    </form>
+                    <form class="form-inline header-search-form my-2 my-lg-0">
+
+                        <button id = "logoutButton" class="btn btn-secondary my-2 my-sm-0" type="submit" ng-click="logoutClick()">Odjavi se</button>
                         
                     </form>
                     

@@ -1,5 +1,5 @@
 package project.besp.MegaTravel.model;
 
 public enum UserRole {
-	Client,Employee;
+	Client,Employee,Administrator;
 }

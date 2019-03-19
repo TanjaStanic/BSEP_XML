@@ -47,18 +47,29 @@ public class EmployeeController {
 		}
 		User user = (User) session.getAttribute("user");
 		System.out.println("postoji user u sesiji !");
-
+		 
+		
 		Iterator<Role> iterator = user.roles.iterator();
 		System.out.println("uzeo iterator");
-		if (iterator.hasNext()) {
+		
+		
+		while (iterator.hasNext()) {
 			System.out.println("petlja za privilegije");
 			Iterator<Privilege> it = iterator.next().privileges.iterator();
-			if (it.hasNext()) {
-		
+
+			while (it.hasNext()) {
+				
+				
 				System.out.println(operationName);
 				System.out.println(it.next().name.toString());
-				if (it.next().name.toString().equals(operationName))
+				System.out.println(it.next().name);
+				if (it.next().name.equals(operationName)) {
 					return true;
+				}
+				if (it.next().name.toString().equals(operationName)) {
+					return true;
+
+				}
 			}
 		}
 		return false;

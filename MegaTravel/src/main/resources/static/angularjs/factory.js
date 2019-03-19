@@ -16,5 +16,9 @@ bespApp.factory('generateFactory', function generateFactory($http) {
 	data.getEmployee = function(){
 		return $http.get("/employee/getEmployee");
 	};
+	
+	data.logout = function(){
+		return $http.get("/user/logout");
+	};
 	return data;
 });
