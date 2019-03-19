@@ -34,6 +34,9 @@ bespApp.factory('generateFactory', function generateFactory($http) {
 	
 	data.generateCertificate = function(cert) {
 		return $http.post( "/certificate/generateCertificate" ,cert);
+	};
+	data.statusCertificate = function(serial) {
+		return $http.get( "/certificate/statusCertificate/" + serial);
 	}
 	return data;
 });

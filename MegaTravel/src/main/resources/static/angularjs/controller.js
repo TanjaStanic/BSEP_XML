@@ -127,6 +127,12 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
     	});
 	}
 
+	$scope.statusCertificate = function() {
+		generateFactory.statusCertificate($scope.serial).then(
+	      function(response) {
+	      $scope.status = response.data; 
+	      });
+	   }
 	
 	
 });

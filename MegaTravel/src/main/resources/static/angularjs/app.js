@@ -10,6 +10,8 @@ bespApp.config(function($routeProvider) {
 		templateUrl : 'start.html'
 	}).when('/generate', {
 		templateUrl : 'generate.html'
+	}).when('/checkStatus', {
+		templateUrl : 'checkStatus.html'
 	})
 
 });

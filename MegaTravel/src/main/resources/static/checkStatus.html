@@ -1,0 +1,23 @@
+<main class="container">
+            <div class="row" ng-controller="generateController">
+                
+                <!-- Main content -->
+                <div class="col-sm-8">
+                
+                <h3>Check status</h3>
+                <fieldset>
+                            <div class="form-group">
+                                <label >Serial number:</label>
+                                <input type="text" class="form-control" ng-Model="serial" >
+                            </div>
+							<div class="form-group">
+									<button type="submit" class="btn btn-success"
+								ng-disabled="myForm.$invalid" ng-Click="statusCertificate(serial)">Send</button>
+							</div>
+							<div class="form-group">
+								<label>Status:</label> {{status}}
+							</div>
+                        </fieldset>   
+                </div>
+             </div>
+</main>
