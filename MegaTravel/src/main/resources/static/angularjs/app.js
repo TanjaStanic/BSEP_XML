@@ -7,9 +7,9 @@ var bespApp = angular.module('bespApp', [ 'ngRoute']);
 bespApp.config(function($routeProvider) {
 
 	$routeProvider.when('/', {
-		templateUrl : 'index.html'
+		templateUrl : 'start.html'
 	}).when('/certificate', {
-		templateUrl : 'certificate.html'
+		templateUrl : 'generate.html'
 	})
 
 });
