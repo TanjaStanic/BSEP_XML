@@ -15,6 +15,9 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 		document.getElementById("admimSettings1").style.visibility = "hidden";
 		document.getElementById("admimSettings2").style.visibility = "hidden";
 		document.getElementById("admimSettings3").style.visibility = "hidden";
+		document.getElementById("admimSettings4").style.visibility = "hidden";
+		document.getElementById("admimSettings5").style.visibility = "hidden";
+
 		
 	}else if (role=='Employee'){
 		document.getElementById("loginButton").style.visibility = "hidden";
@@ -24,6 +27,8 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 		document.getElementById("admimSettings1").style.visibility = "hidden";
 		document.getElementById("admimSettings2").style.visibility = "hidden";
 		document.getElementById("admimSettings3").style.visibility = "hidden";
+		document.getElementById("admimSettings4").style.visibility = "hidden";
+		document.getElementById("admimSettings5").style.visibility = "hidden";
 
 	}else if (role=='Administrator'){
 		document.getElementById("loginButton").style.visibility = "hidden";
@@ -33,6 +38,8 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 		document.getElementById("admimSettings1").style.visibility = "visible";
 		document.getElementById("admimSettings2").style.visibility = "visible";
 		document.getElementById("admimSettings3").style.visibility = "visible";
+		document.getElementById("admimSettings4").style.visibility = "visible";
+		document.getElementById("admimSettings5").style.visibility = "visible";
 
 	}else if (role==null){
 		document.getElementById("loginButton").style.visibility = "visible";
@@ -42,6 +49,8 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 		document.getElementById("admimSettings1").style.visibility = "hidden";
 		document.getElementById("admimSettings2").style.visibility = "hidden";
 		document.getElementById("admimSettings3").style.visibility = "hidden";
+		document.getElementById("admimSettings4").style.visibility = "hidden";
+		document.getElementById("admimSettings5").style.visibility = "hidden";
 
 	}
 	$scope.loginClick = function(){
@@ -73,10 +82,14 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 						document.getElementById("admimSettings1").style.visibility = "visible";
 						document.getElementById("admimSettings2").style.visibility = "visible";
 						document.getElementById("admimSettings3").style.visibility = "visible";
+						document.getElementById("admimSettings4").style.visibility = "visible";
+						document.getElementById("admimSettings5").style.visibility = "visible";
 					} else{
 						document.getElementById("admimSettings1").style.visibility = "hidden";
 						document.getElementById("admimSettings2").style.visibility = "hidden";
 						document.getElementById("admimSettings3").style.visibility = "hidden";
+						document.getElementById("admimSettings4").style.visibility = "hidden";
+						document.getElementById("admimSettings5").style.visibility = "hidden";
 					}
 				} 
 				else {
@@ -102,6 +115,8 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 			document.getElementById("admimSettings1").style.visibility = "hidden";
 			document.getElementById("admimSettings2").style.visibility = "hidden";
 			document.getElementById("admimSettings3").style.visibility = "hidden";
+			document.getElementById("admimSettings4").style.visibility = "hidden";
+			document.getElementById("admimSettings5").style.visibility = "hidden";
 		});
 	};
 	
@@ -160,7 +175,12 @@ $scope.generateCRSCertificate= function(){
     $scope.delCertificate = function(){
 		
     	generateFactory.delCertificate($scope.serial).then(function(response){
-    		
+    		if(response.status == 'BAD_REQUEST'){
+    			$scope.status = 'Ne postoji sertifikat sa tim serijskim brojem!';
+    		}
+    		else {
+    			
+    		}
     	});
 	}
   
@@ -169,7 +189,7 @@ $scope.generateCRSCertificate= function(){
 	      function(response) {
 	      $scope.status = response.data; 
 	      });
-	   }
+	   };
 	
-	
+
 });

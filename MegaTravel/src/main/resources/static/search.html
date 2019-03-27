@@ -1,0 +1,40 @@
+<main class="container">
+            <div class="row">
+                
+                <!-- Main content -->
+                <div class="col-sm-8">
+                    <article>
+<div ng-controller="generateController" ng-init="caCertificate()">
+	<form name="myForm" novalidate style="width: 500px;">
+		
+			<div>
+			<h3>Lista validnih sertifikata</h3>
+
+                        <table class="table" >
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>rd</th>
+                                <th>Adfdfgge</th>
+                            </tr>
+                            <tr ng-repeat="x in caCertificate">
+                                <td>{{x.cert.keyAlgorithm}}</td>
+                                <td>{{x.issuerName}}</td>
+                                <td>{{x.validTo}}</td>
+                                <td>{{x.serialNumber}}</td>
+                                <td>{{x.commonName}}</td>
+                            </tr>
+                           
+
+                        </table>
+				
+			</div>
+
+			
+	</form>
+</div>
+</article>
+</div>
+</div>
+</main>
