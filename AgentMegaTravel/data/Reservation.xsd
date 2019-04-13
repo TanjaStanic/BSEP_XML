@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.mega-travel/reservation" xmlns="http://www.mega-travel/reservation"
+    xmlns:ns1="www.mega-travel/user" xmlns:ns2="http://www.mega-travel/user"
+    xmlns:ns3="http://www.mega-travel/accommodation">
+
+    <xs:import namespace="http://www.mega-travel/user" schemaLocation="User.xsd"/>
+    <xs:import namespace="http://www.mega-travel/accommodation" schemaLocation="Accommodation.xsd"/>
+    <xs:element name="reservation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:long">
+                            <xs:minInclusive value="0"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element ref="ns2:user"/>
+                <xs:element ref="ns3:accommodation"/>
+                <xs:element name="reservationStatus">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="cancelled"/>
+                            <xs:whiteSpace value="preserve"/>
+                            <xs:enumeration value="confirmed"/>
+                            <xs:enumeration value="arrived"/>
+                            <xs:enumeration value="rejected"/>
+                            <xs:enumeration value="pending"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element default="unrated" name="reservationRating">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="1"/>
+                            <xs:enumeration value="2"/>
+                            <xs:enumeration value="3"/>
+                            <xs:enumeration value="4"/>
+                            <xs:enumeration value="5"/>
+                            <xs:enumeration value="unrated"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

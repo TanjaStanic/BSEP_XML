@@ -190,6 +190,12 @@ public class CertificateController {
            
 	}
 
+	//za validnost uraditi sve tri stvari
+	//digitalni potpis, datum i povucenost
+	
+	//kad istekne mozemo da reizdamo sve, ili da svi koji su potomci traju krace
+	
+	//
 	@RequestMapping(value = "/statusCertificate/{serial}", method = RequestMethod.GET)
 	@ResponseBody
 	public ArrayList<String> statusCertificate(@PathVariable("serial") String serialNumber) throws KeyStoreException,

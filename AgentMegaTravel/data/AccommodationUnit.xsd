@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.mega-travel/accommodation-unit"
+    xmlns="http://www.mega-travel/accommodation-unit" xmlns:ns1="http://www.mega-travel/user">
+    <xs:import namespace="http://www.mega-travel/user" schemaLocation="User.xsd"/>
+    <xs:element name="accommodationUnit">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:long">
+                            <xs:minInclusive value="0"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="capacity" type="xs:positiveInteger"/>
+                <xs:element minOccurs="0" name="size">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:positiveInteger">
+                            <xs:minInclusive value="1"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element ref="pricing"/>
+                <xs:element maxOccurs="12" minOccurs="0" ref="additional_services"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="pricing">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:long">
+                            <xs:minInclusive value="0"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="price">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:double">
+                            <xs:minInclusive value="0"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="dateFrom" type="xs:date"/>
+                <xs:element name="dateTo">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:date"/>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="additional_services">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:long">
+                            <xs:minInclusive value="0"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="name">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="parking"/>
+                            <xs:enumeration value="WiFi"/>
+                            <xs:enumeration value="breakfast"/>
+                            <xs:enumeration value="half borad"/>
+                            <xs:whiteSpace value="preserve"/>
+                            <xs:enumeration value="full board"/>
+                            <xs:enumeration value="all inclusive"/>
+                            <xs:enumeration value="pet friendly"/>
+                            <xs:enumeration value="TV"/>
+                            <xs:enumeration value="kitchen"/>
+                            <xs:enumeration value="bathroom"/>
+                            <xs:enumeration value="free canceling"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="priceOfAdd">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:double">
+                            <xs:minInclusive value="0"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="pricingList">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="pricing"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="renting">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:long">
+                            <xs:minInclusive value="0"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element ref="accommodationUnit"/>
+                <xs:element ref="ns1:user"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
