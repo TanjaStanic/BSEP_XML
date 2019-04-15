@@ -19,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,22 +37,23 @@ public class User implements UserDetails, Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@Column(name = "user_id", nullable = false, updatable = false)
+    @Column(name = "user_id", nullable = false, updatable = false)
 	public Long id;
 	
 	/*@Column(name = "role")
 	@Enumerated(EnumType.STRING)
 	public UserRole role;*/
 	
-	@Column(name = "first_name")
+	@Column(name = "first_name", nullable = false)
 	public String firstName;
     
 	
 
-	@Column(name = "last_name")
+	@Column(name = "last_name", nullable = false)
 	public String lastName;
 	
-	@Column(name = "email")
+	@Email
+	@Column(name = "email", nullable = false)
 	public String email; //username
 	
     @Column(name = "password")
@@ -63,15 +65,13 @@ public class User implements UserDetails, Serializable{
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	 @JoinTable( 
 	        name = "user_authority", 
-		            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+		            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
 		            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id")) 
-	 @JsonIgnore
 	    private List<Authority> authorities;
 	
 	 @Column(name = "last_password_reset_date")
 	    private Date lastPasswordResetDate;
 
-	public UserRole roles;
 	
 	public User() {
 		

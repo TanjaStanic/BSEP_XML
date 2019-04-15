@@ -59,10 +59,10 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 
 	}
 	$scope.loginClick = function(){
-		
 		userName = $scope.userName;
 		password = $scope.password;
-		
+		console.log(userName+ ": moja uloga");
+
 		if (!userName || !password) {
 			alert("Morate unijeti korisnicko ime i lozinku!");
 		}
