@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,7 +36,7 @@ public class User implements UserDetails, Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", nullable = false, updatable = false)
+    //@Column(name = "user_id", nullable = false, updatable = false)
 	public Long id;
 	
 	/*@Column(name = "role")
@@ -56,16 +57,14 @@ public class User implements UserDetails, Serializable{
     @Column(name = "password")
 	public String password;
     
-    @Column
+    @Column(name = "certificated")
 	private boolean certificated;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	 @JoinTable( 
-	        name = "user_roles", 
-	        joinColumns = @JoinColumn(
-	        		name = "user_id", referencedColumnName = "user_id"), 
-	        inverseJoinColumns = @JoinColumn(
-	        		name = "role_id", referencedColumnName = "role_id")) 
+	        name = "user_authority", 
+		            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+		            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id")) 
 	 @JsonIgnore
 	    private List<Authority> authorities;
 	
@@ -134,7 +133,7 @@ public class User implements UserDetails, Serializable{
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setUserId(Long id) {
 		this.id = id;
 	}
 

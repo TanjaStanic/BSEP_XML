@@ -17,6 +17,8 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 		document.getElementById("admimSettings3").style.visibility = "hidden";
 		document.getElementById("admimSettings4").style.visibility = "hidden";
 		document.getElementById("admimSettings5").style.visibility = "hidden";
+		document.getElementById("registrationId").style.visibility = "hidden";
+
 
 		
 	}else if (role=='Employee'){
@@ -29,6 +31,7 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 		document.getElementById("admimSettings3").style.visibility = "hidden";
 		document.getElementById("admimSettings4").style.visibility = "hidden";
 		document.getElementById("admimSettings5").style.visibility = "hidden";
+		document.getElementById("registrationId").style.visibility = "hidden";
 
 	}else if (role=='Administrator'){
 		document.getElementById("loginButton").style.visibility = "hidden";
@@ -40,6 +43,7 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 		document.getElementById("admimSettings3").style.visibility = "visible";
 		document.getElementById("admimSettings4").style.visibility = "visible";
 		document.getElementById("admimSettings5").style.visibility = "visible";
+		document.getElementById("registrationId").style.visibility = "hidden";
 
 	}else if (role==null){
 		document.getElementById("loginButton").style.visibility = "visible";
@@ -51,6 +55,7 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 		document.getElementById("admimSettings3").style.visibility = "hidden";
 		document.getElementById("admimSettings4").style.visibility = "hidden";
 		document.getElementById("admimSettings5").style.visibility = "hidden";
+		document.getElementById("registrationId").style.visibility = "visible";
 
 	}
 	$scope.loginClick = function(){
@@ -62,6 +67,8 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 			alert("Morate unijeti korisnicko ime i lozinku!");
 		}
 		else {
+			
+			
 			generateFactory.login(userName,password).then(function(response){
 				console.log("usao u login");
 				if(response.status==200){
@@ -117,6 +124,7 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 			document.getElementById("admimSettings3").style.visibility = "hidden";
 			document.getElementById("admimSettings4").style.visibility = "hidden";
 			document.getElementById("admimSettings5").style.visibility = "hidden";
+			document.getElementById("registrationId").style.visibility = "visible";
 		});
 	};
 	
@@ -191,5 +199,22 @@ $scope.generateCRSCertificate= function(){
 	      });
 	   };
 	
+
+});
+
+bespApp.controller('registrationController',function($rootScope, $scope,$window, $location,generateFactory){
+
+	$scope.registrationClick = function(){
+		firstName = $scope.firstName;
+		lastName  = $scope.lastName;
+		email = $scope.email;
+		password = $scope.password;
+		
+		if (!firstName || !lastName || !email || !password) {
+			alert("Sva polja moraju biti popunjena!");
+		}
+		else {
+		}
+	};
 
 });

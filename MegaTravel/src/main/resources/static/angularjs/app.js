@@ -18,6 +18,8 @@ bespApp.config(function($routeProvider) {
 		templateUrl : 'deleteCertificate.html'
 	}).when('/search', {
 		templateUrl : 'search.html'
+	}).when('/registration', {
+		templateUrl : 'registration.html'
 	})
 
 });
