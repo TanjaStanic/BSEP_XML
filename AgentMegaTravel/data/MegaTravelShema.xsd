@@ -300,45 +300,6 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:element name="reservation">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="id">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:long">
-                            <xs:minInclusive value="0"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:element>
-                <xs:element ref="accommodation"/>
-                <xs:element ref="user"/>
-                <xs:element name="reservationStatus">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:enumeration value="cancelled"/>
-                            <xs:whiteSpace value="preserve"/>
-                            <xs:enumeration value="confirmed"/>
-                            <xs:enumeration value="arrived"/>
-                            <xs:enumeration value="rejected"/>
-                            <xs:enumeration value="pending"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:element>
-                <xs:element default="unrated" name="reservationRating">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:enumeration value="1"/>
-                            <xs:enumeration value="2"/>
-                            <xs:enumeration value="3"/>
-                            <xs:enumeration value="4"/>
-                            <xs:enumeration value="5"/>
-                            <xs:enumeration value="unrated"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:element>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
     <xs:element name="renting">
         <xs:complexType>
             <xs:sequence>
