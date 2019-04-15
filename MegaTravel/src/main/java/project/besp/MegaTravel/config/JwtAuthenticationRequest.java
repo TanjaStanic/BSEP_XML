@@ -1,7 +1,7 @@
 package project.besp.MegaTravel.config;
 
 public class JwtAuthenticationRequest {
-	
+	// blaaa
 	private String username;
     private String password;
 
