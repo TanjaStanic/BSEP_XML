@@ -1,4 +1,4 @@
-package project.besp.MegaTravel.serviceImpl;
+/*package project.besp.MegaTravel.serviceImpl;
 
 import java.util.ArrayList;
 
@@ -50,3 +50,4 @@ public class ClientServiceImpl implements ClientService{
 	}
 
 }
+*/

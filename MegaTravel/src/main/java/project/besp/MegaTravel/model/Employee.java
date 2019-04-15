@@ -1,5 +1,7 @@
 package project.besp.MegaTravel.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,8 +21,8 @@ public class Employee extends User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Employee(String firstName, String lastName, String userName, String password, EmployeeRole employeeRole) {
-		super(firstName, lastName, userName, password);
+	public Employee(String firstName, String lastName, String userName, String password, EmployeeRole employeeRole,List<Authority> authorities) {
+		super(firstName, lastName, userName, password,authorities);
 		this.employeeRole = employeeRole;
 	}
 	

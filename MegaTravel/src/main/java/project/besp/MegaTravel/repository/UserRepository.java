@@ -9,8 +9,9 @@ import org.springframework.stereotype.Repository;
 import project.besp.MegaTravel.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
-	User findByUserNameAndPassword(String userName, String password);
 	List<User> findAll();
+	User findOneById(Long id);
+	User findOneByEmail(String mail);
 
 
 }

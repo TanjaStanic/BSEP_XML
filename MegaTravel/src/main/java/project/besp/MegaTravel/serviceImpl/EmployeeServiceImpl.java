@@ -1,4 +1,4 @@
-package project.besp.MegaTravel.serviceImpl;
+/*package project.besp.MegaTravel.serviceImpl;
 
 import javax.servlet.http.HttpSession;
 
@@ -36,4 +36,4 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return employeeRepository.getOne(id);
 	}
 
-}
+}*/

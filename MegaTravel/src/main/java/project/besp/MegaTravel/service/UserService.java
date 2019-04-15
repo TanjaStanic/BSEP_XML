@@ -11,12 +11,12 @@ import project.besp.MegaTravel.model.User;
 public interface UserService {
 
 	User login(String userName, String password);
-
-	User save(User k);
-	
-	void promenaLozinke(String l);
-	
-	User preuzmiKorisnika(Long id);
-	
+	User save(User k);	
+	void promenaLozinke(String l);	
+	User preuzmiKorisnika(Long id);	
+	User findOneById(Long id);
+	User saveUser(User user);
+	void removeUser(Long id);
+	User findUserByMail(String mail);
 	List<User> getAll();
 }
