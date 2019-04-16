@@ -20,7 +20,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -62,12 +61,14 @@ public class User implements UserDetails, Serializable{
     @Column(name = "certificated")
 	private boolean certificated;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	 @JoinTable( 
-	        name = "user_authority", 
-		            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
-		            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id")) 
-	    private List<Authority> authorities;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable( 
+        name = "user_roles", 
+        joinColumns =  @JoinColumn(
+          name = "user_id", referencedColumnName = "user_id"), 
+        inverseJoinColumns = @JoinColumn(
+        	name = "role_id", referencedColumnName = "id")) 
+ private Collection<Role> roles;
 	
 	 @Column(name = "last_password_reset_date")
 	    private Date lastPasswordResetDate;
@@ -77,19 +78,18 @@ public class User implements UserDetails, Serializable{
 		
 	}
 	
-	public User( String firstName, String lastName, String email, String password,List<Authority> authorities) {
+	public User( String firstName, String lastName, String email, String password,List<Role> roles) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.password = password;
-		this.authorities = authorities;
+		this.roles = roles;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return this.authorities;
+		return this.roles;
 	}
 
 
@@ -165,8 +165,8 @@ public class User implements UserDetails, Serializable{
 		this.password = password;
 	}
 
-	public void setAuthorities(List<Authority> authorities) {
-		this.authorities = authorities;
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
 	}
 
 	public Date getLastPasswordResetDate() {

@@ -24,9 +24,9 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 import project.besp.MegaTravel.security.TokenUtils;
 import project.besp.MegaTravel.security.auth.RestAuthenticationEntryPoint;
+import project.besp.MegaTravel.service.UserService;
 import project.besp.MegaTravel.serviceImpl.UserServiceImpl;
 
 
@@ -42,14 +42,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  implements 
 			public PasswordEncoder passwordEncoder() {
 				return new  BCryptPasswordEncoder();
 			}
-			
-			@Override
-			  public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-			    configurer.defaultContentType(MediaType.APPLICATION_JSON);
-			  }
-		
+
 			@Autowired
-			private UserServiceImpl jwtUserDetailsService;
+			private UserService jwtUserDetailsService;
 
 			// Neautorizovani pristup zastcenim resursima
 			@Autowired
@@ -98,8 +93,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  implements 
 			@Override
 			public void configure(WebSecurity web) throws Exception {
 				// TokenAuthenticationFilter ce ignorisati sve ispod navedene putanje
-				web.ignoring().antMatchers(HttpMethod.POST, "/user/login");
-				web.ignoring().antMatchers(HttpMethod.POST, "/user/registration");
+				web.ignoring().antMatchers(HttpMethod.POST, "/api/users/login");
 				web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js");
 			}
 			
@@ -125,6 +119,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  implements 
 			        List<HandlerMethodArgumentResolver> argumentResolvers) {
 			    argumentResolvers.add(deviceHandlerMethodArgumentResolver());
 			}
-
 
 }

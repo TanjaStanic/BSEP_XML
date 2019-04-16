@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.crypto.SecretKey;
@@ -41,6 +42,7 @@ import project.besp.MegaTravel.model.Authority;
 import project.besp.MegaTravel.model.User;
 import project.besp.MegaTravel.model.UserTokenState;
 import project.besp.MegaTravel.security.TokenUtils;
+import project.besp.MegaTravel.service.RoleService;
 import project.besp.MegaTravel.service.UserService;
 import org.bouncycastle.crypto.generators.BCrypt;
 
@@ -54,6 +56,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RoleService roleService;
 	
 	@Autowired
 	TokenUtils tokenUtilis;
@@ -89,12 +94,7 @@ public class UserController {
 			newUser.setFirstName(user1.getFirstName());
 			newUser.setLastName(user1.getLastName());
 			newUser.setPassword(hashedP);
-			
-			List<Authority> authorities = new ArrayList<Authority>();
-			Authority auth = new Authority();
-			auth.setName("ROLE_USER");
-			authorities.add(auth);
-			newUser.setAuthorities(authorities);
+			newUser.setRoles(Arrays.asList(roleService.findByName("ROLE_USER")));
 			userService.saveUser(newUser);
 			
 			return new ResponseEntity<>(newUser, HttpStatus.OK);
