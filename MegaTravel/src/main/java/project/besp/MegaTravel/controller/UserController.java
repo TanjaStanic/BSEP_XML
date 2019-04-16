@@ -75,7 +75,6 @@ public class UserController {
 		
 		if(oldUser == null) {
 			User newUser = new User();
-			
 			String newPassword = user1.getPassword();
 			if(newPassword.equals("") || newPassword == null) {
 				return null;
@@ -102,6 +101,7 @@ public class UserController {
 			
 			
 		} else {
+			System.out.println("postoji email adresa ista ");
 			user1.setEmail("error");
 			return new ResponseEntity<>(user1, HttpStatus.OK);
 		}
@@ -141,37 +141,34 @@ public class UserController {
 	public ResponseEntity<?> userLogin(@RequestBody User newUser,@Context HttpServletRequest request, HttpServletResponse response,Device device) throws IOException{
 		System.out.println("usao u login u controlleru");	
 		User postoji = userService.findUserByMail(newUser.getEmail());
-		//System.out.println(postoji.getEmail() + " email useraaaaaa");
 		
 		if(postoji!=null) {
-			if(org.springframework.security.crypto.bcrypt.BCrypt.checkpw(newUser.getPassword(), postoji.getPassword())) {
-				System.out.println("USPJESNO PRIJAVLJEN!");
-			} else {
-				return new ResponseEntity<>(new UserTokenState("error", (long) 0), HttpStatus.OK);
-			}
 			
+			if(org.springframework.security.crypto.bcrypt.BCrypt.checkpw(newUser.getPassword(), postoji.getPassword())){	
+			System.out.println("Uspesna prijava :), email: " + postoji.getEmail());
+			}else{
+				return new ResponseEntity<>(new UserTokenState("error", (long)0), HttpStatus.OK);
+		
+			}
 			final Authentication authentication = authManager
 					.authenticate(new UsernamePasswordAuthenticationToken(
 							postoji.getEmail(),
 							newUser.getPassword()));
-			
+
 			// Ubaci username + password u kontext
-		 SecurityContextHolder.getContext().setAuthentication(authentication);
-		 
-		 //Kreiranje tokena
-		 User user = (User) authentication.getPrincipal();
-		 
-		String jwt = tokenUtilis.generateToken(user.getEmail(),device);
-		int expiresIn = tokenUtilis.getExpiredIn(device);
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+
+			// Kreiraj token
+			User user = (User) authentication.getPrincipal();
+			String jwt = tokenUtilis.generateToken(user.getEmail(), device);
+			int expiresIn = tokenUtilis.getExpiredIn(device);
+			return ResponseEntity.ok(new UserTokenState(jwt, (long) expiresIn));
 		
-		System.out.println("ispisi jwt: " + jwt);
-		
-		return ResponseEntity.ok(new UserTokenState(jwt, (long) expiresIn));
-		 
 		}else {
+		
 			return new ResponseEntity<>(new UserTokenState("error", (long) 0), HttpStatus.OK);
+
 		}
-				
 	}
 	
 	@RequestMapping(

@@ -165,13 +165,39 @@ bespApp.controller('registrationController',function($rootScope, $scope,$window,
 		email = $scope.email;
 		password = $scope.password;
 		
-		//user = {'firstName' : firstName, 'lastName'};
+		user = {'firstName' : firstName, 'lastName' : lastName, 'email' : email, 'password' : password};
 		
 		if (!firstName || !lastName || !email || !password) {
 			alert("Sva polja moraju biti popunjena!");
 		}
 		else {
-			
+			console.log("usao u else u registration");
+
+			generateFactory.registration(user).then(function(response){
+				console.log("usao u registration");
+				if(response.status==200){
+					console.log("status registrationa je 200");
+					
+					$rootScope.korisnik = response.data;
+					korisnik = response.data;
+					console.log(korisnik.email + 'korisniiiiiiiiik');
+					
+					localStorage.setItem('korisnik', JSON.stringify(korisnik));
+					
+					auth = response.data.authorities;
+					console.log(auth);
+					//localStorage.setItem('role', JSON.stringify(authorities));
+					console.log('uspjesnooooooooooo registrovannnnnnn');
+					location.href='#/';
+				} 
+				else {
+					
+				}
+			}).catch(function(response) {
+				alert("Korisnik ne postoji");
+				$scope.userName=" ";
+				$scope.password = "";
+			  });
 		}
 	};
 

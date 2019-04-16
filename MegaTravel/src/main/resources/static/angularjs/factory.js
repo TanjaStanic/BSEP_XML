@@ -9,6 +9,10 @@ bespApp.factory('generateFactory', function generateFactory($http) {
 		return $http.post("/user/login",user);
 	};
 	
+	data.registration = function(user) {
+		return $http.post("/user/registration",user);
+	};
+	
 	data.getClient = function(){
 		return $http.get("/client/getClient");
 	};
