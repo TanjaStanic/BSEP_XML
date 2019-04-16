@@ -42,6 +42,7 @@ import project.besp.MegaTravel.certificates.CertificateInfoGenerator;
 import project.besp.MegaTravel.data.*;
 import project.besp.MegaTravel.keyStore.*;
 import project.besp.MegaTravel.service.CertificateCSRService;
+import project.besp.MegaTravel.service.CertificateService;
 import project.besp.MegaTravel.service.WithDrawCertService;
 
 @Controller
@@ -49,6 +50,9 @@ import project.besp.MegaTravel.service.WithDrawCertService;
 public class CertificateController {
 	
 	private KeyStore keyStore;
+	
+	@Autowired
+	private CertificateService certificateService;
 
 	@Autowired
 	public WithDrawCertService ws;
