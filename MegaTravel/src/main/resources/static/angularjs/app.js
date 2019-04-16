@@ -20,6 +20,8 @@ bespApp.config(function($routeProvider) {
 		templateUrl : 'search.html'
 	}).when('/registration', {
 		templateUrl : 'registration.html'
+	}).when('/login', {
+		templateUrl : 'login.html'
 	})
 
 });
