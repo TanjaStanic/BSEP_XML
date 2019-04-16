@@ -55,33 +55,22 @@
                         <li class="nav-item active">
                                 <a class="nav-link" href="#/">Home <span class="sr-only">(current)</span></a>
                         </li>
-
-                        <li id="admimSettings1" class="nav-item">
-                                    <a class="nav-link" href="#/generate" role="button" aria-haspopup="true" aria-expanded="false">Generate certificates</a>                                
-                        </li>
-                        
-                        <li id="admimSettings4" class="nav-item">
-                                    <a class="nav-link" href="#/generateCRS" role="button" aria-haspopup="true" aria-expanded="false">Generate certificates with CRS</a>                                
-                        </li>
-						<li id="admimSettings5" class="nav-item">
-                                    <a class="nav-link" href="#/deleteCertificates" role="button" aria-haspopup="true" aria-expanded="false">Delete</a>                                
-                        </li>
-
-                        <li id="admimSettings2" class="nav-item">
-                                <a class="nav-link" href="#/search">Search</a>
-                        </li>
-
-                        <li id="admimSettings3" class="nav-item">
-                                <a class="nav-link" href="#/checkStatus">Check status</a>
-                        </li>
-                      
+						
+                        <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sertifikati</a>
+                                    <div class="dropdown-menu navbar-dark bg-primary">
+                                        <a class="dropdown-item"  href="#/generate" >Generate certificates</a>
+                                          <a class="dropdown-item" href="#/generateCRS">Generate certificates with CRS</a>
+                                          <a class="dropdown-item" href="#/deleteCertificates">Delete</a>
+                                          <a class="dropdown-item" href="#/search">Search</a>
+                                          <a class="dropdown-item"  href="#/checkStatus">Check status</a>
+                                   </div>
+                        </li>       
                     </ul>
-                    
-                    <form class="form-inline header-search-form my-2 my-lg-0">     
-                        <button id = "loginButton" class="btn btn-secondary my-2 my-sm-0" type="submit" href="#/login">Prijavi se</button>             
-                    </form>
+
                     <form class="form-inline header-search-form my-2 my-lg-0">
-                        <button id = "logoutButton" class="btn btn-secondary my-2 my-sm-0" type="submit" ng-click="logoutClick()">Odjavi se</button>                
+                	   <a id="logoutButton" href = "#/"  ng-click="logoutClick()"><button class="btn btn-secondary my-2 my-sm-0" type="submit">Odjavi se</button></a>
+                       <a id="loginButton" href = "#/login"><button class="btn btn-secondary my-2 my-sm-0" type="submit">Prijavi se</button></a>                       
                     </form>
                     
                 </div>

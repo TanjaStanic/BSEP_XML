@@ -3,21 +3,21 @@
             <div class="row">
                 
                 <!-- Main content -->
-                <div class="container" id = "field" ng-controller="loginController">
+                <div class="col-sm-8" ng-controller="loginController">
                        <article>
                        <h3>Prijava</h3>
                        <fieldset>
                             <div class="form-group">
                                 <label>Email address:</label>
-                                <input type="email" class="form-control" id="mail" aria-describedby="emailHelp" placeholder="Enter your email" required>
+                                <input type="email" class="form-control" ng-model="mail" aria-describedby="emailHelp" placeholder="Enter your email" required>
                             </div>
  							
  							<div class="form-group">
                                 <label>Password: </label>
-                                <input type="password" class="form-control" id="password" required>
+                                <input type="password" class="form-control" ng-model="password" required>
                             </div>
- 
-			             <button type="submit" id="confirmBtn" class="btn btn-default btn-lg">Prijavi se</button>
+                             <button class="btn btn-primary" ng-click="loginClick()">Prijavi se</button>
+
                         	<br/>
                             <a href="#/registration" title="Registracija" >Nemate nalog? Registrujte se.</a>
                         

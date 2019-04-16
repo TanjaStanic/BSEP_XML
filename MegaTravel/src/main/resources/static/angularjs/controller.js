@@ -11,22 +11,16 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 	if (korisnik==undefined){
 		document.getElementById("loginButton").style.visibility = "visible";
 		document.getElementById("logoutButton").style.visibility = "hidden";
-		document.getElementById("admimSettings1").style.visibility = "hidden";
-		document.getElementById("admimSettings2").style.visibility = "hidden";
-		document.getElementById("admimSettings3").style.visibility = "hidden";
-		document.getElementById("admimSettings4").style.visibility = "hidden";
-		document.getElementById("admimSettings5").style.visibility = "hidden";
+		//document.getElementById("admimSettings1").style.visibility = "hidden";
+
 
 
 
 	}else if (korisnik!=undefined){
 		document.getElementById("loginButton").style.visibility = "hidden";
 		document.getElementById("logoutButton").style.visibility = "visible";
-		document.getElementById("admimSettings1").style.visibility = "visible";
-		document.getElementById("admimSettings2").style.visibility = "visible";
-		document.getElementById("admimSettings3").style.visibility = "visible";
-		document.getElementById("admimSettings4").style.visibility = "visible";
-		document.getElementById("admimSettings5").style.visibility = "visible";
+		//document.getElementById("admimSettings1").style.visibility = "visible";
+
 	}
 	
 	$scope.logoutClick = function() {
@@ -36,11 +30,8 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 			console.log("Uspjesno odjavljen");
 			document.getElementById("loginButton").style.visibility = "visible";
 			document.getElementById("logoutButton").style.visibility = "hidden";
-			document.getElementById("admimSettings1").style.visibility = "hidden";
-			document.getElementById("admimSettings2").style.visibility = "hidden";
-			document.getElementById("admimSettings3").style.visibility = "hidden";
-			document.getElementById("admimSettings4").style.visibility = "hidden";
-			document.getElementById("admimSettings5").style.visibility = "hidden";
+			//document.getElementById("admimSettings1").style.visibility = "hidden";
+
 		});
 	};
 	
@@ -121,14 +112,14 @@ $scope.generateCRSCertificate= function(){
 bespApp.controller('loginController',function($rootScope, $scope,$window, $location,generateFactory){
 	
 	$scope.loginClick = function(){
-		userName = $scope.userName;
+		mail = $scope.mail;
 		password = $scope.password;
 		
-		user = {'email' : userName, 'password' : password};
+		user = {'email' : mail, 'password' : password};
 		
-		console.log(userName+ ": moja uloga");
+		console.log(mail+ ": moja mail");
 
-		if (!userName || !password) {
+		if (!mail || !password) {
 			alert("Morate unijeti korisnicko ime i lozinku!");
 		}
 		else {
@@ -142,31 +133,15 @@ bespApp.controller('loginController',function($rootScope, $scope,$window, $locat
 					
 					$rootScope.korisnik = response.data;
 					korisnik = response.data;
-					console.log(korisnik);
+					console.log(korisnik.email + 'korisniiiiiiiiik');
 					
 					localStorage.setItem('korisnik', JSON.stringify(korisnik));
 					
 					auth = response.data.authorities;
 					console.log(auth);
 					//localStorage.setItem('role', JSON.stringify(authorities));
-					
-					document.getElementById("loginButton").style.visibility = "hidden";
-					document.getElementById("logoutButton").style.visibility = "visible";
-					document.getElementById("username").style.visibility = "hidden";
-					document.getElementById("password").style.visibility = "hidden";
-					if (role=='Administrator'){
-						document.getElementById("admimSettings1").style.visibility = "visible";
-						document.getElementById("admimSettings2").style.visibility = "visible";
-						document.getElementById("admimSettings3").style.visibility = "visible";
-						document.getElementById("admimSettings4").style.visibility = "visible";
-						document.getElementById("admimSettings5").style.visibility = "visible";
-					} else{
-						document.getElementById("admimSettings1").style.visibility = "hidden";
-						document.getElementById("admimSettings2").style.visibility = "hidden";
-						document.getElementById("admimSettings3").style.visibility = "hidden";
-						document.getElementById("admimSettings4").style.visibility = "hidden";
-						document.getElementById("admimSettings5").style.visibility = "hidden";
-					}
+					console.log('uspjesnooooooooooo');
+					location.href='#/';
 				} 
 				else {
 					
@@ -190,10 +165,13 @@ bespApp.controller('registrationController',function($rootScope, $scope,$window,
 		email = $scope.email;
 		password = $scope.password;
 		
+		//user = {'firstName' : firstName, 'lastName'};
+		
 		if (!firstName || !lastName || !email || !password) {
 			alert("Sva polja moraju biti popunjena!");
 		}
 		else {
+			
 		}
 	};
 
