@@ -58,9 +58,13 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 		document.getElementById("registrationId").style.visibility = "visible";
 
 	}
+
+	
+	
 	$scope.loginClick = function(){
 		userName = $scope.userName;
 		password = $scope.password;
+		user = {'email' : userName, 'password' : password};
 		console.log(userName+ ": moja uloga");
 
 		if (!userName || !password) {
@@ -68,8 +72,9 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 		}
 		else {
 			
-			
-			generateFactory.login(userName,password).then(function(response){
+			console.log("usao u else");
+
+			generateFactory.login(user).then(function(response){
 				console.log("usao u login");
 				if(response.status==200){
 					console.log("status logina je 200");
@@ -78,8 +83,9 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 					korisnik = response.data;
 					localStorage.setItem('korisnik', JSON.stringify(korisnik));
 					
-					role = response.data.role;
-					localStorage.setItem('role', JSON.stringify(role));
+					auth = response.data.authorities;
+					console.log(auth);
+					//localStorage.setItem('role', JSON.stringify(authorities));
 					
 					document.getElementById("loginButton").style.visibility = "hidden";
 					document.getElementById("logoutButton").style.visibility = "visible";

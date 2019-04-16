@@ -138,9 +138,10 @@ public class UserController {
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	
-	public ResponseEntity<?> userLogin(@RequestBody User newUser,@Context HttpServletRequest request, HttpServletResponse response,Device device) throws IOException{
+	public ResponseEntity<?> userLogin(User newUser,@Context HttpServletRequest request, HttpServletResponse response,Device device) throws IOException{
 		System.out.println("usao u login u controlleru");	
 		User postoji = userService.findUserByMail(newUser.getEmail());
+			
 		
 		if(postoji!=null) {
 			if(org.springframework.security.crypto.bcrypt.BCrypt.checkpw(newUser.getPassword(), postoji.getPassword())) {

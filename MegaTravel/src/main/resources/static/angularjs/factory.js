@@ -5,8 +5,8 @@
 bespApp.factory('generateFactory', function generateFactory($http) {
 
 	var data = {};
-	data.login = function(userName,password) {
-		return $http.get("/user/login/"+userName+"/"+password);
+	data.login = function(user) {
+		return $http.post("/user/login",user);
 	};
 	
 	data.getClient = function(){

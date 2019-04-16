@@ -1,6 +1,7 @@
 package project.besp.MegaTravel.config;
 
 import java.util.List;
+import org.springframework.http.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -32,7 +34,7 @@ import project.besp.MegaTravel.serviceImpl.UserServiceImpl;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer{
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter  implements WebMvcConfigurer{
 	
 	// Implementacija PasswordEncoder-a koriscenjem BCrypt hashing funkcije.
 			// BCrypt po defalt-u radi 10 rundi hesiranja prosledjene vrednosti.
@@ -40,7 +42,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
 			public PasswordEncoder passwordEncoder() {
 				return new  BCryptPasswordEncoder();
 			}
-
+			
+			@Override
+			  public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+			    configurer.defaultContentType(MediaType.APPLICATION_JSON);
+			  }
+		
 			@Autowired
 			private UserServiceImpl jwtUserDetailsService;
 
@@ -91,7 +98,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
 			@Override
 			public void configure(WebSecurity web) throws Exception {
 				// TokenAuthenticationFilter ce ignorisati sve ispod navedene putanje
-				web.ignoring().antMatchers(HttpMethod.POST, "/api/users/login");
+				web.ignoring().antMatchers(HttpMethod.POST, "/user/login");
 				web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js");
 			}
 			
