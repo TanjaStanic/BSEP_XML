@@ -48,10 +48,11 @@ import project.besp.MegaTravel.security.TokenUtils;
 import project.besp.MegaTravel.service.RoleService;
 import project.besp.MegaTravel.service.UserService;
 import org.bouncycastle.crypto.generators.BCrypt;
+import org.owasp.encoder.Encode;
+
 
 
 @RestController
-@Controller
 @RequestMapping("/user")
 public class UserController {
 	
@@ -77,9 +78,23 @@ public class UserController {
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	
-	public ResponseEntity<User> registerUser(@RequestBody User user1){
+	public ResponseEntity<?> registerUser(@Valid @RequestBody User user1, BindingResult result){
 		System.out.println("Usao u registraciju korisnika");
-		User oldUser = userService.findUserByMail(user1.getEmail());
+		User oldUser = userService.findUserByMail(Encode.forHtml(user1.getEmail()));
+		
+		if(result.hasErrors()) {
+			//404
+			return new ResponseEntity<>(new UserTokenState("error",(long)0), HttpStatus.NOT_FOUND);
+		}
+		if(!checkMail(user1.getEmail())) {
+			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
+		}
+		if(!checkCharacters(user1.getFirstName())) {
+			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
+		}
+		if(!checkCharacters(user1.getLastName())) {
+			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
+		}
 		
 		if(oldUser == null) {
 			User newUser = new User();
@@ -97,7 +112,7 @@ public class UserController {
 			newUser.setFirstName(user1.getFirstName());
 			newUser.setLastName(user1.getLastName());
 			newUser.setPassword(hashedP);
-			newUser.setRoles(Arrays.asList(roleService.findByName("USER")));
+			newUser.setRoles(Arrays.asList(roleService.findByName("ROLE_USER")));
 			userService.saveUser(newUser);
 			
 			return new ResponseEntity<>(newUser, HttpStatus.OK);
@@ -143,22 +158,24 @@ public class UserController {
 	
 	public ResponseEntity<?> userLogin(@Valid @RequestBody User newUser,@Context HttpServletRequest request, HttpServletResponse response,Device device, BindingResult result) throws IOException{
 		System.out.println("usao u login u controlleru");	
-		User postoji = userService.findUserByMail(newUser.getEmail());
-		List<Role> uloga = postoji.getRoles();
+		//User postoji = userService.findUserByMail(newUser.getEmail());
+		/*List<Role> uloga = postoji.getRoles();
 		newUser.setRoles(uloga);
 		for(int i = 0; i<uloga.size(); i++) {
 		System.out.println(uloga.get(i).getName() + "ULOGAAAAAAAAAAAAa");
+		}*/
+		
+		if(!checkMail(newUser.getEmail())) {
+			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
 		}
 		
-		
-		
+		User postoji = userService.findUserByMail(Encode.forHtml(newUser.getEmail()));
+
 		
 		if(result.hasErrors()) {
 			//404
 		
 			return new ResponseEntity<>(new UserTokenState("error", (long)0), HttpStatus.NOT_FOUND);
-		}if(!checkMail(newUser.getEmail())) {
-			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
 		}
 		
 		if(postoji!=null) {
@@ -183,8 +200,8 @@ public class UserController {
 			String jwt = tokenUtilis.generateToken(user.getEmail(), device);
 			int expiresIn = tokenUtilis.getExpiredIn(device);
             System.out.println(jwt+"tokeeniiiiiiiiiiiiiiiiii");
-            return new ResponseEntity<>(postoji, HttpStatus.OK);
-			//return ResponseEntity.ok(new UserTokenState(jwt, (long) expiresIn));
+            //return new ResponseEntity<>(postoji, HttpStatus.OK);
+			return ResponseEntity.ok(new UserTokenState(jwt, (long) expiresIn));
 		
 		}else {
 		
@@ -213,14 +230,17 @@ public class UserController {
 	produces = MediaType.APPLICATION_JSON_VALUE)
 		public ResponseEntity<User> getProfile(@RequestBody String token) 
 		{
+		    User notvalidUser = new User();
+
 		
 			System.out.println("IMA TOKEN: " + token);
 			String email = tokenUtilis.getUsernameFromToken(token);
 			
 			System.out.println("USERNAME: " + email);
-		    User user = (User) this.userService.findUserByMail(email);
-		    
-		    //System.out.println("Korisnik: " + user.getEmail());
+			if(!checkMail(email)) {
+				return  new ResponseEntity<User>(notvalidUser, HttpStatus.NOT_FOUND);
+			}
+			User user = (User) this.userService.findUserByMail(Encode.forHtml(email));
 			return  new ResponseEntity<User>(user, HttpStatus.OK);
 		}
 
