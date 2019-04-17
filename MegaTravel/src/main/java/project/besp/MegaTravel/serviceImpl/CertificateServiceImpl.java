@@ -1,4 +1,4 @@
-package project.besp.MegaTravel.service;
+package project.besp.MegaTravel.serviceImpl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import project.besp.MegaTravel.model.Certificate;
 import project.besp.MegaTravel.repository.CertificateRepository;
+import project.besp.MegaTravel.service.CertificateService;
 
 
 @Service

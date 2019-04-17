@@ -207,3 +207,74 @@ bespApp.controller('registrationController',function($rootScope, $scope,$window,
 	};
 
 });
+
+
+
+bespApp.controller('createController',function($rootScope, $scope,$window, $location,generateFactory){
+
+	korisnik = JSON.parse(localStorage.getItem('korisnik'));
+
+	//preuzimanje svih korisnika koji imaju sertifikat
+	generateFactory.getUsersWithCetrtificate().then(
+		      function(response) {
+		       $rootScope.caCertificate = response.data;
+		       console.log("response,data =  " + response.data);
+	});
+	
+
+	
+	
+	$scope.generateCertificate= function(){
+		if (korisnik==undefined){
+			alert("Niste prijavljeni!")
+			location.href='#/login';
+		}else if (korisnik!=undefined){	
+			
+			idIssuer = String($scope.idIssuer);
+			startDate = String($scope.startDate);
+			endDate = String($scope.endDate);
+			idSubject = parseFloat(korisnik.id);			
+		
+			//validacija datuma na frontendu
+			sD = new Date(startDate);
+			eD = new Date(endDate);
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth()+1; //January is 0!
+			var yyyy = today.getFullYear();
+			 if(dd<10){
+			        dd='0'+dd
+			    } 
+			    if(mm<10){
+			        mm='0'+mm
+			    } 
+
+			today = yyyy+'-'+mm+'-'+dd;
+			
+			td = new Date(today);
+			
+			if (eD < sD) {
+				alert ("Datum pocetka mora biti prije datuma isticanja!");
+			}
+			else if (eD<=td) {
+				alert("Datum isticanja mora nakon danasnjeg datuma");
+			}
+			else if (sD<td){
+				alert("Datum pocetka vazenja sertifikata mora biti nakon najmanje danasnji datum!");
+			}
+			else {
+				generateFactory.createCertificate(idIssuer,startDate,endDate,idSubject).then(function(response){
+		    		if(response.status == 200){
+		    			alert("USPJESNO GENERISANJE!");
+		    			$scope.error = false;
+		    			//$location.path('/index');
+		    			$scope.cert = null;
+		    		} else {
+		    			$scope.error = true;
+		    		}
+		    	});
+			}
+		}
+	};
+
+});

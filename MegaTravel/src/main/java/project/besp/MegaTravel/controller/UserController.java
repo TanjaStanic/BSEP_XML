@@ -97,7 +97,7 @@ public class UserController {
 			newUser.setFirstName(user1.getFirstName());
 			newUser.setLastName(user1.getLastName());
 			newUser.setPassword(hashedP);
-			newUser.setRoles(Arrays.asList(roleService.findByName("ROLE_USER")));
+			newUser.setRoles(Arrays.asList(roleService.findByName("USER")));
 			userService.saveUser(newUser);
 			
 			return new ResponseEntity<>(newUser, HttpStatus.OK);
@@ -183,8 +183,8 @@ public class UserController {
 			String jwt = tokenUtilis.generateToken(user.getEmail(), device);
 			int expiresIn = tokenUtilis.getExpiredIn(device);
             System.out.println(jwt+"tokeeniiiiiiiiiiiiiiiiii");
-
-			return ResponseEntity.ok(new UserTokenState(jwt, (long) expiresIn));
+            return new ResponseEntity<>(postoji, HttpStatus.OK);
+			//return ResponseEntity.ok(new UserTokenState(jwt, (long) expiresIn));
 		
 		}else {
 		
