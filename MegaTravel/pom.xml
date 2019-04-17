@@ -50,6 +50,12 @@
             <artifactId>jooq-meta</artifactId>
         </dependency>
         <dependency>
+        <groupId>project.xml</groupId>
+		<artifactId>AgentMegaTravel</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
