@@ -213,6 +213,7 @@ bespApp.controller('registrationController',function($rootScope, $scope,$window,
 bespApp.controller('createController',function($rootScope, $scope,$window, $location,generateFactory){
 
 	korisnik = JSON.parse(localStorage.getItem('korisnik'));
+	console.log("imamo korisnikaaaaa" + korisnik.email);
 
 	//preuzimanje svih korisnika koji imaju sertifikat
 	generateFactory.getUsersWithCetrtificate().then(
@@ -225,6 +226,8 @@ bespApp.controller('createController',function($rootScope, $scope,$window, $loca
 	
 	
 	$scope.generateCertificate= function(){
+		korisnik = JSON.parse(localStorage.getItem('korisnik'));
+
 		if (korisnik==undefined){
 			alert("Niste prijavljeni!")
 			location.href='#/login';
