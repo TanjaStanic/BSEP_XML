@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  implements 
 	
 	// Implementacija PasswordEncoder-a koriscenjem BCrypt hashing funkcije.
 			// BCrypt po defalt-u radi 10 rundi hesiranja prosledjene vrednosti.
+			
 			@Bean
 			public PasswordEncoder passwordEncoder() {
 				return new  BCryptPasswordEncoder();
@@ -121,5 +122,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  implements 
 			        List<HandlerMethodArgumentResolver> argumentResolvers) {
 			    argumentResolvers.add(deviceHandlerMethodArgumentResolver());
 			}
+			
+			
 
 }
+
