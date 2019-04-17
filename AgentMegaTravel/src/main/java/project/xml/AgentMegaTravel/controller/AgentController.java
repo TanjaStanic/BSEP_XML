@@ -63,9 +63,9 @@ public class AgentController {
         InputStream is = new FileInputStream(file);
         keyStore.load(is, keyStorePass.toCharArray());
         
-        SSLContext sslContext = SSLContexts.custom().loadTrustMaterial(file, keyStorePass.toCharArray()).loadKeyMaterial(keyStore, keyStorePass.toCharArray()).build();
-		HttpClient httpClient = HttpClients.custom().setHostnameVerifier(SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER).setSSLContext(sslContext).build();
-        template.setRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient));
+        //SSLContext sslContext = SSLContexts.custom().loadTrustMaterial(file, keyStorePass.toCharArray()).loadKeyMaterial(keyStore, keyStorePass.toCharArray()).build();
+		//HttpClient httpClient = HttpClients.custom().setHostnameVerifier(SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER).setSSLContext(sslContext).build();
+        //template.setRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient));
         
         uri = uri.concat("?message=" + message);
         System.out.println("Ostvarena komunikacija ");
