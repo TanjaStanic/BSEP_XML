@@ -249,6 +249,11 @@ public class CertificateController {
 		         Files.write(putanja, data);
 		
 		
+		/*
+		byte[] bytes = c.getEncoded();
+		Path path = Paths.get(UPLOADED_FOLDER + c.getType());
+		Files.write(path, bytes);
+*/
 		return new ResponseEntity<>(HttpStatus.OK);
 		
 
