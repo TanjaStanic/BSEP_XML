@@ -122,7 +122,7 @@ public class UserController {
 		} else {
 			System.out.println("postoji email adresa ista ");
 			user1.setEmail("error");
-			return new ResponseEntity<>(user1, HttpStatus.OK);
+			return new ResponseEntity<>(user1, HttpStatus.NOT_FOUND);
 		}
 		
 	}
@@ -182,9 +182,11 @@ public class UserController {
 		if(postoji!=null) {
 			
 			if(org.springframework.security.crypto.bcrypt.BCrypt.checkpw(newUser.getPassword(), postoji.getPassword())){	
-			System.out.println("Uspesna prijava :), email: " + postoji.getEmail());
+			System.out.println("Uspesna prijava , email: " + postoji.getEmail());
 			}else{
-				return new ResponseEntity<>(new UserTokenState("error", (long)0), HttpStatus.OK);
+				System.out.println("Neuspesna prijava , email: " + postoji.getEmail());
+
+				return new ResponseEntity<>(new UserTokenState("error", (long)0), HttpStatus.NOT_FOUND);
 		
 			}
 			final Authentication authentication = authManager
@@ -206,7 +208,7 @@ public class UserController {
 		
 		}else {
 		
-			return new ResponseEntity<>(new UserTokenState("error", (long) 0), HttpStatus.OK);
+			return new ResponseEntity<>(new UserTokenState("error", (long) 0), HttpStatus.NOT_FOUND);
 
 		}
 	}

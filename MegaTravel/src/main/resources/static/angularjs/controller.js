@@ -1,5 +1,5 @@
 /**
- * 
+ * ?name=<script>alert(document.cookie)<%2Fscript>
  */
 
 bespApp.controller('generateController',function($rootScope, $scope,$window, $location,generateFactory){
@@ -112,19 +112,54 @@ $scope.generateCRSCertificate= function(){
 
 bespApp.controller('loginController',function($rootScope, $scope,$window, $location,generateFactory){
 	
+	function escapeHTML(text) {
+
+	    return text.replace(/&/g, '&amp;')
+	        .replace(/</g, '&lt;')
+	        .replace(/>/g, '&gt;')
+	        .replace(/\"/g, '&quot;')
+	        .replace(/\'/g, '&#39;')
+	        .replace(/\//g, '&#x2F;')
+	        .replace('src', 'drc');
+	  }
+	
 	$scope.loginClick = function(){
 		mail = $scope.mail;
-		password = $scope.password;
+		 var password = $scope.password;
 		
 		user = {'email' : mail, 'password' : password};
 		
 		console.log(mail+ ": moja mail");
 
-		if (!mail || !password) {
+		function checkEmail(text) {
+		    const patternMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		    if (!patternMail.test(text)) {
+		      
+		      return false;
+		    }
+		    return true;
+		  }
+
+		//scope.text = 'enter email';
+       //scope.word = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+		
+		//provjera da li su unijeti mail i lozinka
+
+		
+		if(!checkEmail(mail)){
+			alert('Neispravan format email-a.');
+		}
+		else if (password.length<5 || password.length>30) {
+			alert('Lozinka mora da ima izmedju 6 i 30 znakova');
+			
+		}
+		else if (!mail || !password) {
 			alert("Morate unijeti korisnicko ime i lozinku!");
 		}
+
+
 		else {
-			
+		
 			console.log("usao u else");
 			user = {'email' : mail, 'password' : password};
 			console.log("email" + mail, "password" + password );
@@ -146,8 +181,8 @@ bespApp.controller('loginController',function($rootScope, $scope,$window, $locat
 					console.log('uspjesnooooooooooo');
 					location.href='#/';
 				} 
-				else {
-					
+				else if (response.status==404) {
+					alert("Doslo je do greske! Korisnik ne postoji!")
 				}
 			}).catch(function(response) {
 				alert("Korisnik ne postoji");
@@ -166,11 +201,19 @@ bespApp.controller('registrationController',function($rootScope, $scope,$window,
 		firstName = $scope.firstName;
 		lastName  = $scope.lastName;
 		email = $scope.email;
-		password = $scope.password;
+		 var password = $scope.password;
 		
 		user = {'firstName' : firstName, 'lastName' : lastName, 'email' : email, 'password' : password};
+
+		if(!checkEmail(wmail)){
+			alert('Neispravan format email-a.');
+		}
+		else if (password.length<6 || password.length>30) {
+			alert('Lozinka mora da ima izmedju 6 i 30 znakova');
+			
+		}
 		
-		if (!firstName || !lastName || !email || !password) {
+		else if (!firstName || !lastName || !email || !password) {
 			alert("Sva polja moraju biti popunjena!");
 		}
 		else {
@@ -195,8 +238,8 @@ bespApp.controller('registrationController',function($rootScope, $scope,$window,
 					location.href='#/';
 					location.reload();
 				} 
-				else {
-					
+				else if (response.status==404) {
+					alert("Doslo je do greske! Korisnik ne postoji!")
 				}
 			}).catch(function(response) {
 				alert("Korisnik ne postoji");
