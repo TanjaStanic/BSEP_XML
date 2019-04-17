@@ -333,6 +333,8 @@ public class UserController {
 		session.setAttribute("user", user);
 		SecurityContextHolder.clearContext();
 		return new ResponseEntity<User>(HttpStatus.OK);
+		
+		
 	}
 	@GetMapping(path = "/getAll")
 	public ResponseEntity<List<User>> getAllUsers() {
