@@ -1,5 +1,7 @@
 package project.besp.MegaTravel.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,16 +12,15 @@ import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
-@Table(name = "Authority")
+@Table(name = "authority")
 public class Authority implements GrantedAuthority{
 	
-	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id",nullable = false, updatable = false)
 	
-	Long id;
+	private Long id;
 	
 	@Column(name = "name")
 	String name;
