@@ -31,6 +31,7 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 			document.getElementById("loginButton").style.visibility = "visible";
 			document.getElementById("logoutButton").style.visibility = "hidden";
 			//document.getElementById("admimSettings1").style.visibility = "hidden";
+			window.sessionStorage.clear();
 
 		});
 	};
@@ -125,6 +126,8 @@ bespApp.controller('loginController',function($rootScope, $scope,$window, $locat
 		else {
 			
 			console.log("usao u else");
+			user = {'email' : mail, 'password' : password};
+			console.log("email" + mail, "password" + password );
 
 			generateFactory.login(user).then(function(response){
 				console.log("usao u login");
@@ -188,7 +191,9 @@ bespApp.controller('registrationController',function($rootScope, $scope,$window,
 					console.log(auth);
 					//localStorage.setItem('role', JSON.stringify(authorities));
 					console.log('uspjesnooooooooooo registrovannnnnnn');
+					
 					location.href='#/';
+					location.reload();
 				} 
 				else {
 					

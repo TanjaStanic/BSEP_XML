@@ -68,7 +68,7 @@ public class User implements UserDetails, Serializable{
           name = "user_id", referencedColumnName = "user_id"), 
         inverseJoinColumns = @JoinColumn(
         	name = "role_id", referencedColumnName = "id")) 
- private Collection<Role> roles;
+ private List<Role> roles;
 	
 	 @Column(name = "last_password_reset_date")
 	    private Date lastPasswordResetDate;
@@ -164,8 +164,13 @@ public class User implements UserDetails, Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 
-	public void setRoles(Collection<Role> roles) {
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
 

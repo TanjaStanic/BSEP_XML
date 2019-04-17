@@ -14,6 +14,7 @@ import javax.persistence.Column;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import javax.ws.rs.core.Context;
 
 import org.slf4j.Logger;
@@ -30,6 +31,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +41,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import project.besp.MegaTravel.model.Authority;
+import project.besp.MegaTravel.model.Role;
 import project.besp.MegaTravel.model.User;
 import project.besp.MegaTravel.model.UserTokenState;
 import project.besp.MegaTravel.security.TokenUtils;
@@ -138,9 +141,25 @@ public class UserController {
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	
-	public ResponseEntity<?> userLogin(@RequestBody User newUser,@Context HttpServletRequest request, HttpServletResponse response,Device device) throws IOException{
+	public ResponseEntity<?> userLogin(@Valid @RequestBody User newUser,@Context HttpServletRequest request, HttpServletResponse response,Device device, BindingResult result) throws IOException{
 		System.out.println("usao u login u controlleru");	
 		User postoji = userService.findUserByMail(newUser.getEmail());
+		List<Role> uloga = postoji.getRoles();
+		newUser.setRoles(uloga);
+		for(int i = 0; i<uloga.size(); i++) {
+		System.out.println(uloga.get(i).getName() + "ULOGAAAAAAAAAAAAa");
+		}
+		
+		
+		
+		
+		if(result.hasErrors()) {
+			//404
+		
+			return new ResponseEntity<>(new UserTokenState("error", (long)0), HttpStatus.NOT_FOUND);
+		}if(!checkMail(newUser.getEmail())) {
+			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
+		}
 		
 		if(postoji!=null) {
 			
@@ -160,8 +179,11 @@ public class UserController {
 
 			// Kreiraj token
 			User user = (User) authentication.getPrincipal();
+            System.out.println(user.email + "emaillllllllll");
 			String jwt = tokenUtilis.generateToken(user.getEmail(), device);
 			int expiresIn = tokenUtilis.getExpiredIn(device);
+            System.out.println(jwt+"tokeeniiiiiiiiiiiiiiiiii");
+
 			return ResponseEntity.ok(new UserTokenState(jwt, (long) expiresIn));
 		
 		}else {
@@ -250,7 +272,7 @@ public class UserController {
 		}
 		return true;
 	}
-	public boolean chechByMail(String mail) {
+	public boolean checkMail(String mail) {
 		if(mail.isEmpty()) {
 			return false;
 		}
@@ -283,11 +305,13 @@ public class UserController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}*/
+	
 
 	@GetMapping(path = "/logout")
 	public ResponseEntity<User> logout() {
 		User user = null;
 		session.setAttribute("user", user);
+		SecurityContextHolder.clearContext();
 		return new ResponseEntity<User>(HttpStatus.OK);
 	}
 	@GetMapping(path = "/getAll")

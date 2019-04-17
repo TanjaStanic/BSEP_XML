@@ -4,6 +4,8 @@ public class UserTokenState {
 	
 	private String accessToken;
 	private Long expiresIn;
+	private int expiresIn2;
+
 	
 	public UserTokenState() {
 		this.accessToken = null;

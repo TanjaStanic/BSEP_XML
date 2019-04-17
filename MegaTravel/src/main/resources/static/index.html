@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <title>Mega Travel</title>
 
@@ -52,12 +52,14 @@
                 <!-- Main navigation items -->
                 <div class="collapse navbar-collapse" id="mainNavbar">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
+                        <li class="nav-item-active">
                                 <a class="nav-link" href="#/">Home <span class="sr-only">(current)</span></a>
                         </li>
+                   
+                        
 						
                         <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sertifikati</a>
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Certificates</a>
                                     <div class="dropdown-menu navbar-dark bg-primary">
                                         <a class="dropdown-item"  href="#/generate" >Generate certificates</a>
                                         <a class="dropdown-item" href="#/generateCRS">Generate certificates with CRS</a>
@@ -69,8 +71,8 @@
                     </ul>
 			
                     <form class="form-inline header-search-form my-2 my-lg-0">
-                	   <a id="logoutButton" href = "#/"  ng-click="logoutClick()"><button class="btn btn-secondary my-2 my-sm-0" type="submit">Odjavi se</button></a>
-                       <a id="loginButton" href = "#/login"><button class="btn btn-secondary my-2 my-sm-0" type="submit">Prijavi se</button></a>                       
+                	   <a id="logoutButton" href = "#/"  ng-click="logoutClick()"><button class="btn btn-secondary my-2 my-sm-0" type="submit">Log out</button></a>
+                       <a id="loginButton" href = "#/login"><button class="btn btn-secondary my-2 my-sm-0" type="submit">Log in</button></a>                       
                     </form>
                     
                 </div>
@@ -80,5 +82,12 @@
             </div>
         </nav>
         <div ng-view></div>
+        
+        <!-- Bootcamp JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+        
 </body>
 </html>
