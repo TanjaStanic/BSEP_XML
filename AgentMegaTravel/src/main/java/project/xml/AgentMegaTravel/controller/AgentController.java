@@ -28,7 +28,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping(value="/agent")
-@CrossOrigin(origins = "http://localhost:4201")
+//@CrossOrigin(origins = "http://localhost:4201")
 public class AgentController {
 	
 	private KeyStore keyStore;
@@ -38,7 +38,8 @@ public class AgentController {
 	
 	@PostConstruct
 	public void init(){
-		certPath = "C:\\Users\\Bojan\\Desktop\\globalKeyStore.p12";
+		//certPath = "C:\\Users\\Bojan\\Desktop\\globalKeyStore.p12";
+		certPath = "C:\\Users\\Windows 10\\git\\BSEP_XML\\MegaTravel\\centralKeystore.p12";
 		uri = "https://localhost:8443/users/https";
 		keyStorePass = "agent";
 		try {

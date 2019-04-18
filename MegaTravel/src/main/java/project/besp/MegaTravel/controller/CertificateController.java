@@ -104,7 +104,7 @@ public class CertificateController {
 	public ArrayList<String> getValidCertificates() throws KeyStoreException, NoSuchAlgorithmException,
 			CertificateException, FileNotFoundException, IOException {
 
-		return ksr.getValidCertificates("centralKeystore.jks", "central");
+		return ksr.getValidCertificates("centralKeystore.p12", "central");
 
 	}
 	
@@ -125,7 +125,7 @@ public class CertificateController {
 
 	}
 	
-	//@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+//	@PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
 	@RequestMapping(
 			value = "/create/{id_subject}/{start_date}/{end_date}",
 			method = RequestMethod.POST,
@@ -157,7 +157,13 @@ public class CertificateController {
 		}
 		//u certificate pre cuvanja dodati idIssuerCertificate
 		Certificate issuerCertificate = certificateService.findOneByIdSubject(id_issuer);
-		Long idIssuerCertificate = issuerCertificate.getId();
+		Long i= (long) 1.0;
+		Long idIssuerCertificate = (long) 0;
+		try {
+			 idIssuerCertificate = issuerCertificate.getId();
+		} catch(Exception e) {
+			 idIssuerCertificate = ++i;
+		}
 		certificate.setIdCertificateIssuer(idIssuerCertificate);
 		
 		Certificate saved = certificateService.saveCertificate(certificate);
@@ -179,7 +185,7 @@ public class CertificateController {
 		keyStoreWriter.write(certificatePass, keyPairIssuer.getPrivate(), certificatePass.toCharArray(), cert);
 
 		String centralPass = "central";
-		keyStoreWriter.saveKeyStore("globalKeyStore.p12", centralPass.toCharArray());
+		keyStoreWriter.saveKeyStore("centralKeystore.p12", centralPass.toCharArray());
 		
 		issuer.setCertificated(true);
 		userService.saveUser(issuer);

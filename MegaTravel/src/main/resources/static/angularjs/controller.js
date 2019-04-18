@@ -8,10 +8,12 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 	//role = JSON.parse(localStorage.getItem('role'));
 	//console.log(role+ ": moja uloga");
 	
+	
 	if (korisnik==undefined){
 		document.getElementById("loginButton").style.visibility = "visible";
 		document.getElementById("logoutButton").style.visibility = "hidden";
 		//document.getElementById("admimSettings1").style.visibility = "hidden";
+		document.getElementById("userSettings").style.visibility = "hidden";
 
 
 
@@ -20,7 +22,27 @@ bespApp.controller('generateController',function($rootScope, $scope,$window, $lo
 		document.getElementById("loginButton").style.visibility = "hidden";
 		document.getElementById("logoutButton").style.visibility = "visible";
 		//document.getElementById("admimSettings1").style.visibility = "visible";
+		document.getElementById("userSettings").style.visibility = "visible";
 
+		uloga = korisnik.roles;
+		console.log(uloga);
+		var u;
+		for (u=0; u<uloga.length; u++){
+			console.log("uloga:");
+			console.log(uloga[u].name);
+			rola = uloga[u].name;
+		}
+		
+		if(rola == 'ROLE_USER' || rola == 'ROLE_ADMIN'){
+			console.log("uloga:");
+			console.log(rola);
+			document.getElementById("userSettings").style.visibility = "visible";
+		}
+		else{
+			console.log("uloga:");
+			console.log(rola);
+			document.getElementById("userSettings").style.visibility = "hidden";
+		}
 	}
 	
 	$scope.logoutClick = function() {
@@ -129,7 +151,8 @@ bespApp.controller('loginController',function($rootScope, $scope,$window, $locat
 		
 		user = {'email' : mail, 'password' : password};
 		
-		console.log(mail+ ": moja mail");
+		pss = escapeHTML(password);
+		console.log("email " + mail, "password " + pss );
 
 		function checkEmail(text) {
 		    const patternMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -139,12 +162,6 @@ bespApp.controller('loginController',function($rootScope, $scope,$window, $locat
 		    }
 		    return true;
 		  }
-
-		//scope.text = 'enter email';
-       //scope.word = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
-		
-		//provjera da li su unijeti mail i lozinka
-
 		
 		if(!checkEmail(mail)){
 			alert('Neispravan format email-a.');
@@ -161,8 +178,7 @@ bespApp.controller('loginController',function($rootScope, $scope,$window, $locat
 		else {
 		
 			console.log("usao u else");
-			user = {'email' : mail, 'password' : password};
-			console.log("email" + mail, "password" + password );
+			user = {'email' : mail, 'password' : pss};
 
 			generateFactory.login(user).then(function(response){
 				console.log("usao u login");
@@ -173,6 +189,14 @@ bespApp.controller('loginController',function($rootScope, $scope,$window, $locat
 					korisnik = response.data;
 					console.log(korisnik.email + 'korisniiiiiiiiik');
 					
+					uloga = response.data.roles;
+					console.log(uloga);
+					var u;
+					for (u=0; u<uloga.length; u++){
+						console.log("uloga:");
+						console.log(uloga[u].name);
+					
+					}
 					localStorage.setItem('korisnik', JSON.stringify(korisnik));
 					
 					auth = response.data.authorities;
@@ -202,14 +226,29 @@ bespApp.controller('registrationController',function($rootScope, $scope,$window,
 		lastName  = $scope.lastName;
 		email = $scope.email;
 		 var password = $scope.password;
-		
-		user = {'firstName' : firstName, 'lastName' : lastName, 'email' : email, 'password' : password};
+		 user = {'email' : mail, 'password' : password};
+			
+		 pss = escapeHTML(password);
+		 console.log("email " + mail, "password " + pss );
+
+		 function escapeHTML(text) {
+
+			    return text.replace(/&/g, '&amp;')
+			        .replace(/</g, '&lt;')
+			        .replace(/>/g, '&gt;')
+			        .replace(/\"/g, '&quot;')
+			        .replace(/\'/g, '&#39;')
+			        .replace(/\//g, '&#x2F;')
+			        .replace('src', 'drc');
+			  }
+		 
+		user = {'firstName' : firstName, 'lastName' : lastName, 'email' : email, 'pss' : password};
 
 		if(!checkEmail(wmail)){
 			alert('Neispravan format email-a.');
 		}
 		else if (password.length<6 || password.length>30) {
-			alert('Lozinka mora da ima izmedju 6 i 30 znakova');
+			alert('Lozinka mora da ima izmedju 5 i 30 znakova');
 			
 		}
 		
@@ -280,7 +319,11 @@ bespApp.controller('createController',function($rootScope, $scope,$window, $loca
 			startDate = String($scope.startDate);
 			endDate = String($scope.endDate);
 			idSubject = parseFloat(korisnik.id);			
-		
+			if (startDate==undefined || endDate==undefined){
+				alert("Morate definisati datume!")
+			}
+			console.log(idIssuer + ' idIssuer' + startDate + " - " + endDate + 'idSubj: ' + idSubject);
+
 			//validacija datuma na frontendu
 			sD = new Date(startDate);
 			eD = new Date(endDate);
@@ -308,6 +351,7 @@ bespApp.controller('createController',function($rootScope, $scope,$window, $loca
 			else if (sD<td){
 				alert("Datum pocetka vazenja sertifikata mora biti nakon najmanje danasnji datum!");
 			}
+			
 			else {
 				generateFactory.createCertificate(idIssuer,startDate,endDate,idSubject).then(function(response){
 		    		if(response.status == 200){
@@ -324,3 +368,4 @@ bespApp.controller('createController',function($rootScope, $scope,$window, $loca
 	};
 
 });
+

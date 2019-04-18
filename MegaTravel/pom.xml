@@ -13,11 +13,9 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>MegaTravel</name>
 	<description>Demo project for Spring Boot - MegaTravel</description>
-
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -49,12 +47,12 @@
             <groupId>org.jooq</groupId>
             <artifactId>jooq-meta</artifactId>
         </dependency>
-        <dependency>
-        <groupId>project.xml</groupId>
-		<artifactId>AgentMegaTravel</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-		<scope>compile</scope>
-        </dependency>
+	      <!--   <dependency>
+	        <groupId>project.xml</groupId>
+			<artifactId>AgentMegaTravel</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+	        </dependency> -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -106,11 +104,9 @@
     <artifactId>owasp-java-html-sanitizer</artifactId>
     <version>20190325.1</version>
 </dependency>
-
 		
 		
 		
-
 		<dependency>
 		   <groupId>org.bouncycastle</groupId>
 		   <artifactId>bcpkix-jdk15on</artifactId>
@@ -212,7 +208,6 @@
 	</dependencies>
 	
 	
-
 	<build>
 		<plugins>
 		
@@ -222,5 +217,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

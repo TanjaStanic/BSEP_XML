@@ -203,8 +203,8 @@ public class UserController {
 			String jwt = tokenUtilis.generateToken(user.getEmail(), device);
 			int expiresIn = tokenUtilis.getExpiredIn(device);
             System.out.println(jwt+"tokeeniiiiiiiiiiiiiiiiii");
-            //return new ResponseEntity<>(postoji, HttpStatus.OK);
-			return ResponseEntity.ok(new UserTokenState(jwt, (long) expiresIn));
+            return new ResponseEntity<>(postoji, HttpStatus.OK);
+			//return ResponseEntity.ok(new UserTokenState(jwt, (long) expiresIn));
 		
 		}else {
 		
@@ -315,20 +315,7 @@ public class UserController {
 		}
 		return true;
 	}
-	
-	/*@GetMapping(path = "/login/{userName}/{password}")
-	public ResponseEntity<User> login(@PathVariable("userName") String userName,
-			@PathVariable("password") String password) {
-		User user = userService.login(userName, password);
-		if (user!=null) {
-			session.setAttribute("user", user);
-			return new ResponseEntity<User>(user,HttpStatus.OK);
-		}
-		else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}*/
-	
+
 
 	@GetMapping(path = "/logout")
 	public ResponseEntity<User> logout() {
@@ -339,6 +326,7 @@ public class UserController {
 		
 		
 	}
+	//@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	@GetMapping(path = "/getAll")
 	public ResponseEntity<List<User>> getAllUsers() {
 		User user = null;
