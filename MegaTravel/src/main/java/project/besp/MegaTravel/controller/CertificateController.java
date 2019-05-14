@@ -56,11 +56,14 @@ import project.besp.MegaTravel.service.CertificateCSRService;
 import project.besp.MegaTravel.service.CertificateService;
 import project.besp.MegaTravel.service.UserService;
 import project.besp.MegaTravel.service.WithDrawCertService;
+import project.besp.MegaTravel.serviceImpl.LoggingServiceImpl;
 import project.besp.MegaTravel.model.*;
 
 @Controller
 @RequestMapping("/certificate")
 public class CertificateController {
+	
+	private LoggingServiceImpl logging = new LoggingServiceImpl(getClass());
 	
 	private KeyStore keyStore;
 	
@@ -103,9 +106,9 @@ public class CertificateController {
 	@ResponseBody
 	public ArrayList<String> getValidCertificates() throws KeyStoreException, NoSuchAlgorithmException,
 			CertificateException, FileNotFoundException, IOException {
-
+		logging.printInfo("Get Valid Certificates");
 		return ksr.getValidCertificates("centralKeystore.p12", "central");
-
+		
 	}
 	
 	//@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
@@ -121,6 +124,7 @@ public class CertificateController {
 				returnList.add(u);
 			}
 		}
+		logging.printInfo("Get Users With Certificates");
 		return returnList;
 
 	}
@@ -194,6 +198,7 @@ public class CertificateController {
 		System.out.println("-----------------------------------------------------------------------------------------");
 		System.out.println("[CertificateController - validateCertificate PRE]: issuer private key: " + keyPairIssuer.getPrivate());
 		
+		logging.printInfo("Create User");
 		return new ResponseEntity<Certificate>(certificate , HttpStatus.OK);
 	}
 	
@@ -226,6 +231,8 @@ public class CertificateController {
 
 		ksw.write(info.commonName, keyPairIssuer.getPrivate(), "password".toCharArray(), cer);
 		ksw.saveKeyStore("keystore.jks", "password".toCharArray());
+		
+		logging.printInfo("Generate Certificate");
 		return new ResponseEntity<>(HttpStatus.OK);
 
 	}
@@ -312,6 +319,7 @@ public class CertificateController {
 			System.out.println(cer);
 			ccsrs.save(cer);
 			
+			logging.printInfo("Generate CRS Certificate");
 		    return  new ResponseEntity<> (HttpStatus.OK);
 		    
            
@@ -339,6 +347,7 @@ public class CertificateController {
 		}
 		ArrayList<String> sp = new ArrayList<String>();
 		sp.add(sta);
+		logging.printInfo("Status certificate serial: " + serialNumber + "is: "+ sta);
 		return sp;
 
 	}
@@ -381,7 +390,7 @@ public class CertificateController {
 	@ResponseBody
 	public ResponseEntity<Certificate> deleteCertificate(@PathVariable("serial") String serialNumber) throws KeyStoreException,
 			NoSuchAlgorithmException, CertificateException, FileNotFoundException, IOException {
-
+		logging.printInfo("Certificate serial: " + serialNumber+ "is deleted" );
 		return null;
 		/*ArrayList<Certificate> ce = ksr.deleteCert(serialNumber, true, "keystore.jks", "password");
 

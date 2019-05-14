@@ -47,6 +47,8 @@ import project.besp.MegaTravel.model.UserTokenState;
 import project.besp.MegaTravel.security.TokenUtils;
 import project.besp.MegaTravel.service.RoleService;
 import project.besp.MegaTravel.service.UserService;
+import project.besp.MegaTravel.serviceImpl.LoggingServiceImpl;
+
 import org.bouncycastle.crypto.generators.BCrypt;
 import org.owasp.encoder.Encode;
 import org.owasp.html.HtmlPolicyBuilder;
@@ -57,7 +59,9 @@ import org.owasp.html.HtmlPolicyBuilder;
 @RequestMapping("/user")
 public class UserController {
 	
-	private Logger logger = LoggerFactory.getLogger(UserController.class);
+	private LoggingServiceImpl logging = new LoggingServiceImpl(getClass());
+	
+	
 
 	@Autowired
 	private UserService userService;
@@ -85,15 +89,19 @@ public class UserController {
 		
 		if(result.hasErrors()) {
 			//404
+			logging.printError("ERROR registration");
 			return new ResponseEntity<>(new UserTokenState("error",(long)0), HttpStatus.NOT_FOUND);
 		}
 		if(!checkMail(user1.getEmail())) {
+			logging.printError("ERROR registration");
 			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
 		}
 		if(!checkCharacters(user1.getFirstName())) {
+			logging.printError("ERROR registration");
 			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
 		}
 		if(!checkCharacters(user1.getLastName())) {
+			logging.printError("ERROR registration");
 			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
 		}
 		
@@ -116,12 +124,14 @@ public class UserController {
 			newUser.setRoles(Arrays.asList(roleService.findByName("ROLE_USER")));
 			userService.saveUser(newUser);
 			
+			logging.printInfo("New user registration: Success" + newUser);
 			return new ResponseEntity<>(newUser, HttpStatus.OK);
 			
 			
 		} else {
 			System.out.println("postoji email adresa ista ");
 			user1.setEmail("error");
+			logging.printError("New user reg: Email is already in use");
 			return new ResponseEntity<>(user1, HttpStatus.NOT_FOUND);
 		}
 		
@@ -167,6 +177,8 @@ public class UserController {
 		}*/
 		
 		if(!checkMail(newUser.getEmail())) {
+			logging.printError("User login : wrong email");
+			System.out.println("pogresan mail");
 			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
 		}
 		
@@ -175,7 +187,7 @@ public class UserController {
 		
 		if(result.hasErrors()) {
 			//404
-		
+			logging.printError("User login error");
 			return new ResponseEntity<>(new UserTokenState("error", (long)0), HttpStatus.NOT_FOUND);
 		}
 		
