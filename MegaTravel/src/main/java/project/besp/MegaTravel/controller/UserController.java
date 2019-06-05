@@ -33,11 +33,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import project.besp.MegaTravel.model.Authority;
@@ -57,9 +59,14 @@ import org.owasp.html.HtmlPolicyBuilder;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins = "*")
+
 public class UserController {
 	
 	private LoggingServiceImpl logging = new LoggingServiceImpl(getClass());
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	
 	
 
@@ -163,42 +170,31 @@ public class UserController {
 	
 	}
 	
-	@RequestMapping(value="/login",
+	@RequestMapping(value="/login", 
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	
-	public ResponseEntity<?> userLogin(@Valid @RequestBody User newUser,@Context HttpServletRequest request, HttpServletResponse response,Device device, BindingResult result) throws IOException{
+	public ResponseEntity<?>  userLogin(@Valid @RequestBody User newUser, @Context HttpServletRequest request, HttpServletResponse response, Device device, BindingResult result) throws IOException{		
 		System.out.println("usao u login u controlleru");	
-		//User postoji = userService.findUserByMail(newUser.getEmail());
-		/*List<Role> uloga = postoji.getRoles();
-		newUser.setRoles(uloga);
-		for(int i = 0; i<uloga.size(); i++) {
-		System.out.println(uloga.get(i).getName() + "ULOGAAAAAAAAAAAAa");
-		}*/
-		
+		logger.info("LOG");
 		if(!checkMail(newUser.getEmail())) {
-			logging.printError("User login : wrong email");
-			System.out.println("pogresan mail");
-			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
+			logger.error("LOGERREMAIL");
+			return new ResponseEntity<>(new UserTokenState("error", (long) 0), HttpStatus.NOT_FOUND);
 		}
 		
 		User postoji = userService.findUserByMail(Encode.forHtml(newUser.getEmail()));
-
-		
 		if(result.hasErrors()) {
 			//404
-			logging.printError("User login error");
-			return new ResponseEntity<>(new UserTokenState("error", (long)0), HttpStatus.NOT_FOUND);
+			logger.error("LOGERR");
+			return new ResponseEntity<>(new UserTokenState("error", (long) 0), HttpStatus.NOT_FOUND);
 		}
 		
 		if(postoji!=null) {
-			
+				
 			if(org.springframework.security.crypto.bcrypt.BCrypt.checkpw(newUser.getPassword(), postoji.getPassword())){	
-			System.out.println("Uspesna prijava , email: " + postoji.getEmail());
+			System.out.println("Uspesna prijava :), email: " + postoji.getEmail());
 			}else{
-				System.out.println("Neuspesna prijava , email: " + postoji.getEmail());
-
-				return new ResponseEntity<>(new UserTokenState("error", (long)0), HttpStatus.NOT_FOUND);
+				logger.warn("LOGFAIL");
+				return new ResponseEntity<>(new UserTokenState("error", (long) 0), HttpStatus.OK);
 		
 			}
 			final Authentication authentication = authManager
@@ -211,18 +207,17 @@ public class UserController {
 
 			// Kreiraj token
 			User user = (User) authentication.getPrincipal();
-            System.out.println(user.email + "emaillllllllll");
 			String jwt = tokenUtilis.generateToken(user.getEmail(), device);
 			int expiresIn = tokenUtilis.getExpiredIn(device);
-            System.out.println(jwt+"tokeeniiiiiiiiiiiiiiiiii");
-            return new ResponseEntity<>(postoji, HttpStatus.OK);
-			//return ResponseEntity.ok(new UserTokenState(jwt, (long) expiresIn));
+			logger.info("User id: " + postoji.getId() + " LOGSUCCESS");
+			return ResponseEntity.ok(new UserTokenState(jwt, (long) expiresIn));
 		
 		}else {
-		
-			return new ResponseEntity<>(new UserTokenState("error", (long) 0), HttpStatus.NOT_FOUND);
+			logger.warn("LOGFAIL");
+			return new ResponseEntity<>(new UserTokenState("error", (long) 0), HttpStatus.OK);
 
 		}
+			
 	}
 	
 	@RequestMapping(
@@ -348,5 +343,17 @@ public class UserController {
 		//return userService.getAll();
 		session.setAttribute("user", user);
 		return new ResponseEntity<List<User>>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/communication", 
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+			
+	 public String  communication(@RequestParam String message){		
+		System.out.println("Dosao u communication; message: " + message);
+		
+		String response = "The communication between central and agent module is allowed. Accepted message from agent: ";
+		logger.info("COMM");
+		return response;
 	}
 }

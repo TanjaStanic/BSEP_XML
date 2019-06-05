@@ -24,7 +24,9 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="assets/dist/img/Admin.png" class="user-image" alt="User Image">
-              <span class="hidden-xs"><a routerLink="login">SING IN</a></span>
+              <span class ="visible" id="loginButton" [hidden]="logged"><a routerLink="login">SING IN</a></span>
+              <span class="hidden-xs" id="logoutButton" (click)="logOutUser()" [hidden]="notLogged" ><a routerLink="logout">SING OUT</a></span>
+              
             </a>
           </li>
           <!-- Control Sidebar Toggle Button -->
