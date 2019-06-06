@@ -75,14 +75,6 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
-            <xs:element name="pib">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:minLength value="8"/>
-                        <xs:maxLength value="13"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="address">
@@ -136,14 +128,26 @@
     <xs:element name="client">
         <xs:complexType>
             <xs:complexContent>
-                <xs:extension base="user"/>
+                <xs:extension base="user">
+                </xs:extension>
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
     <xs:element name="agent">
         <xs:complexType>
             <xs:complexContent>
-                <xs:extension base="user"/>
+                <xs:extension base="user">
+                    <xs:sequence>
+                        <xs:element name="pib">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:minLength value="8"/>
+                                    <xs:maxLength value="13"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:extension>
             </xs:complexContent>
         </xs:complexType>
     </xs:element>

@@ -24,6 +24,15 @@
                     </xs:simpleType>
                 </xs:element>
                 <xs:element name="freeCancelation" type="cancelation"/>
+                <xs:element name="type">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="hotel"/>
+                            <xs:enumeration value="bed_and_breakfast"/>
+                            <xs:enumeration value="apartment"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
                 <xs:element ref="pricing"/>
                 <xs:element ref="ns2:accommodation"/>
                 <xs:element maxOccurs="12" minOccurs="0" ref="additional_services"/>
