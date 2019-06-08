@@ -46,6 +46,7 @@ import project.besp.MegaTravel.model.Authority;
 import project.besp.MegaTravel.model.Role;
 import project.besp.MegaTravel.model.User;
 import project.besp.MegaTravel.model.UserTokenState;
+import project.besp.MegaTravel.repository.UserRepository;
 import project.besp.MegaTravel.security.TokenUtils;
 import project.besp.MegaTravel.service.RoleService;
 import project.besp.MegaTravel.service.UserService;
@@ -75,6 +76,9 @@ public class UserController {
 	
 	@Autowired
 	private RoleService roleService;
+	
+	@Autowired
+    UserRepository userRepository;
 	
 	@Autowired
 	TokenUtils tokenUtilis;
@@ -143,6 +147,8 @@ public class UserController {
 		}
 		
 	}
+	
+
 	
 	private byte[] hashPassword(String password, byte[] salt) {
 		int iterations = 10000;
