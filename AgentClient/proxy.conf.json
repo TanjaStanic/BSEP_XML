@@ -1,7 +1,10 @@
 {
-  "/api": {
+  "/api/**": {
+    "target": "https://localhost:8443",
+    "secure": false
+  },
+   "/api2/**": {
     "target": "http://localhost:8442",
-    "secure": false,
-    "logLevel":"debug"
+    "secure": false
   }
 }

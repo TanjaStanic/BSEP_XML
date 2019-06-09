@@ -1,0 +1,45 @@
+<div class="login-box">
+  <div class="login-logo">
+    <a href="../../index2.html"><b>Sing</b>in</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Sing in to access our services</p>
+
+    <form method="post" class="loginForm" (submit)="loginUser()">
+      <div class="form-group has-feedback" id="em">
+        <input type="email" class="form-control" placeholder="Email" 
+        			[(ngModel)]="user.email" #email="ngModel" id="mail" name="email" required />
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div id="pass" class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="Password"
+        		[(ngModel)]="user.password" #password="ngModel" id="password" name="password" required minlength="6" />
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <!-- /.col -->
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <label>
+               <div class="alert alert-danger" *ngIf="!password.valid && password.touched"> Password is required! </div>    
+               <div class="alert error" [innerHTML]="htmlStr" ></div>
+                       </label>
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button class="btn btn-primary btn-block btn-flat" type="submit" id="confirmBtn">Sign In</button>
+          
+         
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+    <a href="#">I forgot my password</a><br>
+    <a href="register" class="text-center">Register a new membership</a>
+
+  </div>
+  <!-- /.login-box-body -->
+</div>

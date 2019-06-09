@@ -3,7 +3,7 @@ import { StatusType } from './status-type.enum';
 import { Address } from './address.model';
 
 
-export interface AbstractUser {
+export class AbstractUser {
     id: number;
     firstName: string;
     lastName: string;
@@ -14,5 +14,7 @@ export interface AbstractUser {
 	active: boolean;
 	address: Address;
     role: UserType;
+    roles: Array<UserType>;
+    certificated: boolean;
 
 }

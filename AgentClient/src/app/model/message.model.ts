@@ -4,6 +4,6 @@ export interface Message {
     content: string;
     agentId: number;
     clientId: number;
-    date: date;
+    date: string;
 
 }
