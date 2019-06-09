@@ -3,6 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../../model/user';
 import {AuthServiceService} from '../auth-service/auth-service.service';
+import {Router} from '@angular/router';
+
 
 
 @Injectable({
@@ -10,12 +12,14 @@ import {AuthServiceService} from '../auth-service/auth-service.service';
 })
 export class UserServiceService {
 
-constructor(private http: HttpClient, private auth: AuthServiceService) { }
+constructor(private http: HttpClient, private auth: AuthServiceService, private router : Router) { }
     
     
 loginUser(u: User) {
     console.log('Usao u loginUser');
     return this.http.post('https://localhost:8443/user/login', u, {headers: this.auth.createAuthorizationTokenHeader()});
+
+
   }
     
 getLogged(token: string) {
