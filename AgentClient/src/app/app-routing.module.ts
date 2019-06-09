@@ -5,6 +5,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { AddAccommodationComponent } from './components/add-accommodation/add-accommodation.component';
 import { AccommodationsComponent } from './components/accommodations/accommodations.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { MessagesComponent } from './components/messages/messages.component';
 
 const routes: Routes = [   {
     path: 'login',

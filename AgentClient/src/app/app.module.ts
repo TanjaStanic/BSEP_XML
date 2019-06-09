@@ -9,6 +9,7 @@ import { AccommodationsComponent } from './components/accommodations/accommodati
 import { CommentsComponent } from './components/comments/comments.component';
 import { AddAccommodationComponent } from './components/add-accommodation/add-accommodation.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { MessagesComponent } from './components/messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HomePageComponent } from './components/home-page/home-page.component';
     AccommodationsComponent,
     CommentsComponent,
     AddAccommodationComponent,
-    HomePageComponent
+    HomePageComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
