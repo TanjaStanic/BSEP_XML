@@ -10,6 +10,7 @@ package project.xml.AgentMegaTravel.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -24,13 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="id">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}long">
- *               &lt;minInclusive value="0"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
+ *         &lt;element ref="{http://www.mega-travel/accommodation-unit}accommodationUnit"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -41,27 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "id"
+    "accommodationUnit"
 })
-@XmlRootElement(name = "AccommodationRequest")
-public class AccommodationRequest {
+@XmlRootElement(name = "AccommodationUtitResponse")
+public class AccommodationUtitResponse {
 
-    protected long id;
+    @XmlElement(namespace = "http://www.mega-travel/accommodation-unit", required = true)
+    protected AccommodationUnit accommodationUnit;
 
     /**
-     * Gets the value of the id property.
+     * Gets the value of the accommodationUnit property.
      * 
+     * @return
+     *     possible object is
+     *     {@link AccommodationUnit }
+     *     
      */
-    public long getId() {
-        return id;
+    public AccommodationUnit getAccommodationUnit() {
+        return accommodationUnit;
     }
 
     /**
-     * Sets the value of the id property.
+     * Sets the value of the accommodationUnit property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link AccommodationUnit }
+     *     
      */
-    public void setId(long value) {
-        this.id = value;
+    public void setAccommodationUnit(AccommodationUnit value) {
+        this.accommodationUnit = value;
     }
 
 }

@@ -1,10 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { UserServiceService } from 'src/app/services/user-service/user-service.service';
+import {AuthServiceService} from 'src/app/services/auth-service/auth-service.service';
+import { AbstractUser } from 'src/app/model/abstract-user.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'Angular 8 Application';
+
+  logged: boolean;
+    notLogged: boolean;
+    token: string;
+    podatak: object;
+    user: AbstractUser = new AbstractUser();
+    id_logged : number;
+    constructor(private userService: UserServiceService, private route: ActivatedRoute, private auth: AuthServiceService) { }
+
+    ngOnInit() {
+      this.token = this.auth.getJwtToken();
+      console.log('Token je ');
+      console.log(this.token);
+      if (!this.token) {
+        this.notLogged = true;
+        console.log('Niko nije ulogovan');
+      } else {
+        console.log('Neko je ulogovan');
+        this.logged = true;
+        this.userService.getLogged(this.token).subscribe(podaci => { this.pathToList(podaci); });
+       }
+    }
+    pathToList(data)
+    {
+      this.user = data as AbstractUser;
+      this.id_logged=this.user.id;
+      document.getElementById("listCertificates").setAttribute("href", "/list-of-certificates/" + this.id_logged);
+    }
+    logOutUser() {
+      
+      this.userService.logOut().subscribe(podaci => window.location.href='http://localhost:4200');
+      this.auth.removeJwtToken();
+      this.notLogged = true;
+      this.logged = false;
+    }
 }

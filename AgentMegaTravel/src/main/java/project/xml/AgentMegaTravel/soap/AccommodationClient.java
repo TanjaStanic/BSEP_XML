@@ -1,22 +1,37 @@
 package project.xml.AgentMegaTravel.soap;
 
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
-import org.springframework.ws.soap.client.core.SoapActionCallback;
-import project.xml.AgentMegaTravel.model.Accommodation;
 import project.xml.AgentMegaTravel.model.AccommodationRequest;
 import project.xml.AgentMegaTravel.model.AccommodationResponse;
+import project.xml.AgentMegaTravel.model.AccommodationUnit;
+import project.xml.AgentMegaTravel.model.AccommodationUnitRequest;
+import project.xml.AgentMegaTravel.model.AccommodationUtitResponse;
+
+import project.xml.AgentMegaTravel.model.AdditionalServiceRequest;
+import project.xml.AgentMegaTravel.model.AdditionalServiseResponse;
+
+import project.xml.AgentMegaTravel.model.AddressRequest;
+import project.xml.AgentMegaTravel.model.AddressResponse;
 
 public class AccommodationClient extends WebServiceGatewaySupport{
-	public AccommodationResponse getCountry(Accommodation accom) {
-
+	public AccommodationResponse getAccommodation(Long id) {
 		AccommodationRequest request = new AccommodationRequest();
-		request.setAccommodation(accom);
-
-		AccommodationResponse response = (AccommodationResponse) getWebServiceTemplate()
-				.marshalSendAndReceive("https://localhost:8443/accommodation", request,
-						new SoapActionCallback(
-								"http://www.ftn.uns.ac.rs/MegaTravel/soap/AccommodationRequest"));
-
-		return response;
+		request.setId(id);
+		return (AccommodationResponse) getWebServiceTemplate().marshalSendAndReceive(request);
+	}
+	public AddressResponse getAddress(Long id) {
+		AddressRequest request = new AddressRequest();
+		request.setId(1);
+		return (AddressResponse) getWebServiceTemplate().marshalSendAndReceive(request);
+	}
+	public AdditionalServiseResponse getAdditionalService(Long id) {
+		AdditionalServiceRequest request = new AdditionalServiceRequest();
+		request.setId(1);
+		return (AdditionalServiseResponse) getWebServiceTemplate().marshalSendAndReceive(request);
+	}
+	public AccommodationUtitResponse saveNewAcc(AccommodationUnit au) {
+		AccommodationUnitRequest request = new AccommodationUnitRequest();
+		request.setAccommodationUnit(au);
+		return (AccommodationUtitResponse) getWebServiceTemplate().marshalSendAndReceive(request);
 	}
 }

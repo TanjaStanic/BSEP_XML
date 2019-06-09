@@ -10,6 +10,7 @@ package project.xml.AgentMegaTravel.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -24,13 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="id">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}long">
- *               &lt;minInclusive value="0"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
+ *         &lt;element ref="{http://www.mega-travel/accommodation-unit}additional_services"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -41,27 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "id"
+    "additionalServices"
 })
-@XmlRootElement(name = "AccommodationRequest")
-public class AccommodationRequest {
+@XmlRootElement(name = "AdditionalServiseResponse")
+public class AdditionalServiseResponse {
 
-    protected long id;
+    @XmlElement(name = "additional_services", namespace = "http://www.mega-travel/accommodation-unit", required = true)
+    protected AdditionalServices additionalServices;
 
     /**
-     * Gets the value of the id property.
+     * Gets the value of the additionalServices property.
      * 
+     * @return
+     *     possible object is
+     *     {@link AdditionalServices }
+     *     
      */
-    public long getId() {
-        return id;
+    public AdditionalServices getAdditionalServices() {
+        return additionalServices;
     }
 
     /**
-     * Sets the value of the id property.
+     * Sets the value of the additionalServices property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link AdditionalServices }
+     *     
      */
-    public void setId(long value) {
-        this.id = value;
+    public void setAdditionalServices(AdditionalServices value) {
+        this.additionalServices = value;
     }
 
 }
