@@ -10,6 +10,7 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { AddAccommodationComponent } from './components/add-accommodation/add-accommodation.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { MessagesComponent } from './components/messages/messages.component';
+import { AddAccUnitComponent } from './components/add-acc-unit/add-acc-unit.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MessagesComponent } from './components/messages/messages.component';
     CommentsComponent,
     AddAccommodationComponent,
     HomePageComponent,
-    MessagesComponent
+    MessagesComponent,
+    AddAccUnitComponent
   ],
   imports: [
     BrowserModule,

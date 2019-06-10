@@ -1,0 +1,62 @@
+
+<div class="register-box">
+  <div class="register-box-body">
+    <p class="login-box-msg">Register new accommodation unit</p>
+
+    <form method="post">
+     <div class="form-group has-feedback">
+        <label for="floor">Floor:</label>
+        <input type="number" class="form-control" placeholder="Number of floor" min="0" required>
+        <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <label for="numberOfRoom">Room:</label>
+        <input type="number" class="form-control" placeholder="Number of room" min="1" required> 
+        <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <label for="numberOfBeds">Capacity:</label>
+        <input type="number" class="form-control" placeholder="Number of beds" min="1" required>
+        <span class="glyphicon glyphicon-bed form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">                
+      	<label for="startDate" >Price start date:</label>
+        <input type="date" class="form-control" required>
+        <span class="glyphicon glyphicon-calendar form-control-feedback"></span>         
+      </div>
+      <div class="form-group has-feedback">                
+      	<label for="endDate" >Price end date:</label>
+        <input type="date" class="form-control" required>
+        <span class="glyphicon glyphicon-calendar form-control-feedback"></span>         
+      </div>
+	  <div class="form-group">
+            <label for="newPrice">Price</label> 
+            <input type="number" class="form-control" name="newPriceValue" required />
+            <span class="glyphicon glyphicon-euro form-control-feedback"></span>
+      </div>
+	  <div class="form-group">
+            <label >Additional services:</label>
+          
+      </div>
+      <div class="row">
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Add Unit</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+  </div>
+  <!-- /.form-box -->
+</div>
+<!-- /.register-box -->
+
+<!-- jQuery 3 -->
+<script src="../../assets/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../../assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="../../assets/plugins/iCheck/icheck.min.js"></script>
+
+

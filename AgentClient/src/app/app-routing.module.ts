@@ -7,10 +7,15 @@ import { AccommodationsComponent } from './components/accommodations/accommodati
 import { CommentsComponent } from './components/comments/comments.component';
 import { MessagesComponent } from './components/messages/messages.component';
 
-const routes: Routes = [   {
+const routes: Routes = [   
+   {
     path: 'login',
     component: LoginComponent
-  },
+   }, 
+   {
+      path: '',
+      component: HomePageComponent
+    },
     {
       path: 'homePage',
       component: HomePageComponent
@@ -26,7 +31,11 @@ const routes: Routes = [   {
     {
       path: 'comments',
       component: CommentsComponent
-    }
+    },
+    {
+        path: 'messages',
+        component: MessagesComponent
+      }
 
   ];
 
