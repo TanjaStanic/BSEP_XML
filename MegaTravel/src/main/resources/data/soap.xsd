@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.mega-travel.com/soap"
+    targetNamespace="http://www.mega-travel.com/soap" elementFormDefault="qualified"
+    xmlns:msg="http://www.mega-travel/message" xmlns:res="http://www.mega-travel/reservation"
+    xmlns:user="http://www.mega-travel/user" xmlns:acc="http://www.mega-travel/accommodation"
+    xmlns:accu="http://www.mega-travel/accommodation-unit">
+
+    <xs:import namespace="http://www.mega-travel/user" schemaLocation="User.xsd"/>
+    <xs:import namespace="http://www.mega-travel/accommodation" schemaLocation="Accommodation.xsd"/>
+    <xs:import namespace="http://www.mega-travel/accommodation-unit"
+        schemaLocation="AccommodationUnit.xsd"/>
+    <xs:import namespace="http://www.mega-travel/message" schemaLocation="Messages.xsd"/>
+    <xs:import namespace="http://www.mega-travel/reservation" schemaLocation="Reservation.xsd"/>
+    <xs:element name="MessageRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="email">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="50"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MessageResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="msg:messages"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ReservationRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="reservationId">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:long">
+                            <xs:minInclusive value="1"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="reservationStatus">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="active"/>
+                            <xs:enumeration value="canceled"/>
+                            <xs:enumeration value="finished"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ReservationResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="res:reservation"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AccommodationRequest">
+
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:long">
+                            <xs:minInclusive value="0"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AccommodationResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="acc:accommodation"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AccommodationUnitRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="accu:accommodationUnit"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AccommodationUtitResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="accu:accommodationUnit"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AddressRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:long">
+                            <xs:minInclusive value="0"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AddressResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="user:address"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AdditionalServiceRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:long">
+                            <xs:minInclusive value="0"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AdditionalServiseResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="accu:additional_services"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
