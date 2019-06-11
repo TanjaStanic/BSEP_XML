@@ -18,6 +18,8 @@ public class MegaTravelApplication {
 		
 		System.out.println("helloooooooooooo"); //SARAAAAAAa
 		
+		// samo za tanjuuuuuuuu
+		
 	}
 
 }
