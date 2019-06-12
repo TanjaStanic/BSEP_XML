@@ -125,9 +125,6 @@ public class Accommodation {
     @XmlElement(required = true)
     protected BigInteger cancelationDays;
     
-    @OneToOne(mappedBy = "accommodation")    
-    protected Agent agent;
-    
     @OneToOne(mappedBy = "accommodation")
     protected Address address;
    
@@ -224,9 +221,7 @@ public class Accommodation {
      *     {@link Agent }
      *     
      */
-    public Agent getAgent() {
-        return agent;
-    }
+    
 
     /**
      * Sets the value of the agent property.
@@ -236,9 +231,7 @@ public class Accommodation {
      *     {@link Agent }
      *     
      */
-    public void setAgent(Agent value) {
-        this.agent = value;
-    }
+    
 
     /**
      * Gets the value of the address property.

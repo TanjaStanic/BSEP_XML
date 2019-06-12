@@ -8,7 +8,12 @@
 
 package project.besp.MegaTravel.modelxsd;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -47,12 +52,15 @@ import javax.xml.bind.annotation.XmlElement;
 public class Agent
     extends User
 {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	protected long id;
 
     @XmlElement(required = true)
     protected String pib;
     
     @OneToMany(mappedBy="agent")
-	private Accommodation accommodation;
+	private List<Accommodation> accommodation;
 
     /**
      * Gets the value of the pib property.
@@ -78,15 +86,15 @@ public class Agent
         this.pib = value;
     }
 
-	public Accommodation getAccommodation() {
+	public List<Accommodation> getAccommodation() {
 		return accommodation;
 	}
 
-	public void setAccommodation(Accommodation accommodation) {
+	public void setAccommodation(List<Accommodation> accommodation) {
 		this.accommodation = accommodation;
 	}
 
-	public Agent(String pib, Accommodation accommodation) {
+	public Agent(String pib, List<Accommodation> accommodation) {
 		super();
 		this.pib = pib;
 		this.accommodation = accommodation;

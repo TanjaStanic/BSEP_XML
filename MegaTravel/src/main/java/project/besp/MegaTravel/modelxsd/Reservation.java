@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import project.besp.MegaTravel.model.User;
 
 
 /**
@@ -85,7 +86,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Rezervation", propOrder = {
+@XmlType(name = "Reservation", propOrder = {
     "startDate",
     "endDate",
     "totalPrice",

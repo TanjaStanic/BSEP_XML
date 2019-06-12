@@ -1,5 +1,5 @@
 
-<div class="register-box">
+<div class="conteiner" id="formRegistration">
   <div class="register-logo">
     <a href="../../index2.html"><b>Admin</b></a>
   </div>
@@ -8,41 +8,55 @@
     <p class="login-box-msg">Register new agent</p>
 
     <form action="../../index.html" method="post">
+    <form class="registration" (submit)="validateUser()">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="First name">
+        <input type="text" class="form-control" [(ngModel)] = "user.name" #name1= "ngModel" name="name" placeholder="First name">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
        <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Last name">
+        <input type="text" class="form-control" [(ngModel)] = "user.lastname" #lastname="ngModel" name="lastname" class="form-control" placeholder="Last name">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Id number">
+        <input type="text" class="form-control" [(ngModel)]="user.id" #id="ngModel" name="id" placeholder="Id number">
         <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Address">
+        <input type="text" class="form-control" [(ngModel)]="user.address" #address="ngModel" name="address" placeholder="Address">
         <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+        
+        <input type="email" class="form-control" [(ngModel)]="user.email" #email="ngModel" name="email" placeholder="Email">
+         <div class="alert alert-danger" *ngIf="!email.valid && email.touched"> Email is required! </div>
+        
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" class="form-control" [(ngModel)]="user.password" #password="ngModel" name="password" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Retype password">
+        <input type="password" class="form-control" [(ngModel)]="user.password" #password="ngModel" name="password" placeholder="Retype password">
+         <div class="alert alert-danger" *ngIf="password.required==false && password.touched"> Password is required! </div>
+          <div class="alert alert-danger" [hidden] = "passwordError">{{passwordErrorMessage}} </div>
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
       </div>
+          <div class="form-group row" [hidden]="hideError">
+        <div class="col-xs-6">	
+          <div class="alert alert-danger" >
+            <label> {{errorMessage}} </label>
+          </div>
+        </div>
+    </div>
       <div class="row">
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+          <button type="submit" id="submit" class="btn btn-primary btn-block btn-flat">Register</button>
         </div>
         <!-- /.col -->
       </div>
+      </form>
     </form>
 
   </div>

@@ -33,6 +33,11 @@ getSelfSigned() {
 logOut() {
     return this.http.get('https://localhost:8443/user/logout', {headers: this.auth.createAuthorizationTokenHeader()});
   }
+    
+addUser(u: User) {
+    console.log('Usao u addUser');
+    return this.http.post('https://localhost:8443/user/registration', u );
+  }
 
 
 }

@@ -74,7 +74,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "AdditionalServices", propOrder = {
     "id",
     "name",
-    "priceOfAdd"
+    "priceOfAdd",
+    "accommodation"
 })
 @Entity
 public class AdditionalServices {
