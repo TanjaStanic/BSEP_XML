@@ -310,6 +310,7 @@ public class Accommodation {
         this.description = value;
     }
 
+    
     /**
      * Gets the value of the additionalServices property.
      * 
