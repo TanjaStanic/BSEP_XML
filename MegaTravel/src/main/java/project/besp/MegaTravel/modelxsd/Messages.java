@@ -10,6 +10,7 @@ package project.besp.MegaTravel.modelxsd;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -71,6 +72,7 @@ public class Messages {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "message_id", nullable = false, updatable = false)
 	private Long id;
     
 	@XmlElement(required = true)
@@ -78,13 +80,7 @@ public class Messages {
     
 	@XmlElement(required = true)
     protected String title;
-    
-	@OneToOne(mappedBy="messages")
-    protected Agent agent;
-    
-	@OneToOne(mappedBy="messages")
-    protected Client client;
-    
+
 	@XmlElement(required = true)
     @XmlSchemaType(name = "date")
     protected Date date;
@@ -135,54 +131,6 @@ public class Messages {
      */
     public void setTitle(String value) {
         this.title = value;
-    }
-
-    /**
-     * Gets the value of the agent property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Agent }
-     *     
-     */
-    public Agent getAgent() {
-        return agent;
-    }
-
-    /**
-     * Sets the value of the agent property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Agent }
-     *     
-     */
-    public void setAgent(Agent value) {
-        this.agent = value;
-    }
-
-    /**
-     * Gets the value of the client property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Client }
-     *     
-     */
-    public Client getClient() {
-        return client;
-    }
-
-    /**
-     * Sets the value of the client property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Client }
-     *     
-     */
-    public void setClient(Client value) {
-        this.client = value;
     }
 
     /**

@@ -10,6 +10,7 @@ package project.besp.MegaTravel.modelxsd;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -90,8 +91,6 @@ import project.besp.MegaTravel.model.User;
     "startDate",
     "endDate",
     "totalPrice",
-    "user",
-    "accommodationUnit",
     "reservationStatus",
     "reservationRating"
 })
@@ -100,6 +99,7 @@ public class Reservation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "reservation_id", nullable = false, updatable = false)
 	private Long id; 
     
 	@XmlElement(name = "start_date", required = true)
@@ -113,11 +113,7 @@ public class Reservation {
 	@XmlElement(name = "total_price")
     protected double totalPrice;
 
-	@XmlElement(required = true)
-	@ManyToOne
-	    @JoinColumn(name="accommodation_unit")
-	    protected AccommodationUnit accommodationUnit;
-	    protected double price;
+	protected double price;
     
     @XmlElement(required = true)
     protected String reservationStatus;
@@ -125,10 +121,6 @@ public class Reservation {
     @XmlElement(required = true, defaultValue = "unrated")
     protected String reservationRating;
 
-    @XmlElement(required = true, type = Long.class, nillable = true)
-    @ManyToOne
-    @JoinColumn(name="user")
-    protected User user;
     /**
      * Gets the value of the id property.
      * 
@@ -217,45 +209,7 @@ public class Reservation {
      *     {@link Client }
      *     
      */
-    public User getUser() {
-        return user;
-    }
-
-    /**
-     * Sets the value of the client property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Client }
-     *     
-     */
-    public void setUser(User value) {
-        this.user = value;
-    }
-
-    /**
-     * Gets the value of the accommodationUnit property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AccommodationUnit }
-     *     
-     */
-    public AccommodationUnit getAccommodationUnit() {
-        return accommodationUnit;
-    }
-
-    /**
-     * Sets the value of the accommodationUnit property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AccommodationUnit }
-     *     
-     */
-    public void setAccommodationUnit(AccommodationUnit value) {
-        this.accommodationUnit = value;
-    }
+   
 
     /**
      * Gets the value of the reservationStatus property.

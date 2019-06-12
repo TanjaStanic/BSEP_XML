@@ -12,10 +12,14 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -103,20 +107,16 @@ import javax.xml.bind.annotation.XmlType;
     "id",
     "name",
     "cancelationDays",
-    "agent",
-    "address",
     "rating",
     "category",
-    "image",
     "description",
-    "additionalServices",
-    "location"
 })
 @Entity
 public class Accommodation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "accommodation_id", nullable = false, updatable = false)
     protected long id;
    
 	@XmlElement(required = true)
@@ -125,29 +125,18 @@ public class Accommodation {
     @XmlElement(required = true)
     protected BigInteger cancelationDays;
     
-    @OneToOne(mappedBy = "accommodation")
-    protected Address address;
    
     @XmlElement(required = true)
     protected double rating;
     
     @XmlElement(required = true)
     protected String category;
-    
-    @OneToMany(mappedBy = "accommodation")
-    protected List<Image> image;
+
     
     @XmlElement(required = true)
     protected String description;
     
-    @OneToMany(mappedBy = "accommodation")
-    protected List<AdditionalServices> additionalServices;
-    
-    @OneToMany(mappedBy = "accommodation")
-    protected List<AccommodationUnit> accommodationsUnitList;
-    
-    @XmlElement(required = true)
-    protected Location location;
+
 
     /**
      * Gets the value of the id property.
@@ -233,29 +222,8 @@ public class Accommodation {
      */
     
 
-    /**
-     * Gets the value of the address property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Address }
-     *     
-     */
-    public Address getAddress() {
-        return address;
-    }
 
-    /**
-     * Sets the value of the address property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Address }
-     *     
-     */
-    public void setAddress(Address value) {
-        this.address = value;
-    }
+
 
     /**
      * Gets the value of the rating property.
@@ -316,15 +284,7 @@ public class Accommodation {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Image }
-     * 
-     * 
-     */
-    public List<Image> getImage() {
-        if (image == null) {
-            image = new ArrayList<Image>();
-        }
-        return this.image;
-    }
+
 
     /**
      * Gets the value of the description property.
@@ -370,14 +330,6 @@ public class Accommodation {
      * Objects of the following type(s) are allowed in the list
      * {@link AdditionalServices }
      * 
-     * 
-     */
-    public List<AdditionalServices> getAdditionalServices() {
-        if (additionalServices == null) {
-            additionalServices = new ArrayList<AdditionalServices>();
-        }
-        return this.additionalServices;
-    }
 
     /**
      * Gets the value of the location property.
@@ -387,37 +339,4 @@ public class Accommodation {
      *     {@link Location }
      *     
      */
-    public Location getLocation() {
-        return location;
-    }
-
-    /**
-     * Sets the value of the location property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Location }
-     *     
-     */
-    public void setLocation(Location value) {
-        this.location = value;
-    }
-
-	public List<AccommodationUnit> getAccommodationsUnitList() {
-		return accommodationsUnitList;
-	}
-
-	public void setAccommodationsUnitList(List<AccommodationUnit> accommodationsUnitList) {
-		this.accommodationsUnitList = accommodationsUnitList;
-	}
-
-	public void setImage(List<Image> image) {
-		this.image = image;
-	}
-
-	public void setAdditionalServices(List<AdditionalServices> additionalServices) {
-		this.additionalServices = additionalServices;
-	}
-
-    
 }

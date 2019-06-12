@@ -8,6 +8,7 @@
 
 package project.besp.MegaTravel.modelxsd;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -62,6 +63,7 @@ public class Location {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "location_id", nullable = false, updatable = false)
     protected long id;
     @XmlElement(required = true)
     protected float geo_length;

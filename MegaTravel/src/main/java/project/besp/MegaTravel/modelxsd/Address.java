@@ -10,6 +10,7 @@ package project.besp.MegaTravel.modelxsd;
 
 import java.math.BigInteger;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -85,6 +86,7 @@ public class Address {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "address_id", nullable = false, updatable = false)
 	private Long id;
     
 	@XmlElement(required = true)

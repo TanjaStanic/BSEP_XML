@@ -9,6 +9,7 @@
 package project.besp.MegaTravel.modelxsd;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -74,14 +75,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "AdditionalServices", propOrder = {
     "id",
     "name",
-    "priceOfAdd",
-    "accommodation"
+    "priceOfAdd"
 })
 @Entity
 public class AdditionalServices {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "additional_id", nullable = false, updatable = false)
     protected long id;
    
 	@XmlElement(required = true)

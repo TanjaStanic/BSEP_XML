@@ -11,10 +11,14 @@ package project.besp.MegaTravel.modelxsd;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -48,9 +52,16 @@ import javax.xml.bind.annotation.XmlType;
 public class PricingList {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "pricing_list_id", nullable = false, updatable = false)
     protected long id;
 	
-	@OneToMany(mappedBy = "pricing_list")
+	@OneToMany(fetch = FetchType.EAGER)
+    @JoinTable( 
+            name = "pricing_list_pricing", 
+            joinColumns =  @JoinColumn(
+              name = "pricing_list_id", referencedColumnName = "pricing_list_id"), 
+            inverseJoinColumns = @JoinColumn(
+            	name = "pricing_id", referencedColumnName = "pricing_id")) 
     protected List<Pricing> pricing;
     /**
      * Gets the value of the pricing property.

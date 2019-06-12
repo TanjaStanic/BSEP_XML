@@ -12,7 +12,9 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -95,15 +97,13 @@ import javax.xml.bind.annotation.XmlType;
     "size",
     "freeCancelation",
     "type",
-    "pricing",
-    "accommodation",
-    "additionalServices"
 })
 @Entity
 public class AccommodationUnit {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "accommodation_unit_id", nullable = false, updatable = false)
 	protected long id;
     
 	@XmlElement(required = true)
@@ -120,23 +120,7 @@ public class AccommodationUnit {
 	@XmlElement(required = true)
     protected String type;
     
-	@XmlElement(required = true)
-    protected PricingList pricing_list;
-    
-    @ManyToMany
-	@JoinTable(
-	        name = "accommodation_unit_additional_services", 
-	        joinColumns = { @JoinColumn(name = "accommodation_unit_id") }, 
-	        inverseJoinColumns = { @JoinColumn(name = "additional_services_id") }
-	    )
-    protected List<AdditionalServices> additionalServices;
-    
-    @ManyToOne
-    @JoinColumn(name="accommodation")
-    private Accommodation accommodation;
-    
-    @OneToMany(mappedBy="accommodationUnit")
-    private List<Reservation> reservations;
+	
     /**
      * Gets the value of the id property.
      * 
@@ -234,45 +218,8 @@ public class AccommodationUnit {
      *     {@link Pricing }
      *     
      */
-    public PricingList getPricingList() {
-        return pricing_list;
-    }
 
-    /**
-     * Sets the value of the pricing property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Pricing }
-     *     
-     */
-    public void setPricingList(PricingList value) {
-        this.pricing_list = value;
-    }
 
-    /**
-     * Gets the value of the accommodation property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Accommodation }
-     *     
-     */
-    public Accommodation getAccommodation() {
-        return accommodation;
-    }
-
-    /**
-     * Sets the value of the accommodation property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Accommodation }
-     *     
-     */
-    public void setAccommodation(Accommodation value) {
-        this.accommodation = value;
-    }
 
     /**
      * Gets the value of the additionalServices property.
@@ -296,12 +243,7 @@ public class AccommodationUnit {
      * 
      * 
      */
-    public List<AdditionalServices> getAdditionalServices() {
-        if (additionalServices == null) {
-            additionalServices = new ArrayList<AdditionalServices>();
-        }
-        return this.additionalServices;
-    }
+
 
     /**
      * Gets the value of the numberOfRoom property.
@@ -359,17 +301,7 @@ public class AccommodationUnit {
 		this.number_of_room = number_of_room;
 	}
 
-	public List<Reservation> getReservations() {
-		return reservations;
-	}
 
-	public void setReservations(List<Reservation> reservations) {
-		this.reservations = reservations;
-	}
-
-	public void setAdditionalServices(List<AdditionalServices> additionalServices) {
-		this.additionalServices = additionalServices;
-	}
     
 
 }

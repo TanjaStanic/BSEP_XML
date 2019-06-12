@@ -10,6 +10,7 @@ package project.besp.MegaTravel.modelxsd;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -73,6 +74,7 @@ public class Pricing {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "pricing_id", nullable = false, updatable = false)
     protected Long id;
     
 	@XmlElement(required = true)
