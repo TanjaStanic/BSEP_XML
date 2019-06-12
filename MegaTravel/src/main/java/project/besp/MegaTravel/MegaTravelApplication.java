@@ -11,9 +11,7 @@ public class MegaTravelApplication {
 	private LoggingServiceImpl logging = new LoggingServiceImpl(getClass());
 
 	public static void main(String[] args) {
-		
-		
-		
+			
 		SpringApplication.run(MegaTravelApplication.class, args);
 		
 		System.out.println("helloooooooooooo"); //SARAAAAAAa
