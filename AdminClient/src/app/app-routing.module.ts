@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AddAgentComponent } from './add-agent/add-agent.component';
 import { CommentsComponent } from './comments/comments.component';
+import { CertificatesComponent } from './certificates/certificates.component';
 
 
 
@@ -29,6 +30,10 @@ const routes: Routes = [
     {
       path: 'comments',
       component: CommentsComponent
+    },
+    {
+      path: 'certificates',
+      component: CertificatesComponent
     }
     
     ];

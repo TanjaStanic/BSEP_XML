@@ -69,13 +69,13 @@ export class AddAgentComponent implements OnInit {
     }
   }
   validateUser() {
-        console.log('Dodavanje' + this.user);
+        console.log('Dodavanje' + this.user.first_name + this.user.password);
         // tslint:disable-next-line:align
         this.errorMessage = '';
         this.hideError = true;
         this.passwordError = true;
    
-        if (!this.user.name) {
+        if (!this.user.first_name) {
           this.hideError = false;
           this.errorMessage = 'Name is required.';
         } else if (!this.user.lastname) {

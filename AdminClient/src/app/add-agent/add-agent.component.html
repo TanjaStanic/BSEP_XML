@@ -1,24 +1,24 @@
 
-<div class="conteiner" id="formRegistration">
+<div class="login-box" id="formRegistration">
   <div class="register-logo">
     <a href="../../index2.html"><b>Admin</b></a>
   </div>
 
-  <div class="register-box-body">
+  <div class="login-box-body">
     <p class="login-box-msg">Register new agent</p>
 
     <form action="../../index.html" method="post">
-    <form class="registration" (submit)="validateUser()">
+    <form class="registration" (submit)="validateUser()" method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" [(ngModel)] = "user.name" #name1= "ngModel" name="name" placeholder="First name">
+        <input type="text" class="form-control" [(ngModel)] = "user.firstName" #name1= "ngModel" name="firstName" placeholder="First name">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
        <div class="form-group has-feedback">
-        <input type="text" class="form-control" [(ngModel)] = "user.lastname" #lastname="ngModel" name="lastname" class="form-control" placeholder="Last name">
+        <input type="text" class="form-control" [(ngModel)] = "user.lastName" #lastname="ngModel" name="lastName" class="form-control" placeholder="Last name">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" [(ngModel)]="user.id" #id="ngModel" name="id" placeholder="Id number">
+        <input type="text" class="form-control" [(ngModel)]="user.id" #id="ngModel" name="id" placeholder="Pib number">
         <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
