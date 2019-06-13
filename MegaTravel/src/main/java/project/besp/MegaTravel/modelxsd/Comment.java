@@ -5,8 +5,12 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="comment")
 public class Comment {
 	@Id
     @Column(name = "id")
@@ -18,15 +22,24 @@ public class Comment {
 	@Column(name = "user_id")
     private Long userID;
 	
-	@Column(name = "acc_unit_id")
-    private Long accommodationUnitID;
-	
 	@Column(name = "comment_date")
     private Date commentDate;
 
 	@Column(name = "visible")
 	private boolean visible;
 
+	/*@ManyToOne
+	@JoinColumn(name="client_comment")
+	private Client client;
+	
+	@ManyToOne
+	@JoinColumn(name="admin_comment")
+	private Administrator administrator;
+	*/
+	@ManyToOne
+	@JoinColumn(name="acc_unit_comment")
+	private AccommodationUnit accommodation_unit;
+	
 	public Long getId() {
 		return id;
 	}
@@ -51,14 +64,6 @@ public class Comment {
 		this.userID = userID;
 	}
 
-	public Long getAccommodationUnitID() {
-		return accommodationUnitID;
-	}
-
-	public void setAccommodationUnitID(Long accommodationUnitID) {
-		this.accommodationUnitID = accommodationUnitID;
-	}
-
 	public Date getCommentDate() {
 		return commentDate;
 	}
@@ -73,6 +78,30 @@ public class Comment {
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+	}
+/*
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public Administrator getAdministrator() {
+		return administrator;
+	}
+
+	public void setAdministrator(Administrator administrator) {
+		this.administrator = administrator;
+	}
+*/
+	public AccommodationUnit getAccommodation_unit() {
+		return accommodation_unit;
+	}
+
+	public void setAccommodation_unit(AccommodationUnit accommodation_unit) {
+		this.accommodation_unit = accommodation_unit;
 	}
 
 }

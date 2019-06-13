@@ -11,18 +11,21 @@ package project.besp.MegaTravel.modelxsd;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+
 import project.besp.MegaTravel.model.User;
 
 
@@ -95,6 +98,7 @@ import project.besp.MegaTravel.model.User;
     "reservationRating"
 })
 @Entity
+@Table(name="reservation")
 public class Reservation {
 
 	@Id
@@ -103,11 +107,9 @@ public class Reservation {
 	private Long id; 
     
 	@XmlElement(name = "start_date", required = true)
-    @XmlSchemaType(name = "date")
     protected Date startDate;
     
 	@XmlElement(name = "end_date", required = true)
-    @XmlSchemaType(name = "date")
     protected Date endDate;
     
 	@XmlElement(name = "total_price")
@@ -115,12 +117,19 @@ public class Reservation {
 
 	protected double price;
     
-    @XmlElement(required = true)
+    @XmlElement(required = true, name="reservation_status")
     protected String reservationStatus;
     
-    @XmlElement(required = true, defaultValue = "unrated")
+    @XmlElement(required = true, defaultValue = "unrated", name="reservation_rating")
     protected String reservationRating;
-
+    
+    @ManyToOne
+	@JoinColumn(name = "reservation_user")
+    protected User user;
+    
+    @ManyToOne
+    @JoinColumn(name = "acc_unit_reservation")
+    protected AccommodationUnit accommodation_unit;
     /**
      * Gets the value of the id property.
      * 
@@ -258,5 +267,35 @@ public class Reservation {
     public void setReservationRating(String value) {
         this.reservationRating = value;
     }
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public AccommodationUnit getAccommodation_unit() {
+		return accommodation_unit;
+	}
+
+	public void setAccommodation_unit(AccommodationUnit accommodation_unit) {
+		this.accommodation_unit = accommodation_unit;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+    
 
 }

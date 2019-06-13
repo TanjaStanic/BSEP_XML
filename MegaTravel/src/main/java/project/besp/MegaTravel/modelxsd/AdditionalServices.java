@@ -9,12 +9,18 @@
 package project.besp.MegaTravel.modelxsd;
 
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -78,6 +84,7 @@ import javax.xml.bind.annotation.XmlType;
     "priceOfAdd"
 })
 @Entity
+@Table(name="additional_services")
 public class AdditionalServices {
 
 	@Id
@@ -89,6 +96,13 @@ public class AdditionalServices {
     protected String name;
     
 	protected double price_of_add;
+
+	@ManyToOne
+	@JoinColumn(name="accommodation_additional_services")
+	private Accommodation accommodation;
+	
+	@ManyToMany(mappedBy = "additional_services")
+    private List<AccommodationUnit> accommodation_units;
 
     /**
      * Gets the value of the id property.
@@ -145,6 +159,30 @@ public class AdditionalServices {
     public void setPriceOfAdd(double value) {
         this.price_of_add = value;
     }
+
+	public double getPrice_of_add() {
+		return price_of_add;
+	}
+
+	public void setPrice_of_add(double price_of_add) {
+		this.price_of_add = price_of_add;
+	}
+
+	public Accommodation getAccommodation() {
+		return accommodation;
+	}
+
+	public void setAccommodation(Accommodation accommodation) {
+		this.accommodation = accommodation;
+	}
+
+	public List<AccommodationUnit> getAccommodation_units() {
+		return accommodation_units;
+	}
+
+	public void setAccommodation_units(List<AccommodationUnit> accommodation_units) {
+		this.accommodation_units = accommodation_units;
+	}
 
 
 

@@ -9,12 +9,10 @@
 package project.besp.MegaTravel.modelxsd;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,10 +21,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
@@ -99,6 +100,8 @@ import javax.xml.bind.annotation.XmlType;
     "type",
 })
 @Entity
+@Table(name="accommodation_unit")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class AccommodationUnit {
 
 	@Id
@@ -120,7 +123,30 @@ public class AccommodationUnit {
 	@XmlElement(required = true)
     protected String type;
     
+	@ManyToOne
+	@JoinColumn(name="acc")
+	private Accommodation accommodation;
 	
+	/*@ManyToOne
+	@JoinColumn(name="agent_units")
+	private Agent agent;
+	*/
+    @ManyToMany
+	@JoinTable(
+	        name = "accommodation_unit_additional_services", 
+	        joinColumns = { @JoinColumn(name = "accommodation_unit_id") }, 
+	        inverseJoinColumns = { @JoinColumn(name = "additional_id") }
+	    )
+    protected List<AdditionalServices> additional_services;
+    
+    @OneToMany(mappedBy="accommodation_unit")
+    protected List<Reservation> reservations;
+    
+    @OneToMany(mappedBy="accommodation_unit")
+    protected List<Pricing> pricing;
+    
+    @OneToMany(mappedBy="accommodation_unit")
+    protected List<Comment> comments;
     /**
      * Gets the value of the id property.
      * 
@@ -301,7 +327,55 @@ public class AccommodationUnit {
 		this.number_of_room = number_of_room;
 	}
 
+	public Accommodation getAccommodation() {
+		return accommodation;
+	}
 
-    
+	public void setAccommodation(Accommodation accommodation) {
+		this.accommodation = accommodation;
+	}
+
+
+
+/*	public Agent getAgent() {
+		return agent;
+	}
+
+	public void setAgent(Agent agent) {
+		this.agent = agent;
+	}
+*/
+	public List<AdditionalServices> getAdditional_services() {
+		return additional_services;
+	}
+
+	public void setAdditional_services(List<AdditionalServices> additional_services) {
+		this.additional_services = additional_services;
+	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	public List<Pricing> getPricing() {
+		return pricing;
+	}
+
+	public void setPricing(List<Pricing> pricing) {
+		this.pricing = pricing;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
 
 }

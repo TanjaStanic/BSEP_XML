@@ -15,7 +15,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -60,7 +63,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
+@XmlType(name = "messages", propOrder = {
     "content",
     "title",
     "agent",
@@ -68,6 +71,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "date"
 })
 @Entity
+@Table(name= "messages")
 public class Messages {
 	
 	@Id
@@ -85,6 +89,13 @@ public class Messages {
     @XmlSchemaType(name = "date")
     protected Date date;
 
+/*	@ManyToOne
+	@JoinColumn(name="agent_message")
+	private Agent agent;
+	
+	@ManyToOne
+	@JoinColumn(name="client_message")
+	private Client client;*/
     /**
      * Gets the value of the content property.
      * 
@@ -156,5 +167,30 @@ public class Messages {
     public void setDate(Date value) {
         this.date = value;
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+/*	public Agent getAgent() {
+		return agent;
+	}
+
+	public void setAgent(Agent agent) {
+		this.agent = agent;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+    */
 
 }

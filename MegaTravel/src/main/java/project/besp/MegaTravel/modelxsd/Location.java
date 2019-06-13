@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -59,6 +61,7 @@ import javax.xml.bind.annotation.XmlType;
     "geo_width"
 })
 @Entity
+@Table(name= "location")
 public class Location {
 	
 	@Id
@@ -70,6 +73,9 @@ public class Location {
     @XmlElement(required = true)
     protected float geo_width;
 
+    @OneToOne(mappedBy="location")
+    protected Accommodation accomodation;
+    
     public long getId() {
 		return id;
 	}
@@ -94,6 +100,11 @@ public class Location {
 		this.geo_width = geo_width;
 	}
 
+	public Accommodation getAccomodation() {
+		return accomodation;
+	}
 
-
+	public void setAccomodation(Accommodation accomodation) {
+		this.accomodation = accomodation;
+	}
 }

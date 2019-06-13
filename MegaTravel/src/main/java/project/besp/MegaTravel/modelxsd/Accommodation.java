@@ -9,7 +9,6 @@
 package project.besp.MegaTravel.modelxsd;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -20,8 +19,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -112,6 +113,7 @@ import javax.xml.bind.annotation.XmlType;
     "description",
 })
 @Entity
+@Table(name = "accommodation")
 public class Accommodation {
 
 	@Id
@@ -122,7 +124,7 @@ public class Accommodation {
 	@XmlElement(required = true)
     protected String name;
     
-    @XmlElement(required = true)
+    @XmlElement(required = true, name="cancelation_days")
     protected BigInteger cancelationDays;
     
    
@@ -136,8 +138,27 @@ public class Accommodation {
     @XmlElement(required = true)
     protected String description;
     
+    @OneToOne
+    @JoinColumn(name="acc_location")
+    protected Location location;
+    
+    @OneToOne
+	@JoinColumn(name = "acc_address")
+	protected Address address;
+    
+    @OneToMany(mappedBy="accommodation")
+    protected List<AccommodationUnit> accommodation_unit;
+    
+    @OneToMany(mappedBy="accommodation")
+    protected List<AdditionalServices> additiona_services;
 
-
+    @OneToMany(mappedBy="accomodation")
+    protected List<Image> images;
+    
+    /*@ManyToOne
+    @JoinColumn(name = "acc_admin")
+    protected Administrator administrator;
+*/
     /**
      * Gets the value of the id property.
      * 
@@ -310,6 +331,62 @@ public class Accommodation {
         this.description = value;
     }
 
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<AccommodationUnit> getAccommodation_unit() {
+		return accommodation_unit;
+	}
+
+	public void setAccommodation_unit(List<AccommodationUnit> accommodation_unit) {
+		this.accommodation_unit = accommodation_unit;
+	}
+
+	public List<AdditionalServices> getAdditiona_services() {
+		return additiona_services;
+	}
+
+	public void setAdditiona_services(List<AdditionalServices> additiona_services) {
+		this.additiona_services = additiona_services;
+	}
+
+	/*public Administrator getAdministrator() {
+		return administrator;
+	}
+
+	public void setAdministrator(Administrator administrator) {
+		this.administrator = administrator;
+	}*/
+
+	public List<Image> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Image> images) {
+		this.images = images;
+	}
+
+/*	public Agent getAgent() {
+		return agent;
+	}
+
+	public void setAgent(Agent agent) {
+		this.agent = agent;
+	}*/
+
     
     /**
      * Gets the value of the additionalServices property.
@@ -340,4 +417,5 @@ public class Accommodation {
      *     {@link Location }
      *     
      */
+    
 }

@@ -9,16 +9,25 @@
 package project.besp.MegaTravel.modelxsd;
 
 import java.math.BigInteger;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import project.besp.MegaTravel.model.User;
 
 
 /**
@@ -82,6 +91,7 @@ import javax.xml.bind.annotation.XmlType;
     "country"
 })
 @Entity
+@Table(name="address")
 public class Address {
 
 	@Id
@@ -99,7 +109,12 @@ public class Address {
     
 	@XmlElement(required = true)
     protected String country;
-
+    
+	@OneToMany(mappedBy="address")
+    protected List<User> users;
+	
+	@OneToOne(mappedBy="address")
+    protected Accommodation accommodation;
     /**
      * Gets the value of the street property.
      * 
@@ -196,4 +211,29 @@ public class Address {
         this.country = value;
     }
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Accommodation getAccommodation() {
+		return accommodation;
+	}
+
+	public void setAccommodation(Accommodation accommodation) {
+		this.accommodation = accommodation;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+    
 }

@@ -8,6 +8,9 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,16 +21,28 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import project.besp.MegaTravel.modelxsd.Reservation;
+import project.besp.MegaTravel.modelxsd.Address;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
 @Entity
-@Table(name = "user")
-public class User implements UserDetails, Serializable{
+@Table(name="user")
+/*@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorColumn(
+	    discriminatorType = DiscriminatorType.INTEGER,
+	    name = "user_type_id",
+	    columnDefinition = "TINYINT(1)"
+	)*/
+public class User  implements UserDetails{
 	
 	/**
 	 * 
@@ -35,7 +50,7 @@ public class User implements UserDetails, Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY )
     @Column(name = "user_id", nullable = false, updatable = false)
 	public Long id;
 	
@@ -68,11 +83,17 @@ public class User implements UserDetails, Serializable{
           name = "user_id", referencedColumnName = "user_id"), 
         inverseJoinColumns = @JoinColumn(
         	name = "role_id", referencedColumnName = "id")) 
- private Collection<Role> roles;
+    private Collection<Role> roles;
 	
-	 @Column(name = "last_password_reset_date")
+	@Column(name = "last_password_reset_date")
 	    private Date lastPasswordResetDate;
-
+	 
+	@ManyToOne
+	@JoinColumn(name = "user_address")
+	protected Address address;
+	
+	@OneToMany(mappedBy="user")
+	protected List<Reservation> reservations;
 	
 	public User() {
 		
@@ -173,6 +194,9 @@ public class User implements UserDetails, Serializable{
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
 	}
+	public void addRole(Role role) {
+		this.roles.add(role);
+	}
 
 	public Date getLastPasswordResetDate() {
 		return lastPasswordResetDate;
@@ -189,9 +213,25 @@ public class User implements UserDetails, Serializable{
 	public void setCertificated(boolean certificated) {
 		this.certificated = certificated;
 	}
-	
-	
 
+	public Address getAddress() {
+		return address;
+	}
 
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 }
