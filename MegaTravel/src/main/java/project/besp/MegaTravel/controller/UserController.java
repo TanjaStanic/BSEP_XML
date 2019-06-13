@@ -148,6 +148,69 @@ public class UserController {
 		
 	}
 	
+	
+	@RequestMapping(value ="/registrationAgent",
+			method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	
+	public ResponseEntity<?> registerAgent(@Valid @RequestBody User user1, BindingResult result){
+		System.out.println("Usao u registraciju agentaaaa");
+		User oldUser = userService.findUserByMail(Encode.forHtml(user1.getEmail()));
+		
+		
+		
+		if(result.hasErrors()) {
+			//404
+			logging.printError("ERROR registration");
+			return new ResponseEntity<>(new UserTokenState("error",(long)0), HttpStatus.NOT_FOUND);
+		}
+		/*if(!checkMail(user1.getEmail())) {
+			logging.printError("ERROR registration");
+			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
+		}
+		if(!checkCharacters(user1.getFirstName())) {
+			logging.printError("ERROR registration");
+			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
+		}
+		if(!checkCharacters(user1.getLastName())) {
+			logging.printError("ERROR registration");
+			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
+		}*/
+		
+		if(oldUser == null) {
+			User newUser = new User();
+			String newPassword = user1.getPassword();
+			System.out.println("Agentt" + user1.firstName);
+			if(newPassword.equals("") || newPassword == null) {
+				return null;
+			}
+			
+			String hash = org.springframework.security.crypto.bcrypt.BCrypt.gensalt();
+			
+			System.out.println("------Hesiranje lozinke------");
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			String hashedP = org.springframework.security.crypto.bcrypt.BCrypt.hashpw(newPassword, hash);
+			newUser.setEmail(user1.getEmail());
+			newUser.setFirstName(user1.getFirstName());
+			newUser.setLastName(user1.getLastName());
+			newUser.setPassword(hashedP);
+			newUser.setRoles(Arrays.asList(roleService.findByName("ROLE_AGENT")));
+			userService.saveUser(newUser);
+			
+			logging.printInfo("New user registration: Success" + newUser);
+			return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+			
+			
+		} else {
+			System.out.println("postoji email adresa ista ");
+			user1.setEmail("error");
+			logging.printError("New user reg: Email is already in use");
+			return new ResponseEntity<>(user1, HttpStatus.NOT_FOUND);
+		}
+		
+	}
+	
 
 	
 	private byte[] hashPassword(String password, byte[] salt) {

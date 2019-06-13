@@ -42,6 +42,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,6 +62,7 @@ import project.besp.MegaTravel.model.*;
 
 @Controller
 @RequestMapping("/certificate")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CertificateController {
 	
 	private LoggingServiceImpl logging = new LoggingServiceImpl(getClass());
@@ -92,13 +94,13 @@ public class CertificateController {
 	// za localKeystore1 je local
 	
 	@PostConstruct
-	public void init(){
+	/*public void init(){
 		keyStoreWriter = new KeyStoreWriter();
 		String centralPass = "central";
 		keyStoreWriter.loadKeyStore("centralKeystore.p12", centralPass.toCharArray());
 		keyStoreWriter.saveKeyStore("centralKeystore.p12", centralPass.toCharArray());
 		keyPairIssuer = generateKeyPair();
-	}
+	}*/
 	
 	
 	
@@ -384,6 +386,59 @@ public class CertificateController {
 		return new ResponseEntity<>(HttpStatus.OK);
 		
 */	return null;
+	}
+	
+	
+	//@PreAuthorize("hasRole('ADMIN')")
+	@RequestMapping(value="/allUsersWithCertificates", method = RequestMethod.GET,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<User> getAllCertificatesDTO(){		
+		List<User> allUsers = new ArrayList<User>();
+		List<Certificate> allCertificates= certificateService.getAll();
+		
+		for(Certificate c : allCertificates)
+		{
+			if(c.isCa()==false)
+			{
+				User u = userService.findOneById(c.getIdSubject());
+				
+					allUsers.add(u);
+			}
+			
+		}
+		
+		if(allUsers.size()>0)
+			return  allUsers;
+		else
+			return null;
+	}
+	
+	
+	//@PreAuthorize("hasRole('USER')") 
+	@RequestMapping(value="/allCertificatesIssuer/{id}", method = RequestMethod.GET,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<User> getAllCertificatesDTOWithIssuer(@PathVariable("id") String id){		
+		List<User> allUsers = new ArrayList<User>();
+		List<Certificate> allCertificates= certificateService.getAll();
+		Long id_issuer = Long.parseLong(id);
+		for(Certificate c : allCertificates)
+		{
+			if(c.getIdIssuer() == id_issuer)
+			{
+				User u = userService.findOneById(c.getIdSubject());
+				
+					allUsers.add(u);
+				
+			}
+			
+		}
+		
+		if(allUsers.size()>0)
+			return  allUsers;
+		else
+			return null;
 	}
 
 	@RequestMapping(value = "/deleteCertificate/{serial}", method = RequestMethod.DELETE)

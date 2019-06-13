@@ -36,7 +36,7 @@ logOut() {
     
 addUser(u: User) {
     console.log('Usao u addUser');
-    return this.http.post('https://localhost:8443/user/registration', u );
+    return this.http.post('https://localhost:8443/user/registrationAgent', u );
   }
 
 
