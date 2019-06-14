@@ -52,7 +52,7 @@ public class User  implements UserDetails{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
     @Column(name = "user_id", nullable = false, updatable = false)
-	public Long id;
+	public int id;
 	
 	/*@Column(name = "role")
 	@Enumerated(EnumType.STRING)
@@ -69,6 +69,9 @@ public class User  implements UserDetails{
 	@Email
 	@Column(name = "email", nullable = false)
 	public String email; //username
+	
+	@Column(name = "pib")
+	public String pib;
 	
     @Column(name = "password")
 	public String password;
@@ -150,11 +153,11 @@ public class User  implements UserDetails{
 		return this.email;
 	}
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setUserId(Long id) {
+	public void setUserId(int id) {
 		this.id = id;
 	}
 
@@ -230,7 +233,7 @@ public class User  implements UserDetails{
 		this.reservations = reservations;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	

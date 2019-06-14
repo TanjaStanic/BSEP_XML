@@ -57,10 +57,10 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MAIN NAVIGATION</li>
+        <li class="header">OPTIONS</li>
         <li class="active" [hidden]="notLogged">
           <a href="#">
-            <i class="fa fa-dashboard" ></i> <span [hidden]="notLogged">Home</span>
+            <i class="fa fa-home" ></i> <span [hidden]="notLogged">Home</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -68,7 +68,7 @@
         </li>
         <li class="treeview" [hidden]="notLogged">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span [hidden]="notLogged"><a routerLink="addAgents">Agents</a></span>
+            <i class="fa fa-user-plus"></i> <span [hidden]="notLogged"><a routerLink="addAgents">Add agents</a></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -76,7 +76,7 @@
         </li>
          <li class="treeview" [hidden]="notLogged">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span [hidden]="notLogged">Users</span>
+            <i class="fa fa-list-ul"></i> <span [hidden]="notLogged"><a routerLink="addAgents">List of agents</a></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -85,7 +85,7 @@
         
         <li class="treeview" [hidden]="notLogged">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span [hidden]="notLogged"><a routerLink="comments">Comments</a></span>
+            <i class="fa fa-building"></i> <span >Accommodation</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -94,15 +94,44 @@
         
         <li class="treeview" [hidden]="notLogged">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span >Accommodation</span>
+            <i class="fa fa-list-ul"></i> <span >List of accommodations</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
         </li>
+        
+         <li class="treeview" [hidden]="notLogged">
+          <a href="#">
+            <i class="fa fa-user-plus"></i> <span [hidden]="notLogged">Users</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        </li>
+        
         <li class="treeview" [hidden]="notLogged">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span ><a routerLink="certificates">Certificates</a></span>
+            <i class="fa fa-list-ul"></i> <span [hidden]="notLogged">List of users</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        </li>
+        
+        <li class="treeview" [hidden]="notLogged">
+          <a href="#">
+            <i class="fa fa-comments"></i> <span [hidden]="notLogged"><a routerLink="comments">Comments</a></span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        </li>
+        
+        
+        <li class="treeview" [hidden]="notLogged">
+          <a href="#">
+            <i class="fa fa-certificate"></i> <span ><a routerLink="certificates">Certificates</a></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

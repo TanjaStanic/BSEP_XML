@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.ws.rs.core.Context;
+import java.util.Collection;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -165,7 +167,7 @@ public class UserController {
 			logging.printError("ERROR registration");
 			return new ResponseEntity<>(new UserTokenState("error",(long)0), HttpStatus.NOT_FOUND);
 		}
-		/*if(!checkMail(user1.getEmail())) {
+		if(!checkMail(user1.getEmail())) {
 			logging.printError("ERROR registration");
 			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
 		}
@@ -176,7 +178,7 @@ public class UserController {
 		if(!checkCharacters(user1.getLastName())) {
 			logging.printError("ERROR registration");
 			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
-		}*/
+		}
 		
 		if(oldUser == null) {
 			User newUser = new User();
@@ -195,9 +197,31 @@ public class UserController {
 			newUser.setFirstName(user1.getFirstName());
 			newUser.setLastName(user1.getLastName());
 			newUser.setPassword(hashedP);
-			newUser.setRoles(Arrays.asList(roleService.findByName("ROLE_AGENT")));
-			userService.saveUser(newUser);
 			
+			Role role = new Role();
+			role.setId(2);
+			role.setName("ROLE_AGENT");
+			//newUser.addRole(role);
+			
+			
+			
+						
+			
+			Role rolica = new Role();
+			rolica = roleService.findById(2);
+			System.out.println("ROLAAAAAAAAAAAAA imeeee" + rolica.getId());
+
+			Collection<Role> r1 = new ArrayList<Role>();
+			r1.add(rolica);
+			newUser.setRoles(r1);
+
+			System.out.println("ROLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA++++++++++++++" + newUser.getRoles().toString());
+
+			
+			
+			//newUser.setRoles(Arrays.asList(roleService.findById(2)));
+			userService.saveUser(newUser);
+			System.out.println("ULOGAAAAAAAAAAAAA" + newUser.getRoles());
 			logging.printInfo("New user registration: Success" + newUser);
 			return new ResponseEntity<>(newUser, HttpStatus.CREATED);
 			

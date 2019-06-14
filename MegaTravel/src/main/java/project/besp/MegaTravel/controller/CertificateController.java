@@ -478,7 +478,7 @@ public class CertificateController {
 			    builder.addRDN(BCStyle.GIVENNAME, user.getLastName());
 			    builder.addRDN(BCStyle.E, user.getEmail());
 			    //UID (USER ID) je ID korisnika
-			    builder.addRDN(BCStyle.UID, user.getId().toString());
+			    //builder.addRDN(BCStyle.UID,  user.getId().toString());
 			}
 			else
 			{
@@ -501,7 +501,7 @@ public class CertificateController {
 	    builder.addRDN(BCStyle.SURNAME, issuer.getFirstName());
 	    builder.addRDN(BCStyle.GIVENNAME, issuer.getLastName());
 	    builder.addRDN(BCStyle.E, issuer.getEmail());
-	    builder.addRDN(BCStyle.UID, issuer.getId().toString());
+	   // builder.addRDN(BCStyle.UID, issuer.getId().toString());
 
 		//Kreiraju se podaci za issuer-a, sto u ovom slucaju ukljucuje:
 	    // - privatni kljuc koji ce se koristiti da potpise sertifikat koji se izdaje

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../model/user';
+import { Role } from '../model/role';
+
 import { UserServiceService } from '../service/user-service/user-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -21,6 +23,7 @@ export class AddAgentComponent implements OnInit {
   errorMessage : string;
   passwordError : boolean;
   passwordErrorMessage : string;
+  role : Role = new Role();
 
   constructor(private service: UserServiceService, private route : ActivatedRoute) { }
 
@@ -68,7 +71,22 @@ export class AddAgentComponent implements OnInit {
       alert('Entered values is not valid!');
     }
   }
+    
+    
+    checkRole(data){
+        var regAgent = data as User;
+        var agent = false as boolean;
+        for(let role of this.user.roles)
+        {
+        if(role.name == "ROLE_ADMIN"){
+            agent = true;
+            
+        }
+        }
+        }
+        
   validateUser() {
+        
         console.log('Dodavanje' + this.user.first_name + this.user.password);
         // tslint:disable-next-line:align
         this.errorMessage = '';
@@ -97,7 +115,7 @@ export class AddAgentComponent implements OnInit {
         }
       }
        if (this.passwordError == true) {
-          
+           
           this.service.addUser(this.user).subscribe(podaci => { 
           this.checkUser = podaci as User;
           if(!podaci){
