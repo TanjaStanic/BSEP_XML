@@ -29,6 +29,8 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import project.besp.MegaTravel.model.User;
+
 
 
 /**
@@ -123,14 +125,24 @@ public class AccommodationUnit {
 	@XmlElement(required = true)
     protected String type;
     
+	/*
+     * Smjestajna jedinica odgovara tacno jednom smjestaju.
+     */
 	@ManyToOne
 	@JoinColumn(name="acc")
 	private Accommodation accommodation;
 	
-	/*@ManyToOne
+	/*
+	 * Jedna smjestajna jedinica odgovara jednom agentu
+	 * Jedan agent ima vise smjestajnih jedinica
+	 */
+	@ManyToOne
 	@JoinColumn(name="agent_units")
-	private Agent agent;
-	*/
+	private User user;
+	
+	/*
+	 * Jedna dodatna usluga moze da odgovora za vise smjestajnih jedinica
+	 */
     @ManyToMany
 	@JoinTable(
 	        name = "accommodation_unit_additional_services", 
@@ -139,9 +151,14 @@ public class AccommodationUnit {
 	    )
     protected List<AdditionalServices> additional_services;
     
+    /*
+     * SJ se rezervise vise puta
+     */
     @OneToMany(mappedBy="accommodation_unit")
     protected List<Reservation> reservations;
-    
+    /*
+     * ima svoju listu cijena (na mjesecnom nivou pozeljno)
+     */
     @OneToMany(mappedBy="accommodation_unit")
     protected List<Pricing> pricing;
     
@@ -336,15 +353,14 @@ public class AccommodationUnit {
 	}
 
 
-
-/*	public Agent getAgent() {
-		return agent;
+	public User getUser() {
+		return user;
 	}
 
-	public void setAgent(Agent agent) {
-		this.agent = agent;
+	public void setUser(User user) {
+		this.user = user;
 	}
-*/
+
 	public List<AdditionalServices> getAdditional_services() {
 		return additional_services;
 	}

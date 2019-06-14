@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import project.besp.MegaTravel.model.User;
+
 @Entity
 @Table(name="comment")
 public class Comment {
@@ -18,24 +20,17 @@ public class Comment {
 	
 	@Column(name = "text", nullable = false)
     private String text;
-	
-	@Column(name = "user_id")
-    private Long userID;
-	
+
 	@Column(name = "comment_date")
     private Date commentDate;
 
 	@Column(name = "visible")
 	private boolean visible;
 
-	/*@ManyToOne
-	@JoinColumn(name="client_comment")
-	private Client client;
-	
 	@ManyToOne
-	@JoinColumn(name="admin_comment")
-	private Administrator administrator;
-	*/
+	@JoinColumn(name="client_comment")
+	private User user;
+	
 	@ManyToOne
 	@JoinColumn(name="acc_unit_comment")
 	private AccommodationUnit accommodation_unit;
@@ -56,14 +51,6 @@ public class Comment {
 		this.text = text;
 	}
 
-	public Long getUserID() {
-		return userID;
-	}
-
-	public void setUserID(Long userID) {
-		this.userID = userID;
-	}
-
 	public Date getCommentDate() {
 		return commentDate;
 	}
@@ -79,23 +66,7 @@ public class Comment {
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
-/*
-	public Client getClient() {
-		return client;
-	}
 
-	public void setClient(Client client) {
-		this.client = client;
-	}
-
-	public Administrator getAdministrator() {
-		return administrator;
-	}
-
-	public void setAdministrator(Administrator administrator) {
-		this.administrator = administrator;
-	}
-*/
 	public AccommodationUnit getAccommodation_unit() {
 		return accommodation_unit;
 	}
@@ -104,4 +75,13 @@ public class Comment {
 		this.accommodation_unit = accommodation_unit;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	
 }

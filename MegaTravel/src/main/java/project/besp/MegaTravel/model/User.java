@@ -28,7 +28,10 @@ import javax.validation.constraints.Email;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import project.besp.MegaTravel.modelxsd.Reservation;
+import project.besp.MegaTravel.modelxsd.Accommodation;
+import project.besp.MegaTravel.modelxsd.AccommodationUnit;
 import project.besp.MegaTravel.modelxsd.Address;
+import project.besp.MegaTravel.modelxsd.Comment;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -52,7 +55,7 @@ public class User  implements UserDetails{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
     @Column(name = "user_id", nullable = false, updatable = false)
-	public int id;
+	public Long id;
 	
 	/*@Column(name = "role")
 	@Enumerated(EnumType.STRING)
@@ -70,11 +73,11 @@ public class User  implements UserDetails{
 	@Column(name = "email", nullable = false)
 	public String email; //username
 	
-	@Column(name = "pib")
-	public String pib;
-	
     @Column(name = "password")
 	public String password;
+   
+    @Column(name = "pib")
+	public String pib;
     
     @Column(name = "certificated")
 	private boolean certificated;
@@ -91,12 +94,37 @@ public class User  implements UserDetails{
 	@Column(name = "last_password_reset_date")
 	    private Date lastPasswordResetDate;
 	 
+	/*
+	 * Vise korisnika (admin,agent,client) mogu biti na jednoj adresi
+	 */
 	@ManyToOne
 	@JoinColumn(name = "user_address")
 	protected Address address;
 	
+	/*
+	 * Samo client ima listu rezervacija (za sada) ili admin
+	 */
 	@OneToMany(mappedBy="user")
 	protected List<Reservation> reservations;
+	
+	/*
+	 * Samo admin ima listu smjestaja
+	 */
+	@OneToMany(mappedBy="user")
+	protected List<Accommodation> accommodations;
+	
+	/*
+	 * Samo agenti imaju listu smjestajnih jedinica
+	 */
+	@OneToMany(mappedBy="user")
+	protected List<AccommodationUnit> accommodation_units;
+	
+	/*
+	 * Admin i klijent upravljaju komentarima.
+	 * Klijent moze da postavlja vise komentara.
+	 */
+	@OneToMany(mappedBy="user")
+	protected List<Comment> comments;
 	
 	public User() {
 		
@@ -153,11 +181,11 @@ public class User  implements UserDetails{
 		return this.email;
 	}
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setUserId(int id) {
+	public void setUserId(Long id) {
 		this.id = id;
 	}
 
@@ -233,8 +261,41 @@ public class User  implements UserDetails{
 		this.reservations = reservations;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
+
+	public String getPib() {
+		return pib;
+	}
+
+	public void setPib(String pib) {
+		this.pib = pib;
+	}
+
+	public List<Accommodation> getAccommodations() {
+		return accommodations;
+	}
+
+	public void setAccommodations(List<Accommodation> accommodations) {
+		this.accommodations = accommodations;
+	}
+
+	public List<AccommodationUnit> getAccommodation_units() {
+		return accommodation_units;
+	}
+
+	public void setAccommodation_units(List<AccommodationUnit> accommodation_units) {
+		this.accommodation_units = accommodation_units;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
 	
 }

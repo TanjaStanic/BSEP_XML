@@ -10,14 +10,17 @@ package project.xml.ReservationService.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
@@ -69,22 +72,26 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "dateTo"
 })
 @Entity
+@Table(name="pricing")
 public class Pricing {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "pricing_id", nullable = false, updatable = false)
     protected Long id;
     
 	@XmlElement(required = true)
     protected double price;
    
-	@XmlElement(required = true)
-    @XmlSchemaType(name = "date")
+	@XmlElement(required = true,name = "date_from")
     protected Date dateFrom;
     
-	@XmlElement(required = true)
+	@XmlElement(required = true,name = "date_to")
     protected Date dateTo;
 
+	@ManyToOne
+	@JoinColumn(name="acc_unit_price")
+	private AccommodationUnit accommodation_unit;
     /**
      * Gets the value of the id property.
      * 
@@ -169,5 +176,11 @@ public class Pricing {
 		this.id = id;
 	}
 
-    
+	/*public AccommodationUnit getAccommodationUnit() {
+		return accommodationUnit;
+	}
+
+	public void setAccommodationUnit(AccommodationUnit accommodationUnit) {
+		this.accommodationUnit = accommodationUnit;
+	}*/
 }
