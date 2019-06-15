@@ -17,6 +17,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -149,14 +151,19 @@ public class Accommodation {
     @OneToMany(mappedBy="accommodation")
     protected List<AccommodationUnit> accommodation_unit;
     
-    @OneToMany(mappedBy="accommodation")
-    protected List<AdditionalServices> additiona_services;
+    @ManyToMany
+	@JoinTable(
+	        name = "accommodation_additional_services", 
+	        joinColumns = { @JoinColumn(name = "accommodation_unit_id") }, 
+	        inverseJoinColumns = { @JoinColumn(name = "additional_id") }
+	    )
+    protected List<AdditionalServices> additional_services;
 
     @OneToMany(mappedBy="accomodation")
     protected List<Image> images;
     
     @ManyToOne
-    @JoinColumn(name = "acc_admin")
+    @JoinColumn(name = "acc_agent")
     protected User user;
 
     /**
@@ -355,12 +362,12 @@ public class Accommodation {
 		this.accommodation_unit = accommodation_unit;
 	}
 
-	public List<AdditionalServices> getAdditiona_services() {
-		return additiona_services;
+	public List<AdditionalServices> getAdditional_services() {
+		return additional_services;
 	}
 
-	public void setAdditiona_services(List<AdditionalServices> additiona_services) {
-		this.additiona_services = additiona_services;
+	public void setAdditional_services(List<AdditionalServices> additional_services) {
+		this.additional_services = additional_services;
 	}
 
 	public List<Image> getImages() {

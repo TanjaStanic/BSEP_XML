@@ -31,8 +31,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import project.besp.MegaTravel.model.User;
 
-
-
 /**
  * <p>Java class for anonymous complex type.
  * 

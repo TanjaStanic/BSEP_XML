@@ -16,9 +16,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -96,9 +94,8 @@ public class AdditionalServices {
     
 	protected double price_of_add;
 
-	@ManyToOne
-	@JoinColumn(name="accommodation_additional_services")
-	private Accommodation accommodation;
+	@ManyToMany(mappedBy = "additional_services")
+	private List<Accommodation> accommodations;
 	
 	@ManyToMany(mappedBy = "additional_services")
     private List<AccommodationUnit> accommodation_units;
@@ -167,20 +164,21 @@ public class AdditionalServices {
 		this.price_of_add = price_of_add;
 	}
 
-	public Accommodation getAccommodation() {
-		return accommodation;
-	}
-
-	public void setAccommodation(Accommodation accommodation) {
-		this.accommodation = accommodation;
-	}
-
+	
 	public List<AccommodationUnit> getAccommodation_units() {
 		return accommodation_units;
 	}
 
 	public void setAccommodation_units(List<AccommodationUnit> accommodation_units) {
 		this.accommodation_units = accommodation_units;
+	}
+
+	public List<Accommodation> getAccommodations() {
+		return accommodations;
+	}
+
+	public void setAccommodations(List<Accommodation> accommodations) {
+		this.accommodations = accommodations;
 	}
 
 
