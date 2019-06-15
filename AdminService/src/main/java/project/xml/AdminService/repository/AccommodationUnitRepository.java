@@ -1,10 +1,9 @@
 package project.xml.AdminService.repository;
-
+import project.xml.AdminService.model.AccommodationUnit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import project.xml.AdminService.model.Accommodation;
 
 @Repository
-public interface AccommodationRepository extends JpaRepository<Accommodation, Long>{
-	
+public interface AccommodationUnitRepository extends JpaRepository<AccommodationUnit, Long> {
+
 }

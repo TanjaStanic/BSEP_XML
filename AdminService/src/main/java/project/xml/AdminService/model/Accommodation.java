@@ -152,7 +152,7 @@ public class Accommodation {
     @ManyToMany
 	@JoinTable(
 	        name = "accommodation_additional_services", 
-	        joinColumns = { @JoinColumn(name = "accommodation_unit_id") }, 
+	        joinColumns = { @JoinColumn(name = "accommodation_id") }, 
 	        inverseJoinColumns = { @JoinColumn(name = "additional_id") }
 	    )
     protected List<AdditionalServices> additional_services;

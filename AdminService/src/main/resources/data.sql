@@ -41,8 +41,6 @@ insert into user_roles (user_id,role_id) values (6,3);
 insert into location (location_id,geo_length,geo_width) values (1,44.8,20.35);
 insert into location (location_id,geo_length,geo_width) values (2,45.8,23.35);
 
---dodati slike za hotele..
-
 --dodavanje smjestaja
 --dodjeljen prvom agentu
 insert into accommodation (accommodation_id,name, cancelation_days,rating,category,description,acc_location,acc_address,acc_agent)
@@ -57,3 +55,16 @@ insert into additional_services (additional_id,name,price_of_add) values (2,'Ful
 insert into additional_services (additional_id,name,price_of_add) values (3,'Half Board',25.1);
 insert into additional_services (additional_id,name,price_of_add) values (4,'WiFi',0.0);
 insert into additional_services (additional_id,name,price_of_add) values (5,'Pet friendly',20.1);
+
+--povezivanje smjestaja i additional servica
+insert into accommodation_additional_services (accommodation_id,additional_id) values (1,1);
+insert into accommodation_additional_services (accommodation_id,additional_id) values (1,2);
+insert into accommodation_additional_services (accommodation_id,additional_id) values (2,3);
+insert into accommodation_additional_services (accommodation_id,additional_id) values (2,4);
+insert into accommodation_additional_services (accommodation_id,additional_id) values (2,5);
+
+--dodati slike za hotele..
+insert into image (image_id,title,uri,accommodation_pic) values (1,'Aleksandar1','../assets/images/aleksandar.jpg',1);
+insert into image (image_id,title,uri,accommodation_pic) values (2,'Aleksandar2','../assets/images/aleksandar2.jpg',1);
+insert into image (image_id,title,uri,accommodation_pic) values (3,'NoviSad1','../assets/images/novisad.jpg',2);
+insert into image (image_id,title,uri,accommodation_pic) values (4,'NoviSad2','../assets/images/novisad2.jpg',2);
