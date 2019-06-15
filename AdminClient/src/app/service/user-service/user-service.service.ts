@@ -39,5 +39,9 @@ addUser(u: User) {
     return this.http.post('https://localhost:8443/user/registrationAgent', u );
   }
 
+getAll() : Observable<any> {
+    return this.http.get('//localhost:8762/user/getAll'); 
+  }
+
 
 }

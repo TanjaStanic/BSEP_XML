@@ -2,5 +2,9 @@
   "/api": {
     "target": "https://localhost:8443",
     "secure": false
+  },
+   "/api2/**": {
+    "target": "http://localhost:8762",
+    "secure": false
   }
 }

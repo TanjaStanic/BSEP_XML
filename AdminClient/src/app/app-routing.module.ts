@@ -8,6 +8,10 @@ import { CommentsComponent } from './comments/comments.component';
 import { CertificatesComponent } from './certificates/certificates.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { AddAccommodationComponent } from './add-accommodation/add-accommodation.component';
+import { ListOfUsersComponent } from './list-of-users/list-of-users.component';
+import { ListOfAccommodationsComponent } from './list-of-accommodations/list-of-accommodations.component';
+
+
 
 
 
@@ -46,6 +50,14 @@ const routes: Routes = [
     {
       path: 'addAcc',
       component: AddAccommodationComponent
+    },
+    {
+      path: 'listUsers',
+      component: ListOfUsersComponent
+    },
+    {
+      path: 'listAcc',
+      component: ListOfAccommodationsComponent
     }
     
     ];
