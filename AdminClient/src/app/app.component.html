@@ -85,7 +85,7 @@
         
         <li class="treeview" [hidden]="notLogged">
           <a href="#">
-            <i class="fa fa-building"></i> <span >Accommodation</span>
+            <i class="fa fa-building"></i> <span ><a routerLink="addAcc">Accommodation</a></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -103,7 +103,7 @@
         
          <li class="treeview" [hidden]="notLogged">
           <a href="#">
-            <i class="fa fa-user-plus"></i> <span [hidden]="notLogged">Users</span>
+            <i class="fa fa-user-plus"></i> <span [hidden]="notLogged"><a routerLink="addUser">Add user</a></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

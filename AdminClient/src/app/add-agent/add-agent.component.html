@@ -5,7 +5,7 @@
   </div>
 
   <div class="login-box-body">
-    <p class="login-box-msg">Register new agent</p>
+    <p class="login-box-msg"><b>Register new agent</b></p>
 
     <form action="../../index.html" method="post">
     <form class="registration" (submit)="validateUser()" method="post">
@@ -30,17 +30,17 @@
         <input type="email" class="form-control" [(ngModel)]="user.email" #email="ngModel" name="email" placeholder="Email">
          <div class="alert alert-danger" *ngIf="!email.valid && email.touched"> Email is required! </div>
         
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <span class="glyphicon form-control-feedback"><i class="fa fa-envelope"></i></span>
       </div>
       <div class="form-group has-feedback">
         <input type="password" class="form-control" [(ngModel)]="user.password" #password="ngModel" name="password" placeholder="Password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <span class="glyphicon form-control-feedback"><i class="fa fa-lock"></i></span>
       </div>
       <div class="form-group has-feedback">
         <input type="password" class="form-control" [(ngModel)]="user.password" #password="ngModel" name="password" placeholder="Retype password">
          <div class="alert alert-danger" *ngIf="password.required==false && password.touched"> Password is required! </div>
           <div class="alert alert-danger" [hidden] = "passwordError">{{passwordErrorMessage}} </div>
-        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+        <span class="glyphicon form-control-feedback"><i class="fa fa-repeat"></i></span>
       </div>
           <div class="form-group row" [hidden]="hideError">
         <div class="col-xs-6">	
@@ -49,10 +49,10 @@
           </div>
         </div>
     </div>
-      <div class="row">
+      <div class="row" position = "center">
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" id="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+          <button type="submit" id="submit"  class="btn btn-primary btn-block btn-flat pull-right">Register</button>
         </div>
         <!-- /.col -->
       </div>

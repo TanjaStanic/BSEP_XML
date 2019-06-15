@@ -1,0 +1,93 @@
+
+<div class="register-box">
+  <div class="register-box-body">
+    <p class="login-box-msg">Register new accommodation</p>
+
+    <form method="post">
+     <div class="form-group has-feedback">
+        <input type="text" class="form-control" placeholder="Name" required>
+        <span class="glyphicon glyphicon-font form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback" height="30px">
+        <input type="text" class="form-control" placeholder="Description" required>
+        <span class="glyphicon glyphicon-align-center form-control-feedback"></span>
+      </div>
+      
+      <div class="form-group has-feedback">
+        <input type="number" class="form-control" placeholder="Cancelation days" min="0" required> 
+        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+      </div>
+             
+        <div class="form-group has-feedback">
+            <input type="text" class="form-control" placeholder="Street" required>
+        	<span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
+        </div >
+        <div class="form-group has-feedback"> 
+        	<input type="number" class="form-control" placeholder="Number" min="1">
+        	<span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
+         </div>
+         <div class="form-group has-feedback"> 
+         	<input type="text" class="form-control" placeholder="City" required>
+        	<span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
+         </div>
+         <div class="form-group has-feedback">
+         	<input type="text" class="form-control" placeholder="Country" required>
+        	<span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
+        </div>
+	  <label>Location</label>
+	  <div class="form-group has-feedback"> 
+        	<input type="number" class="form-control" placeholder="GeoLength" min="-180" max="180">
+        	<span class="glyphicon glyphicon-pushpin form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback"> 
+        	<input type="number" class="form-control" placeholder="GeoWidth" min="-180" max="180">
+        	<span class="glyphicon glyphicon-pushpin form-control-feedback"></span>
+      </div>
+      <label>Category:</label>	
+      <div class="form-group has-feedback">
+		    <select>
+			<option value="one">1<i class="fa fa-star"></i></option>
+			<option value="two">2<i class="fa fa-star"></i></option>
+			<option value="tree">3<i class="fa fa-star"></i></option>
+			<option value="four">4<i class="fa fa-star"></i></option>
+			<option value="five">5<i class="fa fa-star"></i></option>
+			<option value="uncategorized">Uncategorized</option>
+		</select>
+	  </div>
+	  <label >Additional services:</label>
+	  <div class="form-group">
+            <input type="checkbox" name="Parking" value="Parking">Parking <i class="fa fa-car"></i><br>
+			<input type="checkbox" name="WiFi" value="Car" > WiFi <i class="fa fa-wifi"></i><br>
+			<input type="checkbox" name="Breakfast" value="BreakFast">Breakfast <i class="fa fa-cutlery"></i><br>
+      		<input type="checkbox" name="HalfBoard" value="HalfBoard" >Half Board <i class="fa fa-cutlery"> <i class="fa fa-cutlery"></i></i><br>
+      		<input type="checkbox" name="FullBoard" value="FullBoard" >Full Board <i class="fa fa-cutlery"></i> <i class="fa fa-cutlery"></i><i class="fa fa-cutlery"></i><br>
+      		<input type="checkbox" name="AllInclusive" value="AllInclusive" >All inclusive <i class="fa fa-cutlery"></i> <i class="fa fa-coffee"></i> <i class="fa fa-glass"></i><br>
+      		<input type="checkbox" name="PetFriendly" value="PetFriendly" >Pet Friendly <i class="fa fa-paw"></i><br>
+      		<input type="checkbox" name="TV" value="TV" >TV <i class="fa fa-television"></i><br>
+      		<input type="checkbox" name="MiniKitchen" value="MiniKitchen" >Mini Kitchen <i class="fa fa-spoon"></i><br>
+      		<input type="checkbox" name="Bathroom" value="Bathroom" >Bathroom <i class="fa fa-bath"></i><br>
+      
+      </div>
+      <div class="row">
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Submit</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+  </div>
+  <!-- /.form-box -->
+</div>
+<!-- /.register-box -->
+
+<!-- jQuery 3 -->
+<script src="../../assets/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../../assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="../../assets/plugins/iCheck/icheck.min.js"></script>
+
+
+
