@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import project.xml.AgentMegaTravel.model.AccommodationUnit;
-import project.xml.AgentMegaTravel.model.AccommodationUtitResponse;
+import project.xml.AgentMegaTravel.model.AccommodationUnitResponse;
 import project.xml.AgentMegaTravel.soap.AccommodationClient;
 
 @RestController
@@ -19,13 +19,13 @@ public class AccommodationController {
 	
 	@PostMapping("/addAccUnit")
 	public AccommodationUnit addNewAccUnit(@RequestBody AccommodationUnit accUnit) {
-		AccommodationUtitResponse r = client.saveNewAcc(accUnit);
+		AccommodationUnitResponse r = client.saveNewAcc(accUnit);
 		return r.getAccommodationUnit();
 		
 	}
 	@PostMapping
 	public String newAcc(@RequestBody AccommodationUnit request) {
-		AccommodationUtitResponse r = client.saveNewAcc(request);
+		AccommodationUnitResponse r = client.saveNewAcc(request);
 		return r.getAccommodationUnit().getType();	
 	}
 }

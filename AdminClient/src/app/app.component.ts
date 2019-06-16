@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import * as moment from 'moment';
+//import * as moment from 'moment';
 import { ActivatedRoute } from '@angular/router';
 import { UserServiceService } from '../app/service/user-service/user-service.service';
 import {AuthServiceService} from '../app/service/auth-service/auth-service.service';
@@ -41,7 +41,7 @@ logged: boolean;
   {
     this.user = data as User;
     this.id_logged=this.user.id;
-    document.getElementById("listCertificates").setAttribute("href", "/list-of-certificates/" + this.id_logged);
+    //document.getElementById("listCertificates").setAttribute("href", "/list-of-certificates/" + this.id_logged);
   }
   logOutUser() {
     
@@ -49,5 +49,6 @@ logged: boolean;
     this.auth.removeJwtToken();
     this.notLogged = true;
     this.logged = false;
+    localStorage.clean();
   }
 }

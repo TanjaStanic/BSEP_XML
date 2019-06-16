@@ -10,7 +10,7 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { AddAccommodationComponent } from './add-accommodation/add-accommodation.component';
 import { ListOfUsersComponent } from './list-of-users/list-of-users.component';
 import { ListOfAccommodationsComponent } from './list-of-accommodations/list-of-accommodations.component';
-
+import { AddCertificateComponent } from './add-certificate/add-certificate.component';
 
 
 
@@ -58,7 +58,11 @@ const routes: Routes = [
     {
       path: 'listAcc',
       component: ListOfAccommodationsComponent
-    }
+    },
+    {
+        path: 'addCertificate',
+        component: AddCertificateComponent
+      }
     
     ];
 

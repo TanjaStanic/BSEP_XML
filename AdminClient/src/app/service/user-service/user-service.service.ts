@@ -42,6 +42,15 @@ addUser(u: User) {
 getAll() : Observable<any> {
     return this.http.get('//localhost:8762/user/getAll'); 
   }
+getCertificatedUsers(): Observable<any>
+{
+  console.log('get certificated users');
+  return this.http.get('https://localhost:8443/user/allCertificatedUsers', {headers: this.auth.createAuthorizationTokenHeader()});
+}
+changeToCertificatedUser(param : string){
+    console.log('change to certificated user');
+    return this.http.post('https://localhost:8443/user/changetocertificated',param,  {headers: this.auth.createAuthorizationTokenHeader()});
 
+  }
 
 }

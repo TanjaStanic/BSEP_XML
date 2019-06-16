@@ -18,6 +18,7 @@ import { ListOfUsersComponent } from './list-of-users/list-of-users.component';
 import { ListOfAgentsComponent } from './list-of-agents/list-of-agents.component';
 import { AddAccommodationComponent } from './add-accommodation/add-accommodation.component';
 import { ListOfAccommodationsComponent } from './list-of-accommodations/list-of-accommodations.component';
+import { AddCertificateComponent } from './add-certificate/add-certificate.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ListOfAccommodationsComponent } from './list-of-accommodations/list-of-
     ListOfAgentsComponent,
     AddAccommodationComponent,
     ListOfAccommodationsComponent,
+    AddCertificateComponent,
     
   ],
   imports: [

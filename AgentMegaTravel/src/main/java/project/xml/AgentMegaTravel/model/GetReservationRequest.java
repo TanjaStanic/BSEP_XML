@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -26,23 +25,22 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="id">
+ *         &lt;element name="reservationId">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}long">
- *               &lt;minInclusive value="0"/>
+ *               &lt;minInclusive value="1"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="title">
+ *         &lt;element name="reservationStatus">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;minLength value="2"/>
- *               &lt;maxLength value="30"/>
- *               &lt;pattern value="([a-zA-Z0-9 ])+"/>
+ *               &lt;enumeration value="active"/>
+ *               &lt;enumeration value="canceled"/>
+ *               &lt;enumeration value="finished"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="uri" type="{http://www.w3.org/2001/XMLSchema}anyURI"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -53,83 +51,54 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "id",
-    "title",
-    "uri"
+    "reservationId",
+    "reservationStatus"
 })
-@XmlRootElement(name = "image", namespace = "http://www.mega-travel/accommodation")
-public class Image {
+@XmlRootElement(name = "GetReservationRequest")
+public class GetReservationRequest {
 
-    @XmlElement(namespace = "http://www.mega-travel/accommodation")
-    protected long id;
-    @XmlElement(namespace = "http://www.mega-travel/accommodation", required = true)
-    protected String title;
-    @XmlElement(namespace = "http://www.mega-travel/accommodation", required = true)
-    @XmlSchemaType(name = "anyURI")
-    protected String uri;
+    protected long reservationId;
+    @XmlElement(required = true)
+    protected String reservationStatus;
 
     /**
-     * Gets the value of the id property.
+     * Gets the value of the reservationId property.
      * 
      */
-    public long getId() {
-        return id;
+    public long getReservationId() {
+        return reservationId;
     }
 
     /**
-     * Sets the value of the id property.
+     * Sets the value of the reservationId property.
      * 
      */
-    public void setId(long value) {
-        this.id = value;
+    public void setReservationId(long value) {
+        this.reservationId = value;
     }
 
     /**
-     * Gets the value of the title property.
+     * Gets the value of the reservationStatus property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getTitle() {
-        return title;
+    public String getReservationStatus() {
+        return reservationStatus;
     }
 
     /**
-     * Sets the value of the title property.
+     * Sets the value of the reservationStatus property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setTitle(String value) {
-        this.title = value;
-    }
-
-    /**
-     * Gets the value of the uri property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getUri() {
-        return uri;
-    }
-
-    /**
-     * Sets the value of the uri property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setUri(String value) {
-        this.uri = value;
+    public void setReservationStatus(String value) {
+        this.reservationStatus = value;
     }
 
 }

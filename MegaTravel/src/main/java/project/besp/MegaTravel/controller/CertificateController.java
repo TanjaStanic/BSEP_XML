@@ -194,7 +194,7 @@ public class CertificateController {
 		keyStoreWriter.saveKeyStore("centralKeystore.p12", centralPass.toCharArray());
 		
 		issuer.setCertificated(true);
-		userService.saveUser(issuer);
+		//userService.saveUser(issuer);
 		
 		System.out.println("[CertificateController - validateCertificate PRE]: issuer pubic key: " + keyPairIssuer.getPublic());
 		System.out.println("-----------------------------------------------------------------------------------------");

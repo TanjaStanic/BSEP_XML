@@ -8,11 +8,12 @@
 
 package project.xml.AgentMegaTravel.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -33,16 +34,16 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="title">
+ *         &lt;element name="name">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
  *               &lt;minLength value="2"/>
- *               &lt;maxLength value="30"/>
- *               &lt;pattern value="([a-zA-Z0-9 ])+"/>
+ *               &lt;maxLength value="20"/>
+ *               &lt;pattern value="[a-zA-Z ]+"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="uri" type="{http://www.w3.org/2001/XMLSchema}anyURI"/>
+ *         &lt;element ref="{http://www.mega-travel/user}privilege" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -54,19 +55,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "id",
-    "title",
-    "uri"
+    "name",
+    "privilege"
 })
-@XmlRootElement(name = "image", namespace = "http://www.mega-travel/accommodation")
-public class Image {
+@XmlRootElement(name = "role", namespace = "http://www.mega-travel/user")
+public class Role {
 
-    @XmlElement(namespace = "http://www.mega-travel/accommodation")
+    @XmlElement(namespace = "http://www.mega-travel/user")
     protected long id;
-    @XmlElement(namespace = "http://www.mega-travel/accommodation", required = true)
-    protected String title;
-    @XmlElement(namespace = "http://www.mega-travel/accommodation", required = true)
-    @XmlSchemaType(name = "anyURI")
-    protected String uri;
+    @XmlElement(namespace = "http://www.mega-travel/user", required = true)
+    protected String name;
+    @XmlElement(namespace = "http://www.mega-travel/user")
+    protected List<Privilege> privilege;
 
     /**
      * Gets the value of the id property.
@@ -85,51 +85,56 @@ public class Image {
     }
 
     /**
-     * Gets the value of the title property.
+     * Gets the value of the name property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
     /**
-     * Sets the value of the title property.
+     * Sets the value of the name property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setTitle(String value) {
-        this.title = value;
+    public void setName(String value) {
+        this.name = value;
     }
 
     /**
-     * Gets the value of the uri property.
+     * Gets the value of the privilege property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getUri() {
-        return uri;
-    }
-
-    /**
-     * Sets the value of the uri property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the privilege property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPrivilege().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Privilege }
+     * 
+     * 
      */
-    public void setUri(String value) {
-        this.uri = value;
+    public List<Privilege> getPrivilege() {
+        if (privilege == null) {
+            privilege = new ArrayList<Privilege>();
+        }
+        return this.privilege;
     }
 
 }

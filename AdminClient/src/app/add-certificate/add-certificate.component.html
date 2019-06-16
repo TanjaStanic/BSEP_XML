@@ -1,0 +1,56 @@
+
+<div class="login-box" id="formRegistration">
+  <div class="register-logo">
+    <a href="../../index2.html"><b>Certificate</b></a>
+  </div>
+
+  <div class="login-box-body">
+    <p class="login-box-msg"><b>Add new Certificate</b></p>
+
+    <form method="post" class="registration" (submit)="createCertificate()">
+     
+      <div class="form-group has-feedback">
+      <label for="name">Start date:</label>  
+        <input type="text" class="form-control" [(ngModel)] = "startDate" #startDatee="ngModel" name="startDatee" type="date" min="{{today | date: 'yyyy-MM-dd'}}"
+        					  id="startCertificate" placeholder="Start Date" required>
+        <span class="glyphicon form-control-feedback"><i class="fa fa-calendar"></i></span>
+      </div>
+      
+      <div class="form-group has-feedback">
+      <label for="name">End date:</label>  
+        <input type="text" class="form-control" [(ngModel)] = "endDate" #endDatee="ngModel" name="endDatee" type="date" min="{{startDate | date: 'yyyy-MM-dd'}}"
+        					  id="endCertificate" placeholder="End Date" required>
+        <span class="glyphicon form-control-feedback"><i class="fa fa-calendar"></i></span>
+      </div>
+      
+      <div class="form-group has-feedback" id="element1"  hidden="choose">
+         <label for="name">Issuer:</label>
+         <br/>
+        <select name="issuer" id="lista_issuer" [(ngModel)]="author">
+         <option  *ngFor="let c of certificatedUsers" [value]="c.id"> {{c.email}} </option>
+        </select>
+   </div>  
+      
+      
+      <div class="row" position = "center">
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" id="submit"  class="btn btn-primary btn-block btn-flat pull-right">Create</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+  </div>
+  <!-- /.form-box -->
+</div>
+<!-- /.register-box -->
+
+<!-- jQuery 3 -->
+<script src="../../assets/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../../assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="../../assets/plugins/iCheck/icheck.min.js"></script>
+
+

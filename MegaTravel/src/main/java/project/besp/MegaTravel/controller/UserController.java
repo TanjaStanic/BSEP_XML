@@ -327,7 +327,7 @@ public class UserController {
 		
 	}	
 	
-	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')") //ovde mogu pristupiti svi koji su registrovani
+	//@PreAuthorize("hasRole('ADMIN') or hasRole('USER')") //ovde mogu pristupiti svi koji su registrovani
 	@RequestMapping(value = "/userprofile", method = RequestMethod.POST,
 	consumes = MediaType.APPLICATION_JSON_VALUE,
 	produces = MediaType.APPLICATION_JSON_VALUE)
@@ -347,13 +347,14 @@ public class UserController {
 			return  new ResponseEntity<User>(user, HttpStatus.OK);
 		}
 
-	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')") //ovde mogu pristupiti svi koji su registrovani
+	//@PreAuthorize("hasRole('ADMIN') or hasRole('USER')") //ovde mogu pristupiti svi koji su registrovani
 	@RequestMapping(value="/allCertificatedUsers", method = RequestMethod.GET,
 	consumes = MediaType.APPLICATION_JSON_VALUE,
 	produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<User> getAllCertificatedUsers(){	
+	public ResponseEntity<List<User>> getAllCertificatedUsers(){	
 		List<User> all=userService.getAll();
 		List<User> certificated = new ArrayList<User>();
+		List<User> notvalidUser = new ArrayList<User>();
 		
 		for(User user : all)
 		{
@@ -365,10 +366,10 @@ public class UserController {
 		if(certificated.size() > 0)
 		{
 			System.out.println("Ima certificated usera: " + certificated.size());
-			return certificated;
+			return new ResponseEntity<List<User>>(certificated,HttpStatus.OK);
 		}
 		else 
-			return null;
+			return new ResponseEntity<List<User>>(notvalidUser, HttpStatus.NOT_FOUND);
 		
 	}
 	
@@ -429,13 +430,13 @@ public class UserController {
 	//@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	@GetMapping(path = "/getAll")
 	public ResponseEntity<List<User>> getAllUsers() {
-		User user = null;
-		
+		//User user = null;
+		List<User> users  = new ArrayList<User>();
 		System.out.println("Number of users: " + userService.getAll().size());
 		
-		//return userService.getAll();
-		session.setAttribute("user", user);
-		return new ResponseEntity<List<User>>(HttpStatus.OK);
+		users =  userService.getAll();
+		//session.setAttribute("user", user);
+		return new ResponseEntity<>(users,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/communication", 

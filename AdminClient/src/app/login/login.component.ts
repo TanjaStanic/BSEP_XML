@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     user : User = new User();
     htmlStr: string;
     isLoggedIn = false;
-
+   
     
     constructor(private u: UserServiceService, private route: ActivatedRoute, private auth : AuthServiceService, private router : Router) { }
 
@@ -37,9 +37,10 @@ export class LoginComponent implements OnInit {
         
     console.log('Dodavanje' + this.user.email + ', pass: ' + this.user.password);
     if (this.checkEmail(this.user.email)) {
-          this.u.loginUser(this.user).subscribe(podaci => { this.checkUser(podaci); } , err => {this.handleAuthError(err); });
+          this.u.loginUser(this.user).subscribe(podaci => { this.checkUser(podaci);
+          } , err => {this.handleAuthError(err); });
 
-
+          localStorage.setItem('user', JSON.stringify(this.user))
       } else {
         this.htmlStr = 'The e-mail is not valid.';
       }
@@ -67,8 +68,12 @@ checkUser(logged) {
       this.auth.setJwtToken(user_token.accessToken);
       console.log(user_token.accessToken);
       this.router.navigate(['homePage']); 
-
-      this.u.getLogged(user_token.accessToken).subscribe(podaci => {this.ssCertificate(podaci)});
+      this.u.getLogged(user_token.accessToken).subscribe(podaci => {
+          this.ssCertificate(podaci);
+          var currentUser=podaci as User; 
+          localStorage.setItem('user', JSON.stringify(currentUser));
+      });
+      
     }
   }
     

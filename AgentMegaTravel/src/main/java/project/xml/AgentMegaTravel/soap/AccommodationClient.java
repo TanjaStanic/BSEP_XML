@@ -5,7 +5,7 @@ import project.xml.AgentMegaTravel.model.AccommodationRequest;
 import project.xml.AgentMegaTravel.model.AccommodationResponse;
 import project.xml.AgentMegaTravel.model.AccommodationUnit;
 import project.xml.AgentMegaTravel.model.AccommodationUnitRequest;
-import project.xml.AgentMegaTravel.model.AccommodationUtitResponse;
+import project.xml.AgentMegaTravel.model.AccommodationUnitResponse;
 
 import project.xml.AgentMegaTravel.model.AdditionalServiceRequest;
 import project.xml.AgentMegaTravel.model.AdditionalServiseResponse;
@@ -29,9 +29,9 @@ public class AccommodationClient extends WebServiceGatewaySupport{
 		request.setId(1);
 		return (AdditionalServiseResponse) getWebServiceTemplate().marshalSendAndReceive(request);
 	}
-	public AccommodationUtitResponse saveNewAcc(AccommodationUnit au) {
+	public AccommodationUnitResponse saveNewAcc(AccommodationUnit au) {
 		AccommodationUnitRequest request = new AccommodationUnitRequest();
 		request.setAccommodationUnit(au);
-		return (AccommodationUtitResponse) getWebServiceTemplate().marshalSendAndReceive(request);
+		return (AccommodationUnitResponse) getWebServiceTemplate().marshalSendAndReceive(request);
 	}
 }
