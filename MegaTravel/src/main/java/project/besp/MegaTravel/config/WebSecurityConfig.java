@@ -1,7 +1,8 @@
+
 package project.besp.MegaTravel.config;
 
-import java.util.List;
 import org.springframework.http.MediaType;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -68,7 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  implements 
 
 			@Autowired
 			TokenUtils tokenUtils;
-			
+		
 			
 			@Bean
 		    public CorsFilter corsFilter() {
@@ -109,7 +110,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  implements 
 
 				http.csrf().disable();
 			}
-
+			
 			// Generalna bezbednost aplikacije
 			@Override
 			public void configure(WebSecurity web) throws Exception {

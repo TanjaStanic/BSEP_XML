@@ -90,13 +90,13 @@ public class CertificateController {
 	public KeyStoreReader ksr = new KeyStoreReader();
 	public CertificateCSRService certificateCSRService;
 	
-	// sifra za centralKeystore je central
+	// sifra za centralKeystore je certificatePass1
 	// za localKeystore1 je local
 	
 	@PostConstruct
 	public void init(){
 		keyStoreWriter = new KeyStoreWriter();
-		String centralPass = "central";
+		String centralPass = "certificatePass1";
 		keyStoreWriter.loadKeyStore("centralKeystore.p12", centralPass.toCharArray());
 		keyStoreWriter.saveKeyStore("centralKeystore.p12", centralPass.toCharArray());
 		keyPairIssuer = generateKeyPair();
@@ -109,7 +109,7 @@ public class CertificateController {
 	public ArrayList<String> getValidCertificates() throws KeyStoreException, NoSuchAlgorithmException,
 			CertificateException, FileNotFoundException, IOException {
 		logging.printInfo("Get Valid Certificates");
-		return ksr.getValidCertificates("centralKeystore.p12", "central");
+		return ksr.getValidCertificates("centralKeystore.p12", "certificatePass1");
 		
 	}
 	
@@ -184,7 +184,7 @@ public class CertificateController {
 		
 		KeyStoreReader keyStoreReader = new KeyStoreReader();
 		String issuerPass = "certificatePass" + issuer.getId();
-		PrivateKey privateKeyIssuer = keyStoreReader.readPrivateKey("centralKeystore.p12", "central", issuerPass, issuerPass);
+		PrivateKey privateKeyIssuer = keyStoreReader.readPrivateKey("centralKeystore.p12", "certificatePass1", issuerPass, issuerPass);
 		IssuerData issuerData = generateIssuerData(privateKeyIssuer, issuer);
 		
 		CertificateGenerator cg = new CertificateGenerator();
@@ -193,7 +193,7 @@ public class CertificateController {
 		String certificatePass = "certificatePass" + subject.getId();
 		System.out.println("certificatePass: " + certificatePass);
 		keyStoreWriter.write(certificatePass, keyPairIssuer.getPrivate(), certificatePass.toCharArray(), cert);
-		String centralPass = "central";
+		String centralPass = "certificatePass1";
 		keyStoreWriter.saveKeyStore("centralKeystore.p12", centralPass.toCharArray());
 		
 		KeyStoreWriter keyStoreWriterLocal = new KeyStoreWriter();
