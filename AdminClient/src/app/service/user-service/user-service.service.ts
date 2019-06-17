@@ -42,6 +42,9 @@ addUser(u: User) {
 getAll() : Observable<any> {
     return this.http.get('//localhost:8762/user/getAll'); 
   }
+getAllUsers() : Observable<any> {
+    return this.http.get('https://localhost:8443/user/getAll'); 
+  }
 getCertificatedUsers(): Observable<any>
 {
   console.log('get certificated users');

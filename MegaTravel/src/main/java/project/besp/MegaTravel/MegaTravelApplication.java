@@ -1,5 +1,7 @@
 package project.besp.MegaTravel;
 
+import java.security.Security;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -13,7 +15,8 @@ public class MegaTravelApplication {
 	public static void main(String[] args) {
 			
 		SpringApplication.run(MegaTravelApplication.class, args);
-		
+		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+
 		System.out.println("helloooooooooooo"); //SARAAAAAAa
 		
 		// samo za tanjuuuuuuuu

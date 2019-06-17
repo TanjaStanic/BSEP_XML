@@ -28,4 +28,8 @@ export class CertificateServiceService {
     console.log('show certificate');
     return this.http.get('https://localhost:8443/certificate/allCertificatesIssuer/' + id, {headers: this.auth.createAuthorizationTokenHeader()});
   }
+ validateCertificate(id: string) :  Observable<any> {
+     console.log('validate certificate');
+     return this.http.get('https://localhost:8443/certificates/validate/' + id, {headers: this.auth.createAuthorizationTokenHeader()});
+   }
 }

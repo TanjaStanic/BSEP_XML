@@ -94,13 +94,13 @@ public class CertificateController {
 	// za localKeystore1 je local
 	
 	@PostConstruct
-	/*public void init(){
+	public void init(){
 		keyStoreWriter = new KeyStoreWriter();
 		String centralPass = "central";
 		keyStoreWriter.loadKeyStore("centralKeystore.p12", centralPass.toCharArray());
 		keyStoreWriter.saveKeyStore("centralKeystore.p12", centralPass.toCharArray());
 		keyPairIssuer = generateKeyPair();
-	}*/
+	}
 	
 	
 	
@@ -112,6 +112,7 @@ public class CertificateController {
 		return ksr.getValidCertificates("centralKeystore.p12", "central");
 		
 	}
+	
 	
 	//@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	@RequestMapping(value = "/getUsersWithCetrtificate", method = RequestMethod.GET)
@@ -162,6 +163,7 @@ public class CertificateController {
 			return new ResponseEntity<>(certificate, HttpStatus.FORBIDDEN);
 		}
 		//u certificate pre cuvanja dodati idIssuerCertificate
+		//uzimam certifikat onog koji dodaje novi sertifikat
 		Certificate issuerCertificate = certificateService.findOneByIdSubject(id_issuer);
 		Long i= (long) 1.0;
 		Long idIssuerCertificate = (long) 0;
@@ -173,6 +175,8 @@ public class CertificateController {
 		certificate.setIdCertificateIssuer(idIssuerCertificate);
 		
 		Certificate saved = certificateService.saveCertificate(certificate);
+		
+		//sad radim sa userima
 		User subject = userService.findOneById(id_subject);
 		User issuer = userService.findOneById(id_issuer);
 		
@@ -187,13 +191,21 @@ public class CertificateController {
 		X509Certificate cert = cg.generateCertificate(subjectData, issuerData);
 		
 		String certificatePass = "certificatePass" + subject.getId();
-		System.out.println("generisana sifra: certificatePass: " + certificatePass);
+		System.out.println("certificatePass: " + certificatePass);
 		keyStoreWriter.write(certificatePass, keyPairIssuer.getPrivate(), certificatePass.toCharArray(), cert);
-
 		String centralPass = "central";
 		keyStoreWriter.saveKeyStore("centralKeystore.p12", centralPass.toCharArray());
 		
-		issuer.setCertificated(true);
+		KeyStoreWriter keyStoreWriterLocal = new KeyStoreWriter();
+		keyStoreWriterLocal.loadKeyStore(null, subject.getId().toString().toCharArray());
+		
+		keyStoreWriterLocal.saveKeyStore("localKeyStore"+subject.getId()+".p12", subject.getId().toString().toCharArray());
+		String localAlias="myCertificate";
+		
+		keyStoreWriterLocal.write(localAlias, subjectData.getPrivateKey(), localAlias.toCharArray(), cert);
+		keyStoreWriterLocal.saveKeyStore("localKeyStore"+subject.getId().toString()+".p12", subject.getId().toString().toCharArray());
+		
+		//issuer.setCertificated(true);
 		//userService.saveUser(issuer);
 		
 		System.out.println("[CertificateController - validateCertificate PRE]: issuer pubic key: " + keyPairIssuer.getPublic());
@@ -478,7 +490,7 @@ public class CertificateController {
 			    builder.addRDN(BCStyle.GIVENNAME, user.getLastName());
 			    builder.addRDN(BCStyle.E, user.getEmail());
 			    //UID (USER ID) je ID korisnika
-			    //builder.addRDN(BCStyle.UID,  user.getId().toString());
+			    builder.addRDN(BCStyle.UID,  user.getId().toString());
 			}
 			else
 			{
@@ -501,7 +513,7 @@ public class CertificateController {
 	    builder.addRDN(BCStyle.SURNAME, issuer.getFirstName());
 	    builder.addRDN(BCStyle.GIVENNAME, issuer.getLastName());
 	    builder.addRDN(BCStyle.E, issuer.getEmail());
-	   // builder.addRDN(BCStyle.UID, issuer.getId().toString());
+	    builder.addRDN(BCStyle.UID, issuer.getId().toString());
 
 		//Kreiraju se podaci za issuer-a, sto u ovom slucaju ukljucuje:
 	    // - privatni kljuc koji ce se koristiti da potpise sertifikat koji se izdaje
