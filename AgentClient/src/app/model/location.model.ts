@@ -1,5 +1,6 @@
-export interface Location {
+export class Location {
 
+    IdLocation: number;
     geoLength: number;
 	geoWidth: number;
 

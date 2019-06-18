@@ -1,4 +1,4 @@
-export interface AdditionalService {
+export class AdditionalService {
 
     additionalServiceID: number;
 	additionalServiceName: string;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 //import { AgentServiceService } from '../service/agent-service.service';
-import { AbstractUser } from 'src/app/model/abstract-user.model';
+import { User } from 'src/app/model/user.model';
 import { UserToken } from 'src/app/model/user-token';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthServiceService } from 'src/app/services/auth-service/auth-service.service';
@@ -17,7 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 export class LoginComponent implements OnInit {
   
     message : string;
-    user : AbstractUser = new AbstractUser();
+    user : User = new User();
     htmlStr: string;
     
     constructor(private u: UserServiceService, private route: ActivatedRoute, private auth : AuthServiceService) { }
@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
 
 
     ssCertificate(data){
-        var loggedUser = data as AbstractUser;
+        var loggedUser = data as User;
         var admin = false as boolean;
         var obican = false as boolean;
 

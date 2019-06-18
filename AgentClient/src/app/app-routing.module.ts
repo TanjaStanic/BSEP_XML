@@ -6,6 +6,10 @@ import { AddAccommodationComponent } from './components/add-accommodation/add-ac
 import { AccommodationsComponent } from './components/accommodations/accommodations.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { MessagesComponent } from './components/messages/messages.component';
+import { AddAccUnitComponent } from './components/add-acc-unit/add-acc-unit.component';
+import { ListOfAccUnitsComponent } from './components/list-of-acc-units/list-of-acc-units.component';
+
+
 
 const routes: Routes = [   
    {
@@ -29,12 +33,12 @@ const routes: Routes = [
       component: AddAccommodationComponent
     },
     {
-      path: 'comments',
-      component: CommentsComponent
+      path: 'listOdAccUnits',
+      component: ListOfAccUnitsComponent
     },
     {
-        path: 'messages',
-        component: MessagesComponent
+        path: 'addAccUnit',
+        component: AddAccUnitComponent
       }
 
   ];

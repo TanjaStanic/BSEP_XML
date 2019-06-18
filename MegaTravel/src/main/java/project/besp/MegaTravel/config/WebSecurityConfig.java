@@ -37,7 +37,11 @@ import project.besp.MegaTravel.serviceImpl.UserServiceImpl;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(
+		securedEnabled = true,
+		jsr250Enabled = true,
+		prePostEnabled = true
+	)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter  implements WebMvcConfigurer{
 	
 	// Implementacija PasswordEncoder-a koriscenjem BCrypt hashing funkcije.
@@ -101,6 +105,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  implements 
 					.authorizeRequests()
 					.antMatchers("/auth/**").permitAll()
 					.antMatchers("/**").permitAll()
+					.antMatchers("/ws/*").permitAll()
+					.antMatchers("/ws").permitAll()
+					.antMatchers("/api/accobject/*").permitAll()
+					.antMatchers("/api/addresses/test2").permitAll()
+					.antMatchers("/api/comment/*").permitAll()
+					.antMatchers("/api/addresses/*").permitAll()
 					
 					// svaki zahtev mora biti autorizovan
 					.anyRequest().authenticated().and()

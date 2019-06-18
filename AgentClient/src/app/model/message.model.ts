@@ -1,5 +1,6 @@
-export interface Message {
+export class Message {
     
+    idmessage: number;
 	title: string;
     content: string;
     agentId: number;

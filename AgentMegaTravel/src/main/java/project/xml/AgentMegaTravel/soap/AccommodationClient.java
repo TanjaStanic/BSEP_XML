@@ -1,37 +1,41 @@
 package project.xml.AgentMegaTravel.soap;
 
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
-import project.xml.AgentMegaTravel.model.AccommodationRequest;
-import project.xml.AgentMegaTravel.model.AccommodationResponse;
-import project.xml.AgentMegaTravel.model.AccommodationUnit;
-import project.xml.AgentMegaTravel.model.AccommodationUnitRequest;
-import project.xml.AgentMegaTravel.model.AccommodationUnitResponse;
 
-import project.xml.AgentMegaTravel.model.AdditionalServiceRequest;
-import project.xml.AgentMegaTravel.model.AdditionalServiseResponse;
+import project.xml.AgentMegaTravel.xsd.*;
+import project.xml.AgentMegaTravel.xsd.GetAccommodationResponse;
 
-import project.xml.AgentMegaTravel.model.AddressRequest;
-import project.xml.AgentMegaTravel.model.AddressResponse;
 
 public class AccommodationClient extends WebServiceGatewaySupport{
-	public AccommodationResponse getAccommodation(Long id) {
-		AccommodationRequest request = new AccommodationRequest();
+	
+	public GetAccommodationResponse getAccommodation(Long id) {
+		GetAccommodationRequest request = new GetAccommodationRequest();
 		request.setId(id);
-		return (AccommodationResponse) getWebServiceTemplate().marshalSendAndReceive(request);
+		return (GetAccommodationResponse) getWebServiceTemplate().marshalSendAndReceive(request);
+
 	}
-	public AddressResponse getAddress(Long id) {
-		AddressRequest request = new AddressRequest();
+	public GetAddressResponse getAddress(Long id) {
+		GetAddressRequest request = new GetAddressRequest();
 		request.setId(1);
-		return (AddressResponse) getWebServiceTemplate().marshalSendAndReceive(request);
+		return (GetAddressResponse) getWebServiceTemplate().marshalSendAndReceive(request);
 	}
-	public AdditionalServiseResponse getAdditionalService(Long id) {
-		AdditionalServiceRequest request = new AdditionalServiceRequest();
+	public GetAdditionalServiceResponse getAdditionalService(Long id) {
+		GetAdditionalServiceRequest request = new GetAdditionalServiceRequest();
 		request.setId(1);
-		return (AdditionalServiseResponse) getWebServiceTemplate().marshalSendAndReceive(request);
+		return (GetAdditionalServiceResponse) getWebServiceTemplate().marshalSendAndReceive(request);
 	}
-	public AccommodationUnitResponse saveNewAcc(AccommodationUnit au) {
-		AccommodationUnitRequest request = new AccommodationUnitRequest();
+	public GetAllAdditionalServiceResponse getAllAdditionalServiceResponse() {
+		GetAllAdditionalServiceRequest request = new GetAllAdditionalServiceRequest();
+		return (GetAllAdditionalServiceResponse) getWebServiceTemplate().marshalSendAndReceive(request);
+	}
+	public GetPricingResponse getAccUnitPrice(Long id) {
+		GetPricingRequest request = new GetPricingRequest();
+		request.setId(1);
+		return (GetPricingResponse) getWebServiceTemplate().marshalSendAndReceive(request);
+	}
+	public GetAccommodationUnitResponse saveNewAcc(AccommodationUnit au) {
+		GetAccommodationUnitRequest request = new GetAccommodationUnitRequest();
 		request.setAccommodationUnit(au);
-		return (AccommodationUnitResponse) getWebServiceTemplate().marshalSendAndReceive(request);
+		return (GetAccommodationUnitResponse) getWebServiceTemplate().marshalSendAndReceive(request);
 	}
 }

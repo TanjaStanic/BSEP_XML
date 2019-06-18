@@ -1,4 +1,4 @@
-export interface Pricing {
+export class Pricing {
 
     pricingID: number;
 	price: number;

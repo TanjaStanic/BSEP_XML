@@ -3,7 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { UserServiceService } from 'src/app/services/user-service/user-service.service';
 import {AuthServiceService} from 'src/app/services/auth-service/auth-service.service';
-import { AbstractUser } from 'src/app/model/abstract-user.model';
+import { User } from 'src/app/model/user.model';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
     notLogged: boolean;
     token: string;
     podatak: object;
-    user: AbstractUser = new AbstractUser();
+    user: User = new User();
     id_logged : number;
     constructor(private userService: UserServiceService, private route: ActivatedRoute, private auth: AuthServiceService) { }
 
@@ -36,7 +36,7 @@ export class AppComponent implements OnInit{
     }
     pathToList(data)
     {
-      this.user = data as AbstractUser;
+      this.user = data as User;
       this.id_logged=this.user.id;
       document.getElementById("listCertificates").setAttribute("href", "/list-of-certificates/" + this.id_logged);
     }

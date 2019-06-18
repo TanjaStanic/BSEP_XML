@@ -11,6 +11,7 @@ import { AddAccommodationComponent } from './components/add-accommodation/add-ac
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { AddAccUnitComponent } from './components/add-acc-unit/add-acc-unit.component';
+import { ListOfAccUnitsComponent } from './components/list-of-acc-units/list-of-acc-units.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AddAccUnitComponent } from './components/add-acc-unit/add-acc-unit.comp
     AddAccommodationComponent,
     HomePageComponent,
     MessagesComponent,
-    AddAccUnitComponent
+    AddAccUnitComponent,
+    ListOfAccUnitsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 --svi useri
-insert into user (user_id, first_name, last_name, email,password,certificated) values (1, 'admin', 'admin', 'admin@gmail.com', '$2a$10$B5q5PKtYYwtHSLd7lekgGu4ve5Iaa1IoAsZZZJkX74ervZjCAKdUe',1);
+insert into user (user_id, first_name, last_name, email,password,certificated) values (1, 'admin', 'admin', 'adminMAMA@gmail.com', '$2a$10$B5q5PKtYYwtHSLd7lekgGu4ve5Iaa1IoAsZZZJkX74ervZjCAKdUe',1);
 -- agenti za provjeru sertifikata
 insert into user (user_id, first_name, last_name, email,password,certificated,pib) values (2, 'agent', 'agent', 'agent@gmail.com', '$2a$12$l5RRveYgubpdAK5h42f2xu8qpVf6619DtbY90JneL/NXVsBeIzL1e',1,'123456');
 insert into user (user_id, first_name, last_name, email,password,certificated,pib) values (3, 'agent2', 'agent2', 'agent2@gmail.com', '$2a$12$l5RRveYgubpdAK5h42f2xu8qpVf6619DtbY90JneL/NXVsBeIzL1e',1,'1234567');

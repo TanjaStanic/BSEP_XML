@@ -1,4 +1,4 @@
-export interface Reservation {
+export class Reservation {
     reservationId: number;
     startDate: string;
     endDate: string;

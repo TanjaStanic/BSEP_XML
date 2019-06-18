@@ -14,13 +14,13 @@ public class ServiceConfiguration {
 		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
 		// this package must match the package in the  specified in
 		// pom.xml
-		marshaller.setContextPath("project.xml.AgentMegaTravel.model");
+		marshaller.setContextPath("project.xml.AgentMegaTravel.xsd");
 		return marshaller;
 	}
 	@Bean
 	public AccommodationClient movieClient(Jaxb2Marshaller marshaller) {
 		AccommodationClient client = new AccommodationClient();
-		client.setDefaultUri("http://localhost:8442/ws");
+		client.setDefaultUri("https://localhost:8443/ws");
 		client.setMarshaller(marshaller);
 		client.setUnmarshaller(marshaller);
 		return client;
