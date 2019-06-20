@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import project.xml.AdminService.model.Accommodation;
 import project.xml.AdminService.model.AdditionalServices;
 import project.xml.AdminService.model.Address;
@@ -57,7 +59,7 @@ public class AccommodationController {
 	HttpSession session;
 	
 	//private Address newAddress = new Address();
-	
+	@JsonIgnore
 	@GetMapping(path= "/getAllAcc") //getAll accommodations
 	public ResponseEntity<List<Accommodation>> getAllAcc() {
 		System.out.println("Number of additional services: " + addService.getAll().size());
@@ -66,7 +68,7 @@ public class AccommodationController {
 		return new ResponseEntity<>(acc,HttpStatus.OK);
 	}
 
-	
+	@JsonIgnore
 	@GetMapping(path= "/getAll") //getAll additional services
 	public ResponseEntity<List<AdditionalServices>> getAll() {
 		System.out.println("Number of additional services: " + addService.getAll().size());

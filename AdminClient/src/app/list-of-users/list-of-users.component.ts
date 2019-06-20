@@ -80,7 +80,7 @@ export class ListOfUsersComponent implements OnInit {
   ngOnInit() {
      
       this.userService.getAll().subscribe(data =>{
-     // this.users = this.filteredUsers;
+      this.users = data;
       //console.log(this.filteredUsers);
       //filteredUsers[];
       //this.users1 = data;  

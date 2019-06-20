@@ -58,7 +58,7 @@ public class UserController {
 		return new ResponseEntity<>(users,HttpStatus.OK);
 	}
 	
-	
+	@JsonIgnore
 	@GetMapping(path = "/getAcc")
 	public ResponseEntity<List<Accommodation>> getAcc() {
 		//User user = null;

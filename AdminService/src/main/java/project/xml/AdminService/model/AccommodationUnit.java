@@ -27,7 +27,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 
@@ -126,6 +128,8 @@ public class AccommodationUnit {
 	/*
      * Smjestajna jedinica odgovara tacno jednom smjestaju.
      */
+	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="acc")
 	private Accommodation accommodation;
@@ -134,6 +138,8 @@ public class AccommodationUnit {
 	 * Jedna smjestajna jedinica odgovara jednom agentu
 	 * Jedan agent ima vise smjestajnih jedinica
 	 */
+	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="agent_units")
 	private User user;
@@ -141,6 +147,8 @@ public class AccommodationUnit {
 	/*
 	 * Jedna dodatna usluga moze da odgovora za vise smjestajnih jedinica
 	 */
+	
+	@JsonBackReference
     @ManyToMany
 	@JoinTable(
 	        name = "accommodation_unit_additional_services", 
@@ -152,11 +160,13 @@ public class AccommodationUnit {
     /*
      * SJ se rezervise vise puta
      */
+	
     @OneToMany(mappedBy="accommodation_unit")
     protected List<Reservation> reservations;
     /*
      * ima svoju listu cijena (na mjesecnom nivou pozeljno)
      */
+	
     @OneToMany(mappedBy="accommodation_unit")
     protected List<Pricing> pricing;
     

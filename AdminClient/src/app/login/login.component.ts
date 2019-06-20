@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
     user : User = new User();
     htmlStr: string;
     isLoggedIn = false;
+    id : string;
    
     
     constructor(private u: UserServiceService, private route: ActivatedRoute, private auth : AuthServiceService, private router : Router) { }
@@ -39,6 +40,10 @@ export class LoginComponent implements OnInit {
     if (this.checkEmail(this.user.email)) {
           this.u.loginUser(this.user).subscribe(podaci => { this.checkUser(podaci);
           } , err => {this.handleAuthError(err); });
+        
+              sessionStorage.setItem('id', data.id);
+              var data = sessionStorage.getItem('id');
+              console.log(data);
 
           localStorage.setItem('user', JSON.stringify(this.user))
       } else {

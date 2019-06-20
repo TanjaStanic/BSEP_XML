@@ -19,12 +19,12 @@ export class AccServiceService {
   constructor(private http: HttpClient, private router : Router) { }
     
     getAll() : Observable<any> {
-    return this.http.get('//localhost:8762/accommodations/getAll'); 
+    return this.http.get('https://localhost:8762/accommodations/getAll'); 
        }
     
     
    getAllAcc() : Observable<any> {
-    return this.http.get('//localhost:8762/accommodations/getAllAcc'); 
+    return this.http.get('//localhost:8762/user/getAcc'); 
         }
     
     addAcc(acc : Accommodation) {

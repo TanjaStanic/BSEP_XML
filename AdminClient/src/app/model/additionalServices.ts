@@ -1,7 +1,7 @@
 export class AdditionalServices {
-    constructor(public id:number,
-                public name:string,
-                public price:number,
-                public included:boolean){}
+    id:number;
+    name:string;
+    price:number;
+    included:boolean;
         
     }

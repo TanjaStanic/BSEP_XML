@@ -4,15 +4,15 @@
             <div class="box-header">
               <h3 class="box-title"><b>List of accommodations</b></h3>
 
-              <div class="box-tools">
+              <!--  --div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                  <input type="text" name="table_search" [(ngModel)] = "searchTerm" class="form-control pull-right" placeholder="Search">
 
                   <div class="input-group-btn">
                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                   </div>
                 </div>
-              </div>
+              </div-->
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
@@ -21,15 +21,29 @@
                	<tr>
             	<th>Name</th>
             	<th>Category</th>
+            	<th>Street</th>
+            	<th>City</th>
+            	<th>Country</th>
+            	<th>Additional Services</th>
             	<th>Rating</th>
+            	
+            	
+            	
             	<th></th>
             	</tr>
        		 </thead>
        		 <tbody>
-                <tr *ngFor="let acc of accommodation">
-                <td>{{acc.name}}</td>
-                <td>{{acc.category}}</td>
+                <tr *ngFor="let acc of accommodations">
+                <td>{{acc.name}}</td>                
+                <td>{{acc.category}}</td> 
+                <td>{{acc.address.street}}</td>
+                <td>{{acc.address.city}}</td>               
+                <td>{{acc.address.country}}</td> 
+                
+                <td>{{acc.additional_services}}</td>
                 <td>{{acc.rating}}</td>
+                <td><button (click)="changeAcc(acc)" type="button" class="btn btn-outline-success">Change</button></td>
+                <td><button (click)="deleteAcc(acc)" type="button" class="btn btn-outline-danger">Delete</button></td>   
                 </tr>
              </tbody>
 

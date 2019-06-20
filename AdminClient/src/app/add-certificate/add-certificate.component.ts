@@ -65,7 +65,7 @@ export class AddCertificateComponent implements OnInit {
 
         console.log(currentUser);
         //razmotriti self sertifikate
-        
+       // this.author = currentUser;
         console.log('id:' + currentUser.id);
         console.log('start:' + this.startDate);
         console.log('end:' + this.endDate);

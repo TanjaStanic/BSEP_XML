@@ -51,8 +51,7 @@ export class AddAccommodationComponent implements OnInit {
            
       });
       }
-    
-  
+
     
   ngOnInit() {
      this.hideError = true;

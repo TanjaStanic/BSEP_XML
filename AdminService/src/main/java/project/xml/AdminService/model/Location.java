@@ -21,6 +21,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 /**
@@ -64,6 +67,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 })*/
 @Entity
 @Table(name= "location")
+
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Location {
 	
 	@Id
@@ -71,17 +76,18 @@ public class Location {
     @Column(name = "location_id", nullable = false, updatable = false)
     public long id;
 	
-    //@XmlElement(required = true)
+    @XmlElement(required = true)
     @Column(name = "geo_length", nullable = false)
     public float geoLength;
     
     
-   // @XmlElement(required = true)
+    @XmlElement(required = true)
     @Column(name = "geo_width", nullable = false)
     public float geoWidth;
-
-    @OneToOne(mappedBy="location")
-    public Accommodation accomodation;
+    
+    
+    /*@OneToOne(mappedBy="location")
+    public Accommodation accomodation;*/
     
     public long getId() {
 		return id;
@@ -107,11 +113,11 @@ public class Location {
 		this.geoWidth = geoWidth;
 	}
 
-	public Accommodation getAccomodation() {
+	/*public Accommodation getAccomodation() {
 		return accomodation;
 	}
 
 	public void setAccomodation(Accommodation accomodation) {
 		this.accomodation = accomodation;
-	}
+	}*/
 }

@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,14 +27,16 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.CascadeType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ws.server.endpoint.annotation.Endpoint;
 
 
 /**
@@ -110,7 +113,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 
  * 
  */
-@XmlAccessorType(XmlAccessType.FIELD)
+/*@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Accommodation", propOrder = {
     "id",
     "name",
@@ -118,10 +121,10 @@ import org.springframework.beans.factory.annotation.Autowired;
     "rating",
     "category",
     "description",
-})
+})*/
 @Entity
 @Table(name = "accommodation")
-public class Accommodation {
+public class Accommodation implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
 	
@@ -132,40 +135,46 @@ public class Accommodation {
    
 	
 	@XmlElement(required = true)
+	@Column(name = "name", nullable = false)
     protected String name;
     
 	
     @XmlElement(required = true, name="cancelation_days")
+    @Column(name = "cancelation_days", nullable = false)
     protected BigInteger cancelationDays;
     
 	
     @XmlElement(required = true)
+    @Column(name = "rating", nullable = false)
     protected double rating;
     
 	
     @XmlElement(required = true)
+    @Column(name = "category")
     protected String category;
 
 	
     @XmlElement(required = true)
+    @Column(name = "description",nullable = false)
     protected String description;
 	
+    
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="acc_location")
     protected Location location;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+    
+    @OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "acc_address")
 	protected Address address;
 	
-	@JsonIgnore
-    @OneToMany(mappedBy="accommodation")
-    protected List<AccommodationUnit> accommodation_unit;
+    /*@OneToMany(fetch = FetchType.LAZY,mappedBy="accommodation")
+    protected List<AccommodationUnit> accommodation_unit;*/
     
 	
 	
-	@JsonIgnore
-    @ManyToMany
+    
+    @ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 	        name = "accommodation_additional_services", 
 	        joinColumns = { @JoinColumn(name = "accommodation_id") }, 
@@ -174,10 +183,11 @@ public class Accommodation {
     protected List<AdditionalServices> additional_services;
 
 	
-	@JsonIgnore
-    @OneToMany(mappedBy="accomodation")
-    protected List<Image> images;
-	@JsonIgnore
+    /*@OneToMany(fetch = FetchType.LAZY,mappedBy="accomodation")
+    protected List<Image> images;*/
+	
+	
+	@XmlTransient
     @ManyToOne
     @JoinColumn(name = "acc_agent")
     protected User user;
@@ -370,13 +380,13 @@ public class Accommodation {
 		this.address = address;
 	}
 
-	public List<AccommodationUnit> getAccommodation_unit() {
+	/*public List<AccommodationUnit> getAccommodation_unit() {
 		return accommodation_unit;
 	}
 
 	public void setAccommodation_unit(List<AccommodationUnit> accommodation_unit) {
 		this.accommodation_unit = accommodation_unit;
-	}
+	}*/
 
 	public List<AdditionalServices> getAdditional_services() {
 		return additional_services;
@@ -386,13 +396,13 @@ public class Accommodation {
 		this.additional_services = additional_services;
 	}
 
-	public List<Image> getImages() {
+	/*public List<Image> getImages() {
 		return images;
 	}
 
 	public void setImages(List<Image> images) {
 		this.images = images;
-	}
+	}*/
 
 	public User getUser() {
 		return user;

@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 /**
@@ -98,10 +99,8 @@ public class AdditionalServices {
 	protected double price_of_add;
     
 	
-	
-	@ManyToMany(mappedBy = "additional_services")
-	private List<Accommodation> accommodations;
-	
+	/*@ManyToMany(mappedBy = "additional_services")
+	private List<Accommodation> accommodations;*/
 	
 	
 	@ManyToMany(mappedBy = "additional_services")
@@ -180,13 +179,13 @@ public class AdditionalServices {
 		this.accommodation_units = accommodation_units;
 	}
 
-	public List<Accommodation> getAccommodations() {
+	/*public List<Accommodation> getAccommodations() {
 		return accommodations;
 	}
 
 	public void setAccommodations(List<Accommodation> accommodations) {
 		this.accommodations = accommodations;
-	}
+	}*/
 
 
 
