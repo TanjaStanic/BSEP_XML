@@ -23,6 +23,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * <p>Java class for anonymous complex type.
@@ -83,7 +86,7 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name="additional_services")
 public class AdditionalServices {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "additional_id", nullable = false, updatable = false)
@@ -91,11 +94,15 @@ public class AdditionalServices {
    
 	@XmlElement(required = true)
     protected String name;
-    
+	
 	protected double price_of_add;
-
+    
+	
+	
 	@ManyToMany(mappedBy = "additional_services")
 	private List<Accommodation> accommodations;
+	
+	
 	
 	@ManyToMany(mappedBy = "additional_services")
     private List<AccommodationUnit> accommodation_units;

@@ -29,6 +29,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.CascadeType;
+import org.springframework.beans.factory.annotation.Autowired;
+
+
 /**
  * <p>Java class for anonymous complex type.
  * 
@@ -115,40 +122,49 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name = "accommodation")
 public class Accommodation {
+	private static final long serialVersionUID = 1L;
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "accommodation_id", nullable = false, updatable = false)
     protected long id;
    
+	
 	@XmlElement(required = true)
     protected String name;
     
+	
     @XmlElement(required = true, name="cancelation_days")
     protected BigInteger cancelationDays;
     
-   
+	
     @XmlElement(required = true)
     protected double rating;
     
+	
     @XmlElement(required = true)
     protected String category;
 
-    
+	
     @XmlElement(required = true)
     protected String description;
-    
-    @OneToOne
+	
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="acc_location")
     protected Location location;
-    
-    @OneToOne
+	
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "acc_address")
 	protected Address address;
-    
+	
+	@JsonIgnore
     @OneToMany(mappedBy="accommodation")
     protected List<AccommodationUnit> accommodation_unit;
     
+	
+	
+	@JsonIgnore
     @ManyToMany
 	@JoinTable(
 	        name = "accommodation_additional_services", 
@@ -157,9 +173,11 @@ public class Accommodation {
 	    )
     protected List<AdditionalServices> additional_services;
 
+	
+	@JsonIgnore
     @OneToMany(mappedBy="accomodation")
     protected List<Image> images;
-    
+	@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "acc_agent")
     protected User user;

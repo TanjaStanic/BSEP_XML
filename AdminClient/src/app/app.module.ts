@@ -19,6 +19,7 @@ import { ListOfAgentsComponent } from './list-of-agents/list-of-agents.component
 import { AddAccommodationComponent } from './add-accommodation/add-accommodation.component';
 import { ListOfAccommodationsComponent } from './list-of-accommodations/list-of-accommodations.component';
 import { AddCertificateComponent } from './add-certificate/add-certificate.component';
+import { UserFilterPipe } from './model/user-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AddCertificateComponent } from './add-certificate/add-certificate.compo
     AddAccommodationComponent,
     ListOfAccommodationsComponent,
     AddCertificateComponent,
+    UserFilterPipe,
     
   ],
   imports: [

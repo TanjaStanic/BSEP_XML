@@ -427,7 +427,7 @@ public class UserController {
 		
 		
 	}
-	//@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping(path = "/getAll")
 	public ResponseEntity<List<User>> getAllUsers() {
 		//User user = null;

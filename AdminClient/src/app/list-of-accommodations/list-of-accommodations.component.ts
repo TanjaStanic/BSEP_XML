@@ -17,7 +17,7 @@ export class ListOfAccommodationsComponent implements OnInit {
 
   ngOnInit() {
       
-      this.accService.getAll().subscribe(data =>{
+      this.accService.getAllAcc().subscribe(data =>{
       console.log(data);
       this.acc = data;
   });

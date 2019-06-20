@@ -24,6 +24,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * <p>Java class for anonymous complex type.
@@ -88,25 +91,36 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name="address")
 public class Address {
-
+	
+	
+	@JsonIgnore
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "address_id", nullable = false, updatable = false)
 	private Long id;
     
+	
+	
 	@XmlElement(required = true)
     protected String street;
     
+	
+	
 	protected BigInteger number;
     
 	@XmlElement(required = true)
     protected String city;
     
+	
+	
 	@XmlElement(required = true)
     protected String country;
     
+	
+	
 	@OneToMany(mappedBy="address")
     protected List<User> users;
+	
 	
 	@OneToOne(mappedBy="address")
     protected Accommodation accommodation;
@@ -118,6 +132,8 @@ public class Address {
      *     {@link String }
      *     
      */
+	
+	
     public String getStreet() {
         return street;
     }
@@ -130,6 +146,8 @@ public class Address {
      *     {@link String }
      *     
      */
+	
+	
     public void setStreet(String value) {
         this.street = value;
     }
@@ -142,6 +160,8 @@ public class Address {
      *     {@link BigInteger }
      *     
      */
+	
+	
     public BigInteger getNumber() {
         return number;
     }
@@ -154,6 +174,8 @@ public class Address {
      *     {@link BigInteger }
      *     
      */
+	
+	
     public void setNumber(BigInteger value) {
         this.number = value;
     }
@@ -178,6 +200,8 @@ public class Address {
      *     {@link String }
      *     
      */
+    
+    
     public void setCity(String value) {
         this.city = value;
     }
@@ -190,6 +214,8 @@ public class Address {
      *     {@link String }
      *     
      */
+    
+    
     public String getCountry() {
         return country;
     }
@@ -202,6 +228,8 @@ public class Address {
      *     {@link String }
      *     
      */
+    
+    
     public void setCountry(String value) {
         this.country = value;
     }

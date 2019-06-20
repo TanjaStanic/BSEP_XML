@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import project.xml.AdminService.model.Accommodation;
+import project.xml.AdminService.model.Location;
 import project.xml.AdminService.repository.AccommodationRepository;
 import project.xml.AdminService.service.AccommodationService;
 

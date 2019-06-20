@@ -20,6 +20,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 /**
  * <p>Java class for anonymous complex type.
@@ -55,11 +57,11 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
-@XmlAccessorType(XmlAccessType.FIELD)
+/*@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "location", propOrder = {
     "geo_length",
     "geo_width"
-})
+})*/
 @Entity
 @Table(name= "location")
 public class Location {
@@ -67,14 +69,19 @@ public class Location {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "location_id", nullable = false, updatable = false)
-    protected long id;
-    @XmlElement(required = true)
-    protected float geo_length;
-    @XmlElement(required = true)
-    protected float geo_width;
+    public long id;
+	
+    //@XmlElement(required = true)
+    @Column(name = "geo_length", nullable = false)
+    public float geoLength;
+    
+    
+   // @XmlElement(required = true)
+    @Column(name = "geo_width", nullable = false)
+    public float geoWidth;
 
     @OneToOne(mappedBy="location")
-    protected Accommodation accomodation;
+    public Accommodation accomodation;
     
     public long getId() {
 		return id;
@@ -84,20 +91,20 @@ public class Location {
 		this.id = id;
 	}
 
-	public float getGeo_length() {
-		return geo_length;
+	public float getGeoLength() {
+		return geoLength;
 	}
 
-	public void setGeo_length(float geo_length) {
-		this.geo_length = geo_length;
+	public void setGeoLength(float geoLength) {
+		this.geoLength = geoLength;
 	}
 
-	public float getGeo_width() {
-		return geo_width;
+	public float getGeoWidth() {
+		return geoWidth;
 	}
 
-	public void setGeo_width(float geo_width) {
-		this.geo_width = geo_width;
+	public void setGeoWidth(float geoWidth) {
+		this.geoWidth = geoWidth;
 	}
 
 	public Accommodation getAccomodation() {

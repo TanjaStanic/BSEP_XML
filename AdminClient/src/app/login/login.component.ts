@@ -68,11 +68,11 @@ checkUser(logged) {
       this.auth.setJwtToken(user_token.accessToken);
       console.log(user_token.accessToken);
       this.router.navigate(['homePage']); 
-      this.u.getLogged(user_token.accessToken).subscribe(podaci => {
+     /* this.u.getLogged(user_token.accessToken).subscribe(podaci => {
           this.ssCertificate(podaci);
           var currentUser=podaci as User; 
           localStorage.setItem('user', JSON.stringify(currentUser));
-      });
+      });*/
       
     }
   }
@@ -115,7 +115,7 @@ ssCertificate(data){
     }
 
     if (admin){
-      this.u.getSelfSigned().subscribe(podaci => { this.checkSelfSigned(podaci, loggedUser.id) });
+      //this.u.getSelfSigned().subscribe(podaci => { this.checkSelfSigned(podaci, loggedUser.id) });
     } else if (obican) {
         if (loggedUser.certificated == false) {
           window.location.href = 'http://localhost:4200/certificate/nonself/' + loggedUser.id;
