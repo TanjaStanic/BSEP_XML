@@ -38,6 +38,17 @@ insert into user_roles (user_id,role_id) values (5,3);
 insert into user_roles (user_id,role_id) values (6,3);
 
 --privilegije
+insert into privilege (id,name) values (1,'registrationAgent');
+insert into privilege (id,name) values (2,'login');
+insert into privilege (id,name) values (3,'loginAdmin');
+insert into privilege (id,name) values (4,'loginUser');
+
+
+insert into roles_privileges(role_id,privilege_id) values (1,1);
+insert into roles_privileges(role_id,privilege_id) values (1,2);
+insert into roles_privileges(role_id,privilege_id) values (1,3);
+insert into roles_privileges(role_id,privilege_id) values (3,4);
+
 
 
 --lokacija za smjestaj

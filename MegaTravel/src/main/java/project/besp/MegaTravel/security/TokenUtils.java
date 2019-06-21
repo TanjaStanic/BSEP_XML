@@ -3,7 +3,6 @@ package project.besp.MegaTravel.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import project.besp.MegaTravel.common.TimeProvider;
 import project.besp.MegaTravel.model.User;
 
 import java.util.Date;
@@ -20,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TokenUtils {
 
-	@Value("spring-security-demo")
+	@Value("MegaTravel")
 	private String APP_NAME;
 
 	@Value("somesecret")
@@ -47,10 +46,10 @@ public class TokenUtils {
 
 	// Functions for generating new JWT token
 
-	public String generateToken(String username, Device device) {
+	public String generateToken(String email, Device device) {
 		return Jwts.builder()
 				.setIssuer(APP_NAME)
-				.setSubject(username)
+				.setSubject(email)
 				.setAudience(generateAudience(device))
 				.setIssuedAt(timeProvider.now())
 				.setExpiration(generateExpirationDate(device))
@@ -101,10 +100,10 @@ public class TokenUtils {
 
 	public Boolean validateToken(String token, UserDetails userDetails) {
 		User user = (User) userDetails;
-		final String username = getUsernameFromToken(token);
+		final String email = getUsernameFromToken(token);
 		final Date created = getIssuedAtDateFromToken(token);
 		
-		return (username != null && username.equals(userDetails.getUsername())
+		return (email != null && email.equals(userDetails.getUsername())
 				&& !isCreatedBeforeLastPasswordReset(created, user.getLastPasswordResetDate()));
 	}
 
@@ -138,14 +137,14 @@ public class TokenUtils {
 	}
 
 	public String getUsernameFromToken(String token) {
-		String username;
+		String email;
 		try {
 			final Claims claims = this.getAllClaimsFromToken(token);
-			username = claims.getSubject();
+			email = claims.getSubject();
 		} catch (Exception e) {
-			username = null;
+			email = null;
 		}
-		return username;
+		return email;
 	}
 
 	public Date getIssuedAtDateFromToken(String token) {

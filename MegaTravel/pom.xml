@@ -80,10 +80,16 @@
        </dependency>
         
         
-		<dependency>
+		<!--dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
-		</dependency>
+			<exclusions>
+				<exclusion>
+					<groupId>org.atteo</groupId>
+					<artifactId>evo-inflector</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jersey</artifactId>
@@ -156,6 +162,8 @@
 			<version>8.0.13</version>
 			
 		</dependency>
+		
+			
 		
 		 <!-- WS -->
 			<dependency>
@@ -261,6 +269,17 @@
 	</dependency>
 		
 	</dependencies>
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-parent</artifactId>
+            <version>Greenwich.RELEASE</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
 	
 	
 	<build>

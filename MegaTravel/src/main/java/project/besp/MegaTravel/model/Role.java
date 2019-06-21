@@ -1,6 +1,7 @@
 package project.besp.MegaTravel.model;
 
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +16,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 
 @Entity
-public class Role implements GrantedAuthority{
+public class Role{
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,15 +34,7 @@ public class Role implements GrantedAuthority{
           name = "role_id", referencedColumnName = "id"), 
         inverseJoinColumns = @JoinColumn(
           name = "privilege_id", referencedColumnName = "id"))
-    private Collection<Privilege> privileges;
-
-
-	@Override
-	public String getAuthority() {
-		// TODO Auto-generated method stub
-		return name;
-	}
-
+    private Set<Privilege> privileges;
 
 	public int getId() {
 		return id;
@@ -66,12 +59,12 @@ public class Role implements GrantedAuthority{
 	}
 
 
-	public Collection<Privilege> getPrivileges() {
+	public Set<Privilege> getPrivileges() {
 		return privileges;
 	}
 
 
-	public void setPrivileges(Collection<Privilege> privileges) {
+	public void setPrivileges(Set<Privilege> privileges) {
 		this.privileges = privileges;
 	}
 

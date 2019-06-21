@@ -5,6 +5,8 @@ import { Accommodation } from '../model/accommodation';
 import { Address } from '../model/adress';
 import { SearchForm } from '../model/searchForm';
 import { AccServiceService } from '../service/acc-service/acc-service.service';
+import { UserServiceService } from '../service/user-service/user-service.service';
+
 
 @Component({
   selector: 'app-home-page',
@@ -15,7 +17,7 @@ export class HomePageComponent implements OnInit {
 
   acc : Accommodation = new Accommodation();
   address : Address = new Address();
-  constructor(private accService : AccServiceService, private route : Router) { }
+  constructor(private accService : AccServiceService, private route : Router, private userService : UserServiceService) { }
   accommodations : Accommodation[];
   searchForm: SearchForm = new SearchForm();
   parkingLot: boolean;
@@ -26,6 +28,8 @@ export class HomePageComponent implements OnInit {
   bathroom: boolean
   
   ngOnInit() {
+      this.userService.userProfile().subscribe(data => {
+          });
       this.accService.getAllAccommodations().subscribe(data =>{
           this.accommodations = data;
           console.log("All accommodations: ")

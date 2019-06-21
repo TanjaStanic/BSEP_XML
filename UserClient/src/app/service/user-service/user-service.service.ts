@@ -15,7 +15,7 @@ constructor(private http: HttpClient, private auth: AuthServiceService) { }
     
 loginUser(u: User) {
     console.log('Usao u loginUser');
-    return this.http.post('https://localhost:8443/user/login', u, {headers: this.auth.createAuthorizationTokenHeader()});
+    return this.http.post('https://localhost:8443/auth/login', u, {headers: this.auth.createAuthorizationTokenHeader()});
   }
     
 getLogged(token: string) {
@@ -29,6 +29,11 @@ getSelfSigned() {
 logOut() {
     return this.http.get('https://localhost:8443/user/logout', {headers: this.auth.createAuthorizationTokenHeader()});
   }
+    
+userProfile() {
+    return this.http.get('https://localhost:8443/api/mainSecurity/userprofile', {headers: this.auth.createAuthorizationTokenHeader()});
+  }
+    
 
 
 }

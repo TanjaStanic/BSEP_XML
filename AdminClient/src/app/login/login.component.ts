@@ -25,45 +25,28 @@ export class LoginComponent implements OnInit {
     id : string;
    
     
-    constructor(private u: UserServiceService, private route: ActivatedRoute, private auth : AuthServiceService, private router : Router) { }
+    constructor(private userService: UserServiceService, private route: ActivatedRoute, private auth : AuthServiceService, private router : Router) { }
 
 
 
   ngOnInit() {    
-    document.getElementById('response').setAttribute('hidden', 'true');
-    document.getElementById('img').setAttribute('hidden', 'true');
+  
   }
    
   loginUser(){
         
     console.log('Dodavanje' + this.user.email + ', pass: ' + this.user.password);
+              
     if (this.checkEmail(this.user.email)) {
-          this.u.loginUser(this.user).subscribe(podaci => { this.checkUser(podaci);
-          } , err => {this.handleAuthError(err); });
-        
-              sessionStorage.setItem('id', data.id);
-              var data = sessionStorage.getItem('id');
-              console.log(data);
-
-          localStorage.setItem('user', JSON.stringify(this.user))
+          this.userService.loginUser(this.user).subscribe(podaci => { this.checkUser(podaci);
+          } , err => {this.handleAuthError(err); });    
       } else {
         this.htmlStr = 'The e-mail is not valid.';
       }
       
            }  
     
-   /*communicate(){
-    this.service.communicate(this.message).subscribe(data => {
-      console.log(data);
-      document.getElementById('message').setAttribute('hidden', 'true');
-      document.getElementById('button_communicate').setAttribute('hidden', 'true');
-      document.getElementById('response').removeAttribute('hidden');
-      document.getElementById('img').removeAttribute('hidden');
-      document.getElementById('response').innerHTML = data;
-    });
-  }*/
-
-
+ 
 checkUser(logged) {
     let user_token= logged as UserToken;
     // tslint:disable-next-line:triple-equals
@@ -72,12 +55,10 @@ checkUser(logged) {
     } else {
       this.auth.setJwtToken(user_token.accessToken);
       console.log(user_token.accessToken);
+      this.userService.getLogged(user_token.accessToken).subscribe(podaci => {
+      console.log('return: ' + podaci);        
       this.router.navigate(['homePage']); 
-     /* this.u.getLogged(user_token.accessToken).subscribe(podaci => {
-          this.ssCertificate(podaci);
-          var currentUser=podaci as User; 
-          localStorage.setItem('user', JSON.stringify(currentUser));
-      });*/
+      });
       
     }
   }

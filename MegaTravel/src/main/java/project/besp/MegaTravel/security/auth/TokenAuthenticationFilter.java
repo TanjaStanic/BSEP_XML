@@ -1,4 +1,4 @@
-package project.besp.MegaTravel.config;
+package project.besp.MegaTravel.security.auth;
 
 import java.io.IOException;
 
@@ -34,7 +34,8 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 		String authToken = tokenUtils.getToken(request);
 
 		if (authToken != null) {
-			// uzmi username iz tokena
+			// uzmi korisnika iz tokena
+			//uzima username korisnika
 			username = tokenUtils.getUsernameFromToken(authToken);
 			
 			if (username != null) {

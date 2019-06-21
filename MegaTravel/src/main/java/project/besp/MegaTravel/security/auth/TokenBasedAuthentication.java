@@ -1,4 +1,4 @@
-package project.besp.MegaTravel.config;
+package project.besp.MegaTravel.security.auth;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;

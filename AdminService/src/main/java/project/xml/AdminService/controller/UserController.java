@@ -2,7 +2,6 @@ package project.xml.AdminService.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +22,6 @@ import project.xml.AdminService.dto.Status;
 import project.xml.AdminService.dto.UserDTO;
 import project.xml.AdminService.model.Accommodation;
 import project.xml.AdminService.model.User;
-import project.xml.AdminService.repository.AccommodationRepository;
 import project.xml.AdminService.repository.UserRepository;
 import project.xml.AdminService.service.AccommodationService;
 import project.xml.AdminService.service.UserService;
@@ -43,8 +41,7 @@ public class UserController {
 	@Autowired
 	UserRepository userRepository;
 	
-	@Autowired 
-	HttpSession session;
+
 	
 	@JsonIgnore
 	@GetMapping(path = "/getAll")

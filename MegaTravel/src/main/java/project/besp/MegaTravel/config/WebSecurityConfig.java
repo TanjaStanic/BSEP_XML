@@ -30,6 +30,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import project.besp.MegaTravel.security.TokenUtils;
 import project.besp.MegaTravel.security.auth.RestAuthenticationEntryPoint;
+import project.besp.MegaTravel.security.auth.TokenAuthenticationFilter;
 import project.besp.MegaTravel.service.UserService;
 import project.besp.MegaTravel.serviceImpl.UserServiceImpl;
 
@@ -37,11 +38,7 @@ import project.besp.MegaTravel.serviceImpl.UserServiceImpl;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-		securedEnabled = true,
-		jsr250Enabled = true,
-		prePostEnabled = true
-	)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter  implements WebMvcConfigurer{
 	
 	// Implementacija PasswordEncoder-a koriscenjem BCrypt hashing funkcije.
@@ -103,17 +100,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  implements 
 					
 					// svim korisnicima dopusti da pristupe putanjama /auth/** i /h2-console/**
 					.authorizeRequests()
-					.antMatchers("/auth/**").permitAll()
-					.antMatchers("/**").permitAll()
-					.antMatchers("/ws/*").permitAll()
-					.antMatchers("/ws").permitAll()
-					.antMatchers("/api/accobject/*").permitAll()
-					.antMatchers("/api/addresses/test2").permitAll()
-					.antMatchers("/api/comment/*").permitAll()
-					.antMatchers("/api/addresses/*").permitAll()
+					.antMatchers("/api/**").permitAll()
+					.antMatchers("/api/mainSecurity/**").permitAll()
+					.antMatchers("/h2-console/**").permitAll()
+					.antMatchers("/ws/**").permitAll()
 					
 					// svaki zahtev mora biti autorizovan
-					.anyRequest().authenticated().and()
+					.anyRequest().authenticated().and().cors().and()
 					
 					// presretni svaki zahtev filterom
 					.addFilterBefore(new TokenAuthenticationFilter(tokenUtils, jwtUserDetailsService), BasicAuthenticationFilter.class);
@@ -125,8 +118,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  implements 
 			@Override
 			public void configure(WebSecurity web) throws Exception {
 				// TokenAuthenticationFilter ce ignorisati sve ispod navedene putanje
-				web.ignoring().antMatchers(HttpMethod.POST, "/user/login");
-				web.ignoring().antMatchers(HttpMethod.POST, "/user/registration");
+				web.ignoring().antMatchers(HttpMethod.POST, "/auth/login");
+				web.ignoring().antMatchers(HttpMethod.POST, "/api/mainSecurity/setAuthentication");
 				web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js");
 			}
 			

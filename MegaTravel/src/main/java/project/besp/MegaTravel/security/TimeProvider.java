@@ -1,12 +1,15 @@
-package project.besp.MegaTravel.common;
+package project.besp.MegaTravel.security;
+
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class TimeProvider {
+	
+	public Date now() {
+		return new Date();
+	}
+	
 
-	   public Date now() {
-	        return new Date();
-	    }
 }

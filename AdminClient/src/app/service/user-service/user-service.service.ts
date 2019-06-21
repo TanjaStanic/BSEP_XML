@@ -19,7 +19,11 @@ constructor(private http: HttpClient, private auth: AuthServiceService, private 
     
     loginUser(u: User) {
         console.log('Usao u loginUser');
-        return this.http.post('https://localhost:8443/user/login', u, {headers: this.auth.createAuthorizationTokenHeader()});
+            let user={
+                 "email": u.email,
+                 "password": u.password
+                     };
+        return this.http.post('https://localhost:8443/auth/login', user, {headers: this.auth.createAuthorizationTokenHeader()});
         }
     
     /*getSelfSigned() {
@@ -27,12 +31,13 @@ constructor(private http: HttpClient, private auth: AuthServiceService, private 
         }*/
 
     logOut() {
-        return this.http.get('https://localhost:8443/user/logout', {headers: this.auth.createAuthorizationTokenHeader()});
+        window.sessionStorage.clear();
+        return this.http.get('https://localhost:8443/auth/logout', {headers: this.auth.createAuthorizationTokenHeader()});
          }
     
     addUser(u: User) {
         console.log('Usao u addUser');
-        return this.http.post('https://localhost:8443/user/registrationAgent', u );
+        return this.http.post('https://localhost:8443/api/user/registrationAgent', u );
          }
 
     getAll() : Observable<any> {
@@ -61,6 +66,12 @@ constructor(private http: HttpClient, private auth: AuthServiceService, private 
     deleteUser(email){
         console.log(email);
         return this.http.delete('//localhost:8762/user/deleteUser/'+email);
+        }
+    
+    
+    getLogged(token: string) {
+        console.log("token: " + token);
+        return this.http.post('//localhost:8762/api/mainSecurity/userprofile', token, {headers: this.auth.createAuthorizationTokenHeader()});
         }
 
 }
