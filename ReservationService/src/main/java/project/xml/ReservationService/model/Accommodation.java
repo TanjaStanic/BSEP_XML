@@ -6,7 +6,7 @@
 //
 
 
-package project.xml.AdminService.model;
+package project.xml.ReservationService.model;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -146,8 +146,9 @@ public class Accommodation {
 	@JoinColumn(name = "acc_address")
 	protected Address address;
     
-    @OneToMany(mappedBy="accommodation")
-    protected List<AccommodationUnit> accommodation_unit;
+	
+    /*@OneToMany(fetch = FetchType.LAZY,mappedBy="accommodation")
+    protected List<AccommodationUnit> accommodation_unit;*/
     
     @ManyToMany
 	@JoinTable(
@@ -157,9 +158,9 @@ public class Accommodation {
 	    )
     protected List<AdditionalServices> additional_services;
 
-    @OneToMany(mappedBy="accomodation")
-    protected List<Image> images;
-    
+    /*@OneToMany(fetch = FetchType.LAZY,mappedBy="accomodation")
+    protected List<Image> images;*/
+	
     @ManyToOne
     @JoinColumn(name = "acc_agent")
     protected User user;
@@ -352,13 +353,13 @@ public class Accommodation {
 		this.address = address;
 	}
 
-	public List<AccommodationUnit> getAccommodation_unit() {
+	/*public List<AccommodationUnit> getAccommodation_unit() {
 		return accommodation_unit;
 	}
 
 	public void setAccommodation_unit(List<AccommodationUnit> accommodation_unit) {
 		this.accommodation_unit = accommodation_unit;
-	}
+	}*/
 
 	public List<AdditionalServices> getAdditional_services() {
 		return additional_services;
@@ -368,13 +369,13 @@ public class Accommodation {
 		this.additional_services = additional_services;
 	}
 
-	public List<Image> getImages() {
+	/*public List<Image> getImages() {
 		return images;
 	}
 
 	public void setImages(List<Image> images) {
 		this.images = images;
-	}
+	}*/
 
 	public User getUser() {
 		return user;

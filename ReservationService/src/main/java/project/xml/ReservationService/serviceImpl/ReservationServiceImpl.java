@@ -1,4 +1,4 @@
-package project.xml.ReservationService.service;
+package project.xml.ReservationService.serviceImpl;
 
 import java.sql.Date;
 import java.util.List;
@@ -11,6 +11,7 @@ import project.xml.ReservationService.model.Reservation;
 import project.xml.ReservationService.repository.AccommodationUnitRepository;
 import project.xml.ReservationService.repository.AddressRepository;
 import project.xml.ReservationService.repository.ReservationRepository;
+import project.xml.ReservationService.service.ReservationService;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {

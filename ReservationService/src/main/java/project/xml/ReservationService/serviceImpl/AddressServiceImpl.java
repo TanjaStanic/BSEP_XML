@@ -1,4 +1,4 @@
-package project.xml.ReservationService.service;
+package project.xml.ReservationService.serviceImpl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import project.xml.ReservationService.model.Address;
 import project.xml.ReservationService.repository.AddressRepository;
+import project.xml.ReservationService.service.AddressService;
 
 @Service
 public class AddressServiceImpl implements AddressService {

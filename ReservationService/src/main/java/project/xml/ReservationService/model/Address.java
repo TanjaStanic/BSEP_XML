@@ -108,8 +108,8 @@ public class Address {
 	@OneToMany(mappedBy="address")
     protected List<User> users;
 	
-	@OneToOne(mappedBy="address")
-    protected Accommodation accommodation;
+	/*	@OneToOne(mappedBy="address")
+    protected Accommodation accommodation;*/
     /**
      * Gets the value of the street property.
      * 
@@ -214,13 +214,13 @@ public class Address {
 		this.id = id;
 	}
 
-	public Accommodation getAccommodation() {
+	/*public Accommodation getAccommodation() {
 		return accommodation;
 	}
 
 	public void setAccommodation(Accommodation accommodation) {
 		this.accommodation = accommodation;
-	}
+	}*/
 
 	public List<User> getUsers() {
 		return users;

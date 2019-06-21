@@ -1,3 +1,157 @@
-<p>
-  home-page works!
-</p>
+
+<div class="row">
+	<div class="col-xs-12">
+
+    
+
+      <!-- SELECT2 EXAMPLE -->
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <h3 class="box-title">Pretrazi:</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+          </div>
+        </div>
+        <div class = ""></div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+              <label>Enter city:</label>
+                  <input  class="form-control" id="exampleInputEmail1" placeholder="Enter city" [(ngModel)]="searchForm.city" #city="ngModel" name="city" type="text">
+             	  <span id="errorCity"></span>
+              </div>
+              <!-- /.form-group -->
+              <div class="form-group">
+                <label>Enter start date:</label>
+                 <div class="input-group">
+	                    <span class="input-group-addon"> <i class="glyphicon glyphicon-calendar"></i></span>
+	                    <input class="form-control" type="date" [(ngModel)]="searchForm.startDate" #startDate="ngModel" name="startDate" required="required" data-placeholder="Check in">
+	                    <span id="errorStart"></span>                    
+	            </div>
+              </div>
+              <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6">
+            <label>Enter number of people:</label>
+             <div class="form-group">
+	                    <input class="form-control" [(ngModel)]="searchForm.numberOfPeople" min="1" #numPeople="ngModel" name="numPeople" type="number" required placeholder="Enter number of people">
+	         </div>
+              <!-- /.form-group -->
+              <div class="form-group">
+               <label>Enter end date:</label>
+                <div class="input-group">
+                		 
+	                      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+	                      <input class="form-control" type="date" [(ngModel)]="searchForm.endDate" #endDate="ngModel" name="endDate" required="required"  data-placeholder="Check out">
+	                      <span id="errorEnd"></span>
+	                </div>
+              </div>
+              <!-- /.form-group -->
+            </div>
+            <div class="col-md-6">
+           	<div class="form-group">
+                <label>Category</label>
+                <select class="form-control select2"  [(ngModel)]="searchForm.stars" #stars="ngModel" name="stars" style="width: 100%;">
+                  <option>undefined</option>
+                  <option>*</option>
+                  <option>**</option>
+                  <option>***</option>
+                  <option>****</option>
+                  <option>*****</option>
+                </select>
+              </div>
+	          <div class="form-group">
+                 <label>Additional services</label>
+                <select class="form-control select2" multiple="multiple" data-placeholder="Select" style="width: 100%;"
+                        >
+                  <option name="parking" [(ngModel)]="parkingLot">Parking</option>
+                  <option name="wifi" [(ngModel)]="wifi">WiFi</option>
+                  <option name="pf" [(ngModel)]="pet">Pet friendly</option>
+                  <option name="bt" [(ngModel)]="bathroom">Private bathroom</option>
+                  <option name="tv" [(ngModel)]="tv">TV</option>
+                  <option name="kitchen" [(ngModel)]="kitchen">Kitchen</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+				<label>Max distance</label>
+	            <input id="distance" class="form-control" type="number"  [(ngModel)]="searchForm.distance" #distance="ngModel" name="distance" >
+	        </div>
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <div class="box-footer">
+                <button type="button" (click)="findHotels()" class="btn btn-primary">Search</button>
+        </div>
+	</div>
+  </div> 
+</div>
+      <!-- /.box -->
+
+
+<div class="row">
+	<div class="col-xs-12">
+   
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><b>List of accommodations</b></h3>
+
+              <!--  --div class="box-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search" [(ngModel)] = "searchTerm" class="form-control pull-right" placeholder="Search">
+
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
+              </div-->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table id="lista" class="table table-hover">
+              <thead>
+               	<tr>
+            	<th>Name</th>
+            	<th>Category</th>
+            	<th>Street</th>
+            	<th>City</th>
+            	<th>Country</th>
+            	<th>Additional Services</th>
+            	<th>Rating</th>
+            	
+            	
+            	
+            	<th></th>
+            	</tr>
+       		 </thead>
+       		 <tbody>
+                <tr *ngFor="let acc of accommodations">
+                <td>{{acc.name}}</td>                
+                <td>{{acc.category}}</td> 
+                <td>{{acc.address.street}}</td>
+                <td>{{acc.address.city}}</td>               
+                <td>{{acc.address.country}}</td> 
+                
+                <td>{{acc.additional_services}}</td>
+                <td>{{acc.rating}}</td>
+                <td><button (click)="changeAcc(acc)" type="button" class="btn btn-outline-success">Change</button></td>
+                <td><button (click)="deleteAcc(acc)" type="button" class="btn btn-outline-danger">Delete</button></td>   
+                </tr>
+             </tbody>
+
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+

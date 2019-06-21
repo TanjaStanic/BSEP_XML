@@ -6,7 +6,7 @@
 //
 
 
-package project.xml.AdminService.model;
+package project.xml.ReservationService.model;
 
 import java.math.BigInteger;
 import java.util.List;

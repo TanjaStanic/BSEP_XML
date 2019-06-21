@@ -9,7 +9,7 @@ public class ReservationServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ReservationServiceApplication.class, args);
+		System.out.println("Hi from Reservation Servive Application! ");
 	}
-	//aaaaaaaa
 
 }

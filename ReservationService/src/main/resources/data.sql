@@ -37,9 +37,6 @@ insert into user_roles (user_id,role_id) values (4,2);
 insert into user_roles (user_id,role_id) values (5,3);
 insert into user_roles (user_id,role_id) values (6,3);
 
---privilegije
-
-
 --lokacija za smjestaj
 insert into location (location_id,geo_length,geo_width) values (1,44.8,20.35);
 insert into location (location_id,geo_length,geo_width) values (2,45.8,23.35);

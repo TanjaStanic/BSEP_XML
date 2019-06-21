@@ -72,10 +72,9 @@ public class Location {
     protected float geo_length;
     @XmlElement(required = true)
     protected float geo_width;
-
-    @OneToOne(mappedBy="location")
-    protected Accommodation accomodation;
     
+    /*@OneToOne(mappedBy="location")
+    public Accommodation accomodation;*/
     public long getId() {
 		return id;
 	}
@@ -100,11 +99,11 @@ public class Location {
 		this.geo_width = geo_width;
 	}
 
-	public Accommodation getAccomodation() {
+	/*public Accommodation getAccomodation() {
 		return accomodation;
 	}
 
 	public void setAccomodation(Accommodation accomodation) {
 		this.accomodation = accomodation;
-	}
+	}*/
 }
