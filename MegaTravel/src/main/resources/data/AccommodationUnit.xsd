@@ -2,9 +2,12 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://www.mega-travel/accommodation-unit"
     xmlns="http://www.mega-travel/accommodation-unit" xmlns:ns1="http://www.mega-travel/user"
-    xmlns:ns2="http://www.mega-travel/accommodation" xmlns:ns3="Accomodation.xsd">
+    xmlns:ns2="http://www.mega-travel/accommodation" xmlns:ns3="Accomodation.xsd"
+    xmlns:ns4="http://www.mega-travel/reservation" xmlns:ns5="http://www.mega-travel/comment">
     <xs:import namespace="http://www.mega-travel/user" schemaLocation="User.xsd"/>
     <xs:import namespace="http://www.mega-travel/accommodation" schemaLocation="Accommodation.xsd"/>
+    <xs:import namespace="http://www.mega-travel/reservation" schemaLocation="Reservation.xsd"/>
+    <xs:import namespace="http://www.mega-travel/comment" schemaLocation="Comment.xsd"/>
     <xs:element name="accommodationUnit">
         <xs:complexType>
             <xs:sequence>
@@ -16,6 +19,8 @@
                     </xs:simpleType>
                 </xs:element>
                 <xs:element name="capacity" type="xs:positiveInteger"/>
+                <xs:element name="number_of_room" type="xs:nonNegativeInteger"/>
+                <xs:element name="floor" type="xs:nonNegativeInteger"/>
                 <xs:element minOccurs="0" name="size">
                     <xs:simpleType>
                         <xs:restriction base="xs:positiveInteger">
@@ -23,7 +28,6 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
-                <xs:element name="freeCancelation" type="cancelation"/>
                 <xs:element name="type">
                     <xs:simpleType>
                         <xs:restriction base="xs:string">
@@ -33,24 +37,13 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
-                <xs:element ref="pricing"/>
+                <xs:element ref="pricing" maxOccurs="unbounded"/>
                 <xs:element ref="ns2:accommodation"/>
-                <xs:element maxOccurs="12" minOccurs="0" ref="additional_services"/>
+                <xs:element ref="ns1:user"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns4:reservation"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="additional_services"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns5:Comment"/>
             </xs:sequence>
-            <xs:attribute name="number_of_room">
-                <xs:simpleType>
-                    <xs:restriction base="xs:int">
-                        <xs:minInclusive value="1"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="floor">
-                <xs:simpleType>
-                    <xs:restriction base="xs:int">
-                        <xs:minInclusive value="0"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
         </xs:complexType>
     </xs:element>
     <xs:element name="pricing">
@@ -117,37 +110,4 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:element name="pricingList">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="pricing"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="renting">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="id">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:long">
-                            <xs:minInclusive value="0"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:element>
-                <xs:element ref="accommodationUnit"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-    <xs:complexType name="cancelation">
-        <xs:sequence>
-            <xs:element name="allowed" type="xs:boolean"/>
-            <xs:element name="number_of_days">
-                <xs:simpleType>
-                    <xs:restriction base="xs:int">
-                        <xs:minInclusive value="0"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
 </xs:schema>

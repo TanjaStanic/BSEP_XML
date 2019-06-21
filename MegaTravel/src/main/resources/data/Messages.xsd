@@ -20,8 +20,6 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
-                <xs:element ref="ns1:agent"/>
-                <xs:element ref="ns1:client"/>
                 <xs:element name="date" type="xs:date"/>
             </xs:sequence>
         </xs:complexType>

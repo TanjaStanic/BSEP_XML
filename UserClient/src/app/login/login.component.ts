@@ -35,7 +35,9 @@ export class LoginComponent implements OnInit {
         
     console.log('Dodavanje' + this.user.email + ', pass: ' + this.user.password);
     if (this.checkEmail(this.user.email)) {
-          this.u.loginUser(this.user).subscribe(podaci => { this.checkUser(podaci); } , err => {this.handleAuthError(err); });
+          this.u.loginUser(this.user).subscribe(podaci => { this.checkUser(podaci);
+          window.location.href = 'http://localhost:4200';
+          } , err => {this.handleAuthError(err); });
       } else {
         this.htmlStr = 'The e-mail is not valid.';
       }

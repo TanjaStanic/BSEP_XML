@@ -33,7 +33,7 @@ const routes: Routes = [
       component: AddAccommodationComponent
     },
     {
-      path: 'listOdAccUnits',
+      path: 'listOfAccUnits',
       component: ListOfAccUnitsComponent
     },
     {

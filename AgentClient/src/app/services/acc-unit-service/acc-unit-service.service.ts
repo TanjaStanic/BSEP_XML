@@ -10,7 +10,7 @@ export class AccUnitServiceService {
 
   constructor(private http : HttpClient) { }
   
-  getAllAccUnits() : Observable<any>{
-      return this.http.get('https://localhost:8443/api/accommodations/allAccUnits');  
+  getAllAccUnits(id : number) : Observable<any>{
+      return this.http.post('http://localhost:8764/accommodation/getAllAccUnits',id);  
       }
 }

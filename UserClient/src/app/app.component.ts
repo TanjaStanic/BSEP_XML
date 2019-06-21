@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import * as moment from 'moment';
+//import * as moment from 'moment';
 import { ActivatedRoute } from '@angular/router';
 import { UserServiceService } from '../app/service/user-service/user-service.service';
 import {AuthServiceService} from '../app/service/auth-service/auth-service.service';
 import { User } from '../app/model/user';
-import { SearchForm } from '../model/SearchForm';
+//import { SearchForm } from '..app/model/SearchForm';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit{
   podatak: object;
   user: User = new User();
   id_logged : number;
-  searchForm: SearchForm = new SearchForm();
+  //searchForm: SearchForm = new SearchForm();
   
   constructor(private userService: UserServiceService, private route: ActivatedRoute, private auth: AuthServiceService) { }
 
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit{
   {
     this.user = data as User;
     this.id_logged=this.user.id;
-    document.getElementById("listCertificates").setAttribute("href", "/list-of-certificates/" + this.id_logged);
+    //document.getElementById("listCertificates").setAttribute("href", "/list-of-certificates/" + this.id_logged);
   }
   logOutUser() {
     

@@ -8,6 +8,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import project.xml.AgentMegaTravel.filter.AuthenticationTokenFilter;
 
@@ -27,28 +30,50 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         authenticationFilter.setAuthenticationManager(authenticationManagerBean());
         return authenticationFilter;
     }
+	
+	@Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("OPTIONS");
+        config.addAllowedMethod("GET");
+        config.addAllowedMethod("POST");
+        config.addAllowedMethod("PUT");
+        config.addAllowedMethod("DELETE");
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
+    }
+	
 	  @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 	    	http
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			
+			//*
+			 /*.authorizeRequests()
+
+			//.antMatchers("/api/*").permitAll()*/
 			.authorizeRequests()
-
-			.antMatchers("/api/*").permitAll()
-			.antMatchers("/h2console/*").permitAll()
-			.antMatchers("/ws/*").permitAll()
-			.antMatchers("/ws").permitAll()
+			.antMatchers("/auth/**").permitAll()
+			.antMatchers("/**").permitAll()
+			.anyRequest().authenticated().and();
+			/*.antMatchers("/h2console/*").permitAll()
+			//.antMatchers("/ws/*").permitAll()
+			//.antMatchers("/ws").permitAll()/*/
 			//.antMatchers("/api/accommodations/allAdditionalServices").permitAll()
-			.antMatchers("/hello").permitAll()
+			//.antMatchers("/hello").permitAll()
 
-			.antMatchers("/api/accobject/*").permitAll()
-			.antMatchers("/api/accommodations/*").permitAll()
-			.antMatchers("/api/addresses/test2").permitAll()
-			.antMatchers("/api/comment/*").permitAll()
-			.anyRequest().authenticated().and()
+			//.antMatchers("/api/accobject/*").permitAll()
+			//.antMatchers("/api/accommodations/*").permitAll()
+			//.antMatchers("/api/addresses/test2").permitAll()
+			//.antMatchers("/api/comment/*").permitAll()
+			//.anyRequest().authenticated().and()
 			
 			
-			.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+			//.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 		http.csrf().disable();
 	  
 	  }

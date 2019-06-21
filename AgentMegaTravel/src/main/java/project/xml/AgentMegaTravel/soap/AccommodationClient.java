@@ -28,6 +28,12 @@ public class AccommodationClient extends WebServiceGatewaySupport{
 		GetAllAdditionalServiceRequest request = new GetAllAdditionalServiceRequest();
 		return (GetAllAdditionalServiceResponse) getWebServiceTemplate().marshalSendAndReceive(request);
 	}
+	public GetAllAccommodationUnitsResponse getAllAccommodationUnitsResponse(long id) {
+		GetAllAccommodationUnitsRequest request = new GetAllAccommodationUnitsRequest();
+		request.setId(id);
+		System.out.println("Dosao u accommodation client id je: "+ id);
+		return (GetAllAccommodationUnitsResponse) getWebServiceTemplate().marshalSendAndReceive(request);
+	}
 	public GetPricingResponse getAccUnitPrice(Long id) {
 		GetPricingRequest request = new GetPricingRequest();
 		request.setId(1);

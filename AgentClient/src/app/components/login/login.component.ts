@@ -30,8 +30,21 @@ export class LoginComponent implements OnInit {
         
         console.log('Dodavanje' + this.user.email + ', pass: ' + this.user.password);
         if (this.checkEmail(this.user.email)) {
-              this.u.loginUser(this.user).subscribe(podaci => { this.checkUser(podaci); } , err => {this.handleAuthError(err); });
-          } else {
+              this.u.loginUser(this.user).subscribe(podaci => { this.checkUser(podaci);
+              } , err => {this.handleAuthError(err); });
+              console.log("cuvam u json this.usera: ");
+              this.u.getUser(this.user.email).subscribe(podaci => {
+                  console.log("usao u get user...stampam podatke");
+                  console.log(podaci);
+                  var currUser = podaci as User;
+                  console.log("cuvam u json currentusera: ");
+                  console.log(currUser)
+                  localStorage.setItem('user', JSON.stringify(currUser));
+                  
+              });
+              //ocalStorage.setItem('user', JSON.stringify(this.user))
+ 
+        } else {
             this.htmlStr = 'The e-mail is not valid.';
           }
      }
@@ -44,7 +57,15 @@ export class LoginComponent implements OnInit {
         } else {
           this.auth.setJwtToken(user_token.accessToken);
           console.log(user_token.accessToken);
-          this.u.getLogged(user_token.accessToken).subscribe(podaci => {this.ssCertificate(podaci)});
+          console.log("prije getLogged");
+          this.u.getLogged(user_token.accessToken).subscribe(podaci => {
+              console.log("u getLogged");
+              var currentUser=podaci as User; 
+              console.log("cuvam u json currentusera: ");
+              console.log(podaci)
+              //localStorage.setItem('user', JSON.stringify(currentUser));
+              this.ssCertificate(podaci)
+     });
         }
       }
         

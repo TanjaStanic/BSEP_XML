@@ -7,10 +7,11 @@ export class User {
     firstName: string;
     lastName: string;
     email: string;
+    pib : string;
     password: string;
 	active: boolean;
     blocked : boolean;
-	address: Address;
+    user_address: number;
     roles: Array<Role>;
     certificated: boolean;
 

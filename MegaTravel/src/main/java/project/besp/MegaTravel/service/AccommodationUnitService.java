@@ -13,5 +13,6 @@ public interface AccommodationUnitService {
 	//AccommodationUnit getOneAccUnit(Long id);
 	//AccommodationUnit AddNewAccUnit(AccommodationUnit acu);
 	//Accommodation getOneAccObj(Long id);
+	List<AccommodationUnit> gettAllAccUnits(long id);
 	
 }

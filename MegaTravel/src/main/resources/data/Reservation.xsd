@@ -27,7 +27,7 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
-                <xs:element ref="ns2:client"/>
+                <xs:element ref="ns2:user"/>
                 <xs:element ref="ns4:accommodationUnit"/>
                 <xs:element name="reservationStatus">
                     <xs:simpleType>

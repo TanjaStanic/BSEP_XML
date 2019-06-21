@@ -8,7 +8,6 @@
 
 package project.besp.MegaTravel.modelxsd;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -110,7 +109,7 @@ public class AccommodationUnit {
 	protected long id;
     
 	@XmlElement(required = true)
-    protected BigInteger capacity;
+    protected Integer capacity;
 	
 	@XmlElement(required = true)
 	protected Integer number_of_room;
@@ -118,7 +117,7 @@ public class AccommodationUnit {
 	@XmlElement(required = true)
 	protected Integer floor;
     
-	protected BigInteger size;
+	protected Integer size;
    
 	@XmlElement(required = true)
     protected String type;
@@ -183,10 +182,10 @@ public class AccommodationUnit {
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link Integer }
      *     
      */
-    public BigInteger getCapacity() {
+    public Integer getCapacity() {
         return capacity;
     }
 
@@ -195,10 +194,10 @@ public class AccommodationUnit {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link Integer }
      *     
      */
-    public void setCapacity(BigInteger value) {
+    public void setCapacity(Integer value) {
         this.capacity = value;
     }
 
@@ -207,10 +206,10 @@ public class AccommodationUnit {
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link Integer }
      *     
      */
-    public BigInteger getSize() {
+    public Integer getSize() {
         return size;
     }
 
@@ -219,10 +218,10 @@ public class AccommodationUnit {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link Integer }
      *     
      */
-    public void setSize(BigInteger value) {
+    public void setSize(Integer value) {
         this.size = value;
     }
 

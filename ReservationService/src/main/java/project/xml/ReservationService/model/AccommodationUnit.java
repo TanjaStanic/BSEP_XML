@@ -6,7 +6,7 @@
 //
 
 
-package project.xml.ReservationService.model;
+package project.xml.AdminService.model;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -28,7 +28,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 
 
 

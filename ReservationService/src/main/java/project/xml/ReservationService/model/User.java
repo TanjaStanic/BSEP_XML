@@ -21,6 +21,8 @@ import javax.validation.constraints.Email;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="user")
@@ -30,7 +32,7 @@ public class User  implements UserDetails{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	@JsonIgnore
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
     @Column(name = "user_id", nullable = false, updatable = false)
@@ -60,7 +62,15 @@ public class User  implements UserDetails{
     
     @Column(name = "certificated")
 	private boolean certificated;
-	
+    
+    @Column(name = "active")
+	private boolean active;
+    
+    @Column(name = "blocked")
+	private boolean blocked;
+    
+    
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( 
         name = "user_roles", 
@@ -76,6 +86,8 @@ public class User  implements UserDetails{
 	/*
 	 * Vise korisnika (admin,agent,client) mogu biti na jednoj adresi
 	 */
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_address")
 	protected Address address;
@@ -83,18 +95,24 @@ public class User  implements UserDetails{
 	/*
 	 * Samo client ima listu rezervacija (za sada) ili admin
 	 */
+	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	protected List<Reservation> reservations;
 	
 	/*
 	 * Samo admin ima listu smjestaja
 	 */
+	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	protected List<Accommodation> accommodations;
 	
 	/*
 	 * Samo agenti imaju listu smjestajnih jedinica
 	 */
+	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	protected List<AccommodationUnit> accommodation_units;
 	
@@ -102,6 +120,8 @@ public class User  implements UserDetails{
 	 * Admin i klijent upravljaju komentarima.
 	 * Klijent moze da postavlja vise komentara.
 	 */
+	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	protected List<Comment> comments;
 	
@@ -109,12 +129,32 @@ public class User  implements UserDetails{
 		
 	}
 	
-	public User( String firstName, String lastName, String email, String password,List<Role> roles) {
+	public User( String firstName, String lastName, String email, String password,List<Role> roles, boolean active,boolean blocked) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.roles = roles;
+		this.active = active;
+		this.blocked = blocked;
+	}
+	
+	
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public boolean isBlocked() {
+		return blocked;
+	}
+
+	public void setBlocked(boolean blocked) {
+		this.blocked = blocked;
 	}
 
 	@Override
@@ -141,7 +181,8 @@ public class User  implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
-
+	
+	@JsonIgnore
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub

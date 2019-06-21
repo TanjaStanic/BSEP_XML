@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+
 /**
  * <p>Java class for anonymous complex type.
  * 
@@ -163,20 +164,21 @@ public class AdditionalServices {
 		this.price_of_add = price_of_add;
 	}
 
-	public List<Accommodation> getAccommodations() {
-		return accommodations;
-	}
-
-	public void setAccommodations(List<Accommodation> accommodations) {
-		this.accommodations = accommodations;
-	}
-
+	
 	public List<AccommodationUnit> getAccommodation_units() {
 		return accommodation_units;
 	}
 
 	public void setAccommodation_units(List<AccommodationUnit> accommodation_units) {
 		this.accommodation_units = accommodation_units;
+	}
+
+	public List<Accommodation> getAccommodations() {
+		return accommodations;
+	}
+
+	public void setAccommodations(List<Accommodation> accommodations) {
+		this.accommodations = accommodations;
 	}
 
 

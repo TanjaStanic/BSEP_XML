@@ -27,20 +27,17 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
+                <xs:element name="description">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value="([a-zA-Z0-9\. ])+"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
                 <xs:element name="cancelationDays">
                     <xs:simpleType>
                         <xs:restriction base="xs:positiveInteger">
                             <xs:minInclusive value="1"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:element>
-                <xs:element ref="ns2:agent"/>
-                <xs:element ref="ns2:address"/>
-                <xs:element name="rating">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:double">
-                            <xs:minInclusive value="0"/>
-                            <xs:maxInclusive value="5"/>
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
@@ -56,16 +53,20 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
-                <xs:element maxOccurs="unbounded" ref="image"/>
-                <xs:element name="description">
+                <xs:element name="rating">
                     <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:pattern value="([a-zA-Z0-9\. ])+"/>
+                        <xs:restriction base="xs:double">
+                            <xs:minInclusive value="0"/>
+                            <xs:maxInclusive value="5"/>
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
-                <xs:element maxOccurs="12" minOccurs="0" ref="ns1:additional_services"/>
+                <xs:element ref="ns2:address"/>
                 <xs:element ref="location"/>
+                <xs:element maxOccurs="unbounded" ref="image"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns1:additional_services"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns1:accommodationUnit"/>
+                <xs:element ref="ns2:user"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

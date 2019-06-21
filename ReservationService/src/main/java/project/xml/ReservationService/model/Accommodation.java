@@ -6,7 +6,7 @@
 //
 
 
-package project.xml.ReservationService.model;
+package project.xml.AdminService.model;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
 
 /**
  * <p>Java class for anonymous complex type.
@@ -151,7 +152,7 @@ public class Accommodation {
     @ManyToMany
 	@JoinTable(
 	        name = "accommodation_additional_services", 
-	        joinColumns = { @JoinColumn(name = "accommodation_unit_id") }, 
+	        joinColumns = { @JoinColumn(name = "accommodation_id") }, 
 	        inverseJoinColumns = { @JoinColumn(name = "additional_id") }
 	    )
     protected List<AdditionalServices> additional_services;

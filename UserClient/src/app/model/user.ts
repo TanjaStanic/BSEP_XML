@@ -1,13 +1,16 @@
 import {Role} from '../model/Role';
+import { Address } from './adress';
 
 export class User {
     id : number;
-    name : string;
-    lastname : string;
+    firstName : string;
+    lastName : string;
     email : string;
     password : string;
     roles : Array<Role>;
     certificated : boolean;
-    enabled: boolean;
+    active : boolean;
+    blocked : boolean;
+    address : Address = new Address;
     
 }

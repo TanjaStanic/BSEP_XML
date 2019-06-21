@@ -48,6 +48,8 @@ import project.besp.MegaTravel.model.Authority;
 import project.besp.MegaTravel.model.Role;
 import project.besp.MegaTravel.model.User;
 import project.besp.MegaTravel.model.UserTokenState;
+import project.besp.MegaTravel.modelxsd.Address;
+import project.besp.MegaTravel.repository.AddressRepository;
 import project.besp.MegaTravel.repository.UserRepository;
 import project.besp.MegaTravel.security.TokenUtils;
 import project.besp.MegaTravel.service.RoleService;
@@ -71,6 +73,8 @@ public class UserController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	
+	@Autowired
+	private AddressRepository addressRepository;
 	
 
 	@Autowired
@@ -449,5 +453,113 @@ public class UserController {
 		String response = "The communication between central and agent module is allowed. Accepted message from agent: ";
 		logger.info("COMM");
 		return response;
+	}
+	
+	@RequestMapping(value = "/addUserAddress",
+			method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	
+	public ResponseEntity<?> addAccAddress(@RequestBody Address address){
+		System.out.println("Usao u dodavanje adrese");
+		System.out.println("adresa" + address.getStreet());
+		
+		Address newAddress = new Address();
+		newAddress.setStreet(address.getStreet());
+		newAddress.setNumber(address.getNumber());
+		newAddress.setCity(address.getCity());
+		newAddress.setCountry(address.getCountry());
+		
+		addressRepository.save(newAddress);
+		
+		return new ResponseEntity<>(newAddress,HttpStatus.CREATED);				
+	}
+	
+	@RequestMapping(value="/registerNewClient",
+			method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> registerNewClient(@RequestBody User user1, BindingResult result){
+		
+		System.out.println("Usao u registraciju klijenta");
+		User oldUser = userService.findUserByMail(Encode.forHtml(user1.getEmail()));
+		Address myAdrress = user1.getAddress();
+		if(result.hasErrors()) {
+			//404
+			logging.printError("ERROR registration");
+			return new ResponseEntity<>(new UserTokenState("error",(long)0), HttpStatus.NOT_FOUND);
+		}
+		if(!checkMail(user1.getEmail())) {
+			logging.printError("ERROR registration");
+			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
+		}
+		if(!checkCharacters(user1.getFirstName())) {
+			logging.printError("ERROR registration");
+			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
+		}
+		if(!checkCharacters(user1.getLastName())) {
+			logging.printError("ERROR registration");
+			return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
+		}
+		
+		if(oldUser == null) {
+			System.out.println("------Kreiranje usera------");
+			User newUser = new User();
+			String newPassword = user1.getPassword();
+			if(newPassword.equals("") || newPassword == null) {
+				return null;
+			}
+			
+			String hash = org.springframework.security.crypto.bcrypt.BCrypt.gensalt();
+			
+			System.out.println("------Hesiranje lozinke------");
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			String hashedP = org.springframework.security.crypto.bcrypt.BCrypt.hashpw(newPassword, hash);
+			newUser.setEmail(user1.getEmail());
+			newUser.setFirstName(user1.getFirstName());
+			newUser.setLastName(user1.getLastName());
+			newUser.setPassword(hashedP);
+			//newUser.setRoles(Arrays.asList(roleService.findByName("ROLE_USER")));
+			newUser.setAddress(myAdrress);
+			newUser.setActive(false);
+			newUser.setBlocked(false);
+		
+			Role rolica = new Role();
+			rolica = roleService.findById(3);
+			System.out.println("ROLAAAAAAAAAAAAA imeeee" + rolica.getId());
+
+			Collection<Role> r1 = new ArrayList<Role>();
+			r1.add(rolica);
+			newUser.setRoles(r1);
+			
+			userService.saveUser(newUser);
+			
+			logging.printInfo("New user registration: Success" + newUser);
+			return new ResponseEntity<>(newUser, HttpStatus.OK);
+			
+			
+		} else {
+			System.out.println("postoji email adresa ista ");
+			user1.setEmail("error");
+			logging.printError("New user reg: Email is already in use");
+			return new ResponseEntity<>(user1, HttpStatus.NOT_FOUND);
+		}
+		
+		
+		
+		/*Accommodation newAcc = new Accommodation();
+		newAcc.setName(acc.getName());
+		newAcc.setDescription(acc.getDescription());
+		newAcc.setCancelationDays(acc.getCancelationDays());
+		newAcc.setRating(acc.getRating());
+		newAcc.setCategory(acc.getCategory());
+		newAcc.setAdditional_services(acc.getAdditional_services());
+		newAcc.setAddress(acc.getAddress());
+		newAcc.setLocation(acc.getLocation());
+		
+		accommodationRepository.save(newAcc);
+		
+		return new ResponseEntity<>(newAcc,HttpStatus.CREATED);*/
+		
 	}
 }

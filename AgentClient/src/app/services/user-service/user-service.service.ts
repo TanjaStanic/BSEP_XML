@@ -19,6 +19,9 @@ export class UserServiceService {
     getLogged(token: string) {
         return this.http.post('https://localhost:8443/user/userprofile', token, {headers: this.auth.createAuthorizationTokenHeader()});
       }
+    getUser(email: string) {
+        return this.http.post('https://localhost:8443/user/getUser', email, {headers: this.auth.createAuthorizationTokenHeader()});
+      }
         
     getSelfSigned() {
         return this.http.get('https://localhost:8443/api/softwares/getSelfSigned', {headers: this.auth.createAuthorizationTokenHeader()});

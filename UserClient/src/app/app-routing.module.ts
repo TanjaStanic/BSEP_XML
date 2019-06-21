@@ -3,32 +3,25 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { AddAgentComponent } from './add-agent/add-agent.component';
-import { CommentsComponent } from './comments/comments.component';
 
 const routes: Routes = [
-	
-	{
-      path: 'login',
-      component: LoginComponent
-    },
-    
     {
-      path: 'register',
-      component: RegisterComponent
+    path: '',
+    component: HomePageComponent
     },
     {
       path: 'homePage',
       component: HomePageComponent
     },
-    {
-      path: 'addAgents',
-      component: AddAgentComponent
+	{
+      path: 'login',
+      component: LoginComponent
     },
     {
-      path: 'comments',
-      component: CommentsComponent
+      path: 'register',
+      component: RegisterComponent
     }
+
 	
 	];
 

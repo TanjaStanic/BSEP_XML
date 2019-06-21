@@ -48,6 +48,14 @@ public class ObjectFactory {
         return new GetAdditionalServiceResponse();
     }
 
+    public GetAllAccommodationUnitsRequest createGetAllAccommodationUnitsRequest() {
+    	return new GetAllAccommodationUnitsRequest();
+    	
+    }
+    public GetAllAccommodationUnitsResponse createGetAllAccommodationUnitsResponse() {
+    	return new GetAllAccommodationUnitsResponse();
+    	
+    }
     /**
      * Create an instance of {@link GetAddressResponse }
      * 
