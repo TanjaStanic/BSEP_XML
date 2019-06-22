@@ -1,12 +1,21 @@
 package project.xml.AdminService.controller;
 
+import java.util.Collection;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mobile.device.Device;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,12 +32,13 @@ import project.xml.AdminService.dto.UserDTO;
 import project.xml.AdminService.model.Accommodation;
 import project.xml.AdminService.model.User;
 import project.xml.AdminService.repository.UserRepository;
+import project.xml.AdminService.security.auth.JwtAuthenticationRequest;
 import project.xml.AdminService.service.AccommodationService;
 import project.xml.AdminService.service.UserService;
 
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api")
 @CrossOrigin(origins = "*")
 public class UserController {
 	
@@ -41,7 +51,27 @@ public class UserController {
 	@Autowired
 	UserRepository userRepository;
 	
+	@Autowired
+    private AuthenticationManager manager;
+	
+	@RequestMapping(value = "/setAuthentication", method = RequestMethod.POST)
+    public ResponseEntity<?> setAuth(@RequestBody JwtAuthenticationRequest authenticationRequest, HttpServletResponse response, Device device, HttpServletRequest hr){
+    	
+    	System.out.println("setAuthentication entered in SecurityController");
+        final Authentication authentication = manager
+                .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword()));
 
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        
+        Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>)
+      		  SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+      		  
+      		  for (GrantedAuthority authority : authorities) {
+      		    System.out.println("Authority: " + authority.getAuthority());
+      		  }
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 	
 	@JsonIgnore
 	@GetMapping(path = "/getAll")

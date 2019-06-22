@@ -39,9 +39,12 @@ constructor(private http: HttpClient, private auth: AuthServiceService, private 
         console.log('Usao u addUser');
         return this.http.post('https://localhost:8443/api/user/registrationAgent', u );
          }
+    
+    
+    
 
     getAll() : Observable<any> {
-        return this.http.get('//localhost:8762/user/getAll'); 
+        return this.http.get('//localhost:8762/api/getAll'); 
          }
     
     getAllUsers() : Observable<any> {
@@ -50,28 +53,28 @@ constructor(private http: HttpClient, private auth: AuthServiceService, private 
     
     getCertificatedUsers(): Observable<any>{
         console.log('get certificated users');
-        return this.http.get('https://localhost:8443/user/allCertificatedUsers', {headers: this.auth.createAuthorizationTokenHeader()});
+        return this.http.get('https://localhost:8443/api/allCertificatedUsers', {headers: this.auth.createAuthorizationTokenHeader()});
         }
     
     changeToCertificatedUser(param : string){
         console.log('change to certificated user');
-        return this.http.post('https://localhost:8443/user/changetocertificated',param,  {headers: this.auth.createAuthorizationTokenHeader()});
+        return this.http.post('https://localhost:8443/api/changetocertificated',param,  {headers: this.auth.createAuthorizationTokenHeader()});
          }
     
     activateUser(active : ActivateUser) : Observable<any> {
         console.log(active.id);
-        return this.http.post('//localhost:8762/user/activateUser',active);
+        return this.http.post('//localhost:8762/api/activateUser',active);
         }
     
     deleteUser(email){
         console.log(email);
-        return this.http.delete('//localhost:8762/user/deleteUser/'+email);
+        return this.http.delete('//localhost:8762/api/deleteUser/'+email);
         }
     
     
     getLogged(token: string) {
         console.log("token: " + token);
-        return this.http.post('//localhost:8762/api/mainSecurity/userprofile', token, {headers: this.auth.createAuthorizationTokenHeader()});
+        return this.http.post('//localhost:8762/api/userprofile', token, {headers: this.auth.createAuthorizationTokenHeader()});
         }
 
 }

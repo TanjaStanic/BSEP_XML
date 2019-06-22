@@ -11,7 +11,6 @@ import project.xml.AdminService.model.User;
 @Service
 public interface UserService extends UserDetailsService {
 	
-	User login(String userName, String password);
 	User save(User k);	
 	User findOneById(Long id);
 	User saveUser(User user);

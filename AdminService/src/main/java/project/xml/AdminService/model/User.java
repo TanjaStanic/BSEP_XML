@@ -1,5 +1,6 @@
 package project.xml.AdminService.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -16,12 +17,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -158,9 +161,20 @@ public class User  implements UserDetails{
 	}
 
 	@Override
+	@Transient
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return this.roles;
+		if(this.roles.isEmpty()) {
+			Role r = roles.iterator().next();
+			List<Privilege> privileges = new ArrayList<Privilege>();
+			for(Privilege p : r.getPrivileges()) {
+				privileges.add(p);
+			}
+			
+			return privileges;
+		}
+		
+		return null;
 	}
 
 

@@ -63,7 +63,6 @@ public class AuthController {
 		
         if(!checkMail(authenticationRequest.getEmail())) {
         	System.out.println("Nije dobar email");
-            // logger.logError("ULOG_UNAME_ERR. Username: " + authenticationRequest.getUsername());
             return new ResponseEntity<>(new UserTokenState("error",(long) 0), HttpStatus.NOT_FOUND);
         }
 
@@ -103,7 +102,7 @@ public class AuthController {
     	   if(user.getRoles().contains(rolaAdmin))
            {
            	System.out.println("Admin se loguje");
-           	 ResponseEntity<?> res1 = restTemplate.postForEntity("http://AdminService/api/setAuthentication", HReq, JwtAuthenticationRequest.class);
+           	 ResponseEntity<?> res1 = restTemplate.postForEntity("https://localhost:8762/api/setAuthentication", HReq, JwtAuthenticationRequest.class);
 
            }
            else if(user.getRoles().contains(rolaUser))
@@ -114,7 +113,7 @@ public class AuthController {
            } 
            else {
         	   System.out.println("agent se loguje");
-             	 ResponseEntity<?> res3 = restTemplate.postForEntity("http://MegaTravel/api/mainSecurity/setAuthentication", HReq, JwtAuthenticationRequest.class);
+             	 ResponseEntity<?> res3 = restTemplate.postForEntity("https://localhost:8443/api/mainSecurity/setAuthentication", HReq, JwtAuthenticationRequest.class);
      
         	   
            }

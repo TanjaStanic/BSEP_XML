@@ -1,3 +1,6 @@
+delete from user_roles;
+
+
 --adrese
 insert into address (address_id,street,number,city,country) values (1,'Ulica Nikole Tesle',2,'Novi Sad','Srbija');
 insert into address (address_id,street,number,city,country) values (2,'1. Maja',2,'Novi Sad','Srbija');

@@ -24,17 +24,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	HttpSession session;
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public User login(String userName, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public User save(User k) {
@@ -72,5 +62,14 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userRepository.findAll();
 	}
+
+	@Override
+	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		User user = userRepository.findOneByEmail(mail);
+		return user;
+	}
+
+
 
 }

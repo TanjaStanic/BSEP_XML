@@ -15,7 +15,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 
 @Entity
-public class Role implements GrantedAuthority{
+public class Role{
 	
 	/**
 	 * 
@@ -39,13 +39,6 @@ public class Role implements GrantedAuthority{
         inverseJoinColumns = @JoinColumn(
           name = "privilege_id", referencedColumnName = "id"))
     private Collection<Privilege> privileges;
-
-
-	@Override
-	public String getAuthority() {
-		// TODO Auto-generated method stub
-		return name;
-	}
 
 
 	public Long getId() {
