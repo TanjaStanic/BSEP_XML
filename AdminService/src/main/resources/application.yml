@@ -1,22 +1,35 @@
 server:
   port: ${PORT:8762}
-
+  ssl:
+    enabled: true
+    key-store: classpath:admin.jks
+    key-store-password: password
+    key-alias: admin
+web:
+  service:
+    username: tanjica
+    password: password
+security:
+  require-ssl: true
+  
 eureka:
   instance:
-    prefer-ip-address: true
+    hostname: localhost
+    prefer-ip-address: false
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    securePort: ${server.port}
   client:
-    register-with-eureka: true
-    fetch-registry: true
+    securePortEnabled: true
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-
+      defaultZone: https://localhost:8761/eureka/ 
 spring:
   application:
     name: AdminService
   datasource:
     url: jdbc:mysql://localhost:3306/megatravel?useSSL=false&createDatabaseIfNotExist=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
-    password: sara0301997188128
+    password: Tanja1996
     initialization-mode: always
   jpa:
     hibernate:

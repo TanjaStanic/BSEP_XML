@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { ClientProfileComponent } from './client-profile/client-profile.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { HomePageComponent } from './home-page/home-page.component';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomePageComponent
+    HomePageComponent,
+    ClientProfileComponent
     
   ],
   imports: [

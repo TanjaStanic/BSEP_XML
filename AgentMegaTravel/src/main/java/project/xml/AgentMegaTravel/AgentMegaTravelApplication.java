@@ -16,10 +16,10 @@ public class AgentMegaTravelApplication {
 	@Bean
 	public DiscoveryClient.DiscoveryClientOptionalArgs discoveryClientOptionalArgs() throws NoSuchAlgorithmException {
 		DiscoveryClient.DiscoveryClientOptionalArgs args = new DiscoveryClient.DiscoveryClientOptionalArgs();
-		//System.setProperty("javax.net.ssl.keyStore", "src/main/resources/agent.jks");
-	//	System.setProperty("javax.net.ssl.keyStorePassword", "password");
-	//	System.setProperty("javax.net.ssl.trustStore", "src/main/resources/agent.jks");
-	//	System.setProperty("javax.net.ssl.trustStorePassword", "password");
+		System.setProperty("javax.net.ssl.keyStore", "src/main/resources/agent.jks");
+		System.setProperty("javax.net.ssl.keyStorePassword", "password");
+		System.setProperty("javax.net.ssl.trustStore", "src/main/resources/agent.jks");
+		System.setProperty("javax.net.ssl.trustStorePassword", "password");
 		EurekaJerseyClientBuilder builder = new EurekaJerseyClientBuilder();
 		builder.withClientName("agent");
 		
@@ -32,7 +32,7 @@ public class AgentMegaTravelApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(AgentMegaTravelApplication.class, args);
-		System.out.println("HELLOOO");
+		System.out.println("Hi from Agent Mega Travel :)");
 	}
 
 }

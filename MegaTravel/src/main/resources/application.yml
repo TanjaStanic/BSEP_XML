@@ -1,0 +1,29 @@
+server:  
+  port: ${PORT:8443}
+  ssl:
+    enabled: true
+    key-store: classpath:auth.jks
+    key-store-password: password
+    key-alias: auth
+    
+security:
+  require-ssl: true
+  
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: false
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    securePort: ${server.port}
+  client:
+    securePortEnabled: true
+    serviceUrl:
+      defaultZone: https://localhost:8761/eureka/ 
+spring:
+  application:
+    name: MegaTravel
+  datasource:
+    url: jdbc:mysql://localhost:3306/megatravel?useSSL=false&createDatabaseIfNotExist=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: Tanja1996

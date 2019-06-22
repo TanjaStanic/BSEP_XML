@@ -1,11 +1,15 @@
 package project.besp.MegaTravel.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
  
 @RestController
+@RequestMapping("/api/megatravel")
 public class TestController {
-	@RequestMapping("/api/hi")
-	  public String hi() {
-	    return "Hello world! >>> Message from <a href='https://grokonez.com' target='_blank'>grokonez.com</a>";
+	@GetMapping("/test2")
+	public String test() {
+	    return "I m from mega travel!";
 	  }
+
 }

@@ -58,15 +58,22 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">OPTIONS</li>
-        <li class="active" [hidden]="notLogged">
+        <li class="active" >
           <a href="#">
-            <i class="fa fa-home" ></i> <span [hidden]="notLogged">Home</span>
+            <i class="fa fa-home" ></i> <span [hidden]="notLogged"><a routerLink="homePage">Home</a></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
         </li>
-        
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list-ul"></i> <span ><a routerLink="clientProfile">testprofila</a></span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        </li>
         <li class="treeview" [hidden]="notLogged">
           <a href="#">
             <i class="fa fa-list-ul"></i> <span ><a routerLink="listAcc">List of accommodations</a></span>
@@ -75,7 +82,14 @@
             </span>
           </a>
         </li>
-        
+        <li class="treeview" [hidden]="notLogged">
+          <a href="#">
+            <i class="fa fa-list-ul"></i> <span ><a routerLink=clientProfile>My profile</a></span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->

@@ -41,6 +41,6 @@ export class AccServiceService {
     addAccAddress(address : Address) {
         return this.http.post("//localhost:8762/accommodations/addAccAddress",address);
         }
-    
+      
   
 }
