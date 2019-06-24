@@ -11,4 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Repository
 public interface AccommodationRepository extends JpaRepository<Accommodation, Long> {
 	List<Accommodation> findAll();
+	Accommodation findOneById(Long id);
 }

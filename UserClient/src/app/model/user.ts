@@ -1,5 +1,5 @@
 import {Role} from '../model/Role';
-import { Address } from './adress';
+import {Address} from '../model/address';
 
 export class User {
     id : number;
@@ -11,6 +11,5 @@ export class User {
     certificated : boolean;
     active : boolean;
     blocked : boolean;
-    address : Address = new Address;
-    
+    address : Address;
 }

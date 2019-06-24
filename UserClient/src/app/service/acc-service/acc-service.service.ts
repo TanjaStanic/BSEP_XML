@@ -13,7 +13,27 @@ export class AccServiceService {
   constructor(private http: HttpClient, private router : Router) { }
   
   getAllAccommodations() : Observable<any> {
-      return this.http.get('//localhost:8763/api2/accommodations/getAllAccommodations'); 
+      return this.http.get('https://localhost:8763/api/accommodations/getAllAccommodations'); 
   }
   
+  getAllAdditionalServices() : Observable<any> {
+      return this.http.get('https://localhost:8763/api/accommodations/getAllAdditionalServices'); 
+  }
+  
+  getAllPictures(id : number) : Observable<any> {
+      return this.http.post('https://localhost:8763/api/accommodations/getAllPictures',id); 
+
+  }
+  getAllAccommodationUnits(id : number) : Observable<any> {
+      return this.http.post('https://localhost:8763/api/accommodations/getAllAccommodationUnits',id); 
+
+  }
+  getAccommodation(id : number) : Observable<any> {
+      return this.http.post('https://localhost:8763/api/accommodations/getAccommodation',id); 
+
+  }
+  getAdditionalServices(id : number) : Observable<any> {
+      return this.http.post('https://localhost:8763/api/accommodations/getAdditionalServices',id); 
+
+  }
 }

@@ -1,6 +1,7 @@
 import { AdditionalServices } from './additionalServices';
-import { Address } from './adress';
+import { Address } from './address';
 import { Location } from './location';
+import { Picture } from './picture';
 
 export class Accommodation{
     id : number;
@@ -12,5 +13,6 @@ export class Accommodation{
     address : Address = new Address;
     location : Location = new Location;
     additional_services:Array<AdditionalServices>;
+    images : Picture[];
     
-    }
+ }

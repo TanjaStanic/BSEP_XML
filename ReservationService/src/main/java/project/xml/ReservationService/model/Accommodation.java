@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -111,6 +112,7 @@ import javax.xml.bind.annotation.XmlType;
     "rating",
     "category",
     "description",
+    "images"
 })
 @Entity
 @Table(name = "accommodation")
@@ -158,8 +160,8 @@ public class Accommodation {
 	    )
     protected List<AdditionalServices> additional_services;
 
-    /*@OneToMany(fetch = FetchType.LAZY,mappedBy="accomodation")
-    protected List<Image> images;*/
+    @OneToMany(mappedBy="accomodation")
+    protected List<Image> images;
 	
     @ManyToOne
     @JoinColumn(name = "acc_agent")

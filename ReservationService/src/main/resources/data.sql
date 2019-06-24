@@ -55,12 +55,14 @@ insert into additional_services (additional_id,name,price_of_add) values (2,'Ful
 insert into additional_services (additional_id,name,price_of_add) values (3,'Half Board',25.1);
 insert into additional_services (additional_id,name,price_of_add) values (4,'WiFi',0.0);
 insert into additional_services (additional_id,name,price_of_add) values (5,'Pet friendly',20.1);
+insert into additional_services (additional_id,name,price_of_add) values (6,'Parking',20.1);
+insert into additional_services (additional_id,name,price_of_add) values (7,'Kitchen',20.1);
 
 --povezivanje smjestaja i additional servica
 --insert into accommodation_additional_services (accommodation_id,additional_id) values (1,1);
 --insert into accommodation_additional_services (accommodation_id,additional_id) values (1,2);
---insert into accommodation_additional_services (accommodation_id,additional_id) values (2,3);
---insert into accommodation_additional_services (accommodation_id,additional_id) values (2,4);
+--insert into accommodation_additional_services (accommodation_id,additional_id) values (1,3);
+--insert into accommodation_additional_services (accommodation_id,additional_id) values (1,4);
 --insert into accommodation_additional_services (accommodation_id,additional_id) values (2,5);
 
 insert into accommodation_unit (accommodation_unit_id,capacity,number_of_room,floor,size,type, acc,agent_units)
@@ -69,8 +71,11 @@ insert into accommodation_unit (accommodation_unit_id,capacity,number_of_room,fl
 	values (2,2,33,3,35,"apartman",1,2);
 insert into accommodation_unit (accommodation_unit_id,capacity,number_of_room,floor,size,type, acc,agent_units)
 	values (3,5,123,12,50,"bed&breakfast",2,2);
---dodati slike za hotele..
---insert into image (image_id,title,uri,accommodation_pic) values (1,'Aleksandar1','../assets/images/aleksandar.jpg',1);
---insert into image (image_id,title,uri,accommodation_pic) values (2,'Aleksandar2','../assets/images/aleksandar2.jpg',1);
---insert into image (image_id,title,uri,accommodation_pic) values (3,'NoviSad1','../assets/images/novisad.jpg',2);
---insert into image (image_id,title,uri,accommodation_pic) values (4,'NoviSad2','../assets/images/novisad2.jpg',2);
+
+	--dodati slike za hotele..
+insert into image (image_id,title,uri,accommodation_pic) values (1,'Aleksandar1','../assets/images/aleksandar.jpg',1);
+insert into image (image_id,title,uri,accommodation_pic) values (2,'Aleksandar2','../assets/images/aleksandar2.jpg',1);
+insert into image (image_id,title,uri,accommodation_pic) values (3,'NoviSad1','../assets/images/novisad.jpg',2);
+insert into image (image_id,title,uri,accommodation_pic) values (4,'NoviSad2','../assets/images/novisad2.jpg',2);
+
+
