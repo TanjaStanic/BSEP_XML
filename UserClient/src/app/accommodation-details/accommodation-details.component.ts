@@ -18,8 +18,10 @@ import { AccServiceService } from '../service/acc-service/acc-service.service';
 export class AccommodationDetailsComponent implements OnInit {
 
     idAcc : number;
+    address = new Address();
     acc : Accommodation = new Accommodation();
     additional_services : AdditionalServices[];
+    images : Picture[];
     acc_units : AccommodationUnit[];
     constructor(private accService : AccServiceService, private route : Router) { }
 
@@ -43,9 +45,21 @@ export class AccommodationDetailsComponent implements OnInit {
       });
       
       this.accService.getAllAccommodationUnits(this.idAcc).subscribe(data =>{
-         console.log(data);
+          console.log(data);
+          this.acc_units = data;
       });
      
+      this.accService.getAllPictures(this.idAcc).subscribe(data =>{
+          console.log(data);
+          this.images = data;
+       });
+      
+      this.acc.address = this.address;
+  }
+  
+  bokingClick(id) {
+      document.getElementById('bookingDiv').removeAttribute('hidden');
+
   }
 
 }

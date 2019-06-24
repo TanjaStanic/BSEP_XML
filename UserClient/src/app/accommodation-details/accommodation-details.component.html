@@ -1,76 +1,27 @@
  <section class="content-header">
-      <h1>
-        {{acc.name}}
-      </h1>
-    </section>
+
+      <h1 class="profile-username text-Left">{{acc.name}}</h1>
+        <br/>
+</section>
 <div class="row">
 	<div class="col-xs-12">
-		<div class="post">
-                  <div class="user-block">
-                        <span class="username">
-                           naziv <br/>
-                        </span>
-                    <span class="description">Adresa</span>
-                  </div>
-                  <!-- /.user-block -->
-                  <p>
-                    opis
-                    kategorija
-                    
-                    
-                  </p>
-					<ul class="list-inline">
-                    <li class="pull-right">
-                      <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
-                        (5)</a></li>
-                  </ul>
-                  <input class="form-control input-sm" type="text" placeholder="Type a comment">
-       	</div>
-       	
-       	<!--  -->
-       	<div class="box box-solid">
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                  <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-                  <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-                </ol>
-                <div class="carousel-inner">
-                  <div class="item active">
-                    <img src="http://placehold.it/900x500/39CCCC/ffffff&text=I+Love+Bootstrap" alt="First slide">
+		<div class="box">
+	      <div class="box-body box-profile">
+			<div class="post">
+		      <div class="username">
+		         Category : {{acc.category}} *<br/> 
+		         </div>                    
+		         <div class="description">
+					{{acc.address.street}} {{acc.address.number}} <br/>
+					{{acc.address.city}} <br/>
+					{{acc.address.country}} <br/> <br/>
+					{{acc.description}} moze neki opis<br/>
+				</div>
+	       		</div>
+	       	</div>
+	     </div>
+       	<!-- list of units -->
 
-                    <div class="carousel-caption">
-                      First Slide
-                    </div>
-                  </div>
-                  <div class="item">
-                    <img src="http://placehold.it/900x500/3c8dbc/ffffff&text=I+Love+Bootstrap" alt="Second slide">
-
-                    <div class="carousel-caption">
-                      Second Slide
-                    </div>
-                  </div>
-                  <div class="item">
-                    <img src="http://placehold.it/900x500/f39c12/ffffff&text=I+Love+Bootstrap" alt="Third slide">
-
-                    <div class="carousel-caption">
-                      Third Slide
-                    </div>
-                  </div>
-                </div>
-                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                  <span class="fa fa-angle-left"></span>
-                </a>
-                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                  <span class="fa fa-angle-right"></span>
-                </a>
-              </div>
-            </div>
-            <!-- /.box-body -->
-          </div>
-       	
        	<div class="box">
             <div class="box-header">
               <h3 class="box-title"><b>List of accommodation units</b></h3>
@@ -80,31 +31,24 @@
               <table id="lista" class="table table-hover">
               <thead>
                	<tr>
-            	<th>Name</th>
-            	<th>Category</th>
-            	<th>Street</th>
-            	<th>City</th>
-            	<th>Country</th>
-            	<th>Additional Services</th>
-            	<th>Rating</th>
-            	
-            	
-            	
+            	<th>Floor</th>
+            	<th>Number of room</th>
+            	<th>Capacity</th>
+            	<th>Size</th>
+            	<th>Type</th>
             	<th></th>
             	</tr>
        		 </thead>
+       		 
        		 <tbody>
-                <tr *ngFor="let acc of accommodations">
-                <td>{{acc.name}}</td>                
-                <td>{{acc.category}}</td> 
-                <td>{{acc.address.street}}</td>
-                <td>{{acc.address.city}}</td>               
-                <td>{{acc.address.country}}</td> 
+                <tr *ngFor="let unit of acc_units">
+                <td>{{unit.floor}}</td>                
+                <td>{{unit.number_of_room}}</td> 
+                <td>{{unit.capacity}}</td>
+                <td>{{unit.size}}</td>               
+                <td>{{unit.type}}</td> 
                 
-                <td>{{acc.additional_services}}</td>
-                <td>{{acc.rating}}</td>
-                <td><button (click)="changeAcc(acc)" type="button" class="btn btn-outline-success">Change</button></td>
-                <td><button (click)="deleteAcc(acc)" type="button" class="btn btn-outline-danger">Delete</button></td>   
+                <td><button type="button" (click)= "bokingClick(unit.id)" class="btn btn-outline-success">Book me</button></td>
                 </tr>
              </tbody>
 
@@ -113,10 +57,67 @@
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
-	
-	
-	
-	
-	
+		</div>
+	<!-- Div za rezervisanje -->
+
+<div class="col-xs-12" id= "bookingDiv" hidden="true">	
+  <div class="box">	
+  		<div class="box-header with-border">
+              <h3 class="box-title">Book accommodation unit</h3>
+        </div>
+        <div class="box-body box-profile" >
+	  		<div  class="col-md-6">
+  			<div class="form-group">
+                <label>Enter start date:</label>
+                 <div class="input-group">
+	                    <span class="input-group-addon"> <i class="glyphicon glyphicon-calendar"></i></span>
+	                    <input class="form-control" type="date"  name="startDate" required="required" data-placeholder="Check in">
+	            </div>
+  			</div>
+  			</div>
+  			<div class="col-md-6">
+  			<div class="form-group">
+               <label>Enter end date:</label>
+                <div class="input-group">
+	                      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+	                      <input class="form-control" type="date"  name="endDate" required="required"  data-placeholder="Check out">
+	                </div>
+            </div>
+  			</div>
+	</div>	
+</div>
+</div>
+
+
+
+<div class="col-xs-12">	
+  <div class="box">	
+  		<div class="box-header with-border">
+              <h3 class="box-title">All pictures of accommodation</h3>
+        </div>
+        <div class="box-body box-profile" >
+	  		<div  class="col-md-4" *ngFor="let img of images">
+	  			 <img class="img-responsive" src="{{img.uri}}">
+	  			 <br/>
+	  		</div>
+  		</div>
+	</div>	
+</div>
+
+
+<div class="col-xs-12">
+	<div class="box">
+	<div class="box-header with-border">
+       <h3 class="box-title"><b>Comments..</b></h3>
+    </div>
+      <div class="box-body box-profile">
+				<ul class="list-inline">
+                  <li class="pull-right">
+                      <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
+                        (5)</a></li>
+                  </ul>
+       <input class="form-control input-sm" type="text" placeholder="Type a comment">
 	</div>
+	</div>
+</div>
 </div>
