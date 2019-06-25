@@ -98,7 +98,9 @@ public class AuthController {
     	   rolaAdmin = roleService.findById(1);
     	   rolaAgent = roleService.findById(2);
     	   rolaUser = roleService.findById(3);
-    	  
+    	   System.out.println("rola agenta  id je : " + rolaAgent.getId());
+    	   
+    	   
     	   if(user.getRoles().contains(rolaAdmin))
            {
            	System.out.println("Admin se loguje");
@@ -113,15 +115,11 @@ public class AuthController {
            } 
            else {
         	   System.out.println("agent se loguje");
-             	 ResponseEntity<?> res3 = restTemplate.postForEntity("https://localhost:8443/api/mainSecurity/setAuthentication", HReq, JwtAuthenticationRequest.class);
+             	 ResponseEntity<?> res3 = restTemplate.postForEntity("https://localhost:8764/api/setAuthentication", HReq, JwtAuthenticationRequest.class);
      
         	   
            }
        }
-      
-       
-       
-      
 			
 			 final Authentication authentication = manager
 		                .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword()));

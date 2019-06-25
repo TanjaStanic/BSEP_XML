@@ -23,6 +23,10 @@ export class AccommodationDetailsComponent implements OnInit {
     additional_services : AdditionalServices[];
     images : Picture[];
     acc_units : AccommodationUnit[];
+    addServices : AdditionalServices[];
+    idServices: Map<number, boolean> = new Map<number, boolean>();
+
+    
     constructor(private accService : AccServiceService, private route : Router) { }
 
   ngOnInit() {
@@ -37,11 +41,11 @@ export class AccommodationDetailsComponent implements OnInit {
       
       this.accService.getAdditionalServices(this.idAcc).subscribe(data =>{
           this.additional_services = data as AdditionalServices[];
-          this.acc.additional_services = data;
-          console.log('servisi');
+          //this.acc.additional_services = data;
+          //console.log('servisi');
           console.log(data);
-          console.log('my acc sa servisima');
-          console.log(this.acc);
+          //console.log('my acc sa servisima');
+          //console.log(this.acc);
       });
       
       this.accService.getAllAccommodationUnits(this.idAcc).subscribe(data =>{
@@ -59,7 +63,29 @@ export class AccommodationDetailsComponent implements OnInit {
   
   bokingClick(id) {
       document.getElementById('bookingDiv').removeAttribute('hidden');
-
+      
+      this.accService.getAdditionalServicesFromAccUnit(id).subscribe(data =>{
+          console.log(data);
+          console.log("gore su additional service ZA OVAJ unit");
+          this.addServices = data as AdditionalServices[];
+          
+          for (var i=0; i<this.addServices.length; i++){
+          this.idServices.set(this.addServices[i].id, false);
+      
+          }
+      });
   }
+  
+  serviceChanged(id: number){
+      var value = this.idServices.get(id);
+
+      if(value == true){
+        this.idServices.set(id, false);
+      }else{
+        this.idServices.set(id, true);
+      }
+
+       console.log('service changed');
+    }
 
 }

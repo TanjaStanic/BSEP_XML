@@ -9,17 +9,17 @@ insert into address (address_id,street,number,city,country) values (6,'Bulevar J
 
 
 --admin 
-insert into user (user_id, first_name, last_name, email,password,certificated) values (1, 'admin', 'admin', 'admin@gmail.com', '$2a$10$B5q5PKtYYwtHSLd7lekgGu4ve5Iaa1IoAsZZZJkX74ervZjCAKdUe',1);
+insert into user (user_id, first_name, last_name, email,password,certificated,active,blocked) values (1, 'admin', 'admin', 'admin@gmail.com', '$2a$10$B5q5PKtYYwtHSLd7lekgGu4ve5Iaa1IoAsZZZJkX74ervZjCAKdUe',1,1,0);
 
 --agenti ima pib
-insert into user (user_id, first_name, last_name, email,password,certificated,pib) values (2, 'agent', 'agent', 'agent@gmail.com', '$2a$12$l5RRveYgubpdAK5h42f2xu8qpVf6619DtbY90JneL/NXVsBeIzL1e',1,'123456');
-insert into user (user_id, first_name, last_name, email,password,certificated,pib) values (3, 'agent2', 'agent2', 'agent2@gmail.com', '$2a$12$l5RRveYgubpdAK5h42f2xu8qpVf6619DtbY90JneL/NXVsBeIzL1e',1,'1234567');
-insert into user (user_id, first_name, last_name, email,password,certificated,pib) values (4, 'agent3', 'agent3', 'agent3@gmail.com', '$2a$12$l5RRveYgubpdAK5h42f2xu8qpVf6619DtbY90JneL/NXVsBeIzL1e',1,'1234568');
+insert into user (user_id, first_name, last_name, email,password,certificated,pib,active,blocked) values (2, 'agent', 'agent', 'agent@gmail.com', '$2a$12$l5RRveYgubpdAK5h42f2xu8qpVf6619DtbY90JneL/NXVsBeIzL1e',1,'123456',1,0);
+insert into user (user_id, first_name, last_name, email,password,certificated,pib,active,blocked) values (3, 'agent2', 'agent2', 'agent2@gmail.com', '$2a$12$l5RRveYgubpdAK5h42f2xu8qpVf6619DtbY90JneL/NXVsBeIzL1e',1,'1234567',1,0);
+insert into user (user_id, first_name, last_name, email,password,certificated,pib,active,blocked) values (4, 'agent3', 'agent3', 'agent3@gmail.com', '$2a$12$l5RRveYgubpdAK5h42f2xu8qpVf6619DtbY90JneL/NXVsBeIzL1e',1,'1234568',1,0);
 
 
 --client ima adresu 
-insert into user (user_id, first_name, last_name, email,password,certificated,user_address) values (5, 'client', 'client', 'client@gmail.com', '$2a$12$6ftbtcYQQuf1bRpuxOB2oehiLSjYVMJYiC1soNh726NKYMZwTYQ1m',1,1);
-insert into user (user_id, first_name, last_name, email,password,certificated,user_address) values (6, 'tanja', 'tanja', 't@gmail.com', '$2a$10$B5q5PKtYYwtHSLd7lekgGu4ve5Iaa1IoAsZZZJkX74ervZjCAKdUe',1,2);
+insert into user (user_id, first_name, last_name, email,password,certificated,user_address,active,blocked) values (5, 'client', 'client', 'client@gmail.com', '$2a$12$6ftbtcYQQuf1bRpuxOB2oehiLSjYVMJYiC1soNh726NKYMZwTYQ1m',1,1,1,0);
+insert into user (user_id, first_name, last_name, email,password,certificated,user_address,active,blocked) values (6, 'tanja', 'tanja', 't@gmail.com', '$2a$10$B5q5PKtYYwtHSLd7lekgGu4ve5Iaa1IoAsZZZJkX74ervZjCAKdUe',1,2,1,0);
 
 --uloga
 insert into role (id, name) values (1, 'ROLE_ADMIN');
@@ -36,6 +36,19 @@ insert into user_roles (user_id,role_id) values (4,2);
 --client
 insert into user_roles (user_id,role_id) values (5,3);
 insert into user_roles (user_id,role_id) values (6,3);
+--privilegije
+insert into privilege (id,name) values (1,'registrationAgent');
+insert into privilege (id,name) values (2,'login');
+insert into privilege (id,name) values (3,'loginAdmin');
+insert into privilege (id,name) values (4,'loginUser');
+insert into privilege (id,name) values (5,'loginAgent');
+
+insert into roles_privileges(role_id,privilege_id) values (1,1);
+insert into roles_privileges(role_id,privilege_id) values (1,2);
+insert into roles_privileges(role_id,privilege_id) values (1,3);
+insert into roles_privileges(role_id,privilege_id) values (3,4);
+
+insert into roles_privileges(role_id,privilege_id) values (2,5);
 
 --lokacija za smjestaj
 insert into location (location_id,geo_length,geo_width) values (1,44.8,20.35);

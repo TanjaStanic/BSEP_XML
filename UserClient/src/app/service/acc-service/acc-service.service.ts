@@ -36,4 +36,8 @@ export class AccServiceService {
       return this.http.post('https://localhost:8763/api/accommodations/getAdditionalServices',id); 
 
   }
+  getAdditionalServicesFromAccUnit(id : number) : Observable<any> {
+      return this.http.post('https://localhost:8763/api/accommodations/getAdditionalServicesFromAccUnit',id); 
+
+  }
 }

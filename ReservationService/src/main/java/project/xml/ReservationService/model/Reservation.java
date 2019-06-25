@@ -24,6 +24,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * <p>Java class for anonymous complex type.
@@ -111,18 +113,20 @@ public class Reservation {
 	@XmlElement(name = "total_price")
     protected double totalPrice;
 
-	protected double price;
+	//protected double price;
     
     @XmlElement(required = true, name="reservation_status")
     protected String reservationStatus;
     
-    @XmlElement(required = true, defaultValue = "unrated", name="reservation_rating")
+    @XmlElement(required = true, name="reservation_rating")
     protected String reservationRating;
     
+    @JsonIgnore
     @ManyToOne
 	@JoinColumn(name = "reservation_user")
     protected User user;
     
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "acc_unit_reservation")
     protected AccommodationUnit accommodation_unit;
@@ -263,7 +267,7 @@ public class Reservation {
     public void setReservationRating(String value) {
         this.reservationRating = value;
     }
-
+/*
 	public double getPrice() {
 		return price;
 	}
@@ -271,7 +275,7 @@ public class Reservation {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
+*/
 
 	public User getUser() {
 		return user;

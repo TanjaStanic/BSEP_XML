@@ -11,4 +11,5 @@ import project.xml.ReservationService.model.AccommodationUnit;
 @Repository
 public interface AccommodationUnitRepository extends JpaRepository<AccommodationUnit,Long> {
 	List<AccommodationUnit> findAllByAccommodation(Accommodation a);
+	AccommodationUnit findOneById(Long id);
 }

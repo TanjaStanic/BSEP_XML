@@ -94,7 +94,6 @@ public class User  implements UserDetails{
 	/*
 	 * Vise korisnika (admin,agent,client) mogu biti na jednoj adresi
 	 */
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_address")
 	protected Address address;
@@ -150,7 +149,7 @@ public class User  implements UserDetails{
 	@Transient
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		if(this.roles.isEmpty()) {
+		if(!this.roles.isEmpty()) {
 			Role r = roles.iterator().next();
 			List<Privilege> privileges = new ArrayList<Privilege>();
 			for(Privilege p : r.getPrivileges()) {

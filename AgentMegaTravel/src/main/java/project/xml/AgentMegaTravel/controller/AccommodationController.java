@@ -18,7 +18,7 @@ import project.xml.AgentMegaTravel.xsd.GetAllAccommodationUnitsResponse;
 import project.xml.AgentMegaTravel.xsd.GetAllAdditionalServiceResponse;
 
 @RestController
-@RequestMapping("/accommodation")
+@RequestMapping("/api/accommodation")
 @CrossOrigin(origins = "*")
 public class AccommodationController {
 	
@@ -33,9 +33,10 @@ public class AccommodationController {
 	}
 	
 	@PostMapping("/getAllAccUnits")
-	public List<AccommodationUnit> getAllAccommodationUnits(@RequestBody long idRequest) {
-		GetAllAccommodationUnitsResponse r = client.getAllAccommodationUnitsResponse(idRequest);
+	public List<AccommodationUnit> getAllAccommodationUnits(@RequestBody Long idRequest) {
 		System.out.println("Dosao u agent controller id je: "+ idRequest);
+
+		GetAllAccommodationUnitsResponse r = client.getAllAccommodationUnitsResponse(idRequest);
 		return r.getAccommodationUnit();
 	}
 	

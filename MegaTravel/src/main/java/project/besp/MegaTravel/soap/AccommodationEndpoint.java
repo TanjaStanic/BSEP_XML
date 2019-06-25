@@ -10,8 +10,10 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import project.besp.MegaTravel.model.User;
 import project.besp.MegaTravel.modelxsd.AccommodationUnit;
 import project.besp.MegaTravel.repository.AccommodationUnitRepository;
+import project.besp.MegaTravel.repository.UserRepository;
 import project.besp.MegaTravel.xsd.GetAllAccommodationUnitsRequest;
 import project.besp.MegaTravel.xsd.GetAllAccommodationUnitsResponse;
 
@@ -21,12 +23,17 @@ public class AccommodationEndpoint {
 	@Autowired
 	AccommodationUnitRepository accUnitRepository;
 	
+	@Autowired
+	UserRepository userRepository;
+	
 	@PayloadRoot(namespace = "http://www.mega-travel.com/soap", localPart = "GetAllAccommodationUnitsRequest")
 	@ResponsePayload
 	@Transactional
 	public GetAllAccommodationUnitsResponse getAllAccommodationUnits(@RequestPayload GetAllAccommodationUnitsRequest request) {
-		System.out.println("debug");
-		List<AccommodationUnit> au = accUnitRepository.findAllByUser(request.getId());
+		System.out.println("Dosao u megatravel endpoint");
+		User newUser = userRepository.findOneById(request.getId());
+		System.out.println("Dosao u megatravel endpoint user id je: "+ newUser.getId() + newUser.getEmail());
+		List<AccommodationUnit> au = accUnitRepository.findAllByUser(newUser);
 		GetAllAccommodationUnitsResponse e = new GetAllAccommodationUnitsResponse();
 		System.out.println("Dosao u accommodationEndpoint!!! a id agenta je:  " + request.getId());
 		for(AccommodationUnit a : au) {
@@ -40,6 +47,9 @@ public class AccommodationEndpoint {
 			//auxsd.setPricing(pricing);
 			//auxsd.setAccommodation(a.getAccommodation());
 			auxsd.setUser(a.getUser());
+			System.out.println("Dosao u accommodationEndpoint!!! set flooor  " + a.getFloor());
+			System.out.println(au.size());
+
 			e.getAccommodationUnit().add(auxsd);
 		}
 		

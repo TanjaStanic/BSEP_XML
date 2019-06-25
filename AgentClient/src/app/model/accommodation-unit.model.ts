@@ -1,6 +1,6 @@
 import { Pricing } from './pricing.model';
-import { Accommodation } from './accommodation.model';
-import { AdditionalService } from './additional-service.model';
+import { Accommodation } from './accommodation';
+import { AdditionalServices } from './additionalServices';
 export class AccommodationUnit {
 
     accommodationUnitId: number;
@@ -11,6 +11,6 @@ export class AccommodationUnit {
 	pricing: Array<Pricing>;
 	type: string;
     accommodation: Accommodation;
-	additionalService: Array<AdditionalService>;
+	additionalService: Array<AdditionalServices>;
 
 }

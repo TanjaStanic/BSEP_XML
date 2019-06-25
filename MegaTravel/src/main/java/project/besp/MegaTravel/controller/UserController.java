@@ -64,8 +64,7 @@ import org.owasp.html.HtmlPolicyBuilder;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "*")
-
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 	
 	private LoggingServiceImpl logging = new LoggingServiceImpl(getClass());
@@ -562,4 +561,18 @@ public class UserController {
 		return new ResponseEntity<>(newAcc,HttpStatus.CREATED);*/
 		
 	}
+	
+	@PreAuthorize("hasAuthority('myProfile')")
+	@RequestMapping(value="/getUser",
+			method = RequestMethod.POST)
+	public ResponseEntity<?> getUser(@RequestBody String mail){
+		//User user = null;
+		User u = userRepository.findOneByEmail(mail);
+		if (u== null) {
+			return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(u,HttpStatus.OK);
+	}
+	
 }

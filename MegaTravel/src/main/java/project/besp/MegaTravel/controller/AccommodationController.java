@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import project.besp.MegaTravel.model.User;
 import project.besp.MegaTravel.modelxsd.AccommodationUnit;
 import project.besp.MegaTravel.repository.AccommodationUnitRepository;
+import project.besp.MegaTravel.repository.UserRepository;
 import project.besp.MegaTravel.service.AccommodationUnitService;
 
 @RestController
@@ -24,9 +26,16 @@ public class AccommodationController {
 	@Autowired
 	AccommodationUnitRepository accUnitRepository;
 	
+	@Autowired
+	UserRepository userRepository;
+	
 	@PostMapping("/getAllAccUnits")
-	public ResponseEntity<List<AccommodationUnit>> getAllAccommodationUnits(@RequestBody long id) {
-		List<AccommodationUnit> units = accUnitRepository.findAllByUser(id);
+	public ResponseEntity<List<AccommodationUnit>> getAllAccommodationUnits(@RequestBody Long id) {
+		System.out.println("Dosao u get all accomodatuion units");
+
+		User newUser = userRepository.findOneById(id);
+		
+		List<AccommodationUnit> units = accUnitRepository.findAllByUser(newUser);
 		if(units != null) {
 			System.out.println("Postoje acc units");
 			return new ResponseEntity<List<AccommodationUnit>>(units, HttpStatus.OK);

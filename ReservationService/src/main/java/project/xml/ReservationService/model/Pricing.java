@@ -24,6 +24,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * <p>Java class for anonymous complex type.
@@ -89,9 +91,10 @@ public class Pricing {
 	@XmlElement(required = true,name = "date_to")
     protected Date dateTo;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="acc_unit_price")
-	private AccommodationUnit accommodation_unit;
+	private AccommodationUnit accommodationUnit;
     /**
      * Gets the value of the id property.
      * 

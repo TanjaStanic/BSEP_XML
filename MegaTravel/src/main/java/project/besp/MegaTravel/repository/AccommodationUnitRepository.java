@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import project.besp.MegaTravel.model.User;
 import project.besp.MegaTravel.modelxsd.AccommodationUnit;
 
 @Repository
@@ -16,5 +17,5 @@ public interface AccommodationUnitRepository extends JpaRepository<Accommodation
 	//@Query(value = "SELECT * FROM megatravel.accommodation_object, megatravel.agents where acc_obj_id = megatravel.accommodation_object.id;", nativeQuery = true)
 	public List<AccommodationUnit> allAccUnits();
 	
-	public List<AccommodationUnit> findAllByUser(long id);
+	public List<AccommodationUnit> findAllByUser(User user);
 }

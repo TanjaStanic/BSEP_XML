@@ -4,14 +4,17 @@
         <br/>
 </section>
 <div class="row">
-	<div class="col-xs-12">
-		<div class="box">
+
+		
+	      <div  class="col-md-6">
+	      <div class="box">
+	      <div class="box-header with-border">
+              <h3 class="box-title">About Me</h3>
+            </div>
 	      <div class="box-body box-profile">
-			<div class="post">
-		      <div class="username">
-		         Category : {{acc.category}} *<br/> 
-		         </div>                    
+			<div class="post">                   
 		         <div class="description">
+		          	Category : {{acc.category}} <b>*</b> <br/>
 					{{acc.address.street}} {{acc.address.number}} <br/>
 					{{acc.address.city}} <br/>
 					{{acc.address.country}} <br/> <br/>
@@ -19,12 +22,28 @@
 				</div>
 	       		</div>
 	       	</div>
+	       	</div>
+	      </div>
+	       	
+	    <div  class="col-md-6">
+	      <div class="box">
+	      <div class="box-header with-border">
+              <h3 class="box-title">Additional services</h3>
+            </div>
+	      <div class="box-body box-profile">
+	       	<div class="post">               
+		         <ul *ngFor="let service of additional_services">
+					<li >{{service.name}} : {{service.priceOfAdd}}$</li>
+				</ul>
+	       		</div>
+	       	</div>
+	       	</div>
 	     </div>
        	<!-- list of units -->
-
+	<div class="col-xs-12">
        	<div class="box">
-            <div class="box-header">
-              <h3 class="box-title"><b>List of accommodation units</b></h3>
+            <div class="box-header with-border">
+              <h3 class="box-title">All accommodation units</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
@@ -84,7 +103,32 @@
 	                </div>
             </div>
   			</div>
+  			<div class="col-md-6">
+  			<div class="form-group">
+               <label>Enter number of people:</label>
+                <div class="input-group">
+	               <input class="form-control" type="text"  name="numOfPeople">
+	            </div>
+            </div>
+  			</div>
+  			
+  			<div class="col-md-6">
+  				<label>Check additional services: </label>
+                <div class="form-group" id="grupa" >
+                  <div *ngFor="let service of addServices">
+                    <label class="checkbox-block">
+                        <input type="checkbox"  name={{service.name}} value={{service.id}} (change)="serviceChanged(service.id)"> {{service.name}} : {{service.priceOfAdd}}$
+                    </label>
+                  </div>
+                </div>
+  			</div>
+  			
 	</div>	
+	<div class="box-footer">
+	<div class="col-md-12">
+                <button type="button" (click)="findHotels()" class="btn btn-block btn-primary">BOOK NOW</button>
+    </div>
+    </div>
 </div>
 </div>
 
@@ -93,7 +137,7 @@
 <div class="col-xs-12">	
   <div class="box">	
   		<div class="box-header with-border">
-              <h3 class="box-title">All pictures of accommodation</h3>
+              <h3 class="box-title">All images</h3>
         </div>
         <div class="box-body box-profile" >
 	  		<div  class="col-md-4" *ngFor="let img of images">

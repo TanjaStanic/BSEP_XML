@@ -26,7 +26,7 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
 	@Override
 	public List<AccommodationUnit> gettAllAccUnits(long id) {
 		// TODO Auto-generated method stub
-		return accUnitRepository.findAllByUser(id);
+		return null;
 	}
 
 }

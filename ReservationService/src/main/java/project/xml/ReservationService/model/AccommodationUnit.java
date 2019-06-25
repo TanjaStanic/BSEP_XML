@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -126,6 +127,7 @@ public class AccommodationUnit {
 	/*
      * Smjestajna jedinica odgovara tacno jednom smjestaju.
      */
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="acc")
 	private Accommodation accommodation;
@@ -134,6 +136,7 @@ public class AccommodationUnit {
 	 * Jedna smjestajna jedinica odgovara jednom agentu
 	 * Jedan agent ima vise smjestajnih jedinica
 	 */
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="agent_units")
 	private User user;
@@ -141,23 +144,20 @@ public class AccommodationUnit {
 	/*
 	 * Jedna dodatna usluga moze da odgovora za vise smjestajnih jedinica
 	 */
-    @ManyToMany
-	@JoinTable(
-	        name = "accommodation_unit_additional_services", 
-	        joinColumns = { @JoinColumn(name = "accommodation_unit_id") }, 
-	        inverseJoinColumns = { @JoinColumn(name = "additional_id") }
-	    )
+	@JsonIgnore
+    @OneToMany(mappedBy="accommodationUnit")
     protected List<AdditionalServices> additional_services;
     
     /*
      * SJ se rezervise vise puta
      */
+    @JsonIgnore
     @OneToMany(mappedBy="accommodation_unit")
     protected List<Reservation> reservations;
     /*
      * ima svoju listu cijena (na mjesecnom nivou pozeljno)
      */
-    @OneToMany(mappedBy="accommodation_unit")
+    @OneToMany(mappedBy="accommodationUnit")
     protected List<Pricing> pricing;
     
     @OneToMany(mappedBy="accommodation_unit")

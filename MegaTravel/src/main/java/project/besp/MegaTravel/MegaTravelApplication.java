@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.client.RestTemplate;
 
 import com.netflix.discovery.DiscoveryClient;
@@ -15,6 +16,7 @@ import com.netflix.discovery.shared.transport.jersey.EurekaJerseyClientImpl.Eure
 import project.besp.MegaTravel.serviceImpl.LoggingServiceImpl;
 
 @SpringBootApplication
+@EnableTransactionManagement
 @EnableDiscoveryClient
 public class MegaTravelApplication {
 	

@@ -34,6 +34,6 @@ public class WebServiceConfig {
 
 	@Bean
 	public XsdSchema coursesSchema() {
-		return new SimpleXsdSchema(new ClassPathResource("data/soap.xsd"));
+		return new SimpleXsdSchema(new ClassPathResource("soap.xsd"));
 	}
 }

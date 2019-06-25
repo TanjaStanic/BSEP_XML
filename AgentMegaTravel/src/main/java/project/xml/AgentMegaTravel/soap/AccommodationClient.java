@@ -1,6 +1,7 @@
 package project.xml.AgentMegaTravel.soap;
 
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
+import org.springframework.ws.soap.client.core.SoapActionCallback;
 
 import project.xml.AgentMegaTravel.xsd.*;
 import project.xml.AgentMegaTravel.xsd.GetAccommodationResponse;

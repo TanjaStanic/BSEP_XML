@@ -24,6 +24,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import project.besp.MegaTravel.model.User;
 
 
@@ -107,6 +109,7 @@ public class Address {
 	@XmlElement(required = true)
     protected String country;
     
+	@JsonIgnore
 	@OneToMany(mappedBy="address")
     protected List<User> users;
 	

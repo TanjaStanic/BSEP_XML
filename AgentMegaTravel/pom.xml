@@ -38,6 +38,16 @@
 			<groupId>wsdl4j</groupId>
 			<artifactId>wsdl4j</artifactId>
 		</dependency>
+		<dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.6.0</version>
+        </dependency>
+        <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mobile</artifactId>
+			<version>1.5.18.RELEASE</version>
+		</dependency>
 				<dependency>
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
@@ -60,6 +70,7 @@
 		<dependency>
             <groupId>org.springframework.ws</groupId>
             <artifactId>spring-ws-security</artifactId>
+           <version>3.0.7.RELEASE</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.security</groupId>
@@ -129,95 +140,38 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	<build>
 
-  <extensions>
-    <extension>
-      <groupId>kr.motd.maven</groupId>
-      <artifactId>os-maven-plugin</artifactId>
-      <version>1.5.0.Final</version>
-    </extension>
-  </extensions>
-  <plugins>
-    <plugin>
-      <groupId>org.xolstice.maven.plugins</groupId>
-      <artifactId>protobuf-maven-plugin</artifactId>
-      <version>0.5.1</version>
-      <configuration>
-        <protocArtifact>com.google.protobuf:protoc:3.7.1:exe:${os.detected.classifier}</protocArtifact>
-        <pluginId>grpc-java</pluginId>
-        <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.21.0:exe:${os.detected.classifier}</pluginArtifact>
-      </configuration>
-      <executions>
-        <execution>
-          <goals>
-            <goal>compile</goal>
-            <goal>compile-custom</goal>
-          </goals>
-        </execution>
-      </executions>
-    </plugin>
-  
-	
-			<!-- plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+		<build>
+			<pluginManagement>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+					</plugin>
+					<plugin>
+		    <groupId>org.jvnet.jaxb2.maven2</groupId>
+		    <artifactId>maven-jaxb2-plugin</artifactId>
+		    <version>0.12.3</version>
+		    <executions>
+		        <execution>
+		            <goals>
+		                <goal>generate</goal>
+		            </goals>
+		        </execution>
+		    </executions>
+		    <configuration>
+		        <schemaLanguage>WSDL</schemaLanguage>
+		        <generatePackage>project.xml.AgentMegaTravel.xsd</generatePackage>
+		        	<schemas>
+		            	<schema>
+		                	<url>soap.xsd</url>
+		            	</schema>
+		        	</schemas>
+		    	</configuration>
 			</plugin>
-		<plugin>
-	<groupId>org.jvnet.jaxb2.maven2</groupId>
-	<artifactId>maven-jaxb2-plugin</artifactId>
-	<version>0.12.3</version>
-	<executions>
-		<execution>
-			<goals>
-				<goal>generate</goal>
-			</goals>
-		</execution>
-	</executions>
-	<configuration>
-		<schemaLanguage>WSDL</schemaLanguage>
-		<generatePackage>com.ftn.accommodationservice.xsd</generatePackage>
-		<schemas>
-			<schema>
-				<url>soap.xsd</url>
-			</schema>
-		</schemas>
-	</configuration>
-</plugin>
- -->
- <plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-</plugin>
-<!--plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jaxb2-maven-plugin</artifactId>
-				<version>1.5</version>
-				<executions>
-					<execution>
-						<id>xjc</id>
-						<goals>
-							<goal>xjc</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-				<vmArgs>
-           			 <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
-       			 </vmArgs>
- 
-					<schemaDirectory>${project.basedir}/src/main/resources/</schemaDirectory>
-					<outputDirectory>${project.basedir}/src/main/java</outputDirectory>
-					<clearOutputDir>false</clearOutputDir>
-				</configuration>
-			</plugin-->
-
+			</plugins>
+			</pluginManagement>
 	
-
-
-		</plugins>
-
-
 	</build>
 
 </project>

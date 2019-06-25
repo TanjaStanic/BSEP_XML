@@ -1,9 +1,12 @@
 package project.xml.AgentMegaTravel.model;
 
 import java.util.Collection;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,45 +18,32 @@ import org.springframework.security.core.GrantedAuthority;
 
 
 @Entity
-public class Role implements GrantedAuthority{
+public class Role {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, updatable = false)
-    private Long id;
+    private int id;
  
 	@Column
     private String name;
     
  
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(
         name = "roles_privileges", 
         joinColumns = @JoinColumn(
           name = "role_id", referencedColumnName = "id"), 
         inverseJoinColumns = @JoinColumn(
           name = "privilege_id", referencedColumnName = "id"))
-    private Collection<Privilege> privileges;
+    private Set<Privilege> privileges;
 
-
-	@Override
-	public String getAuthority() {
-		// TODO Auto-generated method stub
-		return name;
-	}
-
-
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -66,15 +56,19 @@ public class Role implements GrantedAuthority{
 	public void setName(String name) {
 		this.name = name;
 	}
+	public Role() {
+		
+	}
 
 
-	public Collection<Privilege> getPrivileges() {
+	public Set<Privilege> getPrivileges() {
 		return privileges;
 	}
 
 
-	public void setPrivileges(Collection<Privilege> privileges) {
+	public void setPrivileges(Set<Privilege> privileges) {
 		this.privileges = privileges;
 	}
+
 
 }

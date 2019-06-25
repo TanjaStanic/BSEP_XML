@@ -50,5 +50,7 @@ export class AppComponent implements OnInit{
     this.auth.removeJwtToken();
     this.notLogged = true;
     this.logged = false;
+    //var storageuser : User = new User();
+    //localStorage.setItem('user', JSON.stringify(storageuser));
   }
 }

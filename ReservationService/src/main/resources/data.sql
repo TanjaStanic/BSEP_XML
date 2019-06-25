@@ -50,20 +50,16 @@ insert into accommodation (accommodation_id,name, cancelation_days,rating,catego
  values (2,"Hotel Novi Sad", 3, 3.9, "4", "Sve ok", 2,6,3);
  
  --dodatni servisi
-insert into additional_services (additional_id,name,price_of_add) values (1,'All inclusive',100.1);
-insert into additional_services (additional_id,name,price_of_add) values (2,'Full Board',50.1);
-insert into additional_services (additional_id,name,price_of_add) values (3,'Half Board',25.1);
-insert into additional_services (additional_id,name,price_of_add) values (4,'WiFi',0.0);
-insert into additional_services (additional_id,name,price_of_add) values (5,'Pet friendly',20.1);
-insert into additional_services (additional_id,name,price_of_add) values (6,'Parking',20.1);
-insert into additional_services (additional_id,name,price_of_add) values (7,'Kitchen',20.1);
+insert into additional_services (additional_id,name,price_of_add,accommodation) values (1,'All inclusive',100.1,1);
+insert into additional_services (additional_id,name,price_of_add,accommodation) values (2,'Full Board',50.1,1);
+insert into additional_services (additional_id,name,price_of_add,accommodation) values (3,'Half Board',25.1,1);
+insert into additional_services (additional_id,name,price_of_add,accommodation) values (4,'WiFi',0.0,1);
+insert into additional_services (additional_id,name,price_of_add,accommodation) values (5,'Pet friendly',20.1,1);
 
---povezivanje smjestaja i additional servica
---insert into accommodation_additional_services (accommodation_id,additional_id) values (1,1);
---insert into accommodation_additional_services (accommodation_id,additional_id) values (1,2);
---insert into accommodation_additional_services (accommodation_id,additional_id) values (1,3);
---insert into accommodation_additional_services (accommodation_id,additional_id) values (1,4);
---insert into accommodation_additional_services (accommodation_id,additional_id) values (2,5);
+insert into additional_services (additional_id,name,price_of_add,accommodation_unit) values (6,'Parking',20.1,1);
+insert into additional_services (additional_id,name,price_of_add,accommodation_unit) values (7,'Kitchen',20.1,1);
+insert into additional_services (additional_id,name,price_of_add,accommodation_unit) values (8,'Wifi',20.1,1);
+insert into additional_services (additional_id,name,price_of_add,accommodation_unit) values (9,'Pet Friendly',20.1,1);
 
 insert into accommodation_unit (accommodation_unit_id,capacity,number_of_room,floor,size,type, acc,agent_units)
 	values (1,3,22,2,40,"room",1,2);
@@ -72,6 +68,26 @@ insert into accommodation_unit (accommodation_unit_id,capacity,number_of_room,fl
 insert into accommodation_unit (accommodation_unit_id,capacity,number_of_room,floor,size,type, acc,agent_units)
 	values (3,5,123,12,50,"bed&breakfast",2,2);
 
+--povezivanje cjenovnika
+
+insert into pricing(pricing_id,price,date_from,date_to,acc_unit_price) 
+	values (1,100,'2019-06-01','2019-07-01',1);
+insert into pricing (pricing_id,price,date_from,date_to,acc_unit_price) 
+	values (2,100,'2019-07-01','2019-08-01',1);
+insert into pricing (pricing_id,price,date_from,date_to,acc_unit_price) 
+	values (3,100,'2019-08-01','2019-09-01',1);	
+insert into pricing (pricing_id,price,date_from,date_to,acc_unit_price) 
+	values (4,100,'2019-09-01','2019-10-01',1);
+insert into pricing (pricing_id,price,date_from,date_to,acc_unit_price) 
+	values (5,100,'2019-10-01','2019-11-01',1);
+	
+insert into reservation (reservation_id,start_date,end_date,total_price,reservation_status,reservation_rating,reservation_user,acc_unit_reservation)	
+	values (1,'2018-04-15','2018-04-25',350.5,'arrived',5,5,1);
+insert into reservation (reservation_id,start_date,end_date,total_price,reservation_status,reservation_rating,reservation_user,acc_unit_reservation)	
+	values (2,'2018-04-01','2018-04-13',666.5,'arrived',2,5,1);
+
+	
+	
 	--dodati slike za hotele..
 insert into image (image_id,title,uri,accommodation_pic) values (1,'Aleksandar1','../assets/images/aleksandar.jpg',1);
 insert into image (image_id,title,uri,accommodation_pic) values (2,'Aleksandar2','../assets/images/aleksandar2.jpg',1);

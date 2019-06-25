@@ -21,49 +21,38 @@ export class LoginComponent implements OnInit {
     message : string;
     user : User = new User();
     htmlStr: string;
-    
+    storageuser : User = new User();
+
     constructor(private u: UserServiceService, private route: ActivatedRoute, private auth : AuthServiceService) { }
 
 
 
   ngOnInit() {    
-    document.getElementById('response').setAttribute('hidden', 'true');
-    document.getElementById('img').setAttribute('hidden', 'true');
   }
    
   loginUser(){
         
     console.log('Dodavanje' + this.user.email + ', pass: ' + this.user.password);
     if (this.checkEmail(this.user.email)) {
-          this.u.loginUser(this.user).subscribe(podaci => { this.checkUser(podaci);
-          window.location.href = 'http://localhost:4200';
+          this.u.loginUser(this.user).subscribe(podaci => { 
+             this.checkUser(podaci);
+             localStorage.setItem('user', JSON.stringify(this.user));
           } , err => {this.handleAuthError(err); });
       } else {
         this.htmlStr = 'The e-mail is not valid.';
-      }
-        }  
-    
-   /*communicate(){
-    this.service.communicate(this.message).subscribe(data => {
-      console.log(data);
-      document.getElementById('message').setAttribute('hidden', 'true');
-      document.getElementById('button_communicate').setAttribute('hidden', 'true');
-      document.getElementById('response').removeAttribute('hidden');
-      document.getElementById('img').removeAttribute('hidden');
-      document.getElementById('response').innerHTML = data;
-    });
-  }*/
-
-
+     }
+  }  
+  
 checkUser(logged) {
     let user_token= logged as UserToken;
-    // tslint:disable-next-line:triple-equals
     if(user_token.accessToken == 'error') {
       this.htmlStr = 'The e-mail or password is not correct.';
     } else {
       this.auth.setJwtToken(user_token.accessToken);
       console.log(user_token.accessToken);
-      this.u.getLogged(user_token.accessToken).subscribe(podaci => {this.ssCertificate(podaci)});
+      this.u.getLogged(user_token.accessToken).subscribe(podaci => {this.ssCertificate(podaci);
+          window.location.href = 'http://localhost:4200';
+      });
     }
   }
     
@@ -96,7 +85,7 @@ ssCertificate(data){
     var admin = false as boolean;
     var obican = false as boolean;
 
-    for(let role of loggedUser.roles)
+    /*for(let role of loggedUser.roles)
     {
       if(role.name == "ROLE_ADMIN")
         admin=true;
@@ -112,7 +101,7 @@ ssCertificate(data){
         } else {
         window.location.href = 'http://localhost:4200'; // ovde treba preusmeriti na pocetnu
         }
-  }
+  }*/
 
   }
 

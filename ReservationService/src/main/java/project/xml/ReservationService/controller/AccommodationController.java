@@ -105,7 +105,7 @@ public class AccommodationController {
 		List<AdditionalServices> newList = new ArrayList<AdditionalServices>();
 		Accommodation acc = accommodationRepository.findOneById(id);
 		System.out.println("In get all additional services");
-		newList = additionalServiceRepository.findAllByAccommodations(acc);
+		newList = additionalServiceRepository.findAllByAccommodation(acc);
 		if (newList == null) {
 			System.out.println("no aditional servuces");
 			return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
@@ -124,6 +124,22 @@ public class AccommodationController {
 			return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(acc,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value ="/getAdditionalServicesFromAccUnit",
+			method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)	
+	public ResponseEntity<?> getAdditionalServicesFromAccUnit(@RequestBody Long id){
+		List<AdditionalServices> newList = new ArrayList<AdditionalServices>();
+		AccommodationUnit au = accUnitRepository.findOneById(id);
+		System.out.println("In get all additional services by acc unit");
+		newList = additionalServiceRepository.findAllByAccommodationUnit(au);
+		if (newList == null) {
+			System.out.println("no aditional servuces");
+			return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(newList,HttpStatus.OK);
 	}
 	
 }

@@ -55,7 +55,7 @@ public class SecurityController {
       		  SecurityContextHolder.getContext().getAuthentication().getAuthorities();
       		  
       		  for (GrantedAuthority authority : authorities) {
-      		    System.out.println("Authority: " + authority.getAuthority());
+      		    System.out.println("Authority in security: " + authority.getAuthority());
       		  }
 
         return new ResponseEntity<>(HttpStatus.OK);

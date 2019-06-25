@@ -34,6 +34,8 @@ userProfile() {
     return this.http.get('https://localhost:8443/api/mainSecurity/userprofile', {headers: this.auth.createAuthorizationTokenHeader()});
   }
     
-
+getUser(mail : string) {
+    return this.http.post('https://localhost:8443/user/getUser',mail, {headers: this.auth.createAuthorizationTokenHeader()});
+  }
 
 }

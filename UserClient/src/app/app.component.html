@@ -7,7 +7,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>M</b>T</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>HOME</b></span>
+      <span class="logo-lg"><b>Mega Travel</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -44,10 +44,10 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="assets/dist/img/Admin.png" class="img-circle" alt="User Image">
+          <img src="assets/dist/img/pic.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Home page</p>
+          <p> Welcome </p>
         </div>
       </div>
       <!-- search form -->
@@ -60,34 +60,21 @@
         <li class="header">OPTIONS</li>
         <li class="active" >
           <a href="#">
-            <i class="fa fa-home" ></i> <span [hidden]="notLogged"><a routerLink="homePage">Home</a></span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+            <i class="fa fa-home" ></i> <span><a routerLink="homePage">Home</a></span>
+          
           </a>
         </li>
           <li class="treeview">
           <a href="#">
-            <i class="fa fa-list-ul"></i> <span ><a routerLink="clientProfile">testprofila</a></span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+            <i class="fa fa-user"></i> <span ><a routerLink="clientProfile">testprofila</a></span>
+          
           </a>
         </li>
+  
         <li class="treeview" [hidden]="notLogged">
           <a href="#">
-            <i class="fa fa-list-ul"></i> <span ><a routerLink="listAcc">List of accommodations</a></span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-        </li>
-        <li class="treeview" [hidden]="notLogged">
-          <a href="#">
-            <i class="fa fa-list-ul"></i> <span ><a routerLink=clientProfile>My profile</a></span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+            <i class="fa fa-user"></i> <span ><a routerLink=clientProfile>My profile</a></span>
+            
           </a>
         </li>
       </ul>

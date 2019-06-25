@@ -45,12 +45,16 @@ insert into privilege (id,name) values (1,'registrationAgent');
 insert into privilege (id,name) values (2,'login');
 insert into privilege (id,name) values (3,'loginAdmin');
 insert into privilege (id,name) values (4,'loginUser');
+insert into privilege (id,name) values (5,'loginAgent');
+insert into privilege (id,name) values (6,'myProfile');
 
+insert into roles_privileges(role_id,privilege_id) values (2,5);
 
 insert into roles_privileges(role_id,privilege_id) values (1,1);
 insert into roles_privileges(role_id,privilege_id) values (1,2);
 insert into roles_privileges(role_id,privilege_id) values (1,3);
 insert into roles_privileges(role_id,privilege_id) values (3,4);
+insert into roles_privileges(role_id,privilege_id) values (3,6);
 
 
 

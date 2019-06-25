@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 //import { AgentServiceService } from '../service/agent-service.service';
-import { User } from 'src/app/model/user.model';
+import { User } from 'src/app/model/user';
 import { UserToken } from 'src/app/model/user-token';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthServiceService } from 'src/app/services/auth-service/auth-service.service';
@@ -19,12 +19,12 @@ export class LoginComponent implements OnInit {
     message : string;
     user : User = new User();
     htmlStr: string;
+    isLoggedIn = false;
+    id : string;    
     
     constructor(private u: UserServiceService, private route: ActivatedRoute, private auth : AuthServiceService) { }
 
     ngOnInit() {    
-       // document.getElementById('response').setAttribute('hidden', 'true');
-       // document.getElementById('img').setAttribute('hidden', 'true');
       }
     loginUser(){
         
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
               this.u.loginUser(this.user).subscribe(podaci => { this.checkUser(podaci);
               } , err => {this.handleAuthError(err); });
               console.log("cuvam u json this.usera: ");
-              this.u.getUser(this.user.email).subscribe(podaci => {
+             /* this.u.getUser(this.user.email).subscribe(podaci => {
                   console.log("usao u get user...stampam podatke");
                   console.log(podaci);
                   var currUser = podaci as User;
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
                   console.log(currUser)
                   localStorage.setItem('user', JSON.stringify(currUser));
                   
-              });
+              });*/
               //ocalStorage.setItem('user', JSON.stringify(this.user))
  
         } else {
@@ -94,29 +94,7 @@ export class LoginComponent implements OnInit {
 
 
     ssCertificate(data){
-        var loggedUser = data as User;
-        var admin = false as boolean;
-        var obican = false as boolean;
 
-        for(let role of loggedUser.roles)
-        {
-         /* if(role == "ADMIN")
-            admin=true;
-          if(role == "USER")
-            obican=true;*/
-            obican=true;
-            
-        }
-
-        if (admin){
-          this.u.getSelfSigned().subscribe(podaci => { this.checkSelfSigned(podaci, loggedUser.id) });
-        } else if (obican) {
-            if (loggedUser.certificated == false) {
-              window.location.href = 'http://localhost:4200/certificate/nonself/' + loggedUser.id;
-            } else {
-            window.location.href = 'http://localhost:4200'; // ovde treba preusmeriti na pocetnu
-            }
-      }
 
       }
 

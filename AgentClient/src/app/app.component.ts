@@ -3,7 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { UserServiceService } from 'src/app/services/user-service/user-service.service';
 import {AuthServiceService} from 'src/app/services/auth-service/auth-service.service';
-import { User } from 'src/app/model/user.model';
+import { User } from 'src/app/model/user';
 
 @Component({
   selector: 'app-root',

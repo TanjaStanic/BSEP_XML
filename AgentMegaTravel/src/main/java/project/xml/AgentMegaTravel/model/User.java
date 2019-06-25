@@ -1,5 +1,6 @@
 package project.xml.AgentMegaTravel.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,6 +27,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "User", propOrder = {
@@ -49,12 +52,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 })
 @Entity
 @Table(name="user")
-public class User  implements UserDetails{
+public class User   implements UserDetails{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@JsonIgnore
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
     @Column(name = "user_id", nullable = false, updatable = false)
@@ -63,36 +67,23 @@ public class User  implements UserDetails{
 	/*@Column(name = "role")
 	@Enumerated(EnumType.STRING)
 	public UserRole role;*/
-	
 	@Column(name = "first_name", nullable = false)
 	public String firstName;
     
 	
-
 	@Column(name = "last_name", nullable = false)
 	public String lastName;
 	
 	@Email
 	@Column(name = "email", nullable = false)
 	public String email; //username
-	
     @Column(name = "password")
 	public String password;
-   
     @Column(name = "pib")
 	public String pib;
-    
     @Column(name = "certificated")
 	private boolean certificated;
-    
-    @Column(name = "active")
-	private boolean active;
-    
-    @Column(name = "blocked")
-	private boolean blocked;
-    
-    
-    @JsonIgnore
+	@JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( 
         name = "user_roles", 
@@ -101,15 +92,14 @@ public class User  implements UserDetails{
         inverseJoinColumns = @JoinColumn(
         	name = "role_id", referencedColumnName = "id")) 
     private Collection<Role> roles;
-	
+	@JsonIgnore
 	@Column(name = "last_password_reset_date")
 	    private Date lastPasswordResetDate;
 	 
 	/*
 	 * Vise korisnika (admin,agent,client) mogu biti na jednoj adresi
 	 */
-	
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_address")
 	protected Address address;
@@ -117,24 +107,21 @@ public class User  implements UserDetails{
 	/*
 	 * Samo client ima listu rezervacija (za sada) ili admin
 	 */
-	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	protected List<Reservation> reservations;
 	
 	/*
 	 * Samo admin ima listu smjestaja
 	 */
-	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	protected List<Accommodation> accommodations;
 	
 	/*
 	 * Samo agenti imaju listu smjestajnih jedinica
 	 */
-	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	protected List<AccommodationUnit> accommodation_units;
 	
@@ -142,47 +129,43 @@ public class User  implements UserDetails{
 	 * Admin i klijent upravljaju komentarima.
 	 * Klijent moze da postavlja vise komentara.
 	 */
-	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	protected List<Comment> comments;
+	
+	@Column(name = "active")
+	private boolean active;
+    
+    @Column(name = "blocked")
+	private boolean blocked;
 	
 	public User() {
 		
 	}
 	
-	public User( String firstName, String lastName, String email, String password,List<Role> roles, boolean active,boolean blocked) {
+	public User( String firstName, String lastName, String email, String password,List<Role> roles) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.roles = roles;
-		this.active = active;
-		this.blocked = blocked;
-	}
-	
-	
-
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
-	public boolean isBlocked() {
-		return blocked;
-	}
-
-	public void setBlocked(boolean blocked) {
-		this.blocked = blocked;
 	}
 
 	@Override
+	@Transient
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return this.roles;
+		if(!this.roles.isEmpty()) {
+			Role r = roles.iterator().next();
+			List<Privilege> privileges = new ArrayList<Privilege>();
+			for(Privilege p : r.getPrivileges()) {
+				privileges.add(p);
+			}
+			
+			return privileges;
+		}
+		
+		return null;
 	}
 
 
@@ -203,8 +186,7 @@ public class User  implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
-	@JsonIgnore
+
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
@@ -338,6 +320,23 @@ public class User  implements UserDetails{
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public boolean isBlocked() {
+		return blocked;
+	}
+
+	public void setBlocked(boolean blocked) {
+		this.blocked = blocked;
+	}
+	
 	
 	
 }

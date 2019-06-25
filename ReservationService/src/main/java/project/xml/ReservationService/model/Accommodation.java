@@ -29,6 +29,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * <p>Java class for anonymous complex type.
@@ -149,20 +151,17 @@ public class Accommodation {
 	protected Address address;
     
 	
-    /*@OneToMany(fetch = FetchType.LAZY,mappedBy="accommodation")
-    protected List<AccommodationUnit> accommodation_unit;*/
+    @OneToMany(mappedBy="accommodation")
+    protected List<AccommodationUnit> accommodation_unit;
     
-    @ManyToMany
-	@JoinTable(
-	        name = "accommodation_additional_services", 
-	        joinColumns = { @JoinColumn(name = "accommodation_id") }, 
-	        inverseJoinColumns = { @JoinColumn(name = "additional_id") }
-	    )
+  
+    @OneToMany(mappedBy="accommodation")
     protected List<AdditionalServices> additional_services;
 
     @OneToMany(mappedBy="accomodation")
     protected List<Image> images;
 	
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "acc_agent")
     protected User user;

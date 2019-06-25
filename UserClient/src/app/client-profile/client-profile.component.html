@@ -1,33 +1,32 @@
-
   <!-- Main content -->
-  <section class="invoice">
+<section class="invoice">
   <div class="row">
       <div class="col-xs-12">
         <h2 class="page-header">
-          <i class="fa  fa-user"></i><b>Ime i prezime</b>
+          <i class="fa  fa-user"></i>Welcome	<b>{{user.firstName}} {{user.lastName}} </b>
         </h2>
       </div>
    </div>
    
 	    <div class="row invoice-info">
+	      <div class="col-sm-4 invoice-col">
+        <address>
+          <strong>ABOUT</strong><br>
+          E-mail : {{user.email}} <br/>
+          Active? : {{user.active}} <br>
+          Blocked? : {{user.blocked}} <br>
+        </address>
+      </div>
       <div class="col-sm-4 invoice-col">
         <address>
           <strong>ADRRESS</strong><br>
-          Street: <br>
-          City: <br>
-          Country: <br>
-          Email: 
+          Street : {{user.address.street}} {{user.address.number}}<br>
+          City : {{user.address.city}}<br>
+          Country : {{user.address.country}}<br>
         </address>
       </div>
       <!-- /.col -->
-      <div class="col-sm-4 invoice-col">
-        <address>
-          <strong>My state</strong><br>
-          Active? <br>
-          Blocked? <br>
-          ???<br>
-        </address>
-      </div>
+    
       <!-- /.col -->
       <div class="col-sm-4 invoice-col">
  
