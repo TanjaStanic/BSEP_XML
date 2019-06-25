@@ -171,7 +171,7 @@ public class Accommodation implements java.io.Serializable {
     protected Location location;
 	
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
 	@JoinColumn(name = "acc_address")
 	protected Address address;
 	

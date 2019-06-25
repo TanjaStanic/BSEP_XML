@@ -26,6 +26,16 @@ export class CertificateServiceService {
     return this.http.get('https://localhost:8443/api/certificate/allUsersWithCertificates', {headers: this.auth.createAuthorizationTokenHeader()});
   }
     
+  getCertificatedUsers(): Observable<any>{
+        console.log('get certificated users');
+        return this.http.get('https://localhost:8443/api/allCertificatedUsers', {headers: this.auth.createAuthorizationTokenHeader()});
+     }
+    
+  getNonCertificatedUsers(): Observable<any>{
+        console.log('get noncertificated users');
+        return this.http.get('https://localhost:8443/api/allNonCertificatedUsers', {headers: this.auth.createAuthorizationTokenHeader()});
+     }
+    
     
  getCert() : Observable<any>{
     console.log('show certificate');

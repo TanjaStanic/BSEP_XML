@@ -26,7 +26,7 @@ export class AccServiceService {
     
     
    getAllAcc() : Observable<any> {
-    return this.http.get('https://localhost:8762/api/getAcc',{headers: this.auth.createAuthorizationTokenHeader()}); 
+    return this.http.get('https://localhost:8762/api/accommodations/getAllAcc',{headers: this.auth.createAuthorizationTokenHeader()}); 
         }
     
     addAcc(acc : Accommodation) {

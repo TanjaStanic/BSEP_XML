@@ -26,7 +26,10 @@ export class AddCertificateComponent implements OnInit {
     object: Object;
     today: Date;
     certificatedUsers: Array<any>;
-    author: string;
+    
+    noncertificatedUsers: Array<any>;
+    author: number;
+    subject : number;
 
     constructor(private certificateService: CertificateServiceService, private userService: UserServiceService, private route: ActivatedRoute) { 
        this.route.params.subscribe( params => {this.self = params.self, this.id = params.id; });
@@ -39,11 +42,19 @@ export class AddCertificateComponent implements OnInit {
 
         //if (this.self === 'nonself'){
             console.log('usao if');
-            this.userService.getCertificatedUsers().subscribe(data=>{
+            this.certificateService.getCertificatedUsers().subscribe(data=>{
                 this.certificatedUsers = data;
                 console.log("Certificated users: ")
                 console.log(data);
                 console.log(data.length);
+                this.showField();
+            });
+        
+            this.certificateService.getNonCertificatedUsers().subscribe(data2=>{
+                this.noncertificatedUsers = data2;
+                console.log("Certificated users: ")
+                console.log(data2);
+                console.log(data2.length);
                 this.showField();
             });
        // }
@@ -63,26 +74,18 @@ export class AddCertificateComponent implements OnInit {
         }
     
  createCertificate() {
-    console.log('create ' + this.author);
+      console.log('create ' + this.author);
      
-    console.log(this.self);
-    if (this.self == 'self') {
-      console.log('id:' + this.id1);
-      console.log('start:' + this.startDate);
-      console.log('end:' + this.endDate);
-      this.certificateService.createSelfCertificate(this.id as string, this.startDate, this.endDate).subscribe(
-        data => {window.location.href = 'http://localhost:4200'; },  err => {this.handleAuthError(err); }
-        );
-    } else {
-      console.log('id:' + this.id);
+     
+      console.log('id:' + this.subject);
       console.log('start:' + this.startDate);
       console.log('end:' + this.endDate);
       console.log('author:' + this.author);
       // ovde pozvati funkciju za pravljenje obicnog sertifikata
-      this.certificateService.createNonSelfCertificate(this.id as string, this.startDate, this.endDate, this.author as string).subscribe(
-        data => {this.updateUser(this.id as string); } ,  err => {this.handleAuthError(err); }
+      this.certificateService.createNonSelfCertificate(this.subject, this.startDate, this.endDate, this.author).subscribe(
+        data => {} ,  err => {this.handleAuthError(err); }
       );
-    }
+    //}
   }
     //}
    /* createCertificate(){

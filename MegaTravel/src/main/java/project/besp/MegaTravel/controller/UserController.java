@@ -63,7 +63,7 @@ import org.owasp.html.HtmlPolicyBuilder;
 
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 	
@@ -375,6 +375,34 @@ public class UserController {
 			return new ResponseEntity<List<User>>(notvalidUser, HttpStatus.NOT_FOUND);
 		
 	}
+	
+	
+	
+	
+	@RequestMapping(value="/allNonCertificatedUsers", method = RequestMethod.GET,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+			public ResponseEntity<List<User>> getAllNonCertificatedUsers(){	
+				List<User> all=userService.getAll();
+				List<User> noncertificated = new ArrayList<User>();
+				List<User> validUser = new ArrayList<User>();
+				
+				for(User user : all)
+				{
+					if(!user.isCertificated())
+						noncertificated.add(user);
+				}
+				
+				System.out.println("Ima certificated usera: " + noncertificated.size());
+				if(noncertificated.size() > 0)
+				{
+					System.out.println("Ima nocertificated usera: " + noncertificated.size());
+					return new ResponseEntity<List<User>>(noncertificated,HttpStatus.OK);
+				}
+				else 
+					return new ResponseEntity<List<User>>(validUser, HttpStatus.NOT_FOUND);
+				
+			}
 	
 	public boolean checkCharacters(String data) {
 		if(data.isEmpty()) {

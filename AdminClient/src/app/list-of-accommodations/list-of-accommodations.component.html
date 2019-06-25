@@ -61,14 +61,10 @@
                     <img src="../assets/images/aleksandar.jpg" alt="Image">
                   </div>
                   <div class="product-info">
-                    <a (click)="showMoreClick(acc.id)"  class="product-title">{{acc.name}} 
-                      <span class="label label-warning pull-right">See more</span></a>
-                    <span class="product-description">
-                    	Category: {{acc.category}} <br/>
-                         {{acc.address.street}} {{acc.address.number}}<br/>
-                		{{acc.address.city}}<br/>              
-                		{{acc.address.country}}<br/> 
-                        </span>
+                    <a (click)="showMoreClick(acc.id)">{{acc.name}}
+                      <span class="label label-warning pull-right">See more</span></a>                                  	
+                    	Category: {{acc.category}}<br/>     	
+                     
                   </div>
                 </li>
                 

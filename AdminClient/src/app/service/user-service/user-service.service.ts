@@ -49,10 +49,7 @@ constructor(private http: HttpClient, private auth: AuthServiceService, private 
         return this.http.get('https://localhost:8443/api/certificate/getUsersWithCetrtificate',{headers: this.auth.createAuthorizationTokenHeader()}); 
         }
     
-    getCertificatedUsers(): Observable<any>{
-        console.log('get certificated users');
-        return this.http.get('https://localhost:8443/api/allCertificatedUsers', {headers: this.auth.createAuthorizationTokenHeader()});
-        }
+
     
     changeToCertificatedUser(param : string){
         console.log('change to certificated user');

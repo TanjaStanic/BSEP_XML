@@ -6,7 +6,7 @@ insert into address (address_id,street,number,city,country) values (4,'Bulevar E
 --za smjestaj
 insert into address (address_id,street,number,city,country) values (5,'Bulevar Cara Lazara',79,'Novi Sad','Srbija');
 insert into address (address_id,street,number,city,country) values (6,'Bulevar Jase Tomica',23,'Novi Sad','Srbija');
-insert into address (address_id,street,number,city,country) values (7,'Bulevar Kralja Aleksandra',69,'Beograd','Srbija');
+insert into address (address_id,street,number,city,country) values (7,'Bulevar Aleksandra',69,'Beograd','Srbija');
 insert into address (address_id,street,number,city,country) values (8,'Milentija Popovica',5,'Novi Beograd','Srbija');
 insert into address (address_id,street,number,city,country) values (9,'Vladimira Popovica',10,'Novi Beograd','Srbija');
 insert into address (address_id,street,number,city,country) values (10,'Takovska',49,'Beograd','Srbija');
@@ -39,7 +39,8 @@ insert into user (user_id, first_name, last_name, email,password,certificated,pi
 --client ima adresu 
 insert into user (user_id, first_name, last_name, email,password,certificated,user_address,active,blocked) values (5, 'client', 'client', 'client@gmail.com', '$2a$12$6ftbtcYQQuf1bRpuxOB2oehiLSjYVMJYiC1soNh726NKYMZwTYQ1m',1,1,true,false);
 insert into user (user_id, first_name, last_name, email,password,certificated,user_address,active,blocked) values (6, 'tanja', 'tanja', 't@gmail.com', '$2a$10$B5q5PKtYYwtHSLd7lekgGu4ve5Iaa1IoAsZZZJkX74ervZjCAKdUe',1,2,false,false);
-
+insert into user (user_id, first_name, last_name, email,password,certificated,user_address,active,blocked) values (7, 'client1', 'client1', 'client1@gmail.com', '$2a$12$6ftbtcYQQuf1bRpuxOB2oehiLSjYVMJYiC1soNh726NKYMZwTYQ1m',0,1,1,0);
+insert into user (user_id, first_name, last_name, email,password,certificated,user_address,active,blocked) values (8, 'tanja1', 'tanj1a', 't1@gmail.com', '$2a$10$B5q5PKtYYwtHSLd7lekgGu4ve5Iaa1IoAsZZZJkX74ervZjCAKdUe',0,2,1,0);
 --uloga
 insert into role (id, name) values (1, 'ROLE_ADMIN');
 insert into role (id, name) values (2, 'ROLE_AGENT');

@@ -161,7 +161,6 @@ public class Accommodation {
     @OneToMany(mappedBy="accomodation")
     protected List<Image> images;
 	
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "acc_agent")
     protected User user;

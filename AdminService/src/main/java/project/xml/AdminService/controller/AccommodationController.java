@@ -70,9 +70,14 @@ public class AccommodationController {
 	//private Address newAddress = new Address();
 	
 	@GetMapping(path= "/getAllAcc") //getAll accommodations
-	public ResponseEntity<List<Accommodation>> getAllAcc() {
-		System.out.println("Number of additional services: " + addService.getAll().size());
-		List<Accommodation> acc = accommodationService.getAll();
+	public ResponseEntity<?> getAllAcc() {
+		//System.out.println("Number of additional services: " + addService.getAll().size());
+		List<Accommodation> acc = new ArrayList<Accommodation>();
+		acc = accommodationRepository.findAll();
+		System.out.println(acc.size());
+		for(int i = 0; i < acc.size();i++) {
+			System.out.println("ajde+++++" + acc.get(i).getAddress() + acc.get(i).getName());
+		}
 		
 		return new ResponseEntity<>(acc,HttpStatus.OK);
 	}

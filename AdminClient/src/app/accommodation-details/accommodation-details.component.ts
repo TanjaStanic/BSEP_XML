@@ -25,7 +25,7 @@ export class AccommodationDetailsComponent implements OnInit {
 
   ngOnInit() {
       
-      this.accService.getAccommodation(this.idAcc).subscribe(data =>{
+    /* this.accService.getAccommodation(this.idAcc).subscribe(data =>{
           this.acc = data as Accommodation;
           console.log('my acc preuzeta');
           console.log(this.acc);
@@ -45,7 +45,7 @@ export class AccommodationDetailsComponent implements OnInit {
           this.images = data;
        });
       
-      this.acc.address = this.address;
+      //this.acc.address = this.address;*/
   }
 
 }

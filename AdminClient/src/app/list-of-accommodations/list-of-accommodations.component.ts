@@ -19,9 +19,9 @@ import { Picture } from '../model/picture';
 })
 export class ListOfAccommodationsComponent implements OnInit {
         
-   acc : Accommodation = new Accommodation();
+  acc : Accommodation = new Accommodation();
   address : Address = new Address();
-  accommodations : Accommodation[];
+  //accommodations : Accommodation = new Accommodation();
   additionalServices : AdditionalServices[];
   searchForm: SearchForm = new SearchForm();
   idServices: Map<number, boolean> = new Map<number, boolean>();
@@ -31,23 +31,18 @@ export class ListOfAccommodationsComponent implements OnInit {
   constructor(private accService : AccServiceService, private route : Router, private userService : UserServiceService) { }
     
     
-  //accommodations : Accommodation[];
+  accommodations : Accommodation[];
     
   ngOnInit() {
       
-      //this.acc.address = this.address;      
+      //this.acc.address.street = this.address.street;      
       //console.log(this.accommodations);
       
       this.accService.getAllAcc().subscribe(data =>{
+         
           this.accommodations = data;
+           this.accommodations.address.street = this.address.street;
           console.log(data);
-          for (var i=0; i<this.accommodations.length; i++){
-              console.log("for all acommodations");
-              this.accService.getAllPictures(this.accommodations[i].id).subscribe(data2 =>{
-                  this.picturess = data2 as Picture[];
-                  
-              }) ; 
-           }
        });
 
     }

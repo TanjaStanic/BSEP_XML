@@ -506,7 +506,7 @@ public class CertificateController {
 				String email = tokenUtils.getUsernameFromToken(token);
 				User user = (User) this.userService.findUserByMail(Encode.forHtml(email));
 			
-				logger.info("User id: " + user.getId() + ",REVCERTSUCCESS");
+				//logger.info("User id: " + user.getId() + ",REVCERTSUCCESS");
 
 				for(Certificate c : allCertificates)
 				{
@@ -526,11 +526,11 @@ public class CertificateController {
 				}
 				return certificate;
 			}else {
-				logger.error("REVCERTERRID");
+				//logger.error("REVCERTERRID");
 				return null;
 			}
 		} else {
-			logger.error("REVCERTERRID");
+			//logger.error("REVCERTERRID");
 
 			return null;
 		}
