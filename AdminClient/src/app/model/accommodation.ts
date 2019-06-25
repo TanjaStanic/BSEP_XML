@@ -1,6 +1,8 @@
 import { AdditionalServices } from './additionalServices';
 import { Address } from './adress';
 import { Location } from './location';
+import { User } from './user';
+
 
 export class Accommodation{
     id : number;
@@ -12,5 +14,6 @@ export class Accommodation{
     address : Address = new Address;
     location : Location = new Location;
     additional_services:Array<AdditionalServices>;
+    agents: User;
     
     }

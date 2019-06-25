@@ -23,14 +23,15 @@
         <span class="glyphicon form-control-feedback"><i class="fa fa-calendar"></i></span>
       </div>
       
-      <div class="form-group has-feedback" id="element1"  hidden="choose">
-         <label for="name">Issuer:</label>
-         <br/>
+    <div class="form-group row" id="element1"  hidden="choose">
+      <div class="col-xs-6">	
+           <i class="glyphicon"></i>
+         <label for="endDate">Issuer:</label>
         <select name="issuer" id="lista_issuer" [(ngModel)]="author">
-         <option  *ngFor="let c of certificatedUsers" [value]="c.id"> {{c.email}} </option>
+         <option  *ngFor="let c of certificatedUsers; let i = index" [value]="c.id">{{i}}. {{c.email}}</option>
         </select>
+      </div>
    </div>  
-      
       
       <div class="row" position = "center">
         <!-- /.col -->

@@ -13,12 +13,12 @@ import project.xml.AdminService.service.AdditionalServicesService;
 public class AdditionalServicesServiceImpl implements AdditionalServicesService {
 	
 	@Autowired	
-	AdditionalServiceRepository aditionalRepository;
+	AdditionalServiceRepository additionalServiceRepository;
 
 	@Override
 	public List<AdditionalServices> getAll() {
 		// TODO Auto-generated method stub
-		return aditionalRepository.findAll();
+		return additionalServiceRepository.findAll();
 	}
 
 }

@@ -101,9 +101,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  implements 
 						.authorizeRequests()
 						.antMatchers("/api/**").permitAll()
 						.antMatchers("/api/mainSecurity/**").permitAll()
+						.antMatchers("/api/certificate/**").permitAll()
 						.antMatchers("/h2-console/**").permitAll()
 						.antMatchers("/ws/**").permitAll()
-						
 						// svaki zahtev mora biti autorizovan
 						.anyRequest().authenticated().and().cors().and()
 						
@@ -118,7 +118,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  implements 
 				public void configure(WebSecurity web) throws Exception {
 					// TokenAuthenticationFilter ce ignorisati sve ispod navedene putanje
 					web.ignoring().antMatchers(HttpMethod.POST, "/auth/login");
-					web.ignoring().antMatchers(HttpMethod.POST, "/api/setAuthentication");
+					web.ignoring().antMatchers(HttpMethod.POST, "/auth/logout");
+					web.ignoring().antMatchers(HttpMethod.POST, "/api/mainSecurity/setAuthentication");
 					web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js");
 				}
 				

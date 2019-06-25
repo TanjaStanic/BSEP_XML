@@ -104,7 +104,7 @@ public class AuthController {
     	   if(user.getRoles().contains(rolaAdmin))
            {
            	System.out.println("Admin se loguje");
-           	 ResponseEntity<?> res1 = restTemplate.postForEntity("https://localhost:8762/api/setAuthentication", HReq, JwtAuthenticationRequest.class);
+           	 ResponseEntity<?> res1 = restTemplate.postForEntity("https://localhost:8762/api/mainSecurity/setAuthentication", HReq, JwtAuthenticationRequest.class);
 
            }
            else if(user.getRoles().contains(rolaUser))

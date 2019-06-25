@@ -1,10 +1,11 @@
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
+<div class="row">
+	<div class="col-xs-12">
+   
+          <!-- ->div class="box">
             <div class="box-header">
               <h3 class="box-title"><b>List of accommodations</b></h3>
 
-              <!--  --div class="box-tools">
+              <  --div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                   <input type="text" name="table_search" [(ngModel)] = "searchTerm" class="form-control pull-right" placeholder="Search">
 
@@ -13,45 +14,69 @@
                   </div>
                 </div>
               </div-->
+            <!-- PRODUCT LIST -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Accommodations</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-              <table id="lista" class="table table-hover">
-              <thead>
-               	<tr>
-            	<th>Name</th>
-            	<th>Category</th>
-            	<th>Street</th>
-            	<th>City</th>
-            	<th>Country</th>
-            	<th>Additional Services</th>
-            	<th>Rating</th>
-            	
-            	
-            	
-            	<th></th>
-            	</tr>
-       		 </thead>
-       		 <tbody>
-                <tr *ngFor="let acc of accommodations">
-                <td>{{acc.name}}</td>                
-                <td>{{acc.category}}</td> 
-                <td>{{acc.address.street}}</td>
-                <td>{{acc.address.city}}</td>               
-                <td>{{acc.address.country}}</td> 
+            <div class="box-body">
+              <ul class="products-list product-list-in-box" *ngFor="let acc of accommodations">
+               
+                <li class="item">
+                  <div class="product-img">
+                  
+                   <!--div class="box box-solid">
+		           
+		         
+		            <div class="box-body">
+		              <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+		
+		                <div class="carousel-inner">
+		                  <div class="item " >
+		                  <ul *ngFor="let pic of acc.pictures">
+		                  	<li><img src="{{pic.uri}}" alt="First slide"></li>
+		             
+		                  </ul>
+		
+		                    <div class="carousel-caption">
+		                      o
+		                    </div>
+		                  </div>
+		                
+		                </div>
+		                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+		                  <span class="fa fa-angle-left"></span>
+		                </a>
+		                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+		                  <span class="fa fa-angle-right"></span>
+		                </a>
+		              </div>
+		            </div>
+                  
+                  
+                  </div-->
+                  
+                  
+                    <img src="../assets/images/aleksandar.jpg" alt="Image">
+                  </div>
+                  <div class="product-info">
+                    <a (click)="showMoreClick(acc.id)"  class="product-title">{{acc.name}} 
+                      <span class="label label-warning pull-right">See more</span></a>
+                    <span class="product-description">
+                    	Category: {{acc.category}} <br/>
+                         {{acc.address.street}} {{acc.address.number}}<br/>
+                		{{acc.address.city}}<br/>              
+                		{{acc.address.country}}<br/> 
+                        </span>
+                  </div>
+                </li>
                 
-                <td>{{acc.additional_services}}</td>
-                <td>{{acc.rating}}</td>
-                <td><button (click)="changeAcc(acc)" type="button" class="btn btn-outline-success">Change</button></td>
-                <td><button (click)="deleteAcc(acc)" type="button" class="btn btn-outline-danger">Delete</button></td>   
-                </tr>
-             </tbody>
-
-              </table>
+              </ul>
             </div>
             <!-- /.box-body -->
           </div>
-          <!-- /.box -->
-        </div>
-      </div>
-
+            
+            
+  </div>
+  </div>

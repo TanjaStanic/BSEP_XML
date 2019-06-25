@@ -107,7 +107,7 @@ public class User  implements UserDetails{
 	 * Samo admin ima listu smjestaja
 	 */
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy="user")
 	protected List<Accommodation> accommodations;
 	
@@ -164,7 +164,7 @@ public class User  implements UserDetails{
 	@Transient
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		if(this.roles.isEmpty()) {
+		if(!this.roles.isEmpty()) {
 			Role r = roles.iterator().next();
 			List<Privilege> privileges = new ArrayList<Privilege>();
 			for(Privilege p : r.getPrivileges()) {

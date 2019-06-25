@@ -129,7 +129,6 @@ public class AccommodationUnit {
      * Smjestajna jedinica odgovara tacno jednom smjestaju.
      */
 	
-	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="acc")
 	private Accommodation accommodation;
@@ -148,7 +147,7 @@ public class AccommodationUnit {
 	 * Jedna dodatna usluga moze da odgovora za vise smjestajnih jedinica
 	 */
 	
-	@JsonBackReference
+	
     @ManyToMany
 	@JoinTable(
 	        name = "accommodation_unit_additional_services", 

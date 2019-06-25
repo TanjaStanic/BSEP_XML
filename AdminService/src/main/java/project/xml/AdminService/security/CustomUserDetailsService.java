@@ -10,13 +10,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import project.xml.AdminService.model.Privilege;
 import project.xml.AdminService.model.Role;
 import project.xml.AdminService.model.User;
 import project.xml.AdminService.repository.UserRepository;
 
-
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
 	
 	@Autowired

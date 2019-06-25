@@ -28,6 +28,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Context;
 
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.X500NameBuilder;
@@ -36,6 +38,7 @@ import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
 import org.bouncycastle.operator.OperatorCreationException;
 import org.bouncycastle.pkcs.PKCS10CertificationRequest;
 import org.bouncycastle.pkcs.jcajce.JcaPKCS10CertificationRequest;
+import org.owasp.encoder.Encode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -59,15 +62,24 @@ import project.besp.MegaTravel.service.UserService;
 import project.besp.MegaTravel.service.WithDrawCertService;
 import project.besp.MegaTravel.serviceImpl.LoggingServiceImpl;
 import project.besp.MegaTravel.model.*;
+import project.besp.MegaTravel.security.TokenUtils;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
-@RequestMapping("/certificate")
+@RequestMapping("/api/certificate")
 @CrossOrigin(origins = "http://localhost:4200")
 public class CertificateController {
 	
 	private LoggingServiceImpl logging = new LoggingServiceImpl(getClass());
 	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	private KeyStore keyStore;
+	
+	@Autowired
+	TokenUtils tokenUtils;
 	
 	@Autowired
 	private CertificateService certificateService;
@@ -114,7 +126,7 @@ public class CertificateController {
 	}
 	
 	
-	//@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+	@PreAuthorize("hasAuthority('getUsersWithCetrtificate')")
 	@RequestMapping(value = "/getUsersWithCetrtificate", method = RequestMethod.GET)
 	@ResponseBody
 	public ArrayList<User> getUsersWithCetrtificate() throws KeyStoreException, NoSuchAlgorithmException,
@@ -129,6 +141,15 @@ public class CertificateController {
 		}
 		logging.printInfo("Get Users With Certificates");
 		return returnList;
+
+	}
+	
+    @RequestMapping(value = "/getCert")
+    public ResponseEntity<List<Certificate>> getCert(){
+
+		List<Certificate> allCert = new ArrayList<Certificate>();
+		allCert = certificateService.getAll();
+		return new ResponseEntity<>(allCert,HttpStatus.OK);
 
 	}
 	
@@ -452,6 +473,69 @@ public class CertificateController {
 		else
 			return null;
 	}
+	
+	
+	
+	@RequestMapping(
+			value = "/revoke/{id}/{reason}",
+			method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public Certificate revokeCertificate(@PathVariable("id") Long id,@PathVariable("reason") String reason, @Context HttpServletRequest request){
+		System.out.println("Usao u revokeCertificate "+ id.toString());
+		logger.info("REVCERT");
+		
+		//Certificate certificate2 = certificateService.findOneByIdSubject(id);
+		//System.out.println(certificate2.getIdSubject() + "NZM U CEMU JE PROBLEM");
+		
+		
+		boolean valid = checkId(id);
+		if(valid) {
+
+			Certificate certificate = certificateService.findOneByIdSubject(id);
+			if(certificate!=null) {
+				certificate.setRevoked(true);
+				System.out.println("Razlog je "+reason);
+				certificate.setReasonForRevokation(reason);
+				certificateService.saveCertificate(certificate);
+				User issuer = userService.findOneById(id);
+				issuer.setCertificated(false);
+				userService.saveUser(issuer);
+				List<Certificate> allCertificates = certificateService.getAll();
+				String token = tokenUtils.getToken(request);
+				String email = tokenUtils.getUsernameFromToken(token);
+				User user = (User) this.userService.findUserByMail(Encode.forHtml(email));
+			
+				logger.info("User id: " + user.getId() + ",REVCERTSUCCESS");
+
+				for(Certificate c : allCertificates)
+				{
+					System.out.println("Id issuer " + c.getIdIssuer());
+					if(c.getIdIssuer()==id)
+					{
+						System.out.println("Postoji cert");
+						c.setRevoked(true);
+						c.setReasonForRevokation("Issuer's certificate has been revoked.");
+						certificateService.saveCertificate(c);
+						User subject = userService.findOneById(c.getIdSubject());
+						subject.setCertificated(false);
+						userService.saveUser(subject);
+						
+						
+					}
+				}
+				return certificate;
+			}else {
+				logger.error("REVCERTERRID");
+				return null;
+			}
+		} else {
+			logger.error("REVCERTERRID");
+
+			return null;
+		}
+		
+	}
 
 	@RequestMapping(value = "/deleteCertificate/{serial}", method = RequestMethod.DELETE)
 	@ResponseBody
@@ -555,4 +639,7 @@ public class CertificateController {
 		}
 		return true;
 	}
+	
+	
+	
 }

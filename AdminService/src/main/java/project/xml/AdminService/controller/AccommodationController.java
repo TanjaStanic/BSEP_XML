@@ -1,5 +1,6 @@
 package project.xml.AdminService.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -22,18 +23,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import project.xml.AdminService.model.Accommodation;
 import project.xml.AdminService.model.AdditionalServices;
 import project.xml.AdminService.model.Address;
+import project.xml.AdminService.model.Comment;
+import project.xml.AdminService.model.Image;
 import project.xml.AdminService.model.Location;
 import project.xml.AdminService.repository.AdditionalServiceRepository;
 import project.xml.AdminService.repository.LocationRepository;
 import project.xml.AdminService.repository.AddressRepository;
+import project.xml.AdminService.repository.ImageRepository;
 import project.xml.AdminService.repository.AccommodationRepository;
 import project.xml.AdminService.service.AccommodationService;
 import project.xml.AdminService.service.AdditionalServicesService;
 
 @RestController
-@RequestMapping("/accommodations")
-@CrossOrigin(origins = "*")
-
+@RequestMapping("/api/accommodations")
+@CrossOrigin(origins = "http:localhost:4200")
 
 public class AccommodationController {
 	
@@ -53,13 +56,19 @@ public class AccommodationController {
 	@Autowired
 	private AccommodationService accommodationService;
 	
+	@Autowired
+	ImageRepository imageRepository;
+	
+	@Autowired
+	AdditionalServiceRepository additionalServiceRepository;
+	
 	
 	
 	@Autowired 
 	HttpSession session;
 	
 	//private Address newAddress = new Address();
-	@JsonIgnore
+	
 	@GetMapping(path= "/getAllAcc") //getAll accommodations
 	public ResponseEntity<List<Accommodation>> getAllAcc() {
 		System.out.println("Number of additional services: " + addService.getAll().size());
@@ -68,7 +77,8 @@ public class AccommodationController {
 		return new ResponseEntity<>(acc,HttpStatus.OK);
 	}
 
-	@JsonIgnore
+	
+	@CrossOrigin(origins = "http:localhost:4200")
 	@GetMapping(path= "/getAll") //getAll additional services
 	public ResponseEntity<List<AdditionalServices>> getAll() {
 		System.out.println("Number of additional services: " + addService.getAll().size());
@@ -125,25 +135,82 @@ public class AccommodationController {
 	}
 	
 	@RequestMapping(value="/addAcc",
-			method = RequestMethod.POST,
-			consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+			method = RequestMethod.POST)
 	public ResponseEntity<?> addAcc(@RequestBody Accommodation acc){
-		
+		System.out.println("Usao");
 		Accommodation newAcc = new Accommodation();
 		newAcc.setName(acc.getName());
+		System.out.println("Name");
+
 		newAcc.setDescription(acc.getDescription());
+		System.out.println("Desc");
+
 		newAcc.setCancelationDays(acc.getCancelationDays());
+		System.out.println("Cancdays");
+
 		newAcc.setRating(acc.getRating());
+		System.out.println("Rating");
+
 		newAcc.setCategory(acc.getCategory());
+		System.out.println("cate");
+
 		newAcc.setAdditional_services(acc.getAdditional_services());
+		System.out.println("additional");
+
 		newAcc.setAddress(acc.getAddress());
 		newAcc.setLocation(acc.getLocation());
+		
+		newAcc.setUser(acc.getUser());
 		
 		accommodationRepository.save(newAcc);
 		
 		return new ResponseEntity<>(newAcc,HttpStatus.CREATED);
 		
+	}
+	
+	@RequestMapping(value ="/getAllPictures",
+			method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)	
+	public ResponseEntity<?> getAllPictures(@RequestBody Long id){
+		List<Image> newList = new ArrayList<Image>();
+		Accommodation acc = accommodationRepository.findOneById(id);
+		System.out.println("In get all pictures");
+		newList = imageRepository.findAllByAccomodation(acc);
+		if (newList == null) {
+			System.out.println("no pictures");
+			return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(newList,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value ="/getAdditionalServices",
+			method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)	
+	public ResponseEntity<?> getAdditionalServices(@RequestBody Long id){
+		List<AdditionalServices> newList = new ArrayList<AdditionalServices>();
+		Accommodation acc = accommodationRepository.findOneById(id);
+		System.out.println("In get all additional services");
+		newList = additionalServiceRepository.findAllByAccommodation(acc);
+		if (newList == null) {
+			System.out.println("no aditional servuces");
+			return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(newList,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value ="/getAccommodation",
+			method = RequestMethod.POST)	
+	public ResponseEntity<Accommodation> getAccommodataion(@RequestBody Long id){
+		//List<AdditionalServices> newList = new ArrayList<AdditionalServices>();
+		Accommodation acc = accommodationRepository.findOneById(id);
+		System.out.println("In get accommodationnnnnnnnnn");
+		if (acc == null) {
+			System.out.println("no acccccccc");
+			return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(acc,HttpStatus.OK);
 	}
 	
 	

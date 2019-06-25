@@ -7,7 +7,10 @@ import { AdditionalServices } from '../model/additionalServices';
 import { Accommodation } from '../model/accommodation';
 import { Address } from '../model/adress';
 import { Location } from '../model/location';
+import { User } from '../model/user';
+
 import { AccServiceService } from '../service/accommodation-service/acc-service.service';
+import { UserServiceService } from '../service/user-service/user-service.service';
 
 
 @Component({
@@ -25,9 +28,12 @@ export class AddAccommodationComponent implements OnInit {
     hideError : boolean;
     ad : string;   
     id : number;
+    storageId :number;
 
-  constructor( private additionalService : AdditionalServiceService, private accService : AccServiceService) { }
+
+  constructor( private additionalService : AdditionalServiceService, private accService : AccServiceService, private userService : UserServiceService) { }
     
+    agents : User = new User();
     
   addAcc(){
       console.log(this.acc.name + " IMEE" + this.acc.description + "opiiiis");
@@ -46,6 +52,9 @@ export class AddAccommodationComponent implements OnInit {
       
       this.acc.address = this.address;
       this.acc.location = this.location;
+      this.acc.additional_services = this.additionalServices;
+      //this.acc.agents.id = this.id;
+     // console.log(this.acc.agents.id);
       this.accService.addAcc(this.acc).subscribe(data=> {        
           console.log(this.acc.address);
            
@@ -55,6 +64,12 @@ export class AddAccommodationComponent implements OnInit {
     
   ngOnInit() {
      this.hideError = true;
+      
+     this.userService.getAllAgents().subscribe(data=>{
+         this.agents=data;
+         console.log(data);
+         
+         });     
      this.additionalService.getAll().subscribe(data=>{
          this.additionalServices=data;
          console.log(data);

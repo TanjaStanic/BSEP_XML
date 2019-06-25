@@ -6,6 +6,8 @@ import { UserServiceService } from '../service/user-service/user-service.service
 import { User } from '../model/user';
 import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Certificate } from '../model/certificate';
+
 //import { InitialStylingValuesIndex } from '@angular/core/src/render3/interfaces/styling';
 
 @Component({
@@ -15,6 +17,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class AddCertificateComponent implements OnInit {
     id: Object;
+    id1:number;
     email: Object;
     self: Object;
     startDate: string;
@@ -32,7 +35,7 @@ export class AddCertificateComponent implements OnInit {
     ngOnInit() {
        
         console.log('usao u on init');
-        console.log('parametar: ' + this.self);
+        console.log('parametar: ' + this.id1);
 
         //if (this.self === 'nonself'){
             console.log('usao if');
@@ -58,25 +61,54 @@ export class AddCertificateComponent implements OnInit {
                 console.log(this.certificatedUsers);
             }
         }
+    
+ createCertificate() {
+    console.log('create ' + this.author);
+     
+    console.log(this.self);
+    if (this.self == 'self') {
+      console.log('id:' + this.id1);
+      console.log('start:' + this.startDate);
+      console.log('end:' + this.endDate);
+      this.certificateService.createSelfCertificate(this.id as string, this.startDate, this.endDate).subscribe(
+        data => {window.location.href = 'http://localhost:4200'; },  err => {this.handleAuthError(err); }
+        );
+    } else {
+      console.log('id:' + this.id);
+      console.log('start:' + this.startDate);
+      console.log('end:' + this.endDate);
+      console.log('author:' + this.author);
+      // ovde pozvati funkciju za pravljenje obicnog sertifikata
+      this.certificateService.createNonSelfCertificate(this.id as string, this.startDate, this.endDate, this.author as string).subscribe(
+        data => {this.updateUser(this.id as string); } ,  err => {this.handleAuthError(err); }
+      );
+    }
+  }
     //}
-    createCertificate(){
+   /* createCertificate(){
         console.log('Sertifikat kreira: ' + this.author);
         var currentUser = JSON.parse(localStorage.getItem('user'));
 
         console.log(currentUser);
         //razmotriti self sertifikate
        // this.author = currentUser;
-        console.log('id:' + currentUser.id);
+        console.log('id:' + this.id);
         console.log('start:' + this.startDate);
         console.log('end:' + this.endDate);
         console.log('author:' + this.author);
         this.certificateService.createNonSelfCertificate(currentUser.id as string, this.startDate, this.endDate, this.author as string).subscribe(
                 data => {this.updateUser(currentUser.id as string); }      
         );
-    }
+    }*/
     updateUser(param: string){
         this.userService.changeToCertificatedUser(param).subscribe(
                 data => window.location.href = 'http://localhost:4200'
                 );
     }
+    
+    handleAuthError(err: HttpErrorResponse) {
+    if (err.status === 403) {
+      alert('Not allowed id!');
+    }
+  }
 }

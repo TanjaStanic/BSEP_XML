@@ -33,7 +33,7 @@ logged: boolean;
     } else {
       console.log('Neko je ulogovan');
       this.logged = true;
-      //this.userService.getLogged(this.token).subscribe(podaci => { this.pathToList(podaci); });
+      this.userService.getLogged(this.token).subscribe(podaci => { this.pathToList(podaci); });
      }
   }
 

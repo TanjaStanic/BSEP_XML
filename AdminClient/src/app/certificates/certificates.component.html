@@ -19,26 +19,46 @@
               <table id="lista" class="table table-hover">
               <thead>
                	<tr>
-            	<th>Name</th>
-            	<th>E-mail</th>
-           	 	<th>Certificated</th>
-            	<th>Check/Validate</th>
+               	<th>Id subject</th>               	
+            	<th>Start date</th>
+           	 	<th>End date</th>
+            	<th>Revoked</th>
+            	<th>Reason for revocation</th>
+            	
             	<th></th>
             	</tr>
        		 </thead>
              <tbody>
-               <tr *ngFor="let u of users">
-               <td>{{u.fistName}} {{u.lastName}}</td>
-               <td>{{u.email}}</td>
-               <td *ngIf="u.certificated">
-               		<button class="btn btn-default	btn-md" id="revoke{{u.id}}" (click)="revokeCertificate(u.id)">Revoke</button></td>
-               <td *ngIf="u.certificated">
-               		<button class="btn btn-default	btn-md" (click)="validate(u.id)">Validate</button></td>
-               <td *ngIf="!u.certificated">Revoked!</td>
+               <tr *ngFor="let cert of certificates"  >
+               <td>{{cert.idSubject}}</td>               
+               <td>{{cert.startDate}}</td>
+               <td> {{cert.endDate}}</td>
+               <td>{{cert.revoked}}</td>
+               <td>{{cert.reasonForRevokation}}</td>
+               <td *ngIf="!cert.revoked">
+               		<button class="btn btn-default	btn-md" id="revoke{{cert.idSubject}}" (click)="revokeCertificate(cert.idSubject)">Revoke</button></td>
+               <!--  td *ngIf="user.certificated">
+               		<button class="btn btn-default	btn-md" (click)="validate(cert.idSubject)">Validate</button></td-->
+               <!--  td *ngIf="!user.certificated">Revoked!</td-->
                </tr>
 			</tbody>
               </table>
             <br/>
+            
+          <div id="revokeDiv" class="container-fluid" hidden="true">
+        <div class="row">
+             <div class="col-xs-2" > 
+              <label for="email">Reason:</label>
+            </div>
+          <div class="col-xs-7" > 
+              <input type="text" class="form-control" id="reason" [(ngModel)]="reasonText" name="reason" #reason="ngModel" placeholder="Enter the reason">
+             </div>
+             <div class="col-xs-1" id="btnRevoke" > 
+                <button id="confirmReason"  (click)="revokation()" class="btn btn-default btn-md" >Confirm</button>
+              </div>   	
+        </div>
+      </div>  
+
          
             
            
@@ -75,26 +95,7 @@
       </div>
       </div>
             <!-- /.box-body -->
-      <div class="row" id="revokeDiv" hidden="true">
-           <div class="col-xs-12">
-	        	<div class="box">
-	        		<div class="box-body table-responsive no-padding">
-	        		<br/>
-	        		
-		            	<div class="col-xs-1" > 
-		              	<label>Reason:</label>
-		             	</div>
-			            <div class="col-xs-4" > 
-			              <input type="text" class="form-control" id="reason" [(ngModel)]="reasonText" name="reason" #reason="ngModel" placeholder="Enter the reason">
-					    </div>
-			            <div class="col-xs-1" id="btnRevoke" > 
-			                <button id="confirmReason"   class="btn btn-default btn-md" >Confirm</button>
-			            </div>   
-			          <br/>
-	               </div>	
-        	   </div>
-      		</div>
-      	</div>
+
           <!-- /.box -->
         </div>
       </div>

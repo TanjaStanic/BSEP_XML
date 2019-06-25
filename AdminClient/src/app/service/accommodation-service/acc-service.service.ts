@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { Accommodation } from '../../model/accommodation';
 import { Location } from '../../model/location';
 import { Address } from '../../model/adress';
+import {AuthServiceService} from '../auth-service/auth-service.service';
+
 
 
 
@@ -16,30 +18,45 @@ export class AccServiceService {
         
     
 
-  constructor(private http: HttpClient, private router : Router) { }
+  constructor(private http: HttpClient, private router : Router,private auth: AuthServiceService) { }
     
     getAll() : Observable<any> {
-    return this.http.get('https://localhost:8762/accommodations/getAll'); 
+    return this.http.get('https://localhost:8762/api/accommodations/getAll'); 
        }
     
     
    getAllAcc() : Observable<any> {
-    return this.http.get('//localhost:8762/user/getAcc'); 
+    return this.http.get('https://localhost:8762/api/getAcc',{headers: this.auth.createAuthorizationTokenHeader()}); 
         }
     
     addAcc(acc : Accommodation) {
         console.log(acc.address);
-        return this.http.post('//localhost:8762/accommodations/addAcc',acc);
+        return this.http.post('https://localhost:8762/api/accommodations/addAcc',acc);
         }
     
         
     addAccLocation(location : Location){
         console.log(location.geoWidth + "SIRINA");
-        return this.http.post('//localhost:8762/accommodations/addAccLocation',location);
+        return this.http.post('https://localhost:8762/api/accommodations/addAccLocation',location);
         }
     
     addAccAddress(address : Address) {
-        return this.http.post("//localhost:8762/accommodations/addAccAddress",address);
+        return this.http.post("https://localhost:8762/api/accommodations/addAccAddress",address);
+        }
+    
+    getAllPictures(id : number) : Observable<any> {
+      return this.http.post('https://localhost:8762/api/accommodations/getAllPictures',id); 
+
+        }
+    
+    getAdditionalServices(id : number) : Observable<any> {
+      return this.http.post('https://localhost:8762/api/accommodations/getAdditionalServices',id); 
+
+        }
+    
+    getAccommodation(id : number) : Observable<any> {
+      return this.http.post('https://localhost:8762/api/accommodations/getAccommodation',id); 
+
         }
       
   

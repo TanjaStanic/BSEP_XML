@@ -121,7 +121,7 @@ public class Address {
 	@OneToMany(mappedBy="address")
     protected List<User> users;
 	
-/*	@OneToOne(mappedBy="address")
+	/*@OneToOne(mappedBy="address")
     protected Accommodation accommodation;*/
     /**
      * Gets the value of the street property.

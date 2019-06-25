@@ -10,6 +10,7 @@ package project.xml.AdminService.model;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,12 +32,15 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.CascadeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 
 /**
@@ -122,8 +126,11 @@ import org.springframework.ws.server.endpoint.annotation.Endpoint;
     "category",
     "description",
 })*/
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+
 @Entity
 @Table(name = "accommodation")
+
 public class Accommodation implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -139,7 +146,7 @@ public class Accommodation implements java.io.Serializable {
     protected String name;
     
 	
-    @XmlElement(required = true, name="cancelation_days")
+    @XmlElement(required = true)
     @Column(name = "cancelation_days", nullable = false)
     protected BigInteger cancelationDays;
     
@@ -168,22 +175,16 @@ public class Accommodation implements java.io.Serializable {
 	@JoinColumn(name = "acc_address")
 	protected Address address;
 	
-    /*@OneToMany(fetch = FetchType.LAZY,mappedBy="accommodation")
-    protected List<AccommodationUnit> accommodation_unit;*/
+    @OneToMany(fetch = FetchType.LAZY,mappedBy="accommodation")
+    protected List<AccommodationUnit> accommodation_unit;
     
 	
-	
-    
-    @ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(
-	        name = "accommodation_additional_services", 
-	        joinColumns = { @JoinColumn(name = "accommodation_id") }, 
-	        inverseJoinColumns = { @JoinColumn(name = "additional_id") }
-	    )
+
+    @OneToMany(mappedBy = "accommodation")
     protected List<AdditionalServices> additional_services;
 
 	
-    /*@OneToMany(fetch = FetchType.LAZY,mappedBy="accomodation")
+   /* @OneToMany(fetch = FetchType.LAZY,mappedBy="accomodation")
     protected List<Image> images;*/
 	
 	

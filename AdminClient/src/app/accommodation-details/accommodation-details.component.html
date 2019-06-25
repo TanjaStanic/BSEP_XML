@@ -1,0 +1,113 @@
+
+
+ <section class="content-header">
+
+      <h1 class="profile-username text-Left">{{acc.name}}</h1>
+        <br/>
+</section>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box">
+	      <div class="box-body box-profile">
+			<div class="post">
+		      <div class="username">
+		         Category : {{acc.category}} *<br/> 
+		         </div>                    
+		         <div class="description">
+					{{acc.address.street}} {{acc.address.number}} <br/>
+					{{acc.address.city}} <br/>
+					{{acc.address.country}} <br/> <br/>
+					{{acc.description}} moze neki opis<br/>
+				</div>
+	       		</div>
+	       	</div>
+	     </div>
+		</div>
+
+
+
+<div class="col-sm-12">	
+<div class="row-sm-12">
+  <div class="box">	
+  		<div class="box-header with-border">
+              <h3 class="box-title">All pictures of accommodation</h3>
+        </div>
+        <div class="box-body box-profile" >
+	  		<div  class="col-sm-4" *ngFor="let img of images">
+	  			 <img class="img-responsive" src="{{img.uri}}">
+	  			 <br/>
+	  		</div>
+  		</div>
+	</div>	
+</div>
+</div>
+
+
+<div class="col-xs-12">
+	<div class="box">
+	<div class="box-header with-border">
+       <h3 class="box-title"><b>Comments..</b></h3>
+    </div>
+      <div class="box-body box-profile">
+				<ul class="list-inline">
+                  <li class="pull-right">
+                      <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
+                        (5)</a></li>
+                  </ul>
+       <input class="form-control input-sm" type="text" placeholder="Type a comment">
+	</div>
+	</div>
+</div>
+ <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><b>Details</b></h3>
+
+              <div class="box-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search" [(ngModel)] = "searchTerm" class="form-control pull-right" placeholder="Search">
+
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="box-body table-responsive no-padding">
+              <table id="lista" class="table table-hover">
+              <thead>
+               	<tr>
+            	<th>Name</th>
+            	<th>Category</th>
+            	<th>Street</th>
+            	<th>City</th>
+            	<th>Country</th>
+            	<th>Additional Services</th>
+            	<th>Rating</th>
+            	
+            	
+            	
+            	<th></th>
+            	</tr>
+       		 </thead>
+       		 <tbody>
+                <td>{{acc.name}}</td>                
+                <td>{{acc.category}}</td> 
+                <td>{{acc.address.street}}</td>
+                <td>{{acc.address.city}}</td>               
+                <td>{{acc.address.country}}</td> 
+                
+                <td>{{acc.additional_services}}</td>
+                <td>{{acc.rating}}</td>
+                <td><button (click)="changeAcc(acc)" type="button" class="btn btn-outline-success">Change</button></td>
+                <td><button (click)="deleteAcc(acc)" type="button" class="btn btn-outline-danger">Delete</button></td>   
+             </tbody>
+
+              </table>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+</div>

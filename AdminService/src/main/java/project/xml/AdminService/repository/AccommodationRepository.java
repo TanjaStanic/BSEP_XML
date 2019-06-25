@@ -9,5 +9,8 @@ import project.xml.AdminService.model.Accommodation;
 @Repository
 public interface AccommodationRepository extends JpaRepository<Accommodation, Long>{
 	List<Accommodation> findAll();
+	Accommodation findOneById(Long id);
+
+	
 	
 }

@@ -77,7 +77,7 @@
         
         <li class="treeview" [hidden]="notLogged">
           <a href="#">
-            <i class="fa fa-building"></i> <span ><a routerLink="addAcc">Accommodation</a></span>
+            <i class="fa fa-building"></i> <span ><a routerLink="addAcc">Add accommodation</a></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -86,7 +86,7 @@
         
         <li class="treeview" [hidden]="notLogged">
           <a href="#">
-            <i class="fa fa-list-ul"></i> <span ><a routerLink="listAcc">List of accommodations</a></span>
+            <i class="fa fa-list-ul"></i> <span ><a routerLink="listAcc">Accommodations</a></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -95,7 +95,16 @@
         
         <li class="treeview" [hidden]="notLogged">
           <a href="#">
-            <i class="fa fa-list-ul"></i> <span [hidden]="notLogged"><a routerLink="listUsers">List of all users</a></span>
+            <i class="fa fa-list-ul"></i> <span [hidden]="notLogged"><a routerLink="listUsers">Users</a></span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        </li>
+                       
+       <li class="treeview" [hidden]="notLogged">
+          <a href="#">
+            <i class="fa fa-list-ul"></i> <span [hidden]="notLogged"><a routerLink="listAgents">Agents</a></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

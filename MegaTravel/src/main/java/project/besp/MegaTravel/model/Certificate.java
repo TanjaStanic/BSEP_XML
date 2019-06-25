@@ -15,28 +15,28 @@ public class Certificate {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column
+	@Column(name="idissuer")
 	private Long idIssuer;
 	
-	@Column
+	@Column(name="idsubject")
 	private Long idSubject;
 	
-	@Column
+	@Column(name="startdate")
 	private Date startDate;
 	
-	@Column
+	@Column(name="enddate")
 	private Date endDate;
 	
-	@Column
+	@Column(name="revoked")
 	private boolean revoked;
 	
-	@Column
+	@Column(name="ca")
 	private boolean ca;
 	
-	@Column
+	@Column(name="reasonforrevokation")
 	private String reasonForRevokation;
 	
-	@Column
+	@Column(name="idcertificateissuer")
 	private Long idCertificateIssuer;
 
 	public Certificate() {

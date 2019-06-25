@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
     htmlStr: string;
     isLoggedIn = false;
     id : string;
+    
    
     
     constructor(private userService: UserServiceService, private route: ActivatedRoute, private auth : AuthServiceService, private router : Router) { }
@@ -48,20 +50,27 @@ export class LoginComponent implements OnInit {
     
  
 checkUser(logged) {
-    let user_token= logged as UserToken;
-    // tslint:disable-next-line:triple-equals
-    if(user_token.accessToken == 'error') {
-      this.htmlStr = 'The e-mail or password is not correct.';
-    } else {
-      this.auth.setJwtToken(user_token.accessToken);
-      console.log(user_token.accessToken);
-      this.userService.getLogged(user_token.accessToken).subscribe(podaci => {
-      console.log('return: ' + podaci);        
-      this.router.navigate(['homePage']); 
-      });
-      
-    }
+        let user_token= logged as UserToken;
+        // tslint:disable-next-line:triple-equals
+        if(user_token.accessToken == 'error') {
+          this.htmlStr = 'The e-mail or password is not correct.';
+        } else {
+          this.auth.setJwtToken(user_token.accessToken);
+          console.log(user_token.accessToken);
+          console.log("prije getLogged");
+          this.userService.getLogged(user_token.accessToken).subscribe(podaci => {
+              console.log("u getLogged");
+              var currentUser=podaci as User; 
+              console.log("cuvam u json currentusera: ");
+              console.log(podaci);
+              
+              localStorage.setItem('user', JSON.stringify(currentUser));
+              //this.ssCertificate(podaci);
+              this.router.navigate(['homePage']);
+             
+     });
   }
+    }
     
     
 escapeHTML(text): string {
@@ -87,18 +96,17 @@ escapeHTML(text): string {
   }
 
 
-ssCertificate(data){
+/*ssCertificate(data){
     var loggedUser = data as User;
     var admin = false as boolean;
     var obican = false as boolean;
 
-    for(let role of loggedUser.roles)
-    {
-      if(role.name == "ROLE_ADMIN")
+   
+      if(loggedUser.roles == "ROLE_ADMIN")
         admin=true;
-      if(role.name == "ROLE_USER")
+      if(loggedUser.roles == "ROLE_USER")
         obican=true;
-    }
+    
 
     if (admin){
       //this.u.getSelfSigned().subscribe(podaci => { this.checkSelfSigned(podaci, loggedUser.id) });
@@ -110,7 +118,7 @@ ssCertificate(data){
         }
   }
 
-  }
+  }*/
 
 checkSelfSigned(data, id) {
     let selfSigned = data as boolean;

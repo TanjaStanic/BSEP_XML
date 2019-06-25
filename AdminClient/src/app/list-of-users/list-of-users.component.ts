@@ -14,6 +14,16 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./list-of-users.component.scss']
 })
 export class ListOfUsersComponent implements OnInit {
+    
+    
+    
+  constructor(private userService : UserServiceService, private route : Router) { }
+       
+     //users : Array<User> = new Array<User>();
+     activate : ActivateUser;
+     id : number;   
+     users : User[]; 
+    
     _searchTerm : string;
     
     filteredUsers : User[];
@@ -29,22 +39,14 @@ export class ListOfUsersComponent implements OnInit {
         this.filteredUsers = this.filtereUsers(value);
     }
     
-    filtereUsers(searchString : string){
+    filtereUsers(_searchTerm : string){
         
       
         return this.users1.filter(user=>
-            user.firstName.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
+            user.firstName.toLowerCase().indexOf(_searchTerm.toLowerCase()) !== -1);
     
     
     }
-    
-    
-  constructor(private userService : UserServiceService, private route : Router) { }
-       
-     //users : Array<User> = new Array<User>();
-     activate : ActivateUser;
-     id : number;   
-     users : User[]; 
     
     
    activateUser(user) {
@@ -68,7 +70,7 @@ export class ListOfUsersComponent implements OnInit {
        this.activate = new ActivateUser(user.email,true,"BLOCK");
        this.userService.activateUser(this.activate).subscribe(data=>{
            user.blocked = data.blocked;
-           console.log(user.bocked);
+           console.log(user.blocked);
            });
        } else {
             
@@ -80,11 +82,7 @@ export class ListOfUsersComponent implements OnInit {
   ngOnInit() {
      
       this.userService.getAll().subscribe(data =>{
-      this.users = data;
-      //console.log(this.filteredUsers);
-      //filteredUsers[];
-      //this.users1 = data;  
-
+      this.filteredUsers = data;
       console.log(data);
       
     });

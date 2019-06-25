@@ -21,6 +21,7 @@ import { ListOfAccommodationsComponent } from './list-of-accommodations/list-of-
 import { AddCertificateComponent } from './add-certificate/add-certificate.component';
 import { UserFilterPipe } from './model/user-filter.pipe';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import { AccommodationDetailsComponent } from './accommodation-details/accommodation-details.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { AdminProfileComponent } from './admin-profile/admin-profile.component';
     AddCertificateComponent,
     UserFilterPipe,
     AdminProfileComponent,
+    AccommodationDetailsComponent,
     
   ],
   imports: [

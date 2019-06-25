@@ -40,12 +40,6 @@ public class AdminServiceApplication {
 		return args;
 	}
 	
-
-	 @Bean
-	 public RestTemplate template() throws Exception{
-		 RestTemplate template = new RestTemplate();
-		 return template;
-	 }
 	public static void main(String[] args) {
 		SpringApplication.run(AdminServiceApplication.class, args);
 		System.out.println("Helloo form AdminService");
