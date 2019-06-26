@@ -7,42 +7,127 @@
   <div class="login-box-body">
     <p class="login-box-msg"><b>Add new Certificate</b></p>
 
-    <form method="post" class="registration" (submit)="createCertificate()">
+    <form method="post" class="registration" (submit)="createCertificate(cert)">
      
       <div class="form-group has-feedback">
       <label for="name">Start date:</label>  
-        <input type="text" class="form-control" [(ngModel)] = "startDate" #startDatee="ngModel" name="startDatee" type="date" min="{{today | date: 'yyyy-MM-dd'}}"
+        <input type="text" class="form-control" [(ngModel)] = "cert.startDate" #startDatee="ngModel" name="startDatee" type="date" min="{{today | date: 'yyyy-MM-dd'}}"
         					  id="startCertificate" placeholder="Start Date" required>
         <span class="glyphicon form-control-feedback"><i class="fa fa-calendar"></i></span>
       </div>
       
       <div class="form-group has-feedback">
       <label for="name">End date:</label>  
-        <input type="text" class="form-control" [(ngModel)] = "endDate" #endDatee="ngModel" name="endDatee" type="date" min="{{startDate | date: 'yyyy-MM-dd'}}"
+        <input type="text" class="form-control" [(ngModel)] = "cert.endDate" #endDatee="ngModel" name="endDatee" type="date" min="{{startDate | date: 'yyyy-MM-dd'}}"
         					  id="endCertificate" placeholder="End Date" required>
         <span class="glyphicon form-control-feedback"><i class="fa fa-calendar"></i></span>
       </div>
+      
+       <label>Key algorithm?</label>
+			 <div class="form-group">
+				   <label class="radio-inline"> <input type="radio" value="DSA" name="DSA" #keyAlgorithm="ngModel"
+				             [(ngModel)]="cert.keyAlgorithm" required /> DSA
+			                   	</label> <label class="radio-inline"> <input type="radio" name="RSA" #keyAlgorithm="ngModel"
+			           		value="RSA" [(ngModel)]="cert.keyAlgorithm" required /> RSA
+				        </label>
+			               </div>
+			               
+			               
+	<label>Key size?</label>
+		         	<div class="form-group">
+			       	<label class="radio-inline"> <input type="radio" value="512" #keySize="ngModel" name="512"
+			  		[(ngModel)]="cert.keySize" required /> 512
+			        	</label> <label class="radio-inline"> <input type="radio" #keySize="ngModel" name="1024"
+					value="1024" [(ngModel)]="cert.keySize" required /> 1024
+			       	</label> <label class="radio-inline"> <input type="radio" #keySize="ngModel" name="2048"
+					value="2048" [(ngModel)]="cert.keySize" required /> 2048
+			         	</label> <label class="radio-inline"> <input type="radio" #keySize="ngModel" name="4096"
+					value="4096" [(ngModel)]="cert.keySize" required /> 4096
+			      	</label>
+			        </div>
+			        
+			        
+<div class="form-group">
+             <label for="exampleInputName">Common name</label>
+             <input type="text" class="form-control" id="exampleInputName" name="commonName" #commonName="ngModel" 
+					[(ngModel)]="cert.commonName">
+ </div>
+ 
+ 
+ <div class="form-group">
+                     <label for="exampleInputEmail">Given name</label>
+                      <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
+                      name="givenName" #givenName="ngModel" 
+					[(ngModel)]="cert.givenName">
+            </div>
+			        
+  <div class="form-group">
+                 <label for="exampleInputEmail">Surname</label>
+                <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
+                name="surname" #surname="ngModel" 
+					[(ngModel)]="cert.surname">
+            </div> 
+            
+          <div class="form-group">
+               <label for="exampleInputEmail">Organization</label>
+             <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
+             name="organization" #organization="ngModel" 
+					[(ngModel)]="cert.organization">
+   </div> 
+   
+   
+   <div class="form-group">
+                                <label for="exampleInputEmail">Organization unit</label>
+                                <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
+                                name="organizationUnit" #organizationUnit="ngModel" 
+					[(ngModel)]="cert.organizationUnit">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputEmail">Country</label>
+                                <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
+                                name="country" #country="ngModel" 
+					[(ngModel)]="cert.country">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputEmail">Email</label>
+                                <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
+                                name="email" #email="ngModel" 
+					[(ngModel)]="cert.email">
+                            </div>
+      
+      
+      
+      
+      
       
     <div class="form-group row" id="element1">
       <div class="col-xs-6">	
            <i class="glyphicon"></i>
          <label for="endDate">Issuer:</label>
-        <select name="issuer" id="lista_issuer" [(ngModel)]="author">
+        <select name="issuer" id="lista_issuer" [(ngModel)]="cert.issuer">
          <option  *ngFor="let c of certificatedUsers; let i = index" [value]="i">{{i}}. {{c.email}}</option>
         </select>
       </div>
    </div>  
    
    
- <div class="form-group row" id="element2">
-      <div class="col-xs-6">	
-           <i class="glyphicon"></i>
-         <label for="endDate">Issuer:</label>
-        <select name="user" id="lista_issuer" [(ngModel)]="subject">
-         <option  *ngFor="let c of noncertificatedUsers; let i = index" [value]="i">{{i}}. {{c.email}}</option>
-        </select>
-      </div>
-   </div> 
+  <label ng-show="!uloga">Certification Authority?</label>
+			<div class="form-group" >
+				<label class="radio-inline"> <input type="radio" value=true name="true" #certificationAuthority="ngModel" 
+					[(ngModel)]="cert.certificationAuthority" required /> Yes
+				</label> <label class="radio-inline"> <input type="radio" #certificationAuthority="ngModel" name="false"
+					value=false [(ngModel)]="cert.certificationAuthority" required /> No
+				</label>
+			</div>
+			<div class="form-group">
+				<label>Key alias:</label> <input type="text" name="alias" #keyAlias="ngModel"
+					[(ngModel)]="cert.keyAlias" class="form-control"
+					placeholder="Enter alias" required />
+			</div>
+
+
       
       <div class="row" position = "center">
         <!-- /.col -->

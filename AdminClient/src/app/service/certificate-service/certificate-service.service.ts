@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {AuthServiceService} from '../auth-service/auth-service.service';
+import {Cert } from '../../model/cert';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,9 @@ export class CertificateServiceService {
       return this.http.post('https://localhost:8443/api/certificate/createSelfSigned/' + startDate + '/' + endDate, idIssuer, {headers: this.auth.createAuthorizationTokenHeader()});
 
   }  
-  createNonSelfCertificate(idSubject: string, startDate: string, endDate: string, author: string) {
+  createNonSelfCertificate(cert : Cert) {
       console.log('creating nonself certificate...');
-      return this.http.post('https://localhost:8443/api/certificate/create/' + idSubject + '/' + startDate + '/' + endDate, author, {headers: this.auth.createAuthorizationTokenHeader()});
+      return this.http.post('https://localhost:8443/api/certificate/generateCertificate/' ,cert,{headers: this.auth.createAuthorizationTokenHeader()});
    }
     
     

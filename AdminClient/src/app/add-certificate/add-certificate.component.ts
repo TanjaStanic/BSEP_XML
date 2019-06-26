@@ -4,6 +4,8 @@ import { CertificateServiceService } from  '../service/certificate-service/certi
 import { UserServiceService } from '../service/user-service/user-service.service';
 
 import { User } from '../model/user';
+import { Cert } from '../model/cert';
+
 import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Certificate } from '../model/certificate';
@@ -30,6 +32,7 @@ export class AddCertificateComponent implements OnInit {
     noncertificatedUsers: Array<any>;
     author: number;
     subject : number;
+    cert : Cert = new Cert();
 
     constructor(private certificateService: CertificateServiceService, private userService: UserServiceService, private route: ActivatedRoute) { 
        this.route.params.subscribe( params => {this.self = params.self, this.id = params.id; });
@@ -74,15 +77,8 @@ export class AddCertificateComponent implements OnInit {
         }
     
  createCertificate() {
-      console.log('create ' + this.author);
-     
-     
-      console.log('id:' + this.subject);
-      console.log('start:' + this.startDate);
-      console.log('end:' + this.endDate);
-      console.log('author:' + this.author);
-      // ovde pozvati funkciju za pravljenje obicnog sertifikata
-      this.certificateService.createNonSelfCertificate(this.subject, this.startDate, this.endDate, this.author).subscribe(
+      console.log(this.cert);
+      this.certificateService.createNonSelfCertificate(this.cert).subscribe(
         data => {} ,  err => {this.handleAuthError(err); }
       );
     //}

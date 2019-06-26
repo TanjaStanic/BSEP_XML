@@ -154,7 +154,7 @@ public class CertificateController {
 	}
 	
 //	@PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
-	@RequestMapping(
+	/*@RequestMapping(
 			value = "/create/{id_subject}/{start_date}/{end_date}",
 			method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -235,7 +235,7 @@ public class CertificateController {
 		
 		logging.printInfo("Create User");
 		return new ResponseEntity<Certificate>(certificate , HttpStatus.OK);
-	}
+	}*/
 	
 	@RequestMapping(value = "/generateCertificate", method = RequestMethod.POST)
 	@ResponseBody
