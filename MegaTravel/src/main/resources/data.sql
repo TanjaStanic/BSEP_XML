@@ -147,7 +147,6 @@ insert into certificate (id, idissuer, idsubject, valid_from, valid_to,revoked,c
 
 --insert into accommodation_additional_services (accommodation_id,additional_id) values (1,1);
 --insert into accommodation_additional_services (accommodation_id,additional_id) values (1,2);
---insert into accommodation_additional_services (accommodation_id,additional_id) values (2,4);
 --insert into accommodation_additional_services (accommodation_id,additional_id) values (2,5);
 
 insert into accommodation_unit (accommodation_unit_id,capacity,number_of_room,floor,size,type, acc,agent_units)
