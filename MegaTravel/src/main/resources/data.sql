@@ -144,17 +144,7 @@ insert into certificate (id, idissuer, idsubject, valid_from, valid_to,revoked,c
 				values (5,2,5,'2019-06-26','2020-06-26',0,1,'',	1561575457468);
 insert into certificate (id, idissuer, idsubject, valid_from, valid_to,revoked,ca,reasonforrevokation,serial_number) 
 				values (6,2,null,'2019-06-26','2020-06-26',0,1,'',	1561575457469);				
---insert into certificate (id, idissuer, idsubject, startdate, enddate,revoked,ca,reasonforrevokation,idcertificateissuer) 
-				--values (2,1,2,'2019-03-01','2020-03-01',0,1,'',2);				
---insert into certificate (id, idissuer, idsubject, startdate, enddate,revoked,ca,reasonforrevokation,idcertificateissuer) 
-				--values (3,1,3,'2019-03-01','2020-03-01',0,1,'',3);
---insert into certificate (id, idissuer, idsubject, startdate, enddate,revoked,ca,reasonforrevokation,idcertificateissuer) 
-				--values (4,1,4,'2019-03-01','2020-03-01',0,1,'',4);				
---insert into certificate (id, idissuer, idsubject, startdate, enddate,revoked,ca,reasonforrevokation,idcertificateissuer) 
-				--values (5,1,5,'2019-03-01','2020-03-01',0,1,'',5);				
---insert into certificate (id, idissuer, idsubject, startdate, enddate,revoked,ca,reasonforrevokation,idcertificateissuer) 
-				--values (6,1,6,'2019-03-01','2020-03-01',0,1,'',6);				
-				
+
 --povezivanje smjestaja i additional servica
 --insert into accommodation_additional_services (accommodation_id,additional_id) values (1,1);
 --insert into accommodation_additional_services (accommodation_id,additional_id) values (1,2);
