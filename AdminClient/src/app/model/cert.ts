@@ -9,10 +9,11 @@ export class Cert {
     country : string;
     email : string;
     certificationAuthority : boolean;
-    startDate : Date;
-    endDate : Date;
+    validFrom : Date;
+    validTo : Date;
     issuerName : string;
-    keyAlias : string;    
+    keyAlias : string;  
+    root : boolean;  
 
 
 

@@ -9,6 +9,10 @@ import java.security.PublicKey;
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.bouncycastle.asn1.ASN1Encodable;
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
@@ -147,7 +151,7 @@ public class CertificateGenerator {
 	}
 	
 	public X509Certificate generateCertificate(SubjectData subjectData, IssuerData issuerData, boolean isRoot,
-			String issuerAlias, String file, boolean ca) throws KeyStoreException, CertIOException {
+			String issuerAlias, String file, boolean ca) throws KeyStoreException, CertIOException, ParseException {
 		try {
 			// Posto klasa za generisanje sertifiakta ne moze da primi direktno
 			// privatni kljuc pravi se builder za objekat
@@ -164,7 +168,18 @@ public class CertificateGenerator {
 			// koristiti za potpisivanje sertifikata
 			ContentSigner contentSigner = builder.build(issuerData.getPrivateKey());
 			X509v3CertificateBuilder certGen;
+			
+			
+			
+			
+			//DateFormat date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");			
+			
+			//Date dates = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(date.format(subjectData.getStartDate()));
+			//Date datee = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(date.format(subjectData.getStartDate()));
+			
+			//System.out.println("usaao" + issuerData.getX500name() + dates);
 
+			
 			certGen = new JcaX509v3CertificateBuilder(issuerData.getX500name(),
 					new BigInteger(subjectData.getSerialNumber()), subjectData.getStartDate(), subjectData.getEndDate(),
 					subjectData.getX500name(), subjectData.getPublicKey());

@@ -28,11 +28,13 @@ export class AddCertificateComponent implements OnInit {
     object: Object;
     today: Date;
     certificatedUsers: Array<any>;
+    validCertificates :Array<any>;
     
     noncertificatedUsers: Array<any>;
     author: number;
     subject : number;
     cert : Cert = new Cert();
+    
 
     constructor(private certificateService: CertificateServiceService, private userService: UserServiceService, private route: ActivatedRoute) { 
        this.route.params.subscribe( params => {this.self = params.self, this.id = params.id; });
@@ -43,7 +45,6 @@ export class AddCertificateComponent implements OnInit {
         console.log('usao u on init');
         console.log('parametar: ' + this.id1);
 
-        //if (this.self === 'nonself'){
             console.log('usao if');
             this.certificateService.getCertificatedUsers().subscribe(data=>{
                 this.certificatedUsers = data;
@@ -60,7 +61,11 @@ export class AddCertificateComponent implements OnInit {
                 console.log(data2.length);
                 this.showField();
             });
-       // }
+        this.certificateService.getValidCertificates().subscribe(data3 => {
+            console.log(data3);
+            this.validCertificates = data3 as Array<any>;
+        });
+        
     }
     showField(){
         console.log('parametar: ' + this.self);
@@ -81,29 +86,9 @@ export class AddCertificateComponent implements OnInit {
       this.certificateService.createNonSelfCertificate(this.cert).subscribe(
         data => {} ,  err => {this.handleAuthError(err); }
       );
-    //}
+   
   }
-    //}
-   /* createCertificate(){
-        console.log('Sertifikat kreira: ' + this.author);
-        var currentUser = JSON.parse(localStorage.getItem('user'));
-
-        console.log(currentUser);
-        //razmotriti self sertifikate
-       // this.author = currentUser;
-        console.log('id:' + this.id);
-        console.log('start:' + this.startDate);
-        console.log('end:' + this.endDate);
-        console.log('author:' + this.author);
-        this.certificateService.createNonSelfCertificate(currentUser.id as string, this.startDate, this.endDate, this.author as string).subscribe(
-                data => {this.updateUser(currentUser.id as string); }      
-        );
-    }*/
-    updateUser(param: string){
-        this.userService.changeToCertificatedUser(param).subscribe(
-                data => window.location.href = 'http://localhost:4200'
-                );
-    }
+   
     
     handleAuthError(err: HttpErrorResponse) {
     if (err.status === 403) {

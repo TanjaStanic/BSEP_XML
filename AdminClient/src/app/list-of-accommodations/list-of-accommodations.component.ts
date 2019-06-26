@@ -41,7 +41,7 @@ export class ListOfAccommodationsComponent implements OnInit {
       this.accService.getAllAcc().subscribe(data =>{
          
           this.accommodations = data;
-           this.accommodations.address.street = this.address.street;
+           //this.accommodations.address.street = this.address.street;
           console.log(data);
        });
 

@@ -132,18 +132,28 @@ insert into additional_services (additional_id,name,price_of_add) values (3,'Hal
 insert into additional_services (additional_id,name,price_of_add) values (4,'WiFi',0.0);
 insert into additional_services (additional_id,name,price_of_add) values (5,'Pet friendly',20.1);
 
-insert into certificate (id, idissuer, idsubject, startdate, enddate,revoked,ca,reasonforrevokation,idcertificateissuer) 
-				values (1,1,1,'2019-03-01','2020-03-01',0,1,'',1);
-insert into certificate (id, idissuer, idsubject, startdate, enddate,revoked,ca,reasonforrevokation,idcertificateissuer) 
-				values (2,1,2,'2019-03-01','2020-03-01',0,1,'',2);				
-insert into certificate (id, idissuer, idsubject, startdate, enddate,revoked,ca,reasonforrevokation,idcertificateissuer) 
-				values (3,1,3,'2019-03-01','2020-03-01',0,1,'',3);
-insert into certificate (id, idissuer, idsubject, startdate, enddate,revoked,ca,reasonforrevokation,idcertificateissuer) 
-				values (4,1,4,'2019-03-01','2020-03-01',0,1,'',4);				
-insert into certificate (id, idissuer, idsubject, startdate, enddate,revoked,ca,reasonforrevokation,idcertificateissuer) 
-				values (5,1,5,'2019-03-01','2020-03-01',0,1,'',5);				
-insert into certificate (id, idissuer, idsubject, startdate, enddate,revoked,ca,reasonforrevokation,idcertificateissuer) 
-				values (6,1,6,'2019-03-01','2020-03-01',0,1,'',6);				
+insert into certificate (id, idissuer, idsubject, valid_from, valid_to,revoked,ca,reasonforrevokation,serial_number) 
+				values (1,1,1,'2019-06-26','2020-06-26',0,1,'',1561574973635);
+insert into certificate (id, idissuer, idsubject, valid_from, valid_to,revoked,ca,reasonforrevokation,serial_number) 
+				values (2,1,2,'2019-06-26','2020-06-26',0,1,'',	1561575194191);
+insert into certificate (id, idissuer, idsubject, valid_from, valid_to,revoked,ca,reasonforrevokation,serial_number) 
+				values (3,1,3,'2019-06-26','2020-06-26',0,1,'',	1561575340619);
+insert into certificate (id, idissuer, idsubject, valid_from, valid_to,revoked,ca,reasonforrevokation,serial_number) 
+				values (4,1,4,'2019-06-26','2020-06-26',0,1,'',	1561575397061);
+insert into certificate (id, idissuer, idsubject, valid_from, valid_to,revoked,ca,reasonforrevokation,serial_number) 
+				values (5,2,5,'2019-06-26','2020-06-26',0,1,'',	1561575457468);
+insert into certificate (id, idissuer, idsubject, valid_from, valid_to,revoked,ca,reasonforrevokation,serial_number) 
+				values (6,2,null,'2019-06-26','2020-06-26',0,1,'',	1561575457469);				
+--insert into certificate (id, idissuer, idsubject, startdate, enddate,revoked,ca,reasonforrevokation,idcertificateissuer) 
+				--values (2,1,2,'2019-03-01','2020-03-01',0,1,'',2);				
+--insert into certificate (id, idissuer, idsubject, startdate, enddate,revoked,ca,reasonforrevokation,idcertificateissuer) 
+				--values (3,1,3,'2019-03-01','2020-03-01',0,1,'',3);
+--insert into certificate (id, idissuer, idsubject, startdate, enddate,revoked,ca,reasonforrevokation,idcertificateissuer) 
+				--values (4,1,4,'2019-03-01','2020-03-01',0,1,'',4);				
+--insert into certificate (id, idissuer, idsubject, startdate, enddate,revoked,ca,reasonforrevokation,idcertificateissuer) 
+				--values (5,1,5,'2019-03-01','2020-03-01',0,1,'',5);				
+--insert into certificate (id, idissuer, idsubject, startdate, enddate,revoked,ca,reasonforrevokation,idcertificateissuer) 
+				--values (6,1,6,'2019-03-01','2020-03-01',0,1,'',6);				
 				
 --povezivanje smjestaja i additional servica
 --insert into accommodation_additional_services (accommodation_id,additional_id) values (1,1);

@@ -19,9 +19,11 @@
               <table id="lista" class="table table-hover">
               <thead>
                	<tr>
-               	<th>Id subject</th>               	
+               	<th>Id Issuer</th>
+               	<th>Serial number</th>               	
             	<th>Start date</th>
            	 	<th>End date</th>
+           	 	<th>Id subject</th>
             	<th>Revoked</th>
             	<th>Reason for revocation</th>
             	
@@ -30,15 +32,28 @@
        		 </thead>
              <tbody>
                <tr *ngFor="let cert of certificates"  >
-               <td>{{cert.idSubject}}</td>               
-               <td>{{cert.startDate}}</td>
-               <td> {{cert.endDate}}</td>
+               <td>{{cert.idIssuer}}</td>
+               <td>{{cert.serialNumberr}}</td>               
+               <td>{{cert.validFrom}}</td>
+               <td> {{cert.validTo}}</td>
+               <td>{{cert.idSubject}}</td>
                <td>{{cert.revoked}}</td>
                <td>{{cert.reasonForRevokation}}</td>
                <td *ngIf="!cert.revoked">
-               		<button class="btn btn-default	btn-md" id="revoke{{cert.idSubject}}" (click)="revokeCertificate(cert.idSubject)">Revoke</button></td>
+               		<button class="btn btn-default	btn-md" id="revoke{{cert.serialNumberr}}" (click)="revokeCertificate(cert.serialNumberr,cert.idSubject)">Revoke</button></td>
+               <td *ngIf="!cert.revoked">
+               		<button class="btn btn-default	btn-md" id="export{{cert.serialNumberr}}" (click)="exportCertificate(cert.serialNumberr)">Export</button></td>
+           		 <td *ngIf="!cert.revoked">
+            	 <select name="subjectName" id="subjectName"  [(ngModel)]="cert.subjectName" #subjectName="ngModel">
+         				<option  *ngFor="let c of noncertificatedUsers let i = index" [value]="c.id">{{c.id}}. {{c.email}}</option>
+        		</select>
+        		
+        		        		<button class="btn btn-default	btn-md" id="allocate{{cert.serialNumberr}}" (click)="allocateCertificate(cert.serialNumberr,cert.subjectName)">Allocate</button>
+        		
+        				
+        		</td>
                <!--  td *ngIf="user.certificated">
-               		<button class="btn btn-default	btn-md" (click)="validate(cert.idSubject)">Validate</button></td-->
+               		<button class="btn btn-default	btn-md" (click)="validate(cert.serialNumber)">Validate</button></td-->
                <!--  td *ngIf="!user.certificated">Revoked!</td-->
                </tr>
 			</tbody>

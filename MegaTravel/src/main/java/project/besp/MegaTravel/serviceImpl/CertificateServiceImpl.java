@@ -1,5 +1,6 @@
 package project.besp.MegaTravel.serviceImpl;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,8 @@ public class CertificateServiceImpl implements CertificateService {
 		// TODO Auto-generated method stub
 		return certificateRepository.findOneById(id);
 	}
-
+	
+	
 
 	@Override
 	public Certificate saveCertificate(Certificate certificate) {
@@ -56,6 +58,13 @@ public class CertificateServiceImpl implements CertificateService {
 	public Certificate findOneByIdIssuer(Long id) {
 		// TODO Auto-generated method stub
 		return certificateRepository.findOneByIdIssuer(id);
+	}
+
+
+	@Override
+	public Certificate findOneBySerialNumber(BigInteger id) {
+		// TODO Auto-generated method stub
+		return certificateRepository.findOneBySerialNumber(id);
 	}
 
 

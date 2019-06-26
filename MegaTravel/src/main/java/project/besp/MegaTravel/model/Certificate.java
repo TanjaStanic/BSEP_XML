@@ -1,5 +1,6 @@
 package project.besp.MegaTravel.model;
 
+import java.math.BigInteger;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -21,11 +22,11 @@ public class Certificate {
 	@Column(name="idsubject")
 	private Long idSubject;
 	
-	@Column(name="startdate")
-	private Date startDate;
+	@Column(name="valid_from")
+	private Date validFrom;
 	
-	@Column(name="enddate")
-	private Date endDate;
+	@Column(name="valid_to")
+	private Date validTo;
 	
 	@Column(name="revoked")
 	private boolean revoked;
@@ -35,9 +36,45 @@ public class Certificate {
 	
 	@Column(name="reasonforrevokation")
 	private String reasonForRevokation;
+
+	@Column(name="serial_number")
+	private BigInteger serialNumber;
 	
-	@Column(name="idcertificateissuer")
-	private Long idCertificateIssuer;
+	public Date getValidFrom() {
+		return validFrom;
+	}
+
+
+
+	public void setValidFrom(Date validFrom) {
+		this.validFrom = validFrom;
+	}
+
+
+
+	public Date getValidTo() {
+		return validTo;
+	}
+
+
+
+	public void setValidTo(Date validTo) {
+		this.validTo = validTo;
+	}
+
+
+
+	public BigInteger getSerialNumberr() {
+		return serialNumber;
+	}
+
+
+
+	public void setSerialNumberr(BigInteger serialNumber) {
+		this.serialNumber = serialNumber;
+	}
+
+
 
 	public Certificate() {
 
@@ -45,18 +82,28 @@ public class Certificate {
 	
 	
 
-	public Certificate(Long idIssuer,
-			Long idSubject, Date startDate, Date endDate, boolean revoked,
-			boolean ca, String reasonForRevokation) {
+	public Certificate(Long idIssuer, Date validFrom, Date validTo, boolean revoked,
+			boolean ca, String reasonForRevokation ,BigInteger serialNumber) {
 		super();
-	
 		this.idIssuer = idIssuer;
-		this.idSubject = idSubject;
-		this.startDate = startDate;
-		this.endDate = endDate;
+		this.validFrom = validFrom;
+		this.validTo = validTo;
 		this.revoked = revoked;
 		this.ca = ca;
 		this.reasonForRevokation = reasonForRevokation;
+		this.serialNumber = serialNumber;
+	}
+	public Certificate(Long idIssuer, Long idSubject, Date validFrom, Date validTo, boolean revoked,
+			boolean ca, String reasonForRevokation ,BigInteger serialNumber) {
+		super();
+		this.idSubject = idSubject;
+		this.idIssuer = idIssuer;
+		this.validFrom = validFrom;
+		this.validTo = validTo;
+		this.revoked = revoked;
+		this.ca = ca;
+		this.reasonForRevokation = reasonForRevokation;
+		this.serialNumber = serialNumber;
 	}
 
 
@@ -86,21 +133,7 @@ public class Certificate {
 		this.idSubject = idSubject;
 	}
 
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
+	
 
 	public boolean isRevoked() {
 		return revoked;
@@ -126,12 +159,5 @@ public class Certificate {
 		this.ca = ca;
 	}
 
-	public Long getIdCertificateIssuer() {
-		return idCertificateIssuer;
-	}
-
-	public void setIdCertificateIssuer(Long idCertificateIssuer) {
-		this.idCertificateIssuer = idCertificateIssuer;
-	}
 
 }

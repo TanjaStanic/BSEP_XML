@@ -53,8 +53,22 @@ export class CertificateServiceService {
      return this.http.get('https://localhost:8443/api/certificate/validate/' + id, {headers: this.auth.createAuthorizationTokenHeader()});
    }
     
- revokeCertificate(id_subject:number, reasonText : string)
+ revokeCertificate(serialNumber:string, reasonText : string,i : number)
   {
-    return this.http.post("https://localhost:8443/api/certificate/revoke/" + id_subject + "/" + reasonText, reasonText, {headers: this.auth.createAuthorizationTokenHeader()});
+    return this.http.post("https://localhost:8443/api/certificate/revoke/" + serialNumber + "/" + reasonText+ "/" + i ,reasonText, {headers: this.auth.createAuthorizationTokenHeader()});
   }
-}
+    
+ exportCertificate(serialNumber : string)
+    {
+     return this.http.get("https://localhost:8443/api/certificate/getCertificate/" + serialNumber, {headers: this.auth.createAuthorizationTokenHeader()})
+    }
+  allocateCertificate(serialNumber : string, i : number)
+    {
+     return this.http.get("https://localhost:8443/api/certificate/allocate/" + serialNumber + "/" + i, {headers: this.auth.createAuthorizationTokenHeader()})
+    }
+    
+   getValidCertificates(){
+     return this.http.get("https://localhost:8443/api/certificate/getValidCertificates",{headers: this.auth.createAuthorizationTokenHeader()});
+
+   }
+ }

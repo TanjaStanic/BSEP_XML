@@ -42,8 +42,11 @@ public class KeyStoreReader {
 
 	public KeyStoreReader() {
 		try {
-			keyStore = KeyStore.getInstance("PKCS12");
+			keyStore = KeyStore.getInstance("JKS", "SUN");
 		} catch (KeyStoreException e) {
+			e.printStackTrace();
+		} catch (NoSuchProviderException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -100,7 +103,7 @@ public class KeyStoreReader {
 	public Certificate readCertificate(String keyStoreFile, String keyStorePass, String alias) {
 		try {
 			// kreiramo instancu KeyStore
-			KeyStore ks = KeyStore.getInstance("PKCS12");
+			KeyStore ks = KeyStore.getInstance("JKS", "SUN");
 			// ucitavamo podatke
 			BufferedInputStream in = new BufferedInputStream(new FileInputStream(keyStoreFile));
 			ks.load(in, keyStorePass.toCharArray());
@@ -119,6 +122,9 @@ public class KeyStoreReader {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (NoSuchProviderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -129,7 +135,7 @@ public class KeyStoreReader {
 	public PrivateKey readPrivateKey(String keyStoreFile, String keyStorePass, String alias, String pass) {
 		try {
 			// kreiramo instancu KeyStore
-			KeyStore ks = KeyStore.getInstance("PKCS12");
+			KeyStore ks = KeyStore.getInstance("JKS","SUN");
 			// ucitavamo podatke
 			BufferedInputStream in = new BufferedInputStream(new FileInputStream(keyStoreFile));
 			ks.load(in, keyStorePass.toCharArray());
@@ -149,6 +155,9 @@ public class KeyStoreReader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (UnrecoverableKeyException e) {
+			e.printStackTrace();
+		} catch (NoSuchProviderException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -307,10 +316,10 @@ public class KeyStoreReader {
 
 				x = (X509Certificate) certi;
 				if (!x.getNotAfter().before(new Date())) {
-					String status = "Validan";
+					String status = "Validan datum";
 					return status;
 				} else {
-					String status = "Nije Validan";
+					String status = "Nije Validan datum-istekao";
 					return status;
 				}
 

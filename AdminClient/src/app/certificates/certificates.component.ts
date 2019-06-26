@@ -29,7 +29,8 @@ export class CertificatesComponent implements OnInit {
   resultText: string;
   hideSearchPar: boolean;
   certificates : Certificate[];
-  
+  serialNumber : string;
+ noncertificatedUsers : User[];
     //users : User[] = [];
     //currentUser : Object;
 
@@ -51,6 +52,12 @@ export class CertificatesComponent implements OnInit {
   ngOnInit() {
       
     var token_user = this.auth.getJwtToken() as string;
+      this.certificateService.getNonCertificatedUsers().subscribe(data2=>{
+                this.noncertificatedUsers = data2;
+                console.log("NonCertificated users: ")
+                console.log(data2);
+                console.log(data2.length);
+            });
       
     this.certificateService.getCert().subscribe(data=> {
         this.certificates = data;
@@ -69,22 +76,44 @@ export class CertificatesComponent implements OnInit {
     
   revokation()
   {
-    console.log("Id subject: " + this.id_subject + " reason: " + this.reasonText);
+    console.log("Id subject: " + this.serialNumber + " reason: " + this.reasonText + "i  " + this.i);
 
-    this.certificateService.revokeCertificate(this.id_subject, this.reasonText).subscribe(data => {window.location.href="http://localhost:4200/list-of-certificates/"+this.id});
+    this.certificateService.revokeCertificate(this.serialNumber, this.reasonText,this.i).subscribe(data => {window.location.href="http://localhost:4200/certificates"});
    
   }
-  revokeCertificate(id_subject)
+  revokeCertificate(serialNumber,i)
   {
     this.reasonText="";
     console.log(this.reasonText);
-    console.log("Id subject: " + id_subject);
-    this.id_subject = id_subject as number;
-
+    console.log("Id subject: " + serialNumber);
+    this.serialNumber = serialNumber;
+      
+      this.i  = i;
+   
+      if (this.i==undefined) {
+          this.i = -1;
+      }
+      
     document.getElementById("revokeDiv").removeAttribute("hidden");
     document.getElementById("connectDiv").setAttribute("hidden", "true");
     document.getElementById("validateDiv").setAttribute("hidden", "true");
   }
+    
+ exportCertificate(serialNumber){
+     this.serialNumber = serialNumber;
+     console.log(this.serialNumber);
+     
+     this.certificateService.exportCertificate(this.serialNumber).subscribe(data=>{
+         });
+     
+     }
+    
+allocateCertificate(serialNumber,i){
+    this.serialNumber = serialNumber;
+    this.i = i;
+      this.certificateService.allocateCertificate(this.serialNumber,this.i).subscribe(data => 
+        {});
+}
   validate(id_subject){
       console.log('validate id: ' + id_subject);
          document.getElementById('validateDiv').removeAttribute('hidden');

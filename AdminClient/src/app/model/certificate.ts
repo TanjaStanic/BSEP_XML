@@ -1,10 +1,10 @@
 export class Certificate {
-    id : number;
+    serialNumberr : string;
     idIssuer : number;
     idSubject: number;
     ca : boolean;
-    startDate: Date;
-    endDate: Date;
+    validFrom: Date;
+    validTo: Date;
     revoked: boolean;
     reasonForRevokation: string;
 }

@@ -3,6 +3,7 @@ package project.besp.MegaTravel.controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -62,6 +63,8 @@ import project.besp.MegaTravel.service.UserService;
 import project.besp.MegaTravel.service.WithDrawCertService;
 import project.besp.MegaTravel.serviceImpl.LoggingServiceImpl;
 import project.besp.MegaTravel.model.*;
+import project.besp.MegaTravel.repository.CertificateRepository;
+import project.besp.MegaTravel.repository.UserRepository;
 import project.besp.MegaTravel.security.TokenUtils;
 
 import org.slf4j.Logger;
@@ -83,6 +86,9 @@ public class CertificateController {
 	
 	@Autowired
 	private CertificateService certificateService;
+	
+	@Autowired
+	private CertificateRepository certificateRepository;
 
 	@Autowired
 	public WithDrawCertService ws;
@@ -96,24 +102,15 @@ public class CertificateController {
 	
 	private KeyPair keyPairIssuer;
 	
+	@Autowired 
+	UserRepository userRepository;
+	
+	
 	public CertificateInfoGenerator cig = new CertificateInfoGenerator();
 	public CertificateGenerator cg = new CertificateGenerator();
 	public KeyStoreWriter ksw = new KeyStoreWriter();
 	public KeyStoreReader ksr = new KeyStoreReader();
 	public CertificateCSRService certificateCSRService;
-	
-	// sifra za centralKeystore je certificatePass1
-	// za localKeystore1 je local
-	
-	@PostConstruct
-	public void init(){
-		keyStoreWriter = new KeyStoreWriter();
-		String centralPass = "certificatePass1";
-		keyStoreWriter.loadKeyStore("centralKeystore.p12", centralPass.toCharArray());
-		keyStoreWriter.saveKeyStore("centralKeystore.p12", centralPass.toCharArray());
-		keyPairIssuer = generateKeyPair();
-	}
-	
 	
 	
 	@RequestMapping(value = "/getValidCertificates", method = RequestMethod.GET)
@@ -121,7 +118,7 @@ public class CertificateController {
 	public ArrayList<String> getValidCertificates() throws KeyStoreException, NoSuchAlgorithmException,
 			CertificateException, FileNotFoundException, IOException {
 		logging.printInfo("Get Valid Certificates");
-		return ksr.getValidCertificates("centralKeystore.p12", "certificatePass1");
+		return ksr.getValidCertificates("keystore.jks", "password");
 		
 	}
 	
@@ -152,109 +149,53 @@ public class CertificateController {
 		return new ResponseEntity<>(allCert,HttpStatus.OK);
 
 	}
-	
-//	@PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
-	/*@RequestMapping(
-			value = "/create/{id_subject}/{start_date}/{end_date}",
-			method = RequestMethod.POST,
-			consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Certificate> createCertificate(@RequestBody String idIssuer,@PathVariable("id_subject") Long id_subject, @PathVariable("start_date") String start_date,@PathVariable("end_date") String end_date) throws ParseException
-	{
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date start_date_cert = format.parse(start_date);
-		Date end_date_cert = format.parse(end_date);
-		Long id_issuer = Long.parseLong(idIssuer);
-		
-		System.out.println("dosao u create controller");
-		
-		List<Certificate> allCertificates = certificateService.getAll();
-		for(Certificate c : allCertificates)
-		{
-			if(c.getIdIssuer()==id_issuer && c.getIdSubject()==id_subject && c.isRevoked())
-			{
-				certificateService.removeCertificate(c.getId());
-			}
-		}
-		System.out.println("Certificate: id_subject=" + id_subject + " id_issuer=" + id_issuer + " start=" + start_date_cert + " end_date=" + end_date_cert);
-		Certificate certificate = new Certificate(id_issuer,id_subject, start_date_cert, end_date_cert, false, false, "");
-		
-		if(!checkId(id_issuer) || !checkId(id_subject)) {
-			//403
-			return new ResponseEntity<>(certificate, HttpStatus.FORBIDDEN);
-		}
-		//u certificate pre cuvanja dodati idIssuerCertificate
-		//uzimam certifikat onog koji dodaje novi sertifikat
-		Certificate issuerCertificate = certificateService.findOneByIdSubject(id_issuer);
-		Long i= (long) 1.0;
-		Long idIssuerCertificate = (long) 0;
-		try {
-			 idIssuerCertificate = issuerCertificate.getId();
-		} catch(Exception e) {
-			 idIssuerCertificate = ++i;
-		}
-		certificate.setIdCertificateIssuer(idIssuerCertificate);
-		
-		Certificate saved = certificateService.saveCertificate(certificate);
-		
-		//sad radim sa userima
-		User subject = userService.findOneById(id_subject);
-		User issuer = userService.findOneById(id_issuer);
-		
-		SubjectData subjectData = generateSubjectData(saved.getId(), subject, start_date_cert, end_date_cert);
-		
-		KeyStoreReader keyStoreReader = new KeyStoreReader();
-		String issuerPass = "certificatePass" + issuer.getId();
-		PrivateKey privateKeyIssuer = keyStoreReader.readPrivateKey("centralKeystore.p12", "certificatePass1", issuerPass, issuerPass);
-		IssuerData issuerData = generateIssuerData(privateKeyIssuer, issuer);
-		
-		CertificateGenerator cg = new CertificateGenerator();
-		X509Certificate cert = cg.generateCertificate(subjectData, issuerData);
-		
-		String certificatePass = "certificatePass" + subject.getId();
-		System.out.println("certificatePass: " + certificatePass);
-		keyStoreWriter.write(certificatePass, keyPairIssuer.getPrivate(), certificatePass.toCharArray(), cert);
-		String centralPass = "certificatePass1";
-		keyStoreWriter.saveKeyStore("centralKeystore.p12", centralPass.toCharArray());
-		
-		KeyStoreWriter keyStoreWriterLocal = new KeyStoreWriter();
-		keyStoreWriterLocal.loadKeyStore(null, subject.getId().toString().toCharArray());
-		
-		keyStoreWriterLocal.saveKeyStore("localKeyStore"+subject.getId()+".p12", subject.getId().toString().toCharArray());
-		String localAlias="myCertificate";
-		
-		keyStoreWriterLocal.write(localAlias, subjectData.getPrivateKey(), localAlias.toCharArray(), cert);
-		keyStoreWriterLocal.saveKeyStore("localKeyStore"+subject.getId().toString()+".p12", subject.getId().toString().toCharArray());
-		
-		//issuer.setCertificated(true);
-		//userService.saveUser(issuer);
-		
-		System.out.println("[CertificateController - validateCertificate PRE]: issuer pubic key: " + keyPairIssuer.getPublic());
-		System.out.println("-----------------------------------------------------------------------------------------");
-		System.out.println("[CertificateController - validateCertificate PRE]: issuer private key: " + keyPairIssuer.getPrivate());
-		
-		logging.printInfo("Create User");
-		return new ResponseEntity<Certificate>(certificate , HttpStatus.OK);
-	}*/
-	
+
 	@RequestMapping(value = "/generateCertificate", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> generateCertificate(@RequestBody CertificateInfo info) throws NoSuchAlgorithmException,
-			NoSuchProviderException, OperatorCreationException, KeyStoreException, CertificateException, FileNotFoundException, IOException {
+			NoSuchProviderException, OperatorCreationException, KeyStoreException, CertificateException, FileNotFoundException, IOException, ParseException {
+		
 		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 		ksw.loadKeyStore("keystore.jks", "password".toCharArray());
 		System.out.println(info.certificationAuthority);
+		System.out.println(info.validFrom);
+		System.out.println(info.issuerName);
+		
 		
 		KeyPair keyPairIssuer = cig.generateKeyPair(info.keyAlgorithm, info.keySize);
 
+		Long iId;	//kada je sls onda trazimo usera po id
+		String isId; //kada nije trazimo issuera po aliasu
 		SubjectData subjectData = cig.generateSubjectData(info);
 		X509Certificate cer;
 		if (info.root) {
 			info.issuerName = info.commonName;
+			//ako je s s 
+			User user = userService.findUserByMail(info.email);
+			 
+			 
+			 iId= user.getId();
+			
 			IssuerData issuerData = cig.generateIssuerData(keyPairIssuer.getPrivate(), info);
 			cer = cg.generateCertificate(subjectData, issuerData, info.root, info.issuerName, "keystore.jks",
 					info.certificationAuthority);
 		} else {
+			
+			iId = null;
+			isId = info.issuerName;
+			
+			if(isId.equals("admin")) {
+				iId = (long) 1;
+			}
+			else if (isId.equals("agent")) {
+				iId = (long) 2;
+			}
+			else if (isId.equals("agent2")) {
+				iId = (long) 3;
+			}
+			else if (isId.equals("agent3")) {
+				iId = (long) 4;
+			}
 			IssuerData id = ksr.readIssuerFromStore("keystore.jks", info.issuerName, "password".toCharArray(),
 					"password".toCharArray());
 
@@ -262,12 +203,22 @@ public class CertificateController {
 					info.certificationAuthority);
 		}
 
-		System.out.println("Prilikom upisa: " + cer.getSerialNumber());
+		//System.out.println("Prilikom upisa: " + cer.getSerialNumber());
 
 		ksw.write(info.commonName, keyPairIssuer.getPrivate(), "password".toCharArray(), cer);
 		ksw.saveKeyStore("keystore.jks", "password".toCharArray());
 		
-		logging.printInfo("Generate Certificate");
+		if (info.root) {
+			Certificate newC = new Certificate(iId,iId,subjectData.getStartDate(),subjectData.getEndDate(),false,info.certificationAuthority,"",cer.getSerialNumber());
+			certificateRepository.save(newC);
+
+		}else {
+			Certificate newC = new Certificate(iId,subjectData.getStartDate(),subjectData.getEndDate(),false,info.certificationAuthority,"",cer.getSerialNumber());
+			certificateRepository.save(newC);
+
+		}
+		
+		//logging.printInfo("Generate Certificate");
 		return new ResponseEntity<>(HttpStatus.OK);
 
 	}
@@ -354,7 +305,7 @@ public class CertificateController {
 			System.out.println(cer);
 			ccsrs.save(cer);
 			
-			logging.printInfo("Generate CRS Certificate");
+			//logging.printInfo("Generate CRS Certificate");
 		    return  new ResponseEntity<> (HttpStatus.OK);
 		    
            
@@ -382,17 +333,17 @@ public class CertificateController {
 		}
 		ArrayList<String> sp = new ArrayList<String>();
 		sp.add(sta);
-		logging.printInfo("Status certificate serial: " + serialNumber + "is: "+ sta);
+		//logging.printInfo("Status certificate serial: " + serialNumber + "is: "+ sta);
 		return sp;
 
 	}
 
 	@RequestMapping(value = "/getCertificate/{serial}", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<Certificate> getCertificate(@PathVariable("serial") String serialNumber) throws KeyStoreException,
+	public ResponseEntity<java.security.cert.Certificate> getCertificate(@PathVariable("serial") String serialNumber) throws KeyStoreException,
 			NoSuchAlgorithmException, CertificateException, FileNotFoundException, IOException {
 
-		/*Certificate c = ksr.getOrDeleteCertificateBySerialNumber(serialNumber, false, "keystore.jks", "password");
+		java.security.cert.Certificate c = ksr.getOrDeleteCertificateBySerialNumber(serialNumber, false, "keystore.jks", "password");
 
 		String alias = ksr.getAlias(c);
 		
@@ -412,17 +363,15 @@ public class CertificateController {
 		  byte[] data = Files.readAllBytes(path);
 		  
 		   
-		         Path putanja = Paths.get("C:/Users/Stefan/Desktop/proba" +alias+".cer");
+		         Path putanja = Paths.get("C:/Users/Sara/Desktop" +alias+".cer");
 		         Files.write(putanja, data);
 		
 		
 		return new ResponseEntity<>(HttpStatus.OK);
 		
-*/	return null;
 	}
 	
 	
-	//@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value="/allUsersWithCertificates", method = RequestMethod.GET,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
@@ -477,63 +426,36 @@ public class CertificateController {
 	
 	
 	@RequestMapping(
-			value = "/revoke/{id}/{reason}",
+			value = "/revoke/{id}/{reason}/{idSubject}",
 			method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public Certificate revokeCertificate(@PathVariable("id") Long id,@PathVariable("reason") String reason, @Context HttpServletRequest request){
-		System.out.println("Usao u revokeCertificate "+ id.toString());
-		logger.info("REVCERT");
+	public ResponseEntity<Certificate> revokeCertificate(@PathVariable("id") String id,@PathVariable("reason") String reason, @PathVariable("idSubject") Long idSubject, @Context HttpServletRequest request){
+		System.out.println("Usao u revokeCertificate "+ id.toString() + reason);
+		//logger.info("REVCERT");
 		
-		//Certificate certificate2 = certificateService.findOneByIdSubject(id);
-		//System.out.println(certificate2.getIdSubject() + "NZM U CEMU JE PROBLEM");
-		
-		
-		boolean valid = checkId(id);
-		if(valid) {
+	
 
-			Certificate certificate = certificateService.findOneByIdSubject(id);
+			Certificate certificate = certificateService.findOneBySerialNumber(new BigInteger(id));
 			if(certificate!=null) {
 				certificate.setRevoked(true);
-				System.out.println("Razlog je "+reason);
+				System.out.println("Razlog je "+reason + idSubject);
 				certificate.setReasonForRevokation(reason);
 				certificateService.saveCertificate(certificate);
-				User issuer = userService.findOneById(id);
-				issuer.setCertificated(false);
-				userService.saveUser(issuer);
-				List<Certificate> allCertificates = certificateService.getAll();
-				String token = tokenUtils.getToken(request);
-				String email = tokenUtils.getUsernameFromToken(token);
-				User user = (User) this.userService.findUserByMail(Encode.forHtml(email));
-			
-				//logger.info("User id: " + user.getId() + ",REVCERTSUCCESS");
+				
+				if(idSubject != -1) {
+					User issuer = userService.findOneById(idSubject);
+					issuer.setCertificated(false);
+					userRepository.save(issuer);
 
-				for(Certificate c : allCertificates)
-				{
-					System.out.println("Id issuer " + c.getIdIssuer());
-					if(c.getIdIssuer()==id)
-					{
-						System.out.println("Postoji cert");
-						c.setRevoked(true);
-						c.setReasonForRevokation("Issuer's certificate has been revoked.");
-						certificateService.saveCertificate(c);
-						User subject = userService.findOneById(c.getIdSubject());
-						subject.setCertificated(false);
-						userService.saveUser(subject);
-						
-						
-					}
 				}
-				return certificate;
-			}else {
-				//logger.error("REVCERTERRID");
-				return null;
-			}
-		} else {
-			//logger.error("REVCERTERRID");
-
-			return null;
-		}
+				
+				return new ResponseEntity<>(certificate, HttpStatus.OK);
+			}else 
+			{
+				System.out.println("AAAAAAAAAAAAA+");
+				return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+			} 
 		
 	}
 
@@ -641,5 +563,24 @@ public class CertificateController {
 	}
 	
 	
-	
+	@RequestMapping(value="/allocate/{serialNumber}/{i}", method = RequestMethod.GET,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> allocate(@PathVariable("serialNumber") String serialNumber,@PathVariable("i") Long i){	
+		
+		User newUser = userService.findOneById(i);
+		System.out.println("Ou maj gad" + newUser.getEmail() + newUser.isCertificated());
+		Certificate newCert = certificateService.findOneBySerialNumber(new BigInteger(serialNumber));
+		
+		System.out.println(i + "  je i" + serialNumber+ "  je ser num");
+		
+		newUser.setCertificated(true);
+		newCert.setIdSubject(i);
+		
+		userRepository.save(newUser);
+		certificateRepository.save(newCert);
+		
+		
+		return new ResponseEntity<User>(newUser,HttpStatus.OK) ;
+	}
 }
