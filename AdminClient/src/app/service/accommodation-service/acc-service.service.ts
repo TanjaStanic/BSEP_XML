@@ -34,15 +34,39 @@ export class AccServiceService {
         return this.http.post('https://localhost:8762/api/accommodations/addAcc',acc);
         }
     
+    
+    changeAcc(acc : Accommodation) {
+        console.log(acc.address);
+        return this.http.post('https://localhost:8762/api/accommodations/changeAcc',acc);
+        }
+    
         
     addAccLocation(location : Location){
         console.log(location.geoWidth + "SIRINA");
         return this.http.post('https://localhost:8762/api/accommodations/addAccLocation',location);
         }
     
+    changeAccLocation(location : Location){
+        console.log(location.geoWidth + "SIRINA");
+        return this.http.post('https://localhost:8762/api/accommodations/changeAccLocation',location);
+        }
+    
+    
+    changeAccAddress(address : Address) {
+        return this.http.post("https://localhost:8762/api/accommodations/changeAccAddress",address);
+        }
+    
     addAccAddress(address : Address) {
         return this.http.post("https://localhost:8762/api/accommodations/addAccAddress",address);
         }
+    
+    
+    allocateAcc(idAcc : number,idAg:number)
+        {
+     return this.http.get("https://localhost:8762/api/accommodations/allocate/" + idAcc + "/" + idAg, {headers: this.auth.createAuthorizationTokenHeader()})
+        }
+    
+   
     
     getAllPictures(id : number) : Observable<any> {
       return this.http.post('https://localhost:8762/api/accommodations/getAllPictures',id); 

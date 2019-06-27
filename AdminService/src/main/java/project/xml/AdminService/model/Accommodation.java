@@ -126,11 +126,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
     "category",
     "description",
 })*/
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 
 @Entity
 @Table(name = "accommodation")
-
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Accommodation.class)
 public class Accommodation implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -171,7 +170,7 @@ public class Accommodation implements java.io.Serializable {
     protected Location location;
 	
     
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "acc_address")
 	protected Address address;
 	

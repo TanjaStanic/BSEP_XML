@@ -107,6 +107,14 @@
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/org.owasp/dependency-check-maven -->
+			<dependency>
+   			 <groupId>org.owasp</groupId>
+  			  <artifactId>dependency-check-maven</artifactId>
+  			  <version>1.0.4</version>
+			</dependency>
+		
+		
 		
 		<!-- https://mvnrepository.com/artifact/org.owasp.encoder/encoder -->
      <dependency>

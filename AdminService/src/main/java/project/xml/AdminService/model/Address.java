@@ -25,8 +25,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 /**
@@ -91,6 +93,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 })
 @Entity
 @Table(name="address")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Address.class)
 public class Address {
 	
 	
@@ -121,8 +124,8 @@ public class Address {
 	@OneToMany(mappedBy="address")
     protected List<User> users;
 	
-	@OneToOne(mappedBy="address")
-    protected Accommodation accommodation;
+	/*@OneToOne(mappedBy="address")
+    protected Accommodation accommodation;*/
     /**
      * Gets the value of the street property.
      * 
@@ -241,13 +244,13 @@ public class Address {
 		this.id = id;
 	}
 
-	public Accommodation getAccommodation() {
+	/*public Accommodation getAccommodation() {
 		return accommodation;
 	}
 
 	public void setAccommodation(Accommodation accommodation) {
 		this.accommodation = accommodation;
-	}
+	}*/
 
 	public List<User> getUsers() {
 		return users;

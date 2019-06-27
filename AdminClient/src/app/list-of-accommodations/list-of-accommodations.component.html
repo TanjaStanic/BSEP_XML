@@ -1,78 +1,154 @@
-<div class="row">
-	<div class="col-xs-12">
-   
-          <!-- ->div class="box">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
             <div class="box-header">
               <h3 class="box-title"><b>List of accommodations</b></h3>
 
-              <  --div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" [(ngModel)] = "searchTerm" class="form-control pull-right" placeholder="Search">
 
-                  <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                  </div>
-                </div>
-              </div-->
-            <!-- PRODUCT LIST -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Accommodations</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
-              <ul class="products-list product-list-in-box" *ngFor="let acc of accommodations">
-               
-                <li class="item">
-                  <div class="product-img">
-                  
-                   <!--div class="box box-solid">
-		           
-		         
-		            <div class="box-body">
-		              <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-		
-		                <div class="carousel-inner">
-		                  <div class="item " >
-		                  <ul *ngFor="let pic of acc.pictures">
-		                  	<li><img src="{{pic.uri}}" alt="First slide"></li>
-		             
-		                  </ul>
-		
-		                    <div class="carousel-caption">
-		                      o
-		                    </div>
-		                  </div>
-		                
-		                </div>
-		                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-		                  <span class="fa fa-angle-left"></span>
-		                </a>
-		                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-		                  <span class="fa fa-angle-right"></span>
-		                </a>
-		              </div>
-		            </div>
-                  
-                  
-                  </div-->
-                  
-                  
-                    <img src="../assets/images/aleksandar.jpg" alt="Image">
-                  </div>
-                  <div class="product-info">
-                    <a (click)="showMoreClick(acc.id)">{{acc.name}}
-                      <span class="label label-warning pull-right">See more</span></a>                                  	
-                    	Category: {{acc.category}}<br/>     	
-                     
-                  </div>
-                </li>
-                
-              </ul>
+            <div class="box-body table-responsive no-padding">
+              <table id="lista" class="table table-hover">
+              <thead>
+               	<tr>
+               	<th>ID</th>
+            	<th>Name</th>
+            	<th>Rating</th>            	
+            	<th>Category</th>
+           		<th>Description</th>
+           	 	<th>Address</th>
+            	<th>Block</th>
+            	<th>Delete</th>
+            	<th></th>
+            	</tr>
+       		 </thead>
+       		 <tbody>
+                <tr *ngFor="let a of accommodations">
+                <td>{{a.id}}</td>                
+                <td>{{a.name}}</td>
+                <td>{{a.rating}}</td>
+                <td>{{a.category}}</td>               
+                <td>{{a.description}}</td>
+                <td>{{address.city}}</td>     
+                <td><button (click)="change(a)" type="button" class="btn btn-outline-success">Change</button></td>
+                <td><button (click)="delete(a)" type="button" class="btn btn-outline-danger">Delete</button></td>
+                 <td >
+           <select  [(ngModel)] = "a.agents" name="agents" id="agents" #c ="ngModel">
+         	    <option  *ngFor="let c of userAgents" [value]="c.id">{{c.id}}. {{c.email}}</option>
+        		</select>
+        		
+        		<button class="btn btn-default btn-md" id="allocate{{c.id}}" (click)="allocate(a.id,a.agents)">Allocate</button>
+        		
+        		
+        		        		
+        		
+        				
+        		</td>   
+                </tr>
+             </tbody>
+
+              </table>
             </div>
             <!-- /.box-body -->
           </div>
-            
-            
-  </div>
-  </div>
+          <!-- /.box -->
+        </div>
+      </div>
+      
+      
+      
+ <div class = "register-box" hidden="true" id="changeDiv">
+  <div class="register-box-body">
+    <p class="login-box-msg">Change selected accommodation</p>
+
+    <form method="post" (submit)="changeAcc()">
+     <div class="form-group has-feedback">
+        <input type="text" class="form-control" [(ngModel)]="acc.name" name="name" id="name" required>
+        <span class="glyphicon glyphicon-font form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback" height="30px">
+        <input type="text" class="form-control" [(ngModel)]="acc.description" name="description" id="description"  required>
+        <span class="glyphicon glyphicon-align-center form-control-feedback"></span>
+      </div>
+      
+      <div class="form-group has-feedback">
+        <input type="number" class="form-control" [(ngModel)]="acc.cancelationDays" name="canceldays" id="canceldays"  min="0" required> 
+        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+      </div>
+             
+        <div class="form-group has-feedback">
+            <input type="a.address.street" class="form-control" [(ngModel)]="address.street" name="street" id="street" [ngModelOptions]="{standalone: true}" placeholder="Street" required>
+        	<span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
+        </div >
+        <div class="form-group has-feedback"> 
+        	<input type="number" class="form-control" [(ngModel)]="address.number" name="number" id="streetNumber" [ngModelOptions]="{standalone: true}" placeholder="Number" min="1">
+        	<span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
+         </div>
+         <div class="form-group has-feedback"> 
+         	<input type="text" class="form-control" [(ngModel)]="address.city" name="city" id="city" [ngModelOptions]="{standalone: true}" placeholder="City" required>
+        	<span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
+         </div>
+         <div class="form-group has-feedback">
+         	<input type="text" class="form-control" [(ngModel)]="address.country" name="country" id="country" [ngModelOptions]="{standalone: true}" placeholder="Country" required>
+        	<span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
+        </div>
+	  <label>Location</label>
+	  <div class="form-group has-feedback"> 
+        	<input type="number" class="form-control" [(ngModel)]="location.geoLength" name="geoLenght" id="geoLenght" [value]="location.geoLength" [ngModelOptions]="{standalone: true}" placeholder="GeoLength" min="-180" max="180">
+        	<span class="glyphicon glyphicon-pushpin form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback"> 
+        	<input type="number" class="form-control" [(ngModel)]="location.geoWidth" name="geoWidth" id="geoWidth" [value]="location.geoWidth"  [ngModelOptions]="{standalone: true}" placeholder="GeoWidth" min="-180" max="180">
+        	<span class="glyphicon glyphicon-pushpin form-control-feedback"></span>
+      </div>
+      <label>Category:</label>	
+      <div class="form-group has-feedback" [(ngModel)] = "acc.category" [ngModelOptions]="{standalone: true}">
+		    <select name="category" id="category">
+			<option value="one">1<i class="fa fa-star"></i></option>
+			<option value="two">2<i class="fa fa-star"></i></option>
+			<option value="tree">3<i class="fa fa-star"></i></option>
+			<option value="four">4<i class="fa fa-star"></i></option>
+			<option value="five">5<i class="fa fa-star"></i></option>
+			<option value="uncategorized">Uncategorized</option>
+		</select>
+	  </div>
+	  <label >Additional services:</label>	  
+	  <div class="form-group has-feedback">
+		    <select class="form-control select2" multiple="multiple" [(ngModel)] = "selectedValue" [ngModelOptions]="{standalone: true}">
+			<option *ngFor="let additionalService of additionalServices" [ngValue]="acc.additionalService">
+					{{additionalService.name}}
+			</option>
+			
+		</select>
+	  </div>
+	<div class="form-group row" [hidden]="hideError">
+        <div class="col-xs-6">	
+          <div class="alert alert-danger" >
+            <label> {{errorMessage}} </label>
+          </div>
+        </div>
+    </div>
+      <div class="row">
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Change</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+
+  <!-- /.form-box -->
+</div>
+<!-- /.register-box -->
+</div>
+<!-- jQuery 3 -->
+<script src="../../assets/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../../assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="../../assets/plugins/iCheck/icheck.min.js"></script>
+
+
+
+     

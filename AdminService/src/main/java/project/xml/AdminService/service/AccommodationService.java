@@ -10,6 +10,7 @@ import project.xml.AdminService.model.Location;
 @Service
 public interface AccommodationService {
 	List<Accommodation> getAll();
+	Accommodation findOneById(Long id);
 	
 
 }

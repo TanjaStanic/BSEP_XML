@@ -22,6 +22,12 @@ public class AccommodationServiceImpl implements AccommodationService {
 		return accRep.findAll();
 	}
 
+	@Override
+	public Accommodation findOneById(Long id) {
+		// TODO Auto-generated method stub
+		return accRep.findOneById(id);
+	}
+
 
 	
 
