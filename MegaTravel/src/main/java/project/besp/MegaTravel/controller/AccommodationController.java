@@ -20,6 +20,7 @@ import project.besp.MegaTravel.service.AccommodationUnitService;
 @RequestMapping("/accommodation")
 public class AccommodationController {
 
+	
 	@Autowired
 	AccommodationUnitService accUnitService;
 	
