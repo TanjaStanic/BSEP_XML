@@ -25,7 +25,7 @@ import project.besp.MegaTravel.serviceImpl.LoggingServiceImpl;
 
 @RestController
 @RequestMapping("/agent")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201","http://localhost:4202"})
 public class AgentController {
 	
 	

@@ -29,7 +29,7 @@ import project.xml.AdminService.security.auth.JwtAuthenticationRequest;
 
 @RestController
 @RequestMapping(value="api/mainSecurity")
-@CrossOrigin(origins= "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201","http://localhost:4202"})
 public class SecurityController {
 	
 	@Autowired

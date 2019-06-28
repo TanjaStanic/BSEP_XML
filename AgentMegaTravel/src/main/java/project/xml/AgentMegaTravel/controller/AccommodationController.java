@@ -19,7 +19,7 @@ import project.xml.AgentMegaTravel.xsd.GetAllAdditionalServiceResponse;
 
 @RestController
 @RequestMapping("/api/accommodation")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201","http://localhost:4202"})
 public class AccommodationController {
 	
 	@Autowired

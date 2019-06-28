@@ -72,7 +72,7 @@ import org.slf4j.LoggerFactory;
 
 @Controller
 @RequestMapping("/api/certificate")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201","http://localhost:4202"})
 public class CertificateController {
 	
 	private LoggingServiceImpl logging = new LoggingServiceImpl(getClass());

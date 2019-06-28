@@ -46,7 +46,7 @@ import project.xml.AdminService.service.UserService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201","http://localhost:4202"})
 
 public class UserController {
 	

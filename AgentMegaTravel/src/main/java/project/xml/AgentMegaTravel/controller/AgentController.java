@@ -28,7 +28,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping(value="/agent")
-//@CrossOrigin(origins = "http://localhost:4201")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201","http://localhost:4202"})
 public class AgentController {
 	
 	private KeyStore keyStore;

@@ -29,7 +29,7 @@ import project.xml.AgentMegaTravel.security.auth.JwtAuthenticationRequest;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201","http://localhost:4202"})
 public class SecurityController {
 	
 	@Autowired

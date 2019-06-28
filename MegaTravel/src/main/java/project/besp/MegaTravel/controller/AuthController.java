@@ -38,7 +38,7 @@ import project.besp.MegaTravel.service.UserService;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201","http://localhost:4202"})
 public class AuthController {
 	
 	@Autowired

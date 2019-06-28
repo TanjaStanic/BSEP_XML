@@ -27,7 +27,7 @@ import project.xml.ReservationService.service.UserService;
 
 @RestController
 @RequestMapping("/api/messages")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201"})
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201","http://localhost:4202"})
 public class MessageController {
 	
 	@Autowired

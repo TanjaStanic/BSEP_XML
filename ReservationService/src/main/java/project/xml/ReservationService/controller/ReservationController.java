@@ -25,7 +25,7 @@ import project.xml.ReservationService.repository.ReservationRepository;
 
 @RestController
 @RequestMapping("/api/reservationss")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201"})
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201","http://localhost:4202"})
 public class ReservationController {
 
 	
