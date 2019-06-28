@@ -9,6 +9,11 @@
 package project.besp.MegaTravel.xsd;
 
 import java.math.BigInteger;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -74,20 +79,48 @@ import javax.xml.bind.annotation.XmlType;
     "street",
     "number",
     "city",
-    "country"
+    "country",
+    "distance"
 })
 //@XmlRootElement(name = "address", namespace = "http://www.mega-travel/user")
 public class Address {
+	
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "address_id", nullable = false, updatable = false)
+	private Long id;
 
-    @XmlElement(required = true)
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@XmlElement(required = true)
     protected String street;
     protected BigInteger number;
     @XmlElement(required = true)
     protected String city;
     @XmlElement(required = true)
     protected String country;
+    @XmlElement(required = true)
+    protected double distance;
 
-    /**
+    
+    
+
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+
+	/**
      * Gets the value of the street property.
      * 
      * @return
@@ -182,5 +215,7 @@ public class Address {
     public void setCountry(String value) {
         this.country = value;
     }
+
+	
 
 }

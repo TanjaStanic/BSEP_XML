@@ -2,6 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Accommodation } from '../../model/accommodation';
+import { AccommodationDTO } from '../../model/accommodationDTO';
+import { SearchForm } from '../../model/searchForm';
+import { SortForm } from '../../model/sortForm';
+
+
 import { Observable } from 'rxjs';
 
 
@@ -40,4 +45,22 @@ export class AccServiceService {
       return this.http.post('https://localhost:8763/api/accommodations/getAdditionalServicesFromAccUnit',id); 
 
   }
+    
+  search(searchForm : SearchForm) {
+      console.log("pogodjen servis");
+      return this.http.post("https://localhost:8443/accommodation/searchForm" , searchForm);
+   }
+    
+   sortingHotels(sortForm: SortForm, hotels: Array<AccommodationDTO>) {
+    var item = sortForm.sortItem;
+    console.log(item);
+    var type = sortForm.sortType;
+    console.log(type);
+    console.log(hotels.length);
+    console.log('sortinghotels');
+    var sending= item + '=' + type;
+    // tslint:disable-next-line:max-line-length
+    return this.http.post("https://localhost:8443/accommodation/sortForm" + sending, hotels);
+  }
+    
 }

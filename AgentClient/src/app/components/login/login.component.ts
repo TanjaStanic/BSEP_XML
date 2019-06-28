@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
               var currentUser=podaci as User; 
               console.log("cuvam u json currentusera: ");
               console.log(podaci)
-              //localStorage.setItem('user', JSON.stringify(currentUser));
+              localStorage.setItem('user', JSON.stringify(currentUser));
               this.ssCertificate(podaci)
      });
         }

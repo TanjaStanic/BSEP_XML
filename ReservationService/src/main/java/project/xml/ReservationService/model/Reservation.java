@@ -113,7 +113,6 @@ public class Reservation {
 	@XmlElement(name = "total_price")
     protected double totalPrice;
 
-	//protected double price;
     
     @XmlElement(required = true, name="reservation_status")
     protected String reservationStatus;
@@ -121,12 +120,12 @@ public class Reservation {
     @XmlElement(required = true, name="reservation_rating")
     protected String reservationRating;
     
-    @JsonIgnore
+    
     @ManyToOne
 	@JoinColumn(name = "reservation_user")
     protected User user;
     
-    @JsonIgnore
+    
     @ManyToOne
     @JoinColumn(name = "acc_unit_reservation")
     protected AccommodationUnit accommodation_unit;

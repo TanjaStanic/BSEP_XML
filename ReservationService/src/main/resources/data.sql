@@ -49,6 +49,8 @@ insert into accommodation (accommodation_id,name, cancelation_days,rating,catego
 insert into accommodation (accommodation_id,name, cancelation_days,rating,category,description,acc_location,acc_address,acc_agent)
  values (2,"Hotel Novi Sad", 3, 3.9, "4", "Sve ok", 2,6,3);
  
+ 
+ 
  --dodatni servisi
 insert into additional_services (additional_id,name,price_of_add,accommodation) values (1,'All inclusive',100.1,1);
 insert into additional_services (additional_id,name,price_of_add,accommodation) values (2,'Full Board',50.1,1);

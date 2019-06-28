@@ -119,13 +119,12 @@ insert into accommodation (accommodation_id,name, cancelation_days,rating,catego
  values (2,"Hotel Novi Sad", 3, 3.9, "4", "Sve ok", 2,6,3);
 
 
-
  --dodatni servisi
-insert into additional_services (additional_id,name,price_of_add) values (1,'All inclusive',100.1);
-insert into additional_services (additional_id,name,price_of_add) values (2,'Full Board',50.1);
-insert into additional_services (additional_id,name,price_of_add) values (3,'Half Board',25.1);
-insert into additional_services (additional_id,name,price_of_add) values (4,'WiFi',0.0);
-insert into additional_services (additional_id,name,price_of_add) values (5,'Pet friendly',20.1);
+insert into additional_services (additional_id,name,price_of_add,accommodation) values (1,'All inclusive',100.1,1);
+insert into additional_services (additional_id,name,price_of_add,accommodation) values (2,'Full Board',50.1,1);
+insert into additional_services (additional_id,name,price_of_add,accommodation) values (3,'Half Board',25.1,1);
+insert into additional_services (additional_id,name,price_of_add,accommodation) values (4,'WiFi',0.0,1);
+insert into additional_services (additional_id,name,price_of_add,accommodation) values (5,'Pet friendly',20.1,1);
 
 --povezivanje smjestaja i additional servica
 --insert into accommodation_additional_services (accommodation_id,additional_id) values (1,1);

@@ -9,4 +9,6 @@ export class SearchForm {
     listOfServices: Array<string> = new Array<string>();
     category: number;
     stars: number;
+    cancelation: string;
+
 }

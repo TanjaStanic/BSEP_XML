@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { AdditionalServices } from '../model/additionalServices';
 import { Accommodation } from '../model/accommodation';
+import { AccommodationDTO } from '../model/accommodationDTO';
 import { Address } from '../model/address';
 import { SearchForm } from '../model/searchForm';
+import { SortForm } from '../model/sortForm';
 import { Picture } from '../model/picture';
-
-
 import { AccServiceService } from '../service/acc-service/acc-service.service';
 import { UserServiceService } from '../service/user-service/user-service.service';
 
@@ -24,6 +23,8 @@ export class HomePageComponent implements OnInit {
   accommodations : Accommodation[];
   additionalServices : AdditionalServices[];
   searchForm: SearchForm = new SearchForm();
+  sortForm : SortForm = new SortForm();
+  hotels : Array<AccommodationDTO> = [];
   idServices: Map<number, boolean> = new Map<number, boolean>();
   picturess : Picture[];
     storageId :number;
@@ -64,7 +65,7 @@ export class HomePageComponent implements OnInit {
       
   }
   findHotels() {
-      console.log('Usao u find');
+      console.log('Usao u find hotels');
       this.searchForm.listOfServices = new Array<string>();
       
       for(var i=0; i<this.additionalServices.length; i++){
@@ -72,11 +73,49 @@ export class HomePageComponent implements OnInit {
        this.searchForm.listOfServices.push(this.additionalServices[i].name);
      }
      console.log(this.searchForm);
-
+     console.log("CITY" + this.searchForm.city);
+     console.log("Additional Services" + this.searchForm.listOfServices);
       
-      console.log(this.searchForm);
+      console.log(this.searchForm.numberOfPeople + "PEOPLEE");
+      
+      
+     if(this.searchForm.city == undefined){
+         this.searchForm.city = "undefined";
+         }
+      
+      if(this.searchForm.numberOfPeople == undefined){
+         this.searchForm.numberOfPeople = -1;
+         }
+      
+      if(this.searchForm.stars == undefined){
+         this.searchForm.stars = 0;
+         }
+      
+      if(this.searchForm.distance == undefined){
+         this.searchForm.distance = -1;
+         }
+      
+      this.accService.search(this.searchForm).subscribe(data=> {
+          this.hotels = data as Array<AccommodationDTO>;
+          console.log("Search parametri" + data);
 
+          
+          });
   }
+    
+  sortHotels()
+   {
+    console.log(this.sortForm);
+    this.accService.sortingHotels(this.sortForm, this.hotels).subscribe(data => {
+        this.hotels = data as Array<AccommodationDTO>;
+        console.log(this.hotels);
+        console.log('List is sorted.');
+    });
+      }
+    
+    
+    
+  
   
   serviceChanged(id: number){
       var value = this.idServices.get(id);

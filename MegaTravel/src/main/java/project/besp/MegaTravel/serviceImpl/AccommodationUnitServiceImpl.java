@@ -26,7 +26,31 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
 	@Override
 	public List<AccommodationUnit> gettAllAccUnits(long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return accUnitRepository.findAll();
+	}
+
+	@Override
+	public List<AccommodationUnit> getAll() {
+		// TODO Auto-generated method stub
+		return accUnitRepository.findAll();
+	}
+
+	@Override
+	public AccommodationUnit getById(Long id) {
+		// TODO Auto-generated method stub
+		return accUnitRepository.findById(id).get();
+	}
+
+	@Override
+	public List<AccommodationUnit> getByAccommodationId(Long id) {
+		// TODO Auto-generated method stub
+		return accUnitRepository.findByAccommodationId(id);
+	}
+
+	@Override
+	public AccommodationUnit save(AccommodationUnit unit) {
+		// TODO Auto-generated method stub
+		return accUnitRepository.save(unit);
 	}
 
 }

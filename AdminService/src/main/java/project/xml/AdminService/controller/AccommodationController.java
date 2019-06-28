@@ -84,7 +84,7 @@ public class AccommodationController {
 	public ResponseEntity<?> getAllAcc() {
 		//System.out.println("Number of additional services: " + addService.getAll().size());
 		List<Accommodation> acc = new ArrayList<Accommodation>();
-		acc = accommodationRepository.findAll();
+		acc = accommodationService.getAll();
 		System.out.println(acc.size());
 		for(int i = 0; i < acc.size();i++) {
 			System.out.println("ajde+++++" + acc.get(i).getAddress() + acc.get(i).getName());

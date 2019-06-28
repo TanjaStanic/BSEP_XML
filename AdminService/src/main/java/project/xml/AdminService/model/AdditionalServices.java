@@ -109,6 +109,9 @@ public class AdditionalServices {
 	
 	@ManyToMany(mappedBy = "additional_services")
     private List<AccommodationUnit> accommodation_units;
+	
+	
+
 
     /**
      * Gets the value of the id property.

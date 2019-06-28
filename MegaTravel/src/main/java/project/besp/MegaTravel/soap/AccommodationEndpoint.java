@@ -1,5 +1,6 @@
 package project.besp.MegaTravel.soap;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -34,6 +35,7 @@ public class AccommodationEndpoint {
 		User newUser = userRepository.findOneById(request.getId());
 		System.out.println("Dosao u megatravel endpoint user id je: "+ newUser.getId() + newUser.getEmail());
 		List<AccommodationUnit> au = accUnitRepository.findAllByUser(newUser);
+		List<project.besp.MegaTravel.xsd.AccommodationUnit> accUnits = new ArrayList<project.besp.MegaTravel.xsd.AccommodationUnit>();
 		GetAllAccommodationUnitsResponse e = new GetAllAccommodationUnitsResponse();
 		System.out.println("Dosao u accommodationEndpoint!!! a id agenta je:  " + request.getId());
 		for(AccommodationUnit a : au) {
@@ -49,8 +51,11 @@ public class AccommodationEndpoint {
 			auxsd.setUser(a.getUser());
 			System.out.println("Dosao u accommodationEndpoint!!! set flooor  " + a.getFloor());
 			System.out.println(au.size());
+			
+			accUnits.add(auxsd);
 
 			e.getAccommodationUnit().add(auxsd);
+			e.setAccommodationUnit(accUnits);
 		}
 		
 		return e;

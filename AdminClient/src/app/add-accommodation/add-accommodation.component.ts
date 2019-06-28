@@ -42,18 +42,22 @@ export class AddAccommodationComponent implements OnInit {
       console.log(this.address.street + "+ + + + " + this.address.number);
       
       this.accService.addAccAddress(this.address).subscribe(data=> {       
-          console.log("Dodavanje adrese za accommodation" + this.address.street);
+          console.log("Dodavanje adrese za accommodation" + this.address.street );
+          //this.acc.address = this.address;
+
           });
       
       this.accService.addAccLocation(this.location).subscribe(data=> {         
           console.log("usao u servis" + this.location.geoLength);
+          //this.acc.location = this.location;
+
           
           });   
       
-      this.acc.address = this.address;
-      this.acc.location = this.location;
-      this.acc.additional_services = this.additionalServices;
-      //this.acc.agents.id = this.id;
+        this.acc.address = this.address;
+        this.acc.location = this.location;
+        this.acc.additional_services = this.additionalServices;
+        //this.acc.agents.id = this.id;
      // console.log(this.acc.agents.id);
       this.accService.addAcc(this.acc).subscribe(data=> {        
           console.log(this.acc.address);

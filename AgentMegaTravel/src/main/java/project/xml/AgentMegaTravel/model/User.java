@@ -58,7 +58,7 @@ public class User   implements UserDetails{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@JsonIgnore
+	//@JsonIgnore
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
     @Column(name = "user_id", nullable = false, updatable = false)
@@ -83,7 +83,7 @@ public class User   implements UserDetails{
 	public String pib;
     @Column(name = "certificated")
 	private boolean certificated;
-	@JsonIgnore
+	//@JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( 
         name = "user_roles", 

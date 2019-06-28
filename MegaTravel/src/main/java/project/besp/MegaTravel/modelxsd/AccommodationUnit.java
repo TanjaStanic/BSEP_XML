@@ -97,6 +97,7 @@ import project.besp.MegaTravel.model.User;
     "size",
     "freeCancelation",
     "type",
+
 })
 @Entity
 @Table(name="accommodation_unit")
@@ -121,6 +122,7 @@ public class AccommodationUnit {
    
 	@XmlElement(required = true)
     protected String type;
+    
     
 	/*
      * Smjestajna jedinica odgovara tacno jednom smjestaju.
@@ -329,6 +331,8 @@ public class AccommodationUnit {
      *     {@link Integer }
      *     
      */
+    
+    
     public void setFloor(Integer value) {
         this.floor = value;
     }

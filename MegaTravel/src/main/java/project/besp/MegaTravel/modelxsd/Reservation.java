@@ -24,6 +24,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import project.besp.MegaTravel.model.User;
 
 
@@ -97,6 +99,8 @@ import project.besp.MegaTravel.model.User;
 })
 @Entity
 @Table(name="reservation")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 public class Reservation {
 
 	@Id
@@ -112,8 +116,6 @@ public class Reservation {
     
 	@XmlElement(name = "total_price")
     protected double totalPrice;
-
-	protected double price;
     
     @XmlElement(required = true, name="reservation_status")
     protected String reservationStatus;
@@ -265,14 +267,6 @@ public class Reservation {
     public void setReservationRating(String value) {
         this.reservationRating = value;
     }
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
 
 
 	public User getUser() {

@@ -11,6 +11,5 @@ export class AccommodationUnit {
 	pricing: Array<Pricing>;
 	type: string;
     accommodation: Accommodation;
-	additionalService: Array<AdditionalServices>;
 
 }
