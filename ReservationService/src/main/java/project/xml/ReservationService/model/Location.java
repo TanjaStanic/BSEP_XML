@@ -69,9 +69,9 @@ public class Location {
     @Column(name = "location_id", nullable = false, updatable = false)
     protected long id;
     @XmlElement(required = true)
-    protected float geo_length;
+    protected float geoLength;
     @XmlElement(required = true)
-    protected float geo_width;
+    protected float geoWidth;
     
     /*@OneToOne(mappedBy="location")
     public Accommodation accomodation;*/
@@ -84,19 +84,19 @@ public class Location {
 	}
 
 	public float getGeo_length() {
-		return geo_length;
+		return geoLength;
 	}
 
 	public void setGeo_length(float geo_length) {
-		this.geo_length = geo_length;
+		this.geoLength = geo_length;
 	}
 
 	public float getGeo_width() {
-		return geo_width;
+		return geoWidth;
 	}
 
 	public void setGeo_width(float geo_width) {
-		this.geo_width = geo_width;
+		this.geoWidth = geo_width;
 	}
 
 	/*public Accommodation getAccomodation() {

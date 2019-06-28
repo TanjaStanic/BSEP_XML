@@ -70,7 +70,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "price",
     "dateFrom",
     "dateTo",
-    "accommodation_unit"
+    "accommodationUnit"
 })
 @Entity
 @Table(name="pricing")
@@ -92,7 +92,7 @@ public class Pricing {
 
 	@ManyToOne
 	@JoinColumn(name="acc_unit_price")
-	private AccommodationUnit accommodation_unit;
+	private AccommodationUnit accommodationUnit;
     /**
      * Gets the value of the id property.
      * 

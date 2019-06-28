@@ -8,6 +8,7 @@
 
 package project.besp.MegaTravel.modelxsd;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -97,6 +98,7 @@ import project.besp.MegaTravel.model.User;
     "size",
     "freeCancelation",
     "type",
+    "defaultPrice"
 
 })
 @Entity
@@ -117,8 +119,12 @@ public class AccommodationUnit {
 	
 	@XmlElement(required = true)
 	protected Integer floor;
+	
+	@XmlElement()
+	@Column(name = "default_price")
+	protected Double defaultPrice;
     
-	protected Integer size;
+	protected BigInteger size;
    
 	@XmlElement(required = true)
     protected String type;
@@ -142,23 +148,18 @@ public class AccommodationUnit {
 	/*
 	 * Jedna dodatna usluga moze da odgovora za vise smjestajnih jedinica
 	 */
-    @ManyToMany
-	@JoinTable(
-	        name = "accommodation_unit_additional_services", 
-	        joinColumns = { @JoinColumn(name = "accommodation_unit_id") }, 
-	        inverseJoinColumns = { @JoinColumn(name = "additional_id") }
-	    )
-    protected List<AdditionalServices> additional_services;
+	  @OneToMany(mappedBy="accommodationUnit")
+	    protected List<AdditionalServices> additional_services;
     
     /*
      * SJ se rezervise vise puta
      */
-    @OneToMany(mappedBy="accommodation_unit")
+    @OneToMany(mappedBy="accommodationUnit")
     protected List<Reservation> reservations;
     /*
      * ima svoju listu cijena (na mjesecnom nivou pozeljno)
      */
-    @OneToMany(mappedBy="accommodation_unit")
+    @OneToMany(mappedBy="accommodationUnit")
     protected List<Pricing> pricing;
     
     @OneToMany(mappedBy="accommodation_unit")
@@ -211,7 +212,7 @@ public class AccommodationUnit {
      *     {@link Integer }
      *     
      */
-    public Integer getSize() {
+    public BigInteger getSize() {
         return size;
     }
 
@@ -223,7 +224,7 @@ public class AccommodationUnit {
      *     {@link Integer }
      *     
      */
-    public void setSize(Integer value) {
+    public void setSize(BigInteger value) {
         this.size = value;
     }
 

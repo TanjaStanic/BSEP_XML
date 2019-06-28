@@ -47,6 +47,11 @@ public class Comment {
 	@JoinColumn(name="acc_unit_comment")
 	private AccommodationUnit accommodation_unit;
 	
+	
+	@ManyToOne
+	@JoinColumn(name="acc_commment")
+	private Accommodation accommodation;
+	
 	public Long getId() {
 		return id;
 	}

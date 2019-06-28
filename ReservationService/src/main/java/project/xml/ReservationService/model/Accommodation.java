@@ -12,6 +12,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,9 +29,12 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 
@@ -120,7 +124,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 })
 @Entity
 @Table(name = "accommodation")
-public class Accommodation {
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Accommodation.class)
+public class Accommodation implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -148,7 +158,7 @@ public class Accommodation {
     @JoinColumn(name="acc_location")
     protected Location location;
     
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "acc_address")
 	protected Address address;
     
@@ -168,7 +178,7 @@ public class Accommodation {
     @OneToMany(mappedBy="accommodation")
     protected List<Comment> comments;
     
-    
+    @XmlTransient
     @ManyToOne
     @JoinColumn(name = "acc_agent")
     protected User user;

@@ -115,7 +115,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  * 
  * 
  */
-/*@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Accommodation", propOrder = {
     "id",
     "name",
@@ -123,7 +123,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
     "rating",
     "category",
     "description",
-})*/
+    "images"
+})
 
 @Entity
 @Table(name = "accommodation")
@@ -185,8 +186,8 @@ public class Accommodation implements java.io.Serializable {
     protected List<Comment> comments;
 
 	
-   /* @OneToMany(fetch = FetchType.LAZY,mappedBy="accomodation")
-    protected List<Image> images;*/
+    @OneToMany(fetch = FetchType.LAZY,mappedBy="accomodation")
+    protected List<Image> images;
 	
 	
 	@XmlTransient

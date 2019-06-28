@@ -27,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
+
 @Entity
 @Table(name="user")
 public class User  implements UserDetails{
@@ -127,6 +128,14 @@ public class User  implements UserDetails{
 	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	protected List<Comment> comments;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="userSent")
+	protected List<Messages> messagesSent;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="userReceived")
+	protected List<Messages> messagesReceived;
 	
 	public User() {
 		

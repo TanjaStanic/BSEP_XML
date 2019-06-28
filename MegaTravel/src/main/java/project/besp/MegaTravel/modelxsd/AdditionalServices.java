@@ -20,11 +20,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
 
 
 
@@ -104,9 +106,9 @@ public class AdditionalServices {
 	@JoinColumn(name="accommodation")
 	private Accommodation accommodation;
 	
-	@ManyToMany(mappedBy = "additional_services")
-    private List<AccommodationUnit> accommodation_units;
-
+	@ManyToOne
+    @JoinColumn(name = "accommodation_unit")
+    private AccommodationUnit accommodationUnit;
     /**
      * Gets the value of the id property.
      * 
@@ -179,12 +181,12 @@ public class AdditionalServices {
 		this.accommodation = accommodation;
 	}
 
-	public List<AccommodationUnit> getAccommodation_units() {
-		return accommodation_units;
+	public AccommodationUnit getAccommodation_units() {
+		return accommodationUnit;
 	}
 
-	public void setAccommodation_units(List<AccommodationUnit> accommodation_units) {
-		this.accommodation_units = accommodation_units;
+	public void setAccommodation_units(AccommodationUnit accommodation_units) {
+		this.accommodationUnit = accommodation_units;
 	}
 
 

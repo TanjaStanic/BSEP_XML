@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -100,6 +101,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
     "size",
     "freeCancelation",
     "type",
+    "defaultPrice"
+
 })
 @Entity
 @Table(name="accommodation_unit")
@@ -119,6 +122,10 @@ public class AccommodationUnit {
 	
 	@XmlElement(required = true)
 	protected Integer floor;
+	
+	@XmlElement()
+	@Column(name = "default_price")
+	protected Double defaultPrice;
     
 	protected BigInteger size;
    
@@ -138,7 +145,7 @@ public class AccommodationUnit {
 	 * Jedan agent ima vise smjestajnih jedinica
 	 */
 	
-	@JsonBackReference
+	
 	@ManyToOne
 	@JoinColumn(name="agent_units")
 	private User user;
@@ -148,25 +155,20 @@ public class AccommodationUnit {
 	 */
 	
 	
-    @ManyToMany
-	@JoinTable(
-	        name = "accommodation_unit_additional_services", 
-	        joinColumns = { @JoinColumn(name = "accommodation_unit_id") }, 
-	        inverseJoinColumns = { @JoinColumn(name = "additional_id") }
-	    )
+    @OneToMany(mappedBy="accommodationUnit")
     protected List<AdditionalServices> additional_services;
-    
+     
     /*
      * SJ se rezervise vise puta
      */
 	
-    @OneToMany(mappedBy="accommodation_unit")
+    @OneToMany(mappedBy="accommodationUnit")
     protected List<Reservation> reservations;
     /*
      * ima svoju listu cijena (na mjesecnom nivou pozeljno)
      */
 	
-    @OneToMany(mappedBy="accommodation_unit")
+    @OneToMany(mappedBy="accommodationUnit")
     protected List<Pricing> pricing;
     
     @OneToMany(mappedBy="accommodation_unit")

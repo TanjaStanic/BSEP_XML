@@ -29,6 +29,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "User", propOrder = {
     "id",
@@ -46,7 +47,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
     "reservations",
     "accommodations",
     "accommodation_units",
-    "comments"
+    "comments",
+    "messagesSent",
+    "messagesReceived"
+    
     
     
 })
@@ -138,6 +142,14 @@ public class User   implements UserDetails{
     
     @Column(name = "blocked")
 	private boolean blocked;
+    
+	@JsonIgnore
+	@OneToMany(mappedBy="userSent")
+	protected List<Messages> messagesSent;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="userReceived")
+	protected List<Messages> messagesReceived;
 	
 	public User() {
 		

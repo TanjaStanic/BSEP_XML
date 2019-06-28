@@ -92,7 +92,7 @@ public class Pricing {
 
 	@ManyToOne
 	@JoinColumn(name="acc_unit_price")
-	private AccommodationUnit accommodation_unit;
+	private AccommodationUnit accommodationUnit;
     /**
      * Gets the value of the id property.
      * 

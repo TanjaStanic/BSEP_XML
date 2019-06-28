@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "id",
@@ -18,13 +19,14 @@ import javax.xml.bind.annotation.XmlType;
     "commentDate",
     "user",
     "accommodation_unit",
-    "visible"
+    "visible",
+    "accommodation"
 })
 @Entity
 @Table(name="comment")
 public class Comment {
 	@Id
-    @Column(name = "id")
+    @Column(name = "comment_id")
     private Long id;
 	
 	@Column(name = "text", nullable = false)
@@ -43,6 +45,10 @@ public class Comment {
 	@ManyToOne
 	@JoinColumn(name="acc_unit_comment")
 	private AccommodationUnit accommodation_unit;
+	
+	@ManyToOne
+	@JoinColumn(name="acc_commment")
+	private Accommodation accommodation;
 	
 	public Long getId() {
 		return id;

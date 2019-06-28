@@ -31,6 +31,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
+
 /**
  * <p>Java class for anonymous complex type.
  * 
@@ -148,23 +149,18 @@ public class AccommodationUnit {
 	/*
 	 * Jedna dodatna usluga moze da odgovora za vise smjestajnih jedinica
 	 */
-    @ManyToMany
-	@JoinTable(
-	        name = "accommodation_unit_additional_services", 
-	        joinColumns = { @JoinColumn(name = "accommodation_unit_id") }, 
-	        inverseJoinColumns = { @JoinColumn(name = "additional_id") }
-	    )
-    protected List<AdditionalServices> additional_services;
-    
+	  @OneToMany(mappedBy="accommodationUnit")
+	    protected List<AdditionalServices> additional_services;
+	     
     /*
      * SJ se rezervise vise puta
      */
-    @OneToMany(mappedBy="accommodation_unit")
+    @OneToMany(mappedBy="accommodationUnit")
     protected List<Reservation> reservations;
     /*
      * ima svoju listu cijena (na mjesecnom nivou pozeljno)
      */
-    @OneToMany(mappedBy="accommodation_unit")
+    @OneToMany(mappedBy="accommodationUnit")
     protected List<Pricing> pricing;
     
     @OneToMany(mappedBy="accommodation_unit")

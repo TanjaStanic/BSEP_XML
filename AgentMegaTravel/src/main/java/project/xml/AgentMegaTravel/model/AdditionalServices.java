@@ -11,12 +11,15 @@ package project.xml.AgentMegaTravel.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -79,8 +82,8 @@ import javax.xml.bind.annotation.XmlType;
     "id",
     "name",
     "price_of_add",
-    "accommodations",
-    "accommodation_units"
+    "accommodation",
+    "accommodationUnit"
 })
 @Entity
 @Table(name="additional_services")
@@ -95,12 +98,16 @@ public class AdditionalServices {
     protected String name;
     
 	protected double price_of_add;
-
-	@ManyToMany(mappedBy = "additional_services")
-	private List<Accommodation> accommodations;
 	
-	@ManyToMany(mappedBy = "additional_services")
-    private List<AccommodationUnit> accommodation_units;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="accommodation")
+	private Accommodation accommodation;
+	
+
+	@ManyToOne
+    @JoinColumn(name = "accommodation_unit")
+    private AccommodationUnit accommodationUnit;
+	
 
     /**
      * Gets the value of the id property.
@@ -166,22 +173,22 @@ public class AdditionalServices {
 		this.price_of_add = price_of_add;
 	}
 
-	
-	public List<AccommodationUnit> getAccommodation_units() {
-		return accommodation_units;
+	public Accommodation getAccommodation() {
+		return accommodation;
 	}
 
-	public void setAccommodation_units(List<AccommodationUnit> accommodation_units) {
-		this.accommodation_units = accommodation_units;
+	public void setAccommodation(Accommodation accommodation) {
+		this.accommodation = accommodation;
 	}
 
-	public List<Accommodation> getAccommodations() {
-		return accommodations;
+	public AccommodationUnit getAccommodationUnit() {
+		return accommodationUnit;
 	}
 
-	public void setAccommodations(List<Accommodation> accommodations) {
-		this.accommodations = accommodations;
+	public void setAccommodationUnit(AccommodationUnit accommodationUnit) {
+		this.accommodationUnit = accommodationUnit;
 	}
+
 
 
 

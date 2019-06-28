@@ -89,7 +89,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
     "street",
     "number",
     "city",
-    "country"
+    "country",
+    "users"
 })
 @Entity
 @Table(name="address")

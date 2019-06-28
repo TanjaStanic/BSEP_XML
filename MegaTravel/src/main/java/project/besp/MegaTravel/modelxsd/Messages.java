@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -22,6 +24,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+
+import project.besp.MegaTravel.model.User;
+
 
 
 /**
@@ -60,10 +65,12 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
+@XmlType(name = "messages", propOrder = {
 		"id",
     "content",
     "title",
+    "user",
+    "agent",
     "date"
 })
 @Entity
@@ -80,11 +87,17 @@ public class Messages {
     
 	@XmlElement(required = true)
     protected String title;
+	
+	@ManyToOne
+	@JoinColumn(name="user_sent_id")
+	private User userSent;
 
-	@XmlElement
-    @XmlSchemaType(name = "date")
+	@ManyToOne
+	@JoinColumn(name="user_received_id")
+	private User userReceived;
+	
+	@XmlSchemaType(name = "date")
     protected Date date;
-
 /*	@ManyToOne
 	@JoinColumn(name="agent_message")
 	private Agent agent;
@@ -127,8 +140,17 @@ public class Messages {
     public String getTitle() {
         return title;
     }
+    
 
-    /**
+    public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	/**
      * Sets the value of the title property.
      * 
      * @param value
@@ -148,21 +170,6 @@ public class Messages {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public Date getDate() {
-        return date;
-    }
-
-    /**
-     * Sets the value of the date property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setDate(Date value) {
-        this.date = value;
-    }
 
 	public Long getId() {
 		return id;
@@ -170,6 +177,34 @@ public class Messages {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public User getUserSent() {
+		return userSent;
+	}
+
+	public void setUserSent(User userSent) {
+		this.userSent = userSent;
+	}
+
+	public User getUserReceived() {
+		return userReceived;
+	}
+
+	public void setUserReceived(User userReceived) {
+		this.userReceived = userReceived;
+	}
+
+	public Messages() {
+		
+	}
+	public Messages(String content, String title, User userSent, User userReceived, Date date) {
+		super();
+		this.content = content;
+		this.title = title;
+		this.userSent = userSent;
+		this.userReceived = userReceived;
+		this.date = date;
 	}
 
 }

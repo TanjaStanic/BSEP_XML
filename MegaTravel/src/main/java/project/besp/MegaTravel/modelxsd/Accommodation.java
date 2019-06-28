@@ -28,7 +28,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import project.besp.MegaTravel.model.User;
+
 
 
 /**
@@ -157,14 +160,13 @@ public class Accommodation {
     @OneToMany(mappedBy="accommodation")
     protected List<AccommodationUnit> accommodation_unit;
     
-    @ManyToMany
-	@JoinTable(
-	        name = "accommodation_additional_services", 
-	        joinColumns = { @JoinColumn(name = "accommodation_unit_id") }, 
-	        inverseJoinColumns = { @JoinColumn(name = "additional_id") }
-	    )
+    @OneToMany(mappedBy = "accommodation")
     protected List<AdditionalServices> additional_services;
 
+    @JsonIgnore
+    @OneToMany(mappedBy="accommodation")
+    protected List<Comment> comments;
+    
     @OneToMany(mappedBy="accomodation")
     protected List<Image> images;
     
