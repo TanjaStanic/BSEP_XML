@@ -49,4 +49,10 @@ public class ReservationServiceImpl implements ReservationService {
 		return null;
 	}
 
+	@Override
+	public Reservation save(Reservation r) {
+		// TODO Auto-generated method stub
+		return reservationRepository.save(r);
+	}
+
 }

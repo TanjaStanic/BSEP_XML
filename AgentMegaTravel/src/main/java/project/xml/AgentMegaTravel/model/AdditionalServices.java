@@ -75,7 +75,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "AdditionalServices", propOrder = {
+@XmlType(name = "", propOrder = {
     "id",
     "name",
     "price_of_add",

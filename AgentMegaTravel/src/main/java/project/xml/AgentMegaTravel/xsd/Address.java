@@ -71,6 +71,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Address", propOrder = {
+		"id",
     "street",
     "number",
     "city",
@@ -78,7 +79,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 //@XmlRootElement(name = "address", namespace = "http://www.mega-travel/user")
 public class Address {
-
+	 protected long id;
     @XmlElement(required = true)
     protected String street;
     protected BigInteger number;

@@ -99,6 +99,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
     "size",
     "freeCancelation",
     "type",
+    "defaultPrice"
 })
 @Entity
 @Table(name="accommodation_unit")
@@ -119,6 +120,8 @@ public class AccommodationUnit {
 	@XmlElement(required = true)
 	protected Integer floor;
     
+	protected Double defaultPrice;
+	
 	protected BigInteger size;
    
 	@XmlElement(required = true)
@@ -152,7 +155,7 @@ public class AccommodationUnit {
      * SJ se rezervise vise puta
      */
     @JsonIgnore
-    @OneToMany(mappedBy="accommodation_unit")
+    @OneToMany(mappedBy="accommodationUnit")
     protected List<Reservation> reservations;
     /*
      * ima svoju listu cijena (na mjesecnom nivou pozeljno)
@@ -389,6 +392,14 @@ public class AccommodationUnit {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public Double getDefaultPrice() {
+		return defaultPrice;
+	}
+
+	public void setDefaultPrice(Double defaultPrice) {
+		this.defaultPrice = defaultPrice;
 	}
 	
 

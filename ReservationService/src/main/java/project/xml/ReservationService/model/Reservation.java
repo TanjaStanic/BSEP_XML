@@ -128,7 +128,7 @@ public class Reservation {
     
     @ManyToOne
     @JoinColumn(name = "acc_unit_reservation")
-    protected AccommodationUnit accommodation_unit;
+    protected AccommodationUnit accommodationUnit;
     /**
      * Gets the value of the id property.
      * 
@@ -284,12 +284,13 @@ public class Reservation {
 		this.user = user;
 	}
 
-	public AccommodationUnit getAccommodation_unit() {
-		return accommodation_unit;
+
+	public AccommodationUnit getAccommodationUnit() {
+		return accommodationUnit;
 	}
 
-	public void setAccommodation_unit(AccommodationUnit accommodation_unit) {
-		this.accommodation_unit = accommodation_unit;
+	public void setAccommodationUnit(AccommodationUnit accommodationUnit) {
+		this.accommodationUnit = accommodationUnit;
 	}
 
 	public void setId(Long id) {

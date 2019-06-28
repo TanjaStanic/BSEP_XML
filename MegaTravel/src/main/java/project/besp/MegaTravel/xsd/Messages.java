@@ -52,13 +52,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Messages", propOrder = {
+		"id",
     "content",
     "title",
     "date"
 })
 //@XmlRootElement(name = "messages", namespace = "http://www.mega-travel/message")
 public class Messages {
-
+	 protected long id;
     @XmlElement(required = true)
     protected String content;
     @XmlElement(required = true)

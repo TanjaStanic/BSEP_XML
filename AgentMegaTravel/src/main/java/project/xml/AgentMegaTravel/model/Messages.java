@@ -61,10 +61,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "messages", propOrder = {
+		"id",
     "content",
     "title",
-    "agent",
-    "client",
     "date"
 })
 @Entity

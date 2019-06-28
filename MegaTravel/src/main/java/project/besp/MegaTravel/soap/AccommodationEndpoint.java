@@ -41,10 +41,10 @@ public class AccommodationEndpoint {
 		for(AccommodationUnit a : au) {
 			project.besp.MegaTravel.xsd.AccommodationUnit auxsd = new project.besp.MegaTravel.xsd.AccommodationUnit();
 			auxsd.setId(a.getId());
-			auxsd.setCapacity(a.getCapacity());
+			/*auxsd.setCapacity(a.getCapacity());
 			auxsd.setNumberOfRoom(a.getNumberOfRoom());
 			auxsd.setFloor(a.getFloor());
-			auxsd.setSize(a.getSize());
+			auxsd.setSize(a.getSize());*/
 			auxsd.setType(a.getType());
 			//auxsd.setPricing(pricing);
 			//auxsd.setAccommodation(a.getAccommodation());

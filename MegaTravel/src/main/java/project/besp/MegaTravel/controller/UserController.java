@@ -336,6 +336,7 @@ public class UserController {
 	produces = MediaType.APPLICATION_JSON_VALUE)
 		public ResponseEntity<User> getProfile(@RequestBody String token) 
 		{
+		System.out.println("user profile u api useruuuuuuuuuuuu");
 		    User notvalidUser = new User();
 
 		

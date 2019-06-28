@@ -1,5 +1,6 @@
 package project.xml.ReservationService.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +25,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
+
 @Entity
 @Table(name="user")
 public class User  implements UserDetails{
@@ -32,7 +34,7 @@ public class User  implements UserDetails{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@JsonIgnore
+	//@JsonIgnore
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
     @Column(name = "user_id", nullable = false, updatable = false)
@@ -87,7 +89,7 @@ public class User  implements UserDetails{
 	 * Vise korisnika (admin,agent,client) mogu biti na jednoj adresi
 	 */
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_address")
 	protected Address address;
@@ -124,6 +126,14 @@ public class User  implements UserDetails{
 	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	protected List<Comment> comments;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="userSent")
+	protected List<Messages> messagesSent;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="userReceived")
+	protected List<Messages> messagesReceived;
 	
 	public User() {
 		
@@ -315,6 +325,41 @@ public class User  implements UserDetails{
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+	public void addComment(Comment c) {
+		if (this.comments==null) {
+			this.comments = new ArrayList<Comment>();
+		}
+		this.comments.add(c);
+	}
+
+	public List<Messages> getMessagesSent() {
+		return messagesSent;
+	}
+
+	public void setMessagesSent(List<Messages> messagesSent) {
+		this.messagesSent = messagesSent;
+	}
+
+	public List<Messages> getMessagesReceived() {
+		return messagesReceived;
+	}
+
+	public void setMessagesReceived(List<Messages> messagesReceived) {
+		this.messagesReceived = messagesReceived;
+	}
+
+	public void addSendMessage(Messages m) {
+		if (this.messagesSent==null) {
+			this.messagesSent = new ArrayList<Messages>();
+		}
+		this.messagesSent.add(m);
+	}
+	public void addRecievedMessage(Messages m) {
+		if (this.messagesReceived==null) {
+			this.messagesReceived = new ArrayList<Messages>();
+		}
+		this.messagesReceived.add(m);
 	}
 	
 	

@@ -6,7 +6,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
+@XmlType(name = "", propOrder = {
+	    "id"
+	})
 @XmlRootElement(name = "GetAllAccommodationUnitsRequest")
 public class GetAllAccommodationUnitsRequest {
 

@@ -70,6 +70,7 @@ insert into accommodation_unit (accommodation_unit_id,capacity,number_of_room,fl
 insert into accommodation_unit (accommodation_unit_id,capacity,number_of_room,floor,size,type, acc,agent_units)
 	values (3,5,123,12,50,"bed&breakfast",2,2);
 
+
 --povezivanje cjenovnika
 
 insert into pricing(pricing_id,price,date_from,date_to,acc_unit_price) 
@@ -87,6 +88,12 @@ insert into reservation (reservation_id,start_date,end_date,total_price,reservat
 	values (1,'2018-04-15','2018-04-25',350.5,'arrived',5,5,1);
 insert into reservation (reservation_id,start_date,end_date,total_price,reservation_status,reservation_rating,reservation_user,acc_unit_reservation)	
 	values (2,'2018-04-01','2018-04-13',666.5,'arrived',2,5,1);
+insert into reservation (reservation_id,start_date,end_date,total_price,reservation_status,reservation_rating,reservation_user,acc_unit_reservation)	
+	values (3,'2018-05-01','2018-05-13',666.5,'confirmed',null,5,1);
+insert into reservation (reservation_id,start_date,end_date,total_price,reservation_status,reservation_rating,reservation_user,acc_unit_reservation)	
+	values (4,'2018-04-01','2018-04-13',666.5,'arrived',null,5,1);
+insert into reservation (reservation_id,start_date,end_date,total_price,reservation_status,reservation_rating,reservation_user,acc_unit_reservation)	
+	values (5,'2018-05-01','2018-05-13',666.5,'confirmed',null,5,1);
 
 	
 	
@@ -95,5 +102,16 @@ insert into image (image_id,title,uri,accommodation_pic) values (1,'Aleksandar1'
 insert into image (image_id,title,uri,accommodation_pic) values (2,'Aleksandar2','../assets/images/aleksandar2.jpg',1);
 insert into image (image_id,title,uri,accommodation_pic) values (3,'NoviSad1','../assets/images/novisad.jpg',2);
 insert into image (image_id,title,uri,accommodation_pic) values (4,'NoviSad2','../assets/images/novisad2.jpg',2);
+
+--dodavanje poruke
+insert into messages(message_id,title,content,user_sent_id,user_received_id,date) 
+	values (1,'Title1', 'Postovani, ovo je u smijeru agent  poslao klijentu, puno poozzz',2,5,'2018-05-13');
+insert into messages(message_id,title,content,user_sent_id,user_received_id,date) 
+	values (2,'Title2', 'Postovani, ovo je u smijeru agent  poslao klijentu',2,5,'2018-05-13');
+
+insert into messages(message_id,title,content,user_sent_id,user_received_id,date) 
+	values (3,'Title1', 'Postovani, ovo je u smijeru klijent  poslao agentu, puno poozzz',5,2,'2018-05-13');
+insert into messages(message_id,title,content,user_sent_id,user_received_id,date) 
+	values (4,'Title2', 'Postovani, ovo je u smijeru klijent  poslao agentu',5,2,'2018-05-13');
 
 

@@ -331,5 +331,10 @@ public class User  implements UserDetails{
 		this.blocked = blocked;
 	}
 	
-	
+	public void addComment(Comment c) {
+		if (this.comments==null) {
+			this.comments = new ArrayList<Comment>();
+		}
+		this.comments.add(c);
+	}
 }

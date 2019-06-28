@@ -7,9 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import project.xml.ReservationService.model.Accommodation;
 import project.xml.ReservationService.model.AccommodationUnit;
+import project.xml.ReservationService.model.Reservation;
 
 @Repository
 public interface AccommodationUnitRepository extends JpaRepository<AccommodationUnit,Long> {
 	List<AccommodationUnit> findAllByAccommodation(Accommodation a);
 	AccommodationUnit findOneById(Long id);
+	AccommodationUnit findOneByReservations(Reservation res);
 }

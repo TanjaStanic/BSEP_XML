@@ -9,6 +9,7 @@
 package project.xml.ReservationService.model;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -30,6 +31,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 /**
@@ -150,17 +152,23 @@ public class Accommodation {
 	@JoinColumn(name = "acc_address")
 	protected Address address;
     
-	
+    @JsonIgnore
     @OneToMany(mappedBy="accommodation")
-    protected List<AccommodationUnit> accommodation_unit;
+    protected List<AccommodationUnit> accommodationUnit;
     
-  
+    @JsonIgnore
     @OneToMany(mappedBy="accommodation")
-    protected List<AdditionalServices> additional_services;
+    protected List<AdditionalServices> additionalServices;
 
+    @JsonIgnore
     @OneToMany(mappedBy="accomodation")
     protected List<Image> images;
 	
+    @JsonIgnore
+    @OneToMany(mappedBy="accommodation")
+    protected List<Comment> comments;
+    
+    
     @ManyToOne
     @JoinColumn(name = "acc_agent")
     protected User user;
@@ -247,7 +255,12 @@ public class Accommodation {
      *     {@link Agent }
      *     
      */
-    
+    public void addComment(Comment c) {
+		if (this.comments==null) {
+			this.comments = new ArrayList<Comment>();
+		}
+		this.comments.add(c);
+	}
 
 
 
@@ -361,13 +374,7 @@ public class Accommodation {
 		this.accommodation_unit = accommodation_unit;
 	}*/
 
-	public List<AdditionalServices> getAdditional_services() {
-		return additional_services;
-	}
 
-	public void setAdditional_services(List<AdditionalServices> additional_services) {
-		this.additional_services = additional_services;
-	}
 
 	/*public List<Image> getImages() {
 		return images;
@@ -381,8 +388,24 @@ public class Accommodation {
 		return user;
 	}
 
+	public List<AdditionalServices> getAdditionalServices() {
+		return additionalServices;
+	}
+
+	public void setAdditionalServices(List<AdditionalServices> additionalServices) {
+		this.additionalServices = additionalServices;
+	}
+
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<AccommodationUnit> getAccommodationUnit() {
+		return accommodationUnit;
+	}
+
+	public void setAccommodationUnit(List<AccommodationUnit> accommodationUnit) {
+		this.accommodationUnit = accommodationUnit;
 	}
 
     
@@ -415,5 +438,6 @@ public class Accommodation {
      *     {@link Location }
      *     
      */
+	
     
 }

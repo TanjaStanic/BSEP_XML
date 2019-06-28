@@ -17,7 +17,7 @@ export class UserServiceService {
              "email": u.email,
              "password": u.password
                  };
-        return this.http.post('https://localhost:8443/auth/login', u, {headers: this.auth.createAuthorizationTokenHeader()});
+        return this.http.post('https://localhost:8443/auth/login', user, {headers: this.auth.createAuthorizationTokenHeader()});
       }
         
     getLogged(token: string) {

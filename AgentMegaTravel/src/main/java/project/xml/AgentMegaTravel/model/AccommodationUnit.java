@@ -92,7 +92,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "AccommodationUnit", propOrder = {
+@XmlType(name = "", propOrder = {
     "id",
     "capacity",
     "size",

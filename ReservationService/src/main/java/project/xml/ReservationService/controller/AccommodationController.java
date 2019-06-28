@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import project.xml.ReservationService.model.AdditionalServices;
 import project.xml.ReservationService.model.Image;
+import project.xml.ReservationService.model.Reservation;
+import project.xml.ReservationService.model.User;
 import project.xml.ReservationService.model.Accommodation;
 import project.xml.ReservationService.model.AccommodationUnit;
 
@@ -27,6 +29,8 @@ import project.xml.ReservationService.repository.AccommodationRepository;
 import project.xml.ReservationService.repository.AccommodationUnitRepository;
 import project.xml.ReservationService.repository.AdditionalServicesRepository;
 import project.xml.ReservationService.repository.ImageRepository;
+import project.xml.ReservationService.repository.ReservationRepository;
+import project.xml.ReservationService.repository.UserRepository;
 
 @RestController
 @RequestMapping("/api/accommodations")
@@ -44,6 +48,12 @@ public class AccommodationController {
 	
 	@Autowired
 	AccommodationUnitRepository accUnitRepository;
+	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	ReservationRepository reservationRepository;
 	
 	@JsonIgnore
 	@GetMapping(path = "/getAllAccommodations")
@@ -140,6 +150,39 @@ public class AccommodationController {
 			return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(newList,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value ="/getReservationsFromUser",
+			method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)	
+	public ResponseEntity<?> getReservationsFromUser(@RequestBody Long id){
+		List<Reservation> newList = new ArrayList<Reservation>();
+		User user = userRepository.findOneById(id);		
+		System.out.println("in get all reservations");
+		newList = reservationRepository.findAllByUser(user);
+		if (newList == null) {
+			System.out.println("no reservations");
+			return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(newList,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value ="/getAccommodationFromAccUnit",
+			method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)	
+	public ResponseEntity<?> getAccommodationFromAccUnit(@RequestBody Long id){
+		System.out.println("find one by acc unit, id rezervacije " + id);
+		
+		AccommodationUnit au = accUnitRepository.findOneById(id);
+		System.out.println("find one by acc unit, id accUnita je " + au.getId());
+		Accommodation returnValue = accommodationRepository.findOneByAccommodationUnit(au);
+		if (returnValue == null) {
+			System.out.println("no acc unit from acc unit");
+			return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Accommodation>(returnValue,HttpStatus.OK);
 	}
 	
 }

@@ -11,6 +11,8 @@ import { RegisterComponent } from './register/register.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ClientProfileComponent } from './client-profile/client-profile.component';
 import { AccommodationDetailsComponent } from './accommodation-details/accommodation-details.component';
+import { ClientMessagesComponent } from './client-messages/client-messages.component';
+import { ClientMessagesSentComponent } from './client-messages-sent/client-messages-sent.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { AccommodationDetailsComponent } from './accommodation-details/accommoda
     RegisterComponent,
     HomePageComponent,
     ClientProfileComponent,
-    AccommodationDetailsComponent
+    AccommodationDetailsComponent,
+    ClientMessagesComponent,
+    ClientMessagesSentComponent
     
   ],
   imports: [

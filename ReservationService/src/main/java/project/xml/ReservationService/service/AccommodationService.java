@@ -9,4 +9,5 @@ import project.xml.ReservationService.model.Accommodation;
 @Service
 public interface AccommodationService {
 	List<Accommodation> findAll();
+	Accommodation save(Accommodation acc);
 }

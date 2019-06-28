@@ -15,10 +15,10 @@ export class RegServiceService {
   constructor(private http: HttpClient, private auth: AuthServiceService) { }
   
   addUserAddress(address : Address) {
-      return this.http.post("https://localhost:8443/user/addUserAddress",address);
+      return this.http.post("https://localhost:8443/api/addUserAddress",address);
   }
   
   registerNewClient(user : User) {
-      return this.http.post("https://localhost:8443/user/registerNewClient",user);
+      return this.http.post("https://localhost:8443/api/registerNewClient",user);
   }
 }

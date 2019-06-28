@@ -25,11 +25,12 @@ export class AccommodationDetailsComponent implements OnInit {
     acc_units : AccommodationUnit[];
     addServices : AdditionalServices[];
     idServices: Map<number, boolean> = new Map<number, boolean>();
-
+    totalAccPrice : number;
     
     constructor(private accService : AccServiceService, private route : Router) { }
 
   ngOnInit() {
+      this.totalAccPrice = 0;
       this.idAcc = JSON.parse(localStorage.getItem('idA'));
       console.log("id je : " + this.idAcc);
       
@@ -41,11 +42,8 @@ export class AccommodationDetailsComponent implements OnInit {
       
       this.accService.getAdditionalServices(this.idAcc).subscribe(data =>{
           this.additional_services = data as AdditionalServices[];
-          //this.acc.additional_services = data;
-          //console.log('servisi');
           console.log(data);
-          //console.log('my acc sa servisima');
-          //console.log(this.acc);
+
       });
       
       this.accService.getAllAccommodationUnits(this.idAcc).subscribe(data =>{
@@ -65,9 +63,10 @@ export class AccommodationDetailsComponent implements OnInit {
       document.getElementById('bookingDiv').removeAttribute('hidden');
       
       this.accService.getAdditionalServicesFromAccUnit(id).subscribe(data =>{
-          console.log(data);
-          console.log("gore su additional service ZA OVAJ unit");
-          this.addServices = data as AdditionalServices[];
+        
+          console.log("dole su additional service ZA OVAJ unit");
+          this.addServices = data;
+          console.log(this.addServices);
           
           for (var i=0; i<this.addServices.length; i++){
           this.idServices.set(this.addServices[i].id, false);
@@ -77,15 +76,25 @@ export class AccommodationDetailsComponent implements OnInit {
   }
   
   serviceChanged(id: number){
-      var value = this.idServices.get(id);
-
-      if(value == true){
-        this.idServices.set(id, false);
-      }else{
-        this.idServices.set(id, true);
-      }
-
-       console.log('service changed');
+      
+     for (var i=0; i<this.addServices.length; i++) {
+          console.log("bio");
+          if (this.addServices[i].id == id){
+          console.log("bio2");
+              
+              var value = this.idServices.get(id);
+    
+              if(value == true){
+                this.idServices.set(id, false);
+                  this.totalAccPrice = this.totalAccPrice - this.addServices[i].price_of_add;
+              }else{
+                this.idServices.set(id, true);
+          this.totalAccPrice = this.totalAccPrice + this.addServices[i].price_of_add;
+              }
+    
+               console.log('service changed');
+          
+          }
+       } 
     }
-
 }

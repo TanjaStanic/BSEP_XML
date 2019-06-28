@@ -8,6 +8,7 @@
 
 package project.besp.MegaTravel.xsd;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -18,6 +19,7 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 import project.besp.MegaTravel.model.User;
+
 
 
 /**
@@ -91,15 +93,15 @@ public class AccommodationUnit {
     protected long id;
     @XmlElement(required = true)
     @XmlSchemaType(name = "positiveInteger")
-    protected Integer capacity;
+    protected BigInteger capacity;
     @XmlElement(name = "number_of_room", required = true)
     @XmlSchemaType(name = "nonNegativeInteger")
-    protected Integer numberOfRoom;
+    protected BigInteger numberOfRoom;
     @XmlElement(required = true)
     @XmlSchemaType(name = "nonNegativeInteger")
-    protected Integer floor;
+    protected BigInteger floor;
     @XmlElement(required = true)
-    protected Integer size;
+    protected BigInteger size;
     @XmlElement(required = true)
     protected String type;
     @XmlElement(required = true)
@@ -135,10 +137,10 @@ public class AccommodationUnit {
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public Integer getCapacity() {
+    public BigInteger getCapacity() {
         return capacity;
     }
 
@@ -147,39 +149,22 @@ public class AccommodationUnit {
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public void setCapacity(Integer value) {
+    public void setCapacity(BigInteger value) {
         this.capacity = value;
     }
 
-    
-    public void setPricing(List<Pricing> pricing) {
-		this.pricing = pricing;
-	}
-
-	public void setReservation(List<Reservation> reservation) {
-		this.reservation = reservation;
-	}
-
-	public void setAdditionalServices(List<AdditionalServices> additionalServices) {
-		this.additionalServices = additionalServices;
-	}
-
-	public void setComment(List<Comment> comment) {
-		this.comment = comment;
-	}
-
-	/**
+    /**
      * Gets the value of the numberOfRoom property.
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public Integer getNumberOfRoom() {
+    public BigInteger getNumberOfRoom() {
         return numberOfRoom;
     }
 
@@ -188,10 +173,10 @@ public class AccommodationUnit {
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public void setNumberOfRoom(Integer value) {
+    public void setNumberOfRoom(BigInteger value) {
         this.numberOfRoom = value;
     }
 
@@ -200,10 +185,10 @@ public class AccommodationUnit {
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public Integer getFloor() {
+    public BigInteger getFloor() {
         return floor;
     }
 
@@ -212,10 +197,10 @@ public class AccommodationUnit {
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public void setFloor(Integer value) {
+    public void setFloor(BigInteger value) {
         this.floor = value;
     }
 
@@ -224,10 +209,10 @@ public class AccommodationUnit {
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public Integer getSize() {
+    public BigInteger getSize() {
         return size;
     }
 
@@ -236,10 +221,10 @@ public class AccommodationUnit {
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public void setSize(Integer value) {
+    public void setSize(BigInteger value) {
         this.size = value;
     }
 

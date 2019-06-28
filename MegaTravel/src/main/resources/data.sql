@@ -116,6 +116,7 @@ insert into certificate (id, idissuer, idsubject, valid_from, valid_to,revoked,c
 insert into certificate (id, idissuer, idsubject, valid_from, valid_to,revoked,ca,reasonforrevokation,serial_number) 
 				values (6,2,null,'2019-06-26','2020-06-26',0,1,'',	1561575457469);				
 
+		
 --insert into accommodation_additional_services (accommodation_id,additional_id) values (1,1);
 --insert into accommodation_additional_services (accommodation_id,additional_id) values (1,2);
 --insert into accommodation_additional_services (accommodation_id,additional_id) values (2,5);
@@ -126,8 +127,4 @@ insert into accommodation_unit (accommodation_unit_id,capacity,number_of_room,fl
 	values (2,2,33,3,35,"apartman",1,2);
 insert into accommodation_unit (accommodation_unit_id,capacity,number_of_room,floor,size,type, acc,agent_units)
 	values (3,5,123,12,50,"bed&breakfast",2,2);
---dodati slike za hotele..
---insert into image (image_id,title,uri,accommodation_pic) values (1,'Aleksandar1','../assets/images/aleksandar.jpg',1);
---insert into image (image_id,title,uri,accommodation_pic) values (2,'Aleksandar2','../assets/images/aleksandar2.jpg',1);
---insert into image (image_id,title,uri,accommodation_pic) values (3,'NoviSad1','../assets/images/novisad.jpg',2);
---insert into image (image_id,title,uri,accommodation_pic) values (4,'NoviSad2','../assets/images/novisad2.jpg',2);
+

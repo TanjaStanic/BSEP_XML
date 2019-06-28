@@ -73,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
 					
 					// svim korisnicima dopusti da pristupe putanjama /auth/** i /h2-console/**
 					.authorizeRequests()
-					.antMatchers("/agentSecurity/**").permitAll()
+					.antMatchers("/api/**").permitAll()
 					.antMatchers("/**").permitAll()
 					.antMatchers("/h2-console/**").permitAll()
 					.antMatchers("/ws/**").permitAll()
@@ -94,7 +94,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
 			@Override
 			public void configure(WebSecurity web) throws Exception {
 				// TokenAuthenticationFilter ce ignorisati sve ispod navedene putanje
-				web.ignoring().antMatchers(HttpMethod.POST, "/agentSecurity/setAuthentication");
+				web.ignoring().antMatchers(HttpMethod.POST, "/auth/login");
+				web.ignoring().antMatchers(HttpMethod.POST, "/auth/logout");
+				web.ignoring().antMatchers(HttpMethod.POST, "/api/setAuthentication");
 				web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js");}
 			
 			@Bean

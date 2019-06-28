@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,14 +15,13 @@ import javax.persistence.Table;
 @Table(name="comment")
 public class Comment {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY )
     @Column(name = "id")
     private Long id;
 	
 	@Column(name = "text", nullable = false)
     private String text;
 
-	@Column(name = "comment_date")
-    private Date commentDate;
 
 	@Column(name = "visible")
 	private boolean visible;
@@ -32,6 +33,10 @@ public class Comment {
 	@ManyToOne
 	@JoinColumn(name="acc_unit_comment")
 	private AccommodationUnit accommodation_unit;
+	
+	@ManyToOne
+	@JoinColumn(name="acc_commment")
+	private Accommodation accommodation;
 	
 	public Long getId() {
 		return id;
@@ -49,13 +54,6 @@ public class Comment {
 		this.text = text;
 	}
 
-	public Date getCommentDate() {
-		return commentDate;
-	}
-
-	public void setCommentDate(Date commentDate) {
-		this.commentDate = commentDate;
-	}
 
 	public boolean isVisible() {
 		return visible;
@@ -80,6 +78,15 @@ public class Comment {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public Accommodation getAccommodation() {
+		return accommodation;
+	}
+
+	public void setAccommodation(Accommodation accommodation) {
+		this.accommodation = accommodation;
+	}
+	
 
 	
 }

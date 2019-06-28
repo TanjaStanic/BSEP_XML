@@ -51,13 +51,14 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Location", propOrder = {
+		"id",
     "geoLength",
     "geoWidth"
     
 })
 //@XmlRootElement(name = "location", namespace = "http://www.mega-travel/accommodation")
 public class Location {
-
+	 protected long id;
     protected float geoLength;
     protected float geoWidth;
 

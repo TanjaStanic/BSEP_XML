@@ -75,10 +75,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "AdditionalServices", propOrder = {
+@XmlType(name = "", propOrder = {
     "id",
     "name",
-    "priceOfAdd"
+    "priceOfAdd",
+    "accommodations",
+    "accommodation_units"
 })
 @Entity
 @Table(name="additional_services")

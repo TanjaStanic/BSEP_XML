@@ -64,12 +64,20 @@
           
           </a>
         </li>
-          <li class="treeview">
-          <a href="#">
-            <i class="fa fa-user"></i> <span ><a routerLink="clientProfile">testprofila</a></span>
           
+          
+         <li class="treeview" [hidden]="notLogged">
+          <a href="#">
+            <i class="fa fa-envelope"></i> <span>Messages</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
-        </li>
+          <ul class="treeview-menu" >
+            <li><a routerLink=inbox><i class="fa fa-inbox"></i> Inbox</a></li>
+            <li><a routerLink=sent>><i class="fa fa-envelope-o"></i> Sent</a></li>
+          </ul>
+        </li> 
   
         <li class="treeview" [hidden]="notLogged">
           <a href="#">

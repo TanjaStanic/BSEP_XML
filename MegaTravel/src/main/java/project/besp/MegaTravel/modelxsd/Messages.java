@@ -60,11 +60,10 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "messages", propOrder = {
+@XmlType(name = "", propOrder = {
+		"id",
     "content",
     "title",
-    "agent",
-    "client",
     "date"
 })
 @Entity
@@ -82,7 +81,7 @@ public class Messages {
 	@XmlElement(required = true)
     protected String title;
 
-	@XmlElement(required = true)
+	@XmlElement
     @XmlSchemaType(name = "date")
     protected Date date;
 

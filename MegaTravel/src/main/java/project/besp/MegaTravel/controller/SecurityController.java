@@ -64,7 +64,7 @@ public class SecurityController {
     @PreAuthorize("hasAuthority('loginAdmin') or hasAuthority('loginUser')")
     @RequestMapping(value = "/userprofile", method = RequestMethod.POST)
 	public ResponseEntity<?> getProfile(@RequestBody String token) {
-
+    	System.out.println("u security controlleru /userprofile");
 		System.out.println("IMA TOKEN: " + token);
 		String email = tokenUtils.getUsernameFromToken(token);
 		
