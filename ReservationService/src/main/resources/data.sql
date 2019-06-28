@@ -105,15 +105,17 @@ insert into pricing (pricing_id,price,date_from,date_to,acc_unit_price)
 	values (5,100,'2019-10-01','2019-11-01',1);
 	
 insert into reservation (reservation_id,start_date,end_date,total_price,reservation_status,reservation_rating,reservation_user,acc_unit_reservation)	
-	values (1,'2018-04-15','2018-04-25',350.5,'arrived',5,5,1);
+	values (6,'2018-04-15','2018-04-25',350.5,'arrived',5,5,1);
 insert into reservation (reservation_id,start_date,end_date,total_price,reservation_status,reservation_rating,reservation_user,acc_unit_reservation)	
 	values (2,'2018-04-01','2018-04-13',666.5,'arrived',2,5,1);
 insert into reservation (reservation_id,start_date,end_date,total_price,reservation_status,reservation_rating,reservation_user,acc_unit_reservation)	
-	values (3,'2018-05-01','2018-05-13',666.5,'confirmed',null,5,1);
+	values (3,'2019-05-01','2019-05-13',666.5,'confirmed',null,5,1);
 insert into reservation (reservation_id,start_date,end_date,total_price,reservation_status,reservation_rating,reservation_user,acc_unit_reservation)	
 	values (4,'2018-04-01','2018-04-13',666.5,'arrived',null,5,1);
 insert into reservation (reservation_id,start_date,end_date,total_price,reservation_status,reservation_rating,reservation_user,acc_unit_reservation)	
-	values (5,'2018-05-01','2018-05-13',666.5,'confirmed',null,5,1);
+	values (5,'2019-05-01','2019-05-13',666.5,'confirmed',null,5,1);
+insert into reservation (reservation_id,start_date,end_date,total_price,reservation_status,reservation_rating,reservation_user,acc_unit_reservation)	
+	values (1,'2019-07-10','2019-07-13',666.5,'pending',null,5,1);
 
 	
 	

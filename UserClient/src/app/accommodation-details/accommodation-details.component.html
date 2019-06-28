@@ -127,7 +127,7 @@
 	</div>	
 	<div class="box-footer">
 	<div class="col-md-12">
-                <button type="button" (click)="findHotels()" class="btn btn-block btn-primary">BOOK NOW</button>
+      <button type="button" id="bookButton" data-toggle="modal" (click)="finallBookClick()" class="btn btn-block btn-primary">BOOK NOW</button>
     </div>
     </div>
 </div>
@@ -175,4 +175,22 @@
      </div>
 	</div>
 </div>
+</div>
+
+<div class="modal fade" id="modal-default" hidden="true" >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">You need to be logged. Please logg in.</h4>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click) = "loginClick()" data-dismiss="modal">Login</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
 </div>

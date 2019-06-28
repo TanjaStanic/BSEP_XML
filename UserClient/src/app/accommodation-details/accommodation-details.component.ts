@@ -10,8 +10,8 @@ import { ResServiceService } from '../service/res-service/res-service.service';
 import { Comment } from '../model/comment';
 import { User } from '../model/user';
 
-
 import { AccServiceService } from '../service/acc-service/acc-service.service';
+import {AuthServiceService} from '../service/auth-service/auth-service.service';
 
 @Component({
   selector: 'app-accommodation-details',
@@ -32,10 +32,11 @@ export class AccommodationDetailsComponent implements OnInit {
     idServices: Map<number, boolean> = new Map<number, boolean>();
     totalAccPrice : number;
     comments : Comment[];
-    commentator : User = new User();
+   // loggedUser : User = new User();
+    token: string;
     
     constructor(private accService : AccServiceService, private route : Router,
-            private resService : ResServiceService) { }
+            private resService : ResServiceService,private auth: AuthServiceService) { }
 
   ngOnInit() {
       this.totalAccPrice = 0;
@@ -70,6 +71,16 @@ export class AccommodationDetailsComponent implements OnInit {
       });
       
       this.acc.address = this.address;
+      
+      this.token = this.auth.getJwtToken();
+      if (!this.token) {
+          console.log('niko nije ulogovan');
+          var backOfferButton = document.getElementById('bookButton');
+          console.log(backOfferButton.dataset.target);
+          backOfferButton.dataset.target = "#modal-default";
+      }
+      
+     
   }
   
   bokingClick(unit) {  
@@ -109,4 +120,15 @@ export class AccommodationDetailsComponent implements OnInit {
           }
        } 
     }
+     
+     finallBookClick() {
+     
+     //document.getElementById('modalDiv').removeAttribute('hidden');
+     
+   
+
+  }
+  loginClick(){
+     window.location.href = 'http://localhost:4200/login';
+   }
 }

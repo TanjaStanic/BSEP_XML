@@ -116,7 +116,7 @@
 		      </div >
 		      
 		      <div class="col-xs-12" id = "sendMessageDiv" hidden="true">
-		      	    <div class="col-md-9">
+		      	    <div class="col-md-12">
 			          <div class="box">
 			            <div class="box-header with-border">
 			              <h3 class="box-title">Write message to agent</h3>
@@ -152,7 +152,20 @@
                 	Message is sent!
               </div>
               </div> 
+		       
+		       <div class="col-xs-12" id = "cancelDiv" hidden="true">
+		       
+		       <button type="button" id="cancelIdButton" (click) = "cancelClick(res.id)" class="btn btn-block btn-danger">Cancel reservation</button>
 		      
+		       
+               <div class="col-xs-12" id = "successCancelDiv" hidden="true">
+              	<div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-check"></i></h4>
+                	Cancel success!
+              </div>
+              </div>  
+		      </div>
 		      
 			</div>
 			</div>

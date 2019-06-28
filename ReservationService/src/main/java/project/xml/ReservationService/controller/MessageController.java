@@ -87,30 +87,5 @@ public class MessageController {
 		return new ResponseEntity<Messages>(m,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value ="/getSentMessageFromInbox",
-			method = RequestMethod.POST,
-			consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)	
-	public ResponseEntity<?> getSentMessageFromInbox(@RequestBody Messages mess){
-		//User u = userRepository.findOneById(id);
-		System.out.println("usaaaaaaaaooooooooooo");
-		
-		//.out.println(mess.getContent());
-		//Messages m = mess;
-		//System.out.println(m.getContent());
-		//List<Messages> newList= messageRepository.findAllByUserSent(u);
-		mess.setDate(new Date());
-		//System.out.println("id usera" +mess.getUserSent().getId());
-		//User sentUser = userRepository.findOneById(mess.getUserSent().getId());
-		//User recievedUser = userRepository.findOneById(mess.getUserReceived().getId());
-		//sentUser.addSendMessage(mess);
-		//recievedUser.addRecievedMessage(mess);
-		
-		messageRepository.save(mess);
-		//userService.save(sentUser);
-		//userService.save(recievedUser);
-		
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
 
 }

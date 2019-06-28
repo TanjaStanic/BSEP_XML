@@ -50,8 +50,8 @@ export class AppComponent implements OnInit{
     this.auth.removeJwtToken();
     this.notLogged = true;
     this.logged = false;
-    var currentUser = null; 
-    console.log("cuvam nista u logout user: ");
-    localStorage.setItem('user', JSON.stringify(currentUser));
+    //var currentUser = null; 
+    //console.log("cuvam nista u logout user: ");
+    //localStorage.setItem('user', JSON.stringify(currentUser));
   }
 }

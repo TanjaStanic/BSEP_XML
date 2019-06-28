@@ -174,8 +174,9 @@ public class AccommodationController {
 			produces = MediaType.APPLICATION_JSON_VALUE)	
 	public ResponseEntity<?> getAccommodationFromAccUnit(@RequestBody Long id){
 		System.out.println("find one by acc unit, id rezervacije " + id);
+		Reservation res = reservationRepository.findOneById(id);
 		
-		AccommodationUnit au = accUnitRepository.findOneById(id);
+		AccommodationUnit au = accUnitRepository.findOneByReservations(res);
 		System.out.println("find one by acc unit, id accUnita je " + au.getId());
 		Accommodation returnValue = accommodationRepository.findOneByAccommodationUnit(au);
 		if (returnValue == null) {

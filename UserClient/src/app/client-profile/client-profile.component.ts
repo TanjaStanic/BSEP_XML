@@ -90,6 +90,10 @@ export class ClientProfileComponent implements OnInit {
             document.getElementById("successSentDiv").setAttribute("hidden", "true");
             
         }
+        
+        if (res.reservationStatus=="pending"){
+            document.getElementById('cancelDiv').removeAttribute('hidden');
+        } 
 
     }
     commentClick(comm){
@@ -139,6 +143,10 @@ export class ClientProfileComponent implements OnInit {
        this.newMessage.content = "";
        document.getElementById("sendMessageDiv").setAttribute("hidden", "true");
    }
-   
+   cancelClick(id){
+       this.resService.cancelReservation(this.acc.id, id, this.acc.cancelationDays).subscribe(data=>{
+           
+       });
+   }
    
 }
