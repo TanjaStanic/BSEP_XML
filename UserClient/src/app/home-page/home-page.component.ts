@@ -33,9 +33,9 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
 
-      this.userService.userProfile().subscribe(data => {
+    /*  this.userService.userProfile().subscribe(data => {
           
-      });
+      });*/
       
       this.accService.getAllAdditionalServices().subscribe(data =>{
           this.additionalServices = data as AdditionalServices[];

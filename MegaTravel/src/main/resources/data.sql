@@ -97,11 +97,12 @@ insert into accommodation (accommodation_id,name, cancelation_days,rating,catego
 
  
  --dodatni servisi
-insert into additional_services (additional_id,name,price_of_add) values (1,'All inclusive',100.1);
-insert into additional_services (additional_id,name,price_of_add) values (2,'Full Board',50.1);
-insert into additional_services (additional_id,name,price_of_add) values (3,'Half Board',25.1);
-insert into additional_services (additional_id,name,price_of_add) values (4,'WiFi',0.0);
-insert into additional_services (additional_id,name,price_of_add) values (5,'Pet friendly',20.1);
+insert into additional_services (additional_id,name,price_of_add,accommodation) values (1,'All inclusive',100.1,1);
+insert into additional_services (additional_id,name,price_of_add,accommodation) values (2,'Full Board',50.1,1);
+insert into additional_services (additional_id,name,price_of_add,accommodation) values (3,'Half Board',25.1,1);
+insert into additional_services (additional_id,name,price_of_add,accommodation) values (4,'WiFi',0.0,1);
+insert into additional_services (additional_id,name,price_of_add,accommodation) values (5,'Pet friendly',20.1,1);
+
 
 insert into certificate (id, idissuer, idsubject, valid_from, valid_to,revoked,ca,reasonforrevokation,serial_number) 
 				values (1,1,1,'2019-06-26','2020-06-26',0,1,'',1561574973635);

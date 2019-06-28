@@ -5,6 +5,8 @@ import { Accommodation } from '../../model/accommodation';
 import { AccommodationDTO } from '../../model/accommodationDTO';
 import { SearchForm } from '../../model/searchForm';
 import { SortForm } from '../../model/sortForm';
+import {AuthServiceService} from '../auth-service/auth-service.service';
+
 
 
 import { Observable } from 'rxjs';
@@ -15,7 +17,7 @@ import { Observable } from 'rxjs';
 })
 export class AccServiceService {
 
-  constructor(private http: HttpClient, private router : Router) { }
+  constructor(private http: HttpClient, private router : Router,private auth: AuthServiceService) { }
   
   getAllAccommodations() : Observable<any> {
       return this.http.get('https://localhost:8763/api/accommodations/getAllAccommodations'); 
@@ -59,8 +61,10 @@ export class AccServiceService {
     console.log(hotels.length);
     console.log('sortinghotels');
     var sending= item + '=' + type;
+    console.log(item);
+    console.log(type);
     // tslint:disable-next-line:max-line-length
-    return this.http.post("https://localhost:8443/accommodation/sortForm" + sending, hotels);
+    return this.http.post("https://localhost:8443/accommodation/sortForm/" + sending, hotels,{headers: this.auth.createAuthorizationTokenHeader()});
   }
     
 }

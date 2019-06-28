@@ -242,7 +242,7 @@ public class AccommodationController {
 			
 			AccommodationDTO accom = new AccommodationDTO(kraj.getId(),kraj.getName(),kraj.getAddress().getStreet(),
 					kraj.getAddress().getNumber(),kraj.getAddress().getCity(), kraj.getAddress().getCountry(),
-					kraj.getDescription(),unitsDTO,kraj.getRating());
+					kraj.getDescription(),unitsDTO,(int) kraj.getRating());
 			
 			accs.add(accom);	
 			System.out.println("accommodation" + accom.getName());
@@ -272,7 +272,7 @@ public class AccommodationController {
 			descending = true;
 		}
 		
-		/*if(item.equals("stars")) {
+		if(item.equals("stars")) {
 
 			System.out.println("Stars");
 			Collections.sort(
@@ -282,8 +282,8 @@ public class AccommodationController {
 				sorted.add(A);
 			}	
 		}
-		*/
-		return null;
+	
+		return  new ResponseEntity<List<AccommodationDTO>>(sorted, HttpStatus.OK);
 		
 	}
 	

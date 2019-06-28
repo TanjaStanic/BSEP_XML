@@ -98,12 +98,12 @@ public class AdditionalServices {
     
 	protected double price_of_add;
 
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "accommodation")
 	private Accommodation accommodation;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "accommodation_unit")
     private AccommodationUnit accommodationUnit;
