@@ -1,7 +1,12 @@
+import {Accommodation} from '../model/accommodation';
+import {User} from '../model/user';
+
+
+
 export class Comment{
     id : number;
     text : string;
-    allowed : boolean;
-    commentDate : Date;
     visible : boolean;
+    user : User;
+    accommodation : Accommodation;
 }

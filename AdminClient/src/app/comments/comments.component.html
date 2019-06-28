@@ -2,11 +2,11 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title"><b>Pending comments</b></h3>
+              <h3 class="box-title"><b>List of agents</b></h3>
 
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                  <input type="text" name="table_search" [(ngModel)] = "searchTerm" class="form-control pull-right" placeholder="Search">
 
                   <div class="input-group-btn">
                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
@@ -16,15 +16,27 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
-              <table class="table table-hover">
-                <tr>
-                  <th>ID</th>
-                  <th>User</th>
-                  <th>Date</th>
-                  <th>Status</th>
-                  <th>Comment</th>
-                  <th>Aprove</th>
+              <table id="lista" class="table table-hover">
+              <thead>
+               	<tr>
+               	<th>ID</th>
+            	<th>Text</th>
+            	<th>Client</th>
+            	<th>Visible</th>
+            	<th>Approve</th>
+            	<th></th>
+            	</tr>
+       		 </thead>
+       		 <tbody>
+                <tr *ngFor="let com of comments">
+                <td>{{com.id}}</td>                
+                <td>{{com.text}}</td>
+                <td>{{com.user.firstName}}</td>
+                <td>{{com.visible}}</td>               
+                           
+                <td><button (click)="approve(com.id)" type="button" [disabled]="com.visible" class="btn btn-outline-success">Approve</button></td>
                 </tr>
+             </tbody>
 
               </table>
             </div>
@@ -33,3 +45,4 @@
           <!-- /.box -->
         </div>
       </div>
+

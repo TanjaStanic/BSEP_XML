@@ -1,5 +1,7 @@
 package project.xml.AdminService.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +19,17 @@ public class CommentServiceImpl implements CommentService {
 		// TODO Auto-generated method stub
 		return commentRepository.save(comment);
 	}
+	@Override
+	public List<Comment> getAll() {
+		// TODO Auto-generated method stub
+		return commentRepository.findAll();
+	}
+	@Override
+	public Comment findOneById(Long id) {
+		// TODO Auto-generated method stub
+		return commentRepository.findOneById(id);
+	}
+	
+	
 
 }

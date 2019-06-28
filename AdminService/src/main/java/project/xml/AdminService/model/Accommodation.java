@@ -41,8 +41,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-
-
 /**
  * <p>Java class for anonymous complex type.
  * 
@@ -181,6 +179,10 @@ public class Accommodation implements java.io.Serializable {
 
     @OneToMany(mappedBy = "accommodation")
     protected List<AdditionalServices> additional_services;
+    
+    @JsonIgnore
+    @OneToMany(mappedBy="accommodation")
+    protected List<Comment> comments;
 
 	
    /* @OneToMany(fetch = FetchType.LAZY,mappedBy="accomodation")

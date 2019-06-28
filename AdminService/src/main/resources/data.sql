@@ -140,3 +140,14 @@ insert into image (image_id,title,uri,accommodation_pic) values (3,'NoviSad1','.
 insert into image (image_id,title,uri,accommodation_pic) values (4,'NoviSad2','../assets/images/novisad2.jpg',2);
 
 
+insert into comment (comment_id,text,visible,client_comment,acc_commment) 
+	values (1,'Super zurka. jeeeeeeej',1,5,1);
+insert into comment (comment_id,text,visible,client_comment,acc_commment) 
+	values (2,'Lose posve, palac dole',1,5,1);
+insert into comment (comment_id,text,visible,client_comment,acc_commment) 
+	values (3,'Moze procii, al pih',1,5,1);
+insert into comment (comment_id,text,visible,client_comment,acc_commment) 
+	values (4,'Hejt!!!!!!!!!!!!!',0,5,1);
+
+
+

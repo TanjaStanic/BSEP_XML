@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name="comment")
 public class Comment {
 	@Id
-    @Column(name = "id")
+    @Column(name = "comment_id")
     private Long id;
 	
 	@Column(name = "text", nullable = false)
@@ -32,6 +32,11 @@ public class Comment {
 	@ManyToOne
 	@JoinColumn(name="acc_unit_comment")
 	private AccommodationUnit accommodation_unit;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="acc_commment")
+	private Accommodation accommodation;
 	
 	public Long getId() {
 		return id;

@@ -1,5 +1,8 @@
 package project.xml.AdminService.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import project.xml.AdminService.model.Comment;
+import project.xml.AdminService.model.Role;
+import project.xml.AdminService.model.User;
+import project.xml.AdminService.repository.CommentRepository;
 import project.xml.AdminService.service.CommentService;
 
 
@@ -23,18 +29,34 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	
-	@RequestMapping(value="/aproveComment",
-			method = RequestMethod.POST,
-			consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> aproveComment(@RequestBody Comment comm){
-		
-		comm.setVisible(true);	
-		Comment saved = commentService.saveComment(comm);
-		return new ResponseEntity<>(saved,HttpStatus.CREATED);
-		
-		
+	@Autowired
+	private CommentRepository commentRepository;
+	
+	
+	
+	
+	@RequestMapping(value = "/getAll", method = RequestMethod.GET)
+	public ResponseEntity<List<Comment>> getAll() {
+		//User user = null;
+		List<Comment> novi = commentService.getAll();
+		return new ResponseEntity<>(novi,HttpStatus.OK);
 	}
+	
+	
+	@RequestMapping(value = "/aprove", method = RequestMethod.POST)
+	public ResponseEntity<?> addRoom(@RequestBody Comment comm) {
+		Comment comic = commentService.findOneById(comm.getId());
+		if(comic.isVisible()==false) {
+			comic.setVisible(true);
+		}else {
+			return null;
+		}
+		
+		commentRepository.save(comic);
+		return  new ResponseEntity<Comment>(comic, HttpStatus.OK);
+	}
+	
+	
 	
 
 }
