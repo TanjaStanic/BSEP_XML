@@ -26,6 +26,26 @@ insert into role (id, name) values (1, 'ROLE_ADMIN');
 insert into role (id, name) values (2, 'ROLE_AGENT');
 insert into role (id, name) values (3, 'ROLE_USER');
 
+
+--privilegije
+insert into privilege (id,name) values (1,'registrationAgent');
+insert into privilege (id,name) values (2,'login');
+insert into privilege (id,name) values (3,'loginAdmin');
+insert into privilege (id,name) values (4,'loginUser');
+insert into privilege (id,name) values (5,'loginAgent');
+insert into privilege (id,name) values (6,'myProfile');
+
+insert into roles_privileges(role_id,privilege_id) values (2,5);
+
+insert into roles_privileges(role_id,privilege_id) values (1,1);
+insert into roles_privileges(role_id,privilege_id) values (1,2);
+insert into roles_privileges(role_id,privilege_id) values (1,3);
+insert into roles_privileges(role_id,privilege_id) values (3,4);
+insert into roles_privileges(role_id,privilege_id) values (3,6);
+
+
+
+
 --povezivanje usera i uloga
 --admin
 insert into user_roles (user_id,role_id) values (1,1);
@@ -58,17 +78,17 @@ insert into additional_services (additional_id,name,price_of_add,accommodation) 
 insert into additional_services (additional_id,name,price_of_add,accommodation) values (4,'WiFi',0.0,1);
 insert into additional_services (additional_id,name,price_of_add,accommodation) values (5,'Pet friendly',20.1,1);
 
-insert into additional_services (additional_id,name,price_of_add,accommodation_unit) values (6,'Parking',20.1,1);
-insert into additional_services (additional_id,name,price_of_add,accommodation_unit) values (7,'Kitchen',20.1,1);
-insert into additional_services (additional_id,name,price_of_add,accommodation_unit) values (8,'Wifi',20.1,1);
-insert into additional_services (additional_id,name,price_of_add,accommodation_unit) values (9,'Pet Friendly',20.1,1);
+--insert into additional_services (additional_id,name,price_of_add,accommodation_unit) values (6,'Parking',20.1,1);
+--insert into additional_services (additional_id,name,price_of_add,accommodation_unit) values (7,'Kitchen',20.1,1);
+--insert into additional_services (additional_id,name,price_of_add,accommodation_unit) values (8,'Wifi',20.1,1);
+--insert into additional_services (additional_id,name,price_of_add,accommodation_unit) values (9,'Pet Friendly',20.1,1);
 
-insert into accommodation_unit (accommodation_unit_id,capacity,number_of_room,floor,size,type, acc,agent_units)
-	values (1,3,22,2,40,"room",1,2);
-insert into accommodation_unit (accommodation_unit_id,capacity,number_of_room,floor,size,type, acc,agent_units)
-	values (2,2,33,3,35,"apartman",1,2);
-insert into accommodation_unit (accommodation_unit_id,capacity,number_of_room,floor,size,type, acc,agent_units)
-	values (3,5,123,12,50,"bed&breakfast",2,2);
+insert into accommodation_unit (accommodation_unit_id,capacity,number_of_room,floor,size,default_price,type, acc,agent_units)
+	values (1,3,22,2,40,50,"room",1,2);
+insert into accommodation_unit (accommodation_unit_id,capacity,number_of_room,floor,size,default_price,type, acc,agent_units)
+	values (2,2,33,3,35,51,"apartman",1,2);
+insert into accommodation_unit (accommodation_unit_id,capacity,number_of_room,floor,size,default_price,type, acc,agent_units)
+	values (3,5,123,12,50,59,"bed&breakfast",2,2);
 
 
 --povezivanje cjenovnika
@@ -114,4 +134,16 @@ insert into messages(message_id,title,content,user_sent_id,user_received_id,date
 insert into messages(message_id,title,content,user_sent_id,user_received_id,date) 
 	values (4,'Title2', 'Postovani, ovo je u smijeru klijent  poslao agentu',5,2,'2018-05-13');
 
+insert into comment (comment_id,text,visible,client_comment,acc_commment) 
+	values (1,'Super zurka. jeeeeeeej',1,5,1);
+insert into comment (comment_id,text,visible,client_comment,acc_commment) 
+	values (2,'Lose posve, palac dole',1,5,1);
+insert into comment (comment_id,text,visible,client_comment,acc_commment) 
+	values (3,'Moze procii, al pih',1,5,1);
+insert into comment (comment_id,text,visible,client_comment,acc_commment) 
+	values (4,'Hejt!!!!!!!!!!!!!',0,5,1);
 
+
+
+
+			

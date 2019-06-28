@@ -119,7 +119,9 @@ public class AccommodationUnit {
 	
 	@XmlElement(required = true)
 	protected Integer floor;
-    
+	
+	@XmlElement()
+	@Column(name = "default_price")
 	protected Double defaultPrice;
 	
 	protected BigInteger size;

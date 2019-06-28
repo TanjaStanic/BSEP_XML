@@ -10,5 +10,6 @@ export class Reservation{
     reservationStatus : string;
     reservationRating : string;
 accommodationUnit :AccommodationUnit;
+    user : User;
 
 }

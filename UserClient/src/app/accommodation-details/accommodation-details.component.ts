@@ -6,6 +6,9 @@ import { Accommodation } from '../model/accommodation';
 import { Address } from '../model/address';
 import { Picture } from '../model/picture';
 import { AccommodationUnit } from '../model/accommodation-unit.model';
+import { ResServiceService } from '../service/res-service/res-service.service';
+import { Comment } from '../model/comment';
+import { User } from '../model/user';
 
 
 import { AccServiceService } from '../service/acc-service/acc-service.service';
@@ -18,6 +21,8 @@ import { AccServiceService } from '../service/acc-service/acc-service.service';
 export class AccommodationDetailsComponent implements OnInit {
 
     idAcc : number;
+    id :number;
+    unit :AccommodationUnit = new AccommodationUnit();
     address = new Address();
     acc : Accommodation = new Accommodation();
     additional_services : AdditionalServices[];
@@ -26,8 +31,11 @@ export class AccommodationDetailsComponent implements OnInit {
     addServices : AdditionalServices[];
     idServices: Map<number, boolean> = new Map<number, boolean>();
     totalAccPrice : number;
+    comments : Comment[];
+    commentator : User = new User();
     
-    constructor(private accService : AccServiceService, private route : Router) { }
+    constructor(private accService : AccServiceService, private route : Router,
+            private resService : ResServiceService) { }
 
   ngOnInit() {
       this.totalAccPrice = 0;
@@ -56,40 +64,44 @@ export class AccommodationDetailsComponent implements OnInit {
           this.images = data;
        });
       
+      this.resService.getAllCommentsByAccommodation(this.idAcc).subscribe(data =>{
+          console.log(data);
+          this.comments = data;
+      });
+      
       this.acc.address = this.address;
   }
   
-  bokingClick(id) {
+  bokingClick(unit) {  
+      
+      this.id = unit.id;
+      this.unit = unit;
+      this.totalAccPrice = this.unit.defaultPrice;
       document.getElementById('bookingDiv').removeAttribute('hidden');
       
-      this.accService.getAdditionalServicesFromAccUnit(id).subscribe(data =>{
-        
-          console.log("dole su additional service ZA OVAJ unit");
-          this.addServices = data;
+      this.addServices = this.additional_services;
+
           console.log(this.addServices);
           
-          for (var i=0; i<this.addServices.length; i++){
-          this.idServices.set(this.addServices[i].id, false);
-      
-          }
-      });
+     for (var i=0; i<this.addServices.length; i++){
+         this.idServices.set(this.addServices[i].id, false);
+    }
   }
   
   serviceChanged(id: number){
       
      for (var i=0; i<this.addServices.length; i++) {
-          console.log("bio");
           if (this.addServices[i].id == id){
-          console.log("bio2");
               
               var value = this.idServices.get(id);
     
               if(value == true){
                 this.idServices.set(id, false);
-                  this.totalAccPrice = this.totalAccPrice - this.addServices[i].price_of_add;
-              }else{
+                this.totalAccPrice =this.totalAccPrice  - this.addServices[i].price_of_add;
+              }
+              else{
                 this.idServices.set(id, true);
-          this.totalAccPrice = this.totalAccPrice + this.addServices[i].price_of_add;
+                this.totalAccPrice =this.totalAccPrice + this.addServices[i].price_of_add;
               }
     
                console.log('service changed');

@@ -58,6 +58,9 @@ public class CommentController {
 	@Autowired
 	ReservationService resService;
 	
+	@Autowired 
+	AccommodationRepository accommodationRepository;
+	
 	@RequestMapping(value ="/addCommentar/{idUser}/{idAcc}/{text}",
 			method = RequestMethod.GET)	
 	public ResponseEntity<?> addCommentar(@PathVariable("idUser") Long idUser,
@@ -100,6 +103,23 @@ public class CommentController {
 		
 		
 		return new ResponseEntity<Reservation>(res,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value ="/getAllCommentsByAccommodation",
+			method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)	
+	public ResponseEntity<?> getAllCommentsByAccommodation(@RequestBody Long id){
+		System.out.println("In get all comments");
+
+		List<Comment> newList = new ArrayList<Comment>();
+		Accommodation acc = accommodationRepository.findOneById(id);
+		newList = commRepository.findAllByAccommodation(acc);
+		if (newList == null) {
+			System.out.println("no comments");
+			return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<Comment>>(newList,HttpStatus.OK);
 	}
 	
 }

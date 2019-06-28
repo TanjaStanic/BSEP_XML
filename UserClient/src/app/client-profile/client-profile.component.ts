@@ -7,6 +7,7 @@ import { Reservation } from '../model/reservation';
 import { Accommodation } from '../model/accommodation';
 import { Comment } from '../model/comment';
 import { AccommodationUnit } from '../model/accommodation-unit.model';
+import { Messages } from '../model/messages';
 
 import { ResServiceService } from '../service/res-service/res-service.service';
 
@@ -26,6 +27,7 @@ export class ClientProfileComponent implements OnInit {
     comm : Comment = new Comment();
     ratingNum : number;
     accUnit : AccommodationUnit = new AccommodationUnit();
+    newMessage : Messages = new Messages();
     constructor(private u: UserServiceService, private resService : ResServiceService ) { }
  
  
@@ -65,12 +67,14 @@ export class ClientProfileComponent implements OnInit {
                 document.getElementById("sendMessageDiv").setAttribute("hidden", "true");
                 document.getElementById("successCommDiv").setAttribute("hidden", "true");
                 document.getElementById("successRateDiv").setAttribute("hidden", "true");
+                document.getElementById("successSentDiv").setAttribute("hidden", "true");
             }else{
                 document.getElementById('makeReviewDiv').removeAttribute('hidden');
                 document.getElementById("makeRatingDiv").setAttribute("hidden", "true");
                 document.getElementById("sendMessageDiv").setAttribute("hidden", "true");
                 document.getElementById("successCommDiv").setAttribute("hidden", "true");
                 document.getElementById("successRateDiv").setAttribute("hidden", "true");
+                document.getElementById("successSentDiv").setAttribute("hidden", "true");
                 
             }
             
@@ -83,6 +87,8 @@ export class ClientProfileComponent implements OnInit {
             document.getElementById("successCommDiv").setAttribute("hidden", "true");
             document.getElementById("successRateDiv").setAttribute("hidden", "true");
             document.getElementById("makeRatingDiv").setAttribute("hidden", "true");
+            document.getElementById("successSentDiv").setAttribute("hidden", "true");
+            
         }
 
     }
@@ -109,7 +115,30 @@ export class ClientProfileComponent implements OnInit {
            console.log(data);
            
            document.getElementById('successRateDiv').removeAttribute('hidden');
+           
        });
       
    }
+   sendMessageClick(newMessage){
+       this.newMessage = newMessage;
+       this.newMessage.userReceived = this.res.user;
+       this.newMessage.userSent = this.user;
+       console.log(newMessage);
+
+       this.resService.sentMessageFromInbox(this.newMessage.content, this.newMessage.title, this.user.id,this.res.user.id).subscribe(data=>{
+           console.log("uspjesno poslata poruka");
+           console.log(data);
+           document.getElementById("sendMessageDiv").setAttribute("hidden", "true");
+           document.getElementById('successSentDiv').removeAttribute('hidden');
+       });
+   }
+   
+   
+   sendMessageClickDiscard(newMessage){
+       this.newMessage.title = "";
+       this.newMessage.content = "";
+       document.getElementById("sendMessageDiv").setAttribute("hidden", "true");
+   }
+   
+   
 }

@@ -1,6 +1,6 @@
  <section class="content-header">
 
-      <h1 class="profile-username text-Left">{{acc.name}}</h1>
+      <h1 class="profile-username text-Left">{{acc.name}} <span class="badge bg-red">{{acc.category}}*</span></h1>
         <br/>
 </section>
 <div class="row">
@@ -14,11 +14,13 @@
 	      <div class="box-body box-profile">
 			<div class="post">                   
 		         <div class="description">
-		          	Category : {{acc.category}} <b>*</b> <br/>
+		          	ADDRESS : <br/>
 					{{acc.address.street}} {{acc.address.number}} <br/>
 					{{acc.address.city}} <br/>
 					{{acc.address.country}} <br/> <br/>
 					{{acc.description}} moze neki opis<br/>
+					<br/>
+					Rating : <span class="badge bg-yellow">{{acc.rating}}</span>
 				</div>
 	       		</div>
 	       	</div>
@@ -55,6 +57,7 @@
             	<th>Capacity</th>
             	<th>Size</th>
             	<th>Type</th>
+            	<th>Default price</th>
             	<th></th>
             	</tr>
        		 </thead>
@@ -66,8 +69,8 @@
                 <td>{{unit.capacity}}</td>
                 <td>{{unit.size}}</td>               
                 <td>{{unit.type}}</td> 
-                
-                <td><button type="button" (click)= "bokingClick(unit.id)" class="btn btn-outline-success">Book me</button></td>
+                <td>{{unit.defaultPrice}}</td>
+                <td><button type="button" (click)= "bokingClick(unit)" class="btn btn-outline-success">Book me</button></td>
                 </tr>
              </tbody>
 
@@ -152,14 +155,24 @@
 	<div class="box-header with-border">
        <h3 class="box-title"><b>Comments..</b></h3>
     </div>
-      <div class="box-body box-profile">
-				<ul class="list-inline">
-                  <li class="pull-right">
-                      <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
-                        (5)</a></li>
-                  </ul>
-       <input class="form-control input-sm" type="text" placeholder="Type a comment">
-	</div>
+	<div *ngFor="let c of comments" >
+            <div class="box-footer box-comments" *ngIf="c.visible">
+              <div class="box-comment">
+                <!-- User image -->
+                <img class="img-circle img-sm" src="../assets/images/comment.jpg" alt="  ">
+                <div class="comment-text">
+                      <span class="username">
+                       {{c.user.firstName}} {{c.user.lastName}}
+                      </span><!-- /.username -->
+                 {{c.text}}
+                </div>
+                <!-- /.comment-text -->
+              </div>
+              <!-- /.box-comment -->
+             
+              <!-- /.box-comment -->
+            </div>
+     </div>
 	</div>
 </div>
 </div>

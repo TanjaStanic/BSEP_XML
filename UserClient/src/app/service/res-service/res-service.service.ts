@@ -45,7 +45,9 @@ export class ResServiceService {
       return this.http.get('https://localhost:8763/api/messages/sentMessageFromInbox/'+content+'/' + title +'/'+sentId+'/'+recievedId,{headers: this.auth.createAuthorizationTokenHeader()}); 
   }
   
-  
+  getAllCommentsByAccommodation(id : number) : Observable<any> {
+      return this.http.post('https://localhost:8763/api/comments/getAllCommentsByAccommodation',id,{headers: this.auth.createAuthorizationTokenHeader()}); 
+  }
   
   
 }

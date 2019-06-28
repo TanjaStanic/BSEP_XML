@@ -46,7 +46,7 @@
             <th>End date</th>
             <th>Total price</th>
             <th>Reservation status</th>
-            <th>Reservation mark</th>
+            <th>My rating</th>
             <th></th>
           </tr>
           </thead>
@@ -124,10 +124,10 @@
 			            <!-- /.box-header -->
 			            <div class="box-body">
 			              <div class="form-group">
-			                <input class="form-control" placeholder="Subject:">
+			                <input class="form-control" placeholder="Insert title.." [(ngModel)]="newMessage.title">
 			              </div>
 			              <div class="form-group">
-			                    <textarea id="compose-textarea" class="form-control" style="height: 100px">
+			                    <textarea id="compose-textarea" class="form-control" style="height: 100px" [(ngModel)]="newMessage.content">
 			                     
 			                    </textarea>
 			              </div>
@@ -136,15 +136,24 @@
 			            <!-- /.box-body -->
 			            <div class="box-footer">
 			              <div class="pull-right">
-			                <button type="submit" class="btn btn-primary" [disabled]="user.blocked"><i class="fa fa-envelope-o"></i> Send</button>
+			                <button type="submit" class="btn btn-primary" [disabled]="user.blocked" (click)="sendMessageClick(newMessage)"><i class="fa fa-envelope-o" ></i> Send</button>
 			              </div>
-			              <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> Discard</button>
+			              <button type="reset" class="btn btn-default" (click)="sendMessageClickDiscard(newMessage)"><i class="fa fa-times"></i> Discard</button>
 			            </div>
 			            <!-- /.box-footer -->
 			          </div>
 			          <!-- /. box -->
 			        </div>
 		      </div>
+		       <div class="col-xs-12" id = "successSentDiv" hidden="true">
+              	<div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-check"></i></h4>
+                	Message is sent!
+              </div>
+              </div> 
+		      
+		      
 			</div>
 			</div>
       </div>

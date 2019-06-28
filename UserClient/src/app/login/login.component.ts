@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
     if (this.checkEmail(this.user.email)) {
           this.u.loginUser(this.user).subscribe(podaci => { 
              this.checkUser(podaci);
-            // localStorage.setItem('user', JSON.stringify(this.user));
           });
       } else {
         this.htmlStr = 'The e-mail is not valid.';
