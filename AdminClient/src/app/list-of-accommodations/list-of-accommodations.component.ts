@@ -23,7 +23,7 @@ export class ListOfAccommodationsComponent implements OnInit {
   acc : Accommodation = new Accommodation();
   address : Address = new Address();
   location : Location = new Location();
-  //accommodations : Accommodation = new Accommodation();
+  accommodations : Accommodation[] = [];
   additionalServices : AdditionalServices[];
   searchForm: SearchForm = new SearchForm();
   idServices: Map<number, boolean> = new Map<number, boolean>();
@@ -38,8 +38,7 @@ export class ListOfAccommodationsComponent implements OnInit {
 
   constructor(private accService : AccServiceService, private route : Router, private userService : UserServiceService) { }
     
-    
-  accommodations : Accommodation[];
+   
     
   ngOnInit() {
       
@@ -52,8 +51,8 @@ export class ListOfAccommodationsComponent implements OnInit {
           });
       
       this.accService.getAllAcc().subscribe(data =>{
-         
-          this.accommodations = data as Accommodation[];
+          this.accommodations = data;
+         // this.accommodations = data as Accommodation[];
            //this.accommodations.address.street = this.address.street;
            console.log("All accommodations: ")
            console.log(this.accommodations);       });

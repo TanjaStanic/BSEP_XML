@@ -112,7 +112,7 @@ public class CertificateController {
 	public KeyStoreReader ksr = new KeyStoreReader();
 	public CertificateCSRService certificateCSRService;
 	
-	
+	@PreAuthorize("hasAuthority('getValidCertificates')")
 	@RequestMapping(value = "/getValidCertificates", method = RequestMethod.GET)
 	@ResponseBody
 	public ArrayList<String> getValidCertificates() throws KeyStoreException, NoSuchAlgorithmException,
@@ -141,6 +141,7 @@ public class CertificateController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('getCert')")
     @RequestMapping(value = "/getCert")
     public ResponseEntity<List<Certificate>> getCert(){
 
@@ -149,7 +150,8 @@ public class CertificateController {
 		return new ResponseEntity<>(allCert,HttpStatus.OK);
 
 	}
-
+    
+	@PreAuthorize("hasAuthority('generateCertificate')")
 	@RequestMapping(value = "/generateCertificate", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> generateCertificate(@RequestBody CertificateInfo info) throws NoSuchAlgorithmException,
@@ -223,6 +225,7 @@ public class CertificateController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('generateCRSCertificate')")
 	@RequestMapping(value= "/generateCRSCertificate",method = RequestMethod.POST)
 	public ResponseEntity<?> certificateSigningRequest(@RequestBody CsrRequest info) throws OperatorCreationException, InvalidKeyException, NoSuchAlgorithmException, IOException, CertificateEncodingException, KeyStoreException{
 		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
@@ -316,7 +319,7 @@ public class CertificateController {
 	
 	//kad istekne mozemo da reizdamo sve, ili da svi koji su potomci traju krace
 	
-	//
+	@PreAuthorize("hasAuthority('statusCertificate')")
 	@RequestMapping(value = "/statusCertificate/{serial}", method = RequestMethod.GET)
 	@ResponseBody
 	public ArrayList<String> statusCertificate(@PathVariable("serial") String serialNumber) throws KeyStoreException,
@@ -337,7 +340,8 @@ public class CertificateController {
 		return sp;
 
 	}
-
+	
+	@PreAuthorize("hasAuthority('getCertificate')")
 	@RequestMapping(value = "/getCertificate/{serial}", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<java.security.cert.Certificate> getCertificate(@PathVariable("serial") String serialNumber) throws KeyStoreException,
@@ -372,6 +376,7 @@ public class CertificateController {
 	}
 	
 	
+	@PreAuthorize("hasAuthority('allUsersWithCertificates')")
 	@RequestMapping(value="/allUsersWithCertificates", method = RequestMethod.GET,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
@@ -396,8 +401,7 @@ public class CertificateController {
 			return null;
 	}
 	
-	
-	//@PreAuthorize("hasRole('USER')") 
+	@PreAuthorize("hasAuthority('allCertificatesIssuer')")
 	@RequestMapping(value="/allCertificatesIssuer/{id}", method = RequestMethod.GET,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
@@ -424,7 +428,7 @@ public class CertificateController {
 	}
 	
 	
-	
+	@PreAuthorize("hasAuthority('revoke')")
 	@RequestMapping(
 			value = "/revoke/{id}/{reason}/{idSubject}",
 			method = RequestMethod.POST,
@@ -459,6 +463,7 @@ public class CertificateController {
 		
 	}
 
+	@PreAuthorize("hasAuthority('deleteCertificate')")
 	@RequestMapping(value = "/deleteCertificate/{serial}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResponseEntity<Certificate> deleteCertificate(@PathVariable("serial") String serialNumber) throws KeyStoreException,
@@ -562,7 +567,7 @@ public class CertificateController {
 		return true;
 	}
 	
-	
+	@PreAuthorize("hasAuthority('allocate')")
 	@RequestMapping(value="/allocate/{serialNumber}/{i}", method = RequestMethod.GET,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)

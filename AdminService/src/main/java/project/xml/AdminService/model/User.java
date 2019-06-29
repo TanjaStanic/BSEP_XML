@@ -108,7 +108,7 @@ public class User  implements UserDetails{
 	 * Samo admin ima listu smjestaja
 	 */
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	protected List<Accommodation> accommodations;
 	

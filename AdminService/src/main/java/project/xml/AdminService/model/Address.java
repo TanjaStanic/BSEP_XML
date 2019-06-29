@@ -257,6 +257,12 @@ public class Address {
 		return users;
 	}
 
+	@Override
+	public String toString() {
+		return "Address [id=" + id + ", street=" + street + ", number=" + number + ", city=" + city + ", country="
+				+ country + "]";
+	}
+
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}

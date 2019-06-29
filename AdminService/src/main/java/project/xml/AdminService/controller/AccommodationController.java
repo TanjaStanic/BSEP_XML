@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -80,6 +81,7 @@ public class AccommodationController {
 	
 	//private Address newAddress = new Address();
 	
+	@PreAuthorize("hasAuthority('getAllAcc')")
 	@GetMapping(path= "/getAllAcc") //getAll accommodations
 	public ResponseEntity<?> getAllAcc() {
 		//System.out.println("Number of additional services: " + addService.getAll().size());
@@ -87,16 +89,16 @@ public class AccommodationController {
 		acc = accommodationService.getAll();
 		System.out.println(acc.size());
 		for(int i = 0; i < acc.size();i++) {
-			System.out.println("ajde+++++" + acc.get(i).getAddress() + acc.get(i).getName());
+			System.out.println("ajde+++++" + acc.get(i).getAddress().toString());
 		}
 		
 		return new ResponseEntity<>(acc,HttpStatus.OK);
 	}
 
 	
-	@CrossOrigin(origins = "http:localhost:4200")
-	@GetMapping(path= "/getAll") //getAll additional services
-	public ResponseEntity<List<AdditionalServices>> getAll() {
+	@PreAuthorize("hasAuthority('getAllAdditional')")
+	@GetMapping(path= "/getAllAdditional") //getAll additional services
+	public ResponseEntity<List<AdditionalServices>> getAllAdditional() {
 		System.out.println("Number of additional services: " + addService.getAll().size());
 		List<AdditionalServices> additionalService = addService.getAll();
 		
@@ -106,7 +108,7 @@ public class AccommodationController {
 	
 	
 	
-	
+	@PreAuthorize("hasAuthority('addAccLocation')")
 	@RequestMapping(value = "/addAccLocation",
 			method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -130,7 +132,7 @@ public class AccommodationController {
 	}
 	
 	
-	
+	@PreAuthorize("hasAuthority('changeAccLocation')")
 	@RequestMapping(value = "/changeAccLocation",
 			method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -154,6 +156,8 @@ public class AccommodationController {
 		return new ResponseEntity<>(newlocation, HttpStatus.CREATED);
 	}
 	
+	
+	@PreAuthorize("hasAuthority('addAccAddress')")
 	@RequestMapping(value = "/addAccAddress",
 			method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -175,7 +179,7 @@ public class AccommodationController {
 		
 	}
 	
-	
+	@PreAuthorize("hasAuthority('changeAccAddress')")
 	@RequestMapping(value = "/changeAccAddress",
 			method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -198,6 +202,8 @@ public class AccommodationController {
 		
 	}
 	
+	
+	@PreAuthorize("hasAuthority('addAcc')")
 	@RequestMapping(value="/addAcc",
 			method = RequestMethod.POST)
 	public ResponseEntity<?> addAcc(@RequestBody Accommodation acc){
@@ -233,6 +239,7 @@ public class AccommodationController {
 		
 	}
 	
+	
 	@RequestMapping(value="/allocate/{idAcc}/{idAg}", method = RequestMethod.GET,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
@@ -254,6 +261,7 @@ public class AccommodationController {
 	}
 	
 	
+	@PreAuthorize("hasAuthority('changeAcc')")
 	@RequestMapping(value="/changeAcc",
 			method = RequestMethod.POST)
 	public ResponseEntity<?> changeAcc(@RequestBody Accommodation acc){
@@ -288,6 +296,8 @@ public class AccommodationController {
 		
 	}
 	
+	
+	@PreAuthorize("hasAuthority('getAllPictures')")
 	@RequestMapping(value ="/getAllPictures",
 			method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -304,6 +314,8 @@ public class AccommodationController {
 		return new ResponseEntity<>(newList,HttpStatus.OK);
 	}
 	
+	
+	@PreAuthorize("hasAuthority('getAdditionalServices')")
 	@RequestMapping(value ="/getAdditionalServices",
 			method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -320,6 +332,8 @@ public class AccommodationController {
 		return new ResponseEntity<>(newList,HttpStatus.OK);
 	}
 	
+	
+	@PreAuthorize("hasAuthority('getAccommodation')")
 	@RequestMapping(value ="/getAccommodation",
 			method = RequestMethod.POST)	
 	public ResponseEntity<Accommodation> getAccommodataion(@RequestBody Long id){

@@ -21,7 +21,8 @@ import project.besp.MegaTravel.model.User;
     "commentDate",
     "user",
     "accommodation_unit",
-    "visible"
+    "visible",
+    "accommodation"
 })
 @Entity
 @Table(name="comment")

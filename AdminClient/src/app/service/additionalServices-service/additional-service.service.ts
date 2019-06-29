@@ -12,7 +12,7 @@ export class AdditionalServiceService {
   constructor(private http : HttpClient, private auth: AuthServiceService) { }
     
     getAll() : Observable<any>{
-        return this.http.get('https://localhost:8762/api/accommodations/getAll', {headers: this.auth.createAuthorizationTokenHeader()});    
+        return this.http.get('https://localhost:8762/api/accommodations/getAllAdditional', {headers: this.auth.createAuthorizationTokenHeader()});    
     }
 
 }

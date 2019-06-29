@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,15 +35,16 @@ public class CommentController {
 	
 	
 	
-	
-	@RequestMapping(value = "/getAll", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('getAllComments')")
+	@RequestMapping(value = "/getAllComments", method = RequestMethod.GET)
 	public ResponseEntity<List<Comment>> getAll() {
 		//User user = null;
 		List<Comment> novi = commentService.getAll();
-		return new ResponseEntity<>(novi,HttpStatus.OK);
+		return new ResponseEntity<List<Comment>>(novi,HttpStatus.OK);
 	}
 	
 	
+	@PreAuthorize("hasAuthority('aprove')")
 	@RequestMapping(value = "/aprove", method = RequestMethod.POST)
 	public ResponseEntity<?> addRoom(@RequestBody Comment comm) {
 		Comment comic = commentService.findOneById(comm.getId());

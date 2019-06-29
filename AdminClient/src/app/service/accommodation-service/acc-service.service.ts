@@ -31,19 +31,19 @@ export class AccServiceService {
     
     addAcc(acc : Accommodation) {
         console.log(acc.address);
-        return this.http.post('https://localhost:8762/api/accommodations/addAcc',acc);
+        return this.http.post('https://localhost:8762/api/accommodations/addAcc',acc,{headers: this.auth.createAuthorizationTokenHeader()});
         }
     
     
     changeAcc(acc : Accommodation) {
         console.log(acc.address);
-        return this.http.post('https://localhost:8762/api/accommodations/changeAcc',acc);
+        return this.http.post('https://localhost:8762/api/accommodations/changeAcc',acc,{headers: this.auth.createAuthorizationTokenHeader()});
         }
     
         
     addAccLocation(location : Location){
         console.log(location.geoWidth + "SIRINA");
-        return this.http.post('https://localhost:8762/api/accommodations/addAccLocation',location);
+        return this.http.post('https://localhost:8762/api/accommodations/addAccLocation',location,{headers: this.auth.createAuthorizationTokenHeader()});
         }
     
     changeAccLocation(location : Location){
@@ -57,7 +57,7 @@ export class AccServiceService {
         }
     
     addAccAddress(address : Address) {
-        return this.http.post("https://localhost:8762/api/accommodations/addAccAddress",address);
+        return this.http.post("https://localhost:8762/api/accommodations/addAccAddress",address,{headers: this.auth.createAuthorizationTokenHeader()});
         }
     
     

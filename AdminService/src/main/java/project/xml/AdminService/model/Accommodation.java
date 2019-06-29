@@ -169,7 +169,7 @@ public class Accommodation implements java.io.Serializable {
     protected Location location;
 	
     
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "acc_address")
 	protected Address address;
 	
@@ -190,7 +190,7 @@ public class Accommodation implements java.io.Serializable {
     protected List<Image> images;
 	
 	
-	@XmlTransient
+    
     @ManyToOne
     @JoinColumn(name = "acc_agent")
     protected User user;
