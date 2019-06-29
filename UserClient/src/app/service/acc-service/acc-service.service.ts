@@ -20,31 +20,31 @@ export class AccServiceService {
   constructor(private http: HttpClient, private router : Router,private auth: AuthServiceService) { }
   
   getAllAccommodations() : Observable<any> {
-      return this.http.get('https://localhost:8763/api/accommodations/getAllAccommodations'); 
+      return this.http.get('https://localhost:8763/api/accommodations/getAllAccommodations',{headers: this.auth.createAuthorizationTokenHeader()}); 
   }
   
   getAllAdditionalServices() : Observable<any> {
-      return this.http.get('https://localhost:8763/api/accommodations/getAllAdditionalServices'); 
+      return this.http.get('https://localhost:8763/api/accommodations/getAllAdditionalServices',{headers: this.auth.createAuthorizationTokenHeader()}); 
   }
   
   getAllPictures(id : number) : Observable<any> {
-      return this.http.post('https://localhost:8763/api/accommodations/getAllPictures',id); 
+      return this.http.post('https://localhost:8763/api/accommodations/getAllPictures',id,{headers: this.auth.createAuthorizationTokenHeader()}); 
 
   }
   getAllAccommodationUnits(id : number) : Observable<any> {
-      return this.http.post('https://localhost:8763/api/accommodations/getAllAccommodationUnits',id); 
+      return this.http.post('https://localhost:8763/api/accommodations/getAllAccommodationUnits',id,{headers: this.auth.createAuthorizationTokenHeader()}); 
 
   }
   getAccommodation(id : number) : Observable<any> {
-      return this.http.post('https://localhost:8763/api/accommodations/getAccommodation',id); 
+      return this.http.post('https://localhost:8763/api/accommodations/getAccommodation',id,{headers: this.auth.createAuthorizationTokenHeader()}); 
 
   }
   getAdditionalServices(id : number) : Observable<any> {
-      return this.http.post('https://localhost:8763/api/accommodations/getAdditionalServices',id); 
+      return this.http.post('https://localhost:8763/api/accommodations/getAdditionalServices',id,{headers: this.auth.createAuthorizationTokenHeader()}); 
 
   }
   getAdditionalServicesFromAccUnit(id : number) : Observable<any> {
-      return this.http.post('https://localhost:8763/api/accommodations/getAdditionalServicesFromAccUnit',id); 
+      return this.http.post('https://localhost:8763/api/accommodations/getAdditionalServicesFromAccUnit',id,{headers: this.auth.createAuthorizationTokenHeader()}); 
 
   }
     

@@ -66,7 +66,7 @@ checkUser(logged) {
               
               localStorage.setItem('user', JSON.stringify(currentUser));
               //this.ssCertificate(podaci);
-              this.router.navigate(['homePage']);
+              window.location.href = 'http://localhost:4200';
              
      });
   }
@@ -96,40 +96,6 @@ escapeHTML(text): string {
   }
 
 
-/*ssCertificate(data){
-    var loggedUser = data as User;
-    var admin = false as boolean;
-    var obican = false as boolean;
-
-   
-      if(loggedUser.roles == "ROLE_ADMIN")
-        admin=true;
-      if(loggedUser.roles == "ROLE_USER")
-        obican=true;
-    
-
-    if (admin){
-      //this.u.getSelfSigned().subscribe(podaci => { this.checkSelfSigned(podaci, loggedUser.id) });
-    } else if (obican) {
-        if (loggedUser.certificated == false) {
-          window.location.href = 'http://localhost:4200/certificate/nonself/' + loggedUser.id;
-        } else {
-        window.location.href = 'http://localhost:4200'; // ovde treba preusmeriti na pocetnu
-        }
-  }
-
-  }*/
-
-checkSelfSigned(data, id) {
-    let selfSigned = data as boolean;
-    if (selfSigned) {
-      // ovde otvoriti index.html
-      window.location.href = 'http://localhost:4200';
-    } else {
-      // poslati na stranicu za pravljenje self signed seritifikata
-      window.location.href = 'http://localhost:4200/certificate/self/' + id;
-    }
-  }
   handleAuthError(err: HttpErrorResponse) {
     if (err.status === 404) {
       alert('Entered email is not valid!');

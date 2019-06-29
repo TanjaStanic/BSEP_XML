@@ -15,10 +15,10 @@ export class RegServiceService {
   constructor(private http: HttpClient, private auth: AuthServiceService) { }
   
   addUserAddress(address : Address) {
-      return this.http.post("https://localhost:8443/api/addUserAddress",address);
+      return this.http.post("https://localhost:8443/api/addUserAddress",address,{headers: this.auth.createAuthorizationTokenHeader()});
   }
   
   registerNewClient(user : User) {
-      return this.http.post("https://localhost:8443/api/registerNewClient",user);
+      return this.http.post("https://localhost:8443/api/registerNewClient",user,{headers: this.auth.createAuthorizationTokenHeader()});
   }
 }

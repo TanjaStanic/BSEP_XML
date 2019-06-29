@@ -28,6 +28,7 @@ export class ClientProfileComponent implements OnInit {
     ratingNum : number;
     accUnit : AccommodationUnit = new AccommodationUnit();
     newMessage : Messages = new Messages();
+    stars : string;
     constructor(private u: UserServiceService, private resService : ResServiceService ) { }
  
  
@@ -108,6 +109,39 @@ export class ClientProfileComponent implements OnInit {
             document.getElementById("successRateDiv").setAttribute("hidden", "true");
             this.comm.text = "";
         });
+    }
+    
+    rating(id) {
+        if (this.stars==null){
+            alert("Please, rate us with 1-5 stars!");
+        }
+        else
+        {
+            console.log("Oznaceno je " + this.stars);
+            this.resService.addRating(this.acc.id,this.res.id,this.stars).subscribe(data =>{
+                { this.validateRate(data)};
+                console.log("uspesno ocjenjeno");
+                console.log(data);
+                
+                document.getElementById('successRateDiv').removeAttribute('hidden');
+                
+            });
+            //this.u.rateOurApp(this.stars.value as number).subscribe(data => { this.validateRate(data)});
+          }
+            
+    }
+    
+    validateRate(podaci)
+    {
+      let validno = podaci as boolean;
+      if(validno)
+      {
+        window.location.href= 'http://localhost:4200';
+      }
+      else
+      {
+        alert("Please, rate us with 1-5 stars!");
+      }
     }
     
    ratingClick(ratingNum, id) {

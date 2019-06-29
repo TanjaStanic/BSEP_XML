@@ -31,19 +31,8 @@ export class LoginComponent implements OnInit {
         console.log('Dodavanje' + this.user.email + ', pass: ' + this.user.password);
         if (this.checkEmail(this.user.email)) {
               this.u.loginUser(this.user).subscribe(podaci => { this.checkUser(podaci);
-              } , err => {this.handleAuthError(err); });
-              console.log("cuvam u json this.usera: ");
-             /* this.u.getUser(this.user.email).subscribe(podaci => {
-                  console.log("usao u get user...stampam podatke");
-                  console.log(podaci);
-                  var currUser = podaci as User;
-                  console.log("cuvam u json currentusera: ");
-                  console.log(currUser)
-                  localStorage.setItem('user', JSON.stringify(currUser));
-                  
-              });*/
-              //ocalStorage.setItem('user', JSON.stringify(this.user))
- 
+              });
+              console.log("logovann ");
         } else {
             this.htmlStr = 'The e-mail is not valid.';
           }
@@ -51,7 +40,6 @@ export class LoginComponent implements OnInit {
 
     checkUser(logged) {
         let user_token= logged as UserToken;
-        // tslint:disable-next-line:triple-equals
         if(user_token.accessToken == 'error') {
           this.htmlStr = 'The e-mail or password is not correct.';
         } else {
@@ -64,10 +52,10 @@ export class LoginComponent implements OnInit {
               console.log("cuvam u json currentusera: ");
               console.log(podaci)
               localStorage.setItem('user', JSON.stringify(currentUser));
-              this.ssCertificate(podaci)
+              
      });
-        }
-      }
+    }
+}
         
         
     escapeHTML(text): string {
@@ -92,27 +80,5 @@ export class LoginComponent implements OnInit {
         return true;
       }
 
-
-    ssCertificate(data){
-
-
-      }
-
-    checkSelfSigned(data, id) {
-        let selfSigned = data as boolean;
-        if (selfSigned) {
-          // ovde otvoriti index.html
-          window.location.href = 'http://localhost:4200';
-        } else {
-          // poslati na stranicu za pravljenje self signed seritifikata
-          window.location.href = 'http://localhost:4200/certificate/self/' + id;
-        }
-      }
-      handleAuthError(err: HttpErrorResponse) {
-        if (err.status === 404) {
-          alert('Entered email is not valid!');
-        }
- 
-      }
 
 }
