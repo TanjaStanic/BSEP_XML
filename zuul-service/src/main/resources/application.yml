@@ -1,0 +1,50 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+    gateway:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+management:
+  security:
+    enabled: false
+ribbon:
+  ConnectTimeout: 60000
+  ReadTimeout: 60000
+security:
+  basic:
+    enable: 'false   '
+server:
+  port: 8084
+spring:
+  application:
+    name: zuul-service
+zuul:
+  host:
+    socket-timeout-millis: 30000
+  ribbon:
+    eager-load:
+      enabled: true
+  routes:
+    AdminService:
+      sensitive-headers: Authorization
+      serviceId: AdminService
+    AgentMegaTravel:
+      sensitive-headers: Authorization
+      serviceId: AgentMegaTravel
+    MegaTravel:
+      sensitive-headers: Authorization
+      serviceId: MegaTravel
+    ReservationService:
+      sensitive-headers: Authorization
+      serviceId: ReservationService
+  sensitive-headers: Authorization

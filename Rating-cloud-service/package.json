@@ -1,0 +1,21 @@
+{
+  "name": "rating",
+  "version": "1.0.0",
+  "description": "short package description",
+  "main": "index.js",
+  "scripts": {
+    "test": "rate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TanjaStanic/BSEP_XML"
+  },
+  "keywords": [
+    "rating-cloud"
+  ],
+  "author": "sara celik",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@google/cloud-debug": "^0.9.3"
+  }
+}
