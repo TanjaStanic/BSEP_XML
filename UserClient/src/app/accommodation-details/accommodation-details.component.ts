@@ -130,8 +130,9 @@ export class AccommodationDetailsComponent implements OnInit {
      
      finallBookClick() {
      
-     this.addServices.reservationUnit(this.reservation,this.user.id,this.unit.id).subscribe(data=>{
+     this.resService.reservationUnit(this.reservation,this.user.id,this.unit.id).subscribe(data=>{
          console.log(data);
+         
      });
      
    
