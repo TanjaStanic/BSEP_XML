@@ -1,5 +1,6 @@
 package project.besp.MegaTravel.controller;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -154,7 +155,8 @@ public class AccommodationController {
 			for(Iterator<AccommodationUnit> unitIter1 = units1.iterator(); unitIter1.hasNext();)
 			{
 				AccommodationUnit unit = unitIter1.next();
-				if(unit.getCapacity()<searchForm.getNumberOfPeople())
+		
+				if(unit.getCapacity().intValue()<searchForm.getNumberOfPeople())
 				{
 					unitIter1.remove();
 					System.out.println("units kapacitet" + unit.getSize());
@@ -165,29 +167,7 @@ public class AccommodationController {
 			
 		}
 		
-		/*if(!searchForm.getCancelation().equals("undefined") || searchForm.getCancelation()!= null || !searchForm.getCancelation().equals(null))
-		{
-			if(searchForm.getCancelation().equals(true))
-			{
-				for(Iterator<Accommodation> iterAcc1 = acc1.iterator(); iterAcc1.hasNext();)
-				{
-					Accommodation ac1 = iterAcc1.next();
-					if(ac1.getCancelationDays()equals(obj))
-				}
-			}
-		}*/
 		
-		/*if(searchForm.getDistance() != -1)
-		{
-			for(Iterator<Accommodation> iterAcc4 = acc1.iterator(); iterAcc4.hasNext();)
-			{
-				Accommodation ac4 = iterAcc4.next();
-				if(ac4.getAddress().g>searchForm.getDistance())
-				{
-					iterAcc4.remove();
-				}
-			}
-		}*/
 		
 		
 		if(searchForm.getListOfServices().size()>0)
@@ -239,7 +219,7 @@ public class AccommodationController {
 			List<AccommodationUnitDTO> unitsDTO = new ArrayList<AccommodationUnitDTO>();
 			
 			for(AccommodationUnit u : units) {
-				unitsDTO.add(new AccommodationUnitDTO(u.getId(),u.getCapacity()));
+				unitsDTO.add(new AccommodationUnitDTO(u.getId(),u.getCapacity().intValue()));
 			}
 			
 			AccommodationDTO accom = new AccommodationDTO(kraj.getId(),kraj.getName(),kraj.getAddress().getStreet(),
