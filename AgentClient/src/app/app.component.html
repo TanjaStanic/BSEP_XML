@@ -88,6 +88,12 @@
 
           </a>
         </li>
+        <li class="treeview" [hidden]="notLogged">
+          <a href="#">
+            <i class="fa fa-list-ul"></i> <span [hidden]="notLogged"><a routerLink="reservations">All reservations</a></span>
+
+          </a>
+        </li>
         
         <li class="treeview" [hidden]="notLogged">
           <a href="#">

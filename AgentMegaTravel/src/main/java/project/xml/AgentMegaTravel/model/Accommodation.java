@@ -11,6 +11,7 @@ package project.xml.AgentMegaTravel.model;
 import java.math.BigInteger;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -154,7 +155,7 @@ public class Accommodation {
     @JoinColumn(name="acc_location")
     protected Location location;
     
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "acc_address")
 	protected Address address;
     

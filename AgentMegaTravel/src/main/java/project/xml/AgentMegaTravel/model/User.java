@@ -67,10 +67,7 @@ public class User   implements UserDetails{
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
     @Column(name = "user_id", nullable = false, updatable = false)
 	public Long id;
-	
-	/*@Column(name = "role")
-	@Enumerated(EnumType.STRING)
-	public UserRole role;*/
+
 	@Column(name = "first_name", nullable = false)
 	public String firstName;
     

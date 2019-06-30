@@ -26,4 +26,11 @@ export class AccUnitServiceService {
   getAllAccFromUser(id : number) : Observable<any>{
       return this.http.post('https://localhost:8764/api/accommodation/getAllAccFromUser',id,{headers: this.auth.createAuthorizationTokenHeader()});  
       }
+    
+    getAllReservations(id : number) : Observable<any>{
+      return this.http.post('https://localhost:8764/api/reservation/getAllReservations',id,{headers: this.auth.createAuthorizationTokenHeader()});  
+      }
+     changeStatus(id : number, newStatus: string) : Observable<any>{
+      return this.http.get('https://localhost:8764/api/reservation/changeStatus/'+id+'/'+newStatus,{headers: this.auth.createAuthorizationTokenHeader()});  
+      }
 }

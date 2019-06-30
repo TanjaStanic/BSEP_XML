@@ -20,6 +20,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * <p>Java class for anonymous complex type.
@@ -75,6 +77,7 @@ public class Location {
     @XmlElement(required = true)
     protected float geo_width;
 
+    @JsonIgnore
     @OneToOne(mappedBy="location")
     protected Accommodation accommodation;
     

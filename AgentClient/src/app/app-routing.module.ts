@@ -10,6 +10,7 @@ import { AddAccUnitComponent } from './components/add-acc-unit/add-acc-unit.comp
 import { ListOfAccUnitsComponent } from './components/list-of-acc-units/list-of-acc-units.component';
 import { AgentMessagesComponent } from './components/agent-messages/agent-messages.component';
 import { AgentMessagesSentComponent } from './components/agent-messages-sent/agent-messages-sent.component';
+import { ListReservationsComponent } from './components/list-reservations/list-reservations.component';
 
 
 
@@ -49,6 +50,10 @@ const routes: Routes = [
       {
           path: 'sent',
           component: AgentMessagesSentComponent
+      },
+      {
+          path: 'reservations',
+          component: ListReservationsComponent
       }
 
   ];
