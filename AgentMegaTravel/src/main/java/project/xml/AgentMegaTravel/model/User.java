@@ -127,7 +127,7 @@ public class User   implements UserDetails{
 	 */
 	@JsonIgnore
 	@OneToMany(mappedBy="user")
-	protected List<AccommodationUnit> accommodation_units;
+	protected List<AccommodationUnit> accommodationUnits;
 	
 	/*
 	 * Admin i klijent upravljaju komentarima.
@@ -317,12 +317,30 @@ public class User   implements UserDetails{
 		this.accommodations = accommodations;
 	}
 
-	public List<AccommodationUnit> getAccommodation_units() {
-		return accommodation_units;
+
+
+	public List<AccommodationUnit> getAccommodationUnits() {
+		return accommodationUnits;
 	}
 
-	public void setAccommodation_units(List<AccommodationUnit> accommodation_units) {
-		this.accommodation_units = accommodation_units;
+	public void setAccommodationUnits(List<AccommodationUnit> accommodationUnits) {
+		this.accommodationUnits = accommodationUnits;
+	}
+
+	public List<Messages> getMessagesSent() {
+		return messagesSent;
+	}
+
+	public void setMessagesSent(List<Messages> messagesSent) {
+		this.messagesSent = messagesSent;
+	}
+
+	public List<Messages> getMessagesReceived() {
+		return messagesReceived;
+	}
+
+	public void setMessagesReceived(List<Messages> messagesReceived) {
+		this.messagesReceived = messagesReceived;
 	}
 
 	public List<Comment> getComments() {

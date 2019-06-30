@@ -93,7 +93,7 @@
                 <label>Enter start date:</label>
                  <div class="input-group">
 	                    <span class="input-group-addon"> <i class="glyphicon glyphicon-calendar"></i></span>
-	                    <input class="form-control" type="date"  name="startDate" required="required" data-placeholder="Check in">
+	                    <input class="form-control" type="date"  name="startDate"   [(ngModel)]="reservation.startDate" required="required" data-placeholder="Check in">
 	            </div>
   			</div>
   			</div>
@@ -102,7 +102,7 @@
                <label>Enter end date:</label>
                 <div class="input-group">
 	                      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-	                      <input class="form-control" type="date"  name="endDate" required="required"  data-placeholder="Check out">
+	                      <input class="form-control" type="date"  name="endDate"  [(ngModel)]="reservation.endDate" required="required"  data-placeholder="Check out">
 	                </div>
             </div>
   			</div>

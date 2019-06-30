@@ -1,8 +1,12 @@
 package project.xml.AgentMegaTravel.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bouncycastle.asn1.tsp.Accuracy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,8 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import project.xml.AgentMegaTravel.model.Accommodation;
 import project.xml.AgentMegaTravel.model.AccommodationUnit;
+import project.xml.AgentMegaTravel.model.User;
 import project.xml.AgentMegaTravel.repository.AccommodationRepository;
 import project.xml.AgentMegaTravel.repository.AccommodationUnitRepository;
+import project.xml.AgentMegaTravel.repository.UserRepository;
 import project.xml.AgentMegaTravel.soap.UpdateClient;
 import project.xml.AgentMegaTravel.xsd.SaveAccommodationUnitResponse;
 
@@ -25,6 +31,9 @@ public class AccommodationUnitController {
 
 	@Autowired
 	UpdateClient updateClient;
+	
+	@Autowired
+	UserRepository userRepository;
 	
 	@Autowired
 	AccommodationRepository accommodationRepository;
@@ -90,4 +99,20 @@ public class AccommodationUnitController {
 		}
 	}
 	
+	@RequestMapping(value = "/getAllAccUnitsFromUser", method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getAllAccUnitsFromUser(@RequestBody Long userId) {
+		User u = userRepository.findOneById(userId);
+		List<AccommodationUnit> returnList = new ArrayList<AccommodationUnit>();
+		
+		returnList = accommodationUnitRepository.findAllByUser(u);
+		if (returnList==null) {
+			return  new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+		else {
+			return new ResponseEntity<List<AccommodationUnit>>(returnList, HttpStatus.OK);
+		}
+		
+	}
 }

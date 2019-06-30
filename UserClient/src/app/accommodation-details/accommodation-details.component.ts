@@ -9,6 +9,7 @@ import { AccommodationUnit } from '../model/accommodation-unit.model';
 import { ResServiceService } from '../service/res-service/res-service.service';
 import { Comment } from '../model/comment';
 import { User } from '../model/user';
+import { Reservation } from '../model/reservation';
 
 import { AccServiceService } from '../service/acc-service/acc-service.service';
 import {AuthServiceService} from '../service/auth-service/auth-service.service';
@@ -32,6 +33,11 @@ export class AccommodationDetailsComponent implements OnInit {
     idServices: Map<number, boolean> = new Map<number, boolean>();
     totalAccPrice : number;
     comments : Comment[];
+    user : User = new User();
+    
+    reservation : Reservation = new Reservation();
+    
+    
    // loggedUser : User = new User();
     token: string;
     
@@ -40,6 +46,7 @@ export class AccommodationDetailsComponent implements OnInit {
 
   ngOnInit() {
       this.totalAccPrice = 0;
+      this.user = JSON.parse(localStorage.getItem('user'));
       this.idAcc = JSON.parse(localStorage.getItem('idA'));
       console.log("id je : " + this.idAcc);
       
@@ -123,7 +130,9 @@ export class AccommodationDetailsComponent implements OnInit {
      
      finallBookClick() {
      
-     //document.getElementById('modalDiv').removeAttribute('hidden');
+     this.addServices.reservationUnit(this.reservation,this.user.id,this.unit.id).subscribe(data=>{
+         console.log(data);
+     });
      
    
 

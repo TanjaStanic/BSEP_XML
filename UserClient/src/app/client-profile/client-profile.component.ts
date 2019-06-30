@@ -8,6 +8,7 @@ import { Accommodation } from '../model/accommodation';
 import { Comment } from '../model/comment';
 import { AccommodationUnit } from '../model/accommodation-unit.model';
 import { Messages } from '../model/messages';
+import { RatingDTO } from '../model/ratingDTO';
 
 import { ResServiceService } from '../service/res-service/res-service.service';
 
@@ -203,6 +204,17 @@ export class ClientProfileComponent implements OnInit {
     rating.published = false;
       this.resService.postRating(rating).subscribe(data => {
       
-      })
-   
+      });
+      
+      //this.ratingNum = this.stars;
+      //console.log(this.ratingNum + this.res.id + this.star + " putanja" );
+      //console.log(res);
+      this.resService.addRating(this.acc.id,this.res.id,this.stars).subscribe(data =>{
+          console.log("uspesno ocjenjeno");
+          console.log(data);
+          
+          document.getElementById('successRateDiv').removeAttribute('hidden');
+          
+      });
+   }
 }

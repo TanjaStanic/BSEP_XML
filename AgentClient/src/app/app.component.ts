@@ -46,6 +46,6 @@ export class AppComponent implements OnInit{
       this.auth.removeJwtToken();
       this.notLogged = true;
       this.logged = false;
-      localStorage.clean();
+
     }
 }

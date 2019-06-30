@@ -12,6 +12,8 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { AddAccUnitComponent } from './components/add-acc-unit/add-acc-unit.component';
 import { ListOfAccUnitsComponent } from './components/list-of-acc-units/list-of-acc-units.component';
+import { AgentMessagesComponent } from './components/agent-messages/agent-messages.component';
+import { AgentMessagesSentComponent } from './components/agent-messages-sent/agent-messages-sent.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { ListOfAccUnitsComponent } from './components/list-of-acc-units/list-of-
     HomePageComponent,
     MessagesComponent,
     AddAccUnitComponent,
-    ListOfAccUnitsComponent
+    ListOfAccUnitsComponent,
+    AgentMessagesComponent,
+    AgentMessagesSentComponent
   ],
   imports: [
     BrowserModule,

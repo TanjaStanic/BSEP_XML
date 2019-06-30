@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,6 +27,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -156,18 +158,23 @@ public class Accommodation {
 	@JoinColumn(name = "acc_address")
 	protected Address address;
     
-    @OneToMany(mappedBy="accommodation")
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY,mappedBy="accommodation")
     protected List<AccommodationUnit> accommodation_unit;
-    
-    @OneToMany(mappedBy = "accommodation")
+   
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "accommodation")
     protected List<AdditionalServices> additional_services;
-
+    
+    @JsonIgnore
     @OneToMany(mappedBy="accomodation")
     protected List<Image> images;
     
     @JsonIgnore
     @OneToMany(mappedBy="accommodation")
     protected List<Comment> comments;
+   
+    
     @ManyToOne
     @JoinColumn(name = "acc_agent")
     protected User user;

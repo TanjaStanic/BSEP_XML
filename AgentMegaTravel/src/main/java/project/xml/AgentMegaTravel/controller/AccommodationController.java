@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-
+import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -35,9 +35,11 @@ public class AccommodationController {
 	@Autowired 
 	AccommodationRepository accommodationRepository;
 	
-	@RequestMapping(value="/getAccommodations/{id}", 
-			method = RequestMethod.GET)
-	public ResponseEntity<?> getAcommodationsOfAgent(@PathVariable("id") Long agentId){
+	@RequestMapping(value="/getAllAccFromUser",
+			method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getAllAccFromUser(@RequestBody Long agentId){
 	
 		System.out.println("Usao u accommodation controller - get acc of agents");
 		List<Accommodation> allAcc = accommodationRepository.findAll();
@@ -59,19 +61,6 @@ public class AccommodationController {
 		}
 		
 		System.out.println("Acc of agents: " + accOfAgent.size());
-		/*List<AccommodationDTO> dtos = new ArrayList<AccommodationDTO>();
-		
-		for(Accommodation acc: accOfAgent)
-		{
-			System.out.println("Name " + acc.getName());
-			
-			AccommodationDTO dto = new AccommodationDTO(acc.getId(), acc.getName(), acc.getAddress().getStreet(), acc.getAddress().getNumber(), 
-					acc.getAddress().getCity(), acc.getAddress().getState(),acc.getType().getName(), acc.getDescription());
-			System.out.println("DTO " + dto.getId() + " " + dto.getName() + " " + dto.getStreet() + " " + dto.getNumber() + " " + dto.getCity() + " " + dto.getState() + " "
-					+ dto.getType() + " " + dto.getDescription());
-			dtos.add(dto);
-			
-		}*/
 		return new ResponseEntity<List<Accommodation>>(accOfAgent, HttpStatus.OK);
 	}
 

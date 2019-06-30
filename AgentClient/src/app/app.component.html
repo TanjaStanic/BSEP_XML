@@ -61,35 +61,46 @@
         <li class="active" [hidden]="notLogged">
           <a href="#">
             <i class="fa fa-home" ></i> <span [hidden]="notLogged"><a routerLink="homePage"></a>Home</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+
           </a>
         </li>
         <li class="treeview" [hidden]="notLogged">
           <a href="#">
             <i class="fa fa-building"></i> <span [hidden]="notLogged"><a routerLink="addAccUnit">Add Unit</a></span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+
           </a>
         </li>
          <li class="treeview" [hidden]="notLogged">
           <a href="#">
-            <i class="fa fa-list-ul"></i> <span [hidden]="notLogged"><a routerLink="listOfAccUnits">List of Units</a></span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+            <i class="fa fa-list-ul"></i> <span [hidden]="notLogged"><a routerLink="homePage">List of Units</a></span>
+
+          </a>
+        </li>
+         <li class="treeview" [hidden]="notLogged">
+          <a href="#">
+            <i class="fa fa-list-ul"></i> <span [hidden]="notLogged"><a routerLink="accommodations">List of Accommodations</a></span>
+
           </a>
         </li>
         <li class="treeview" [hidden]="notLogged">
           <a href="#">
             <i class="fa fa-list-ul"></i> <span [hidden]="notLogged"><a routerLink="addAccUnit">Add unit</a></span>
+
+          </a>
+        </li>
+        
+        <li class="treeview" [hidden]="notLogged">
+          <a href="#">
+            <i class="fa fa-envelope"></i> <span>Messages</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-        </li>
+          <ul class="treeview-menu" >
+            <li><a routerLink=inbox><i class="fa fa-inbox"></i> Inbox</a></li>
+            <li><a routerLink=sent>><i class="fa fa-envelope-o"></i> Sent</a></li>
+          </ul>
+        </li> 
 
       </ul>
     </section>

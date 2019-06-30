@@ -8,6 +8,8 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { AddAccUnitComponent } from './components/add-acc-unit/add-acc-unit.component';
 import { ListOfAccUnitsComponent } from './components/list-of-acc-units/list-of-acc-units.component';
+import { AgentMessagesComponent } from './components/agent-messages/agent-messages.component';
+import { AgentMessagesSentComponent } from './components/agent-messages-sent/agent-messages-sent.component';
 
 
 
@@ -39,6 +41,14 @@ const routes: Routes = [
     {
         path: 'addAccUnit',
         component: AddAccUnitComponent
+      },
+      {
+          path: 'inbox',
+          component: AgentMessagesComponent
+      },
+      {
+          path: 'sent',
+          component: AgentMessagesSentComponent
       }
 
   ];

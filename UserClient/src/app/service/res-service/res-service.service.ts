@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import {AuthServiceService} from '../auth-service/auth-service.service';
 import { User } from '../../model/user';
 import { Messages } from '../../model/messages';
+import { Reservation } from '../../model/reservation';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +53,9 @@ export class ResServiceService {
       return this.http.get('https://localhost:8763/api/reservationss/cancelReservation/'+accId +'/'+ resId+'/' + cancelDays,{headers: this.auth.createAuthorizationTokenHeader()}); 
   }
     
-    
+  reservationUnit(reservation : Reservation,userId : number, unitId: number) : Observable<any> {
+      return this.http.post('https://localhost:8763/api/reservationss/reservationUnit/'+userId +'/'+ unitId,reservation,{headers: this.auth.createAuthorizationTokenHeader()}); 
+  }
   postRating(rating) :Observable<any> {
     return this.http.post("'https://localhost:8763/api/comments/rating", rating);
   }

@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
     
     constructor(private u: UserServiceService, private route: ActivatedRoute, private auth : AuthServiceService) { }
 
-    ngOnInit() {    
+    ngOnInit() { 
+        
       }
     loginUser(){
         
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit {
         if (this.checkEmail(this.user.email)) {
               this.u.loginUser(this.user).subscribe(podaci => { this.checkUser(podaci);
               });
-              console.log("logovann ");
+            
         } else {
             this.htmlStr = 'The e-mail is not valid.';
           }
@@ -52,6 +53,7 @@ export class LoginComponent implements OnInit {
               console.log("cuvam u json currentusera: ");
               console.log(podaci)
               localStorage.setItem('user', JSON.stringify(currentUser));
+              window.location.href = 'http://localhost:4200';
               
      });
     }

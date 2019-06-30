@@ -20,4 +20,10 @@ export class AccUnitServiceService {
   addAccommodationUnit(id : number, accUnit: AccommodationUnit) : Observable<any>{
       return this.http.post('https://localhost:8764/api/accommodationUnit/addAccommodationUnit/'+id,accUnit,{headers: this.auth.createAuthorizationTokenHeader()});  
       }
+  getAllAccUnitsFromUser(id : number) : Observable<any>{
+      return this.http.post('https://localhost:8764/api/accommodationUnit/getAllAccUnitsFromUser',id,{headers: this.auth.createAuthorizationTokenHeader()});  
+      }
+  getAllAccFromUser(id : number) : Observable<any>{
+      return this.http.post('https://localhost:8764/api/accommodation/getAllAccFromUser',id,{headers: this.auth.createAuthorizationTokenHeader()});  
+      }
 }
