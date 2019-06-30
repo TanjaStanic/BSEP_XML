@@ -191,5 +191,18 @@ export class ClientProfileComponent implements OnInit {
            
        });
    }
+    
+    
+   Rate() {
+    let rating = new RatingDTO();
+    rating.accommodationID = this.acc.id;
+    rating.userID = this.user.id;
+
+    rating.rating = +this.stars;
+    rating.reservationID = this.res.id;
+    rating.published = false;
+      this.resService.postRating(rating).subscribe(data => {
+      
+      })
    
 }

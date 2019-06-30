@@ -7,43 +7,23 @@
  * @param {!Object} res Cloud Function response context.
  */
 
-require('@google/cloud-debug');
-exports.sortContacts = function (req, res) {
-	
-	let prop = req.query.criteria || 'last_name';
-	let order = req.query.order || 'ascending';
-	let contacts = req.body;
-    
-    if (contacts === undefined) {
-    	// This is an error case, as HTTP request body is required.
-    	console.warn('Bad request: No contacts provided.');
-    	res.status(400).send('Contacts is not defined!');
-  	} else {
-    	// Everything is okay.
-		  console.log('Contacts array length: ', contacts.length); 
-		  console.log('Sort criteria: ', prop);
-		  console.log('Sort order: ', order);
-      let contactsSorted = contacts.sort(propComparator(prop, order));
-      console.log(JSON.stringify(contacts)); 
-		  res.status(200).send(contactsSorted);
-  	}
-    
-};
+//require('@google/cloud-debug');
 
-function propComparator(prop, order) {
-    return function(c1, c2) {
-		if (order == 'ascending') {
-			if (c1[prop] < c2[prop])
-				return -1;
-			if (c1[prop] > c2[prop])
-				return 1;
-			return 0;
-		} else {
-			if (c1[prop] < c2[prop])
-				return 1;
-			if (c1[prop] > c2[prop])
-				return -1;
-			return 0;
-		}
-  	};
-}
+const connection = require('./database')
+
+exports.newRating = function newRating(req, res) {
+    let userID = req.body.userID;
+    let comment = req.body.comment;
+    let rating = req.body.rating;
+    let accommodationID = req.body.accommodationID;
+	let reservationID = req.body.reservationID;
+    connection.query("insert into reservatiion (userID, comment, rating, accommodationID, published, reservationID) values (?, ?, ?, ?, ?, ?)", [userID, comment, rating, accommodationID, 0, reservationID], (err, result) => {
+	if (err) res.status(400).send(err);
+	else {
+		
+		res.status(200).send('upisano');
+
+	}
+	
+    });
+};

@@ -85,7 +85,7 @@
 		      
 		       <div class="input-group margin">
                 <!-- >input type="number "  min="1" max="5" class="form-control" [(ngModel)]="ratingNum" placeholder="Rate accomodation.."-->
-                   <form (ngSubmit)="rating(res.id)" >
+                   <form (ngSubmit)="Rate()" >
                    
                       <!-- button type="button" class="btn btn-warning btn-flat" (click) = "ratingClick(ratingNum,res.id)" [disabled]="user.blocked">Rate us!</button-->
                     	 	<input type="radio" id="star5" [(ngModel)]="stars" name="rate" value="5" />

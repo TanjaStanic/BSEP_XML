@@ -51,5 +51,10 @@ export class ResServiceService {
   cancelReservation(accId : number,resId : number, cancelDays: number) : Observable<any> {
       return this.http.get('https://localhost:8763/api/reservationss/cancelReservation/'+accId +'/'+ resId+'/' + cancelDays,{headers: this.auth.createAuthorizationTokenHeader()}); 
   }
+    
+    
+  postRating(rating) :Observable<any> {
+    return this.http.post("'https://localhost:8763/api/comments/rating", rating);
+  }
   
 }

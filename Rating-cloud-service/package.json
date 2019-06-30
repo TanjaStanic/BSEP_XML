@@ -16,6 +16,11 @@
   "author": "sara celik",
   "license": "Apache-2.0",
   "dependencies": {
-    "@google/cloud-debug": "^0.9.3"
-  }
+    "@google-cloud/functions-framework": "^1.1.1",
+    "mysql": "^8.0.13",
+    "@google/cloud-debug": "^0.9.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {}
 }

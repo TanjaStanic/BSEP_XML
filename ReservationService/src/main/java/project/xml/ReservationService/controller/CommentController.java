@@ -4,18 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
+import project.xml.ReservationService.dto.RatingDTO;
 import project.xml.ReservationService.model.Accommodation;
 import project.xml.ReservationService.model.Comment;
 import project.xml.ReservationService.model.Image;
@@ -61,6 +65,9 @@ public class CommentController {
 	
 	@Autowired 
 	AccommodationRepository accommodationRepository;
+	
+	@Autowired
+	private RestTemplate template;
 	
 	//@PreAuthorize("hasAuthority('addCommentar')")
 	@RequestMapping(value ="/addCommentar/{idUser}/{idAcc}/{text}",
@@ -125,5 +132,14 @@ public class CommentController {
 		}
 		return new ResponseEntity<List<Comment>>(newList,HttpStatus.OK);
 	}
+	
+	
+	 @PostMapping("/rating")
+		public ResponseEntity<?> postRating(@RequestBody RatingDTO rating){		
+			HttpEntity<RatingDTO> request = new HttpEntity<RatingDTO>(rating);
+			String _return= template.postForObject("http://localhost:8135/newRating",
+					request, String.class);
+			return new ResponseEntity<String>(_return, HttpStatus.OK);
+		}
 	
 }

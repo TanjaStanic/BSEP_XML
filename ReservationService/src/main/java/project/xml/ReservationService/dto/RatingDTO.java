@@ -1,0 +1,18 @@
+package project.xml.ReservationService.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class RatingDTO {
+	private Long id;
+	private Long userID;
+	private String comment;
+	private Integer rating;
+	private Long accommodationID;
+	private boolean published;
+	private Long reservationID;
+}
