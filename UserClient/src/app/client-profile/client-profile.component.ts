@@ -69,6 +69,7 @@ export class ClientProfileComponent implements OnInit {
                 document.getElementById("successCommDiv").setAttribute("hidden", "true");
                 document.getElementById("successRateDiv").setAttribute("hidden", "true");
                 document.getElementById("successSentDiv").setAttribute("hidden", "true");
+                document.getElementById("cancelDiv").setAttribute("hidden", "true");
             }else{
                 document.getElementById('makeReviewDiv').removeAttribute('hidden');
                 document.getElementById("makeRatingDiv").setAttribute("hidden", "true");
@@ -76,6 +77,7 @@ export class ClientProfileComponent implements OnInit {
                 document.getElementById("successCommDiv").setAttribute("hidden", "true");
                 document.getElementById("successRateDiv").setAttribute("hidden", "true");
                 document.getElementById("successSentDiv").setAttribute("hidden", "true");
+                document.getElementById("cancelDiv").setAttribute("hidden", "true");
                 
             }
             
@@ -89,11 +91,18 @@ export class ClientProfileComponent implements OnInit {
             document.getElementById("successRateDiv").setAttribute("hidden", "true");
             document.getElementById("makeRatingDiv").setAttribute("hidden", "true");
             document.getElementById("successSentDiv").setAttribute("hidden", "true");
+            document.getElementById("cancelDiv").setAttribute("hidden", "true");
             
         }
         
         if (res.reservationStatus=="pending"){
             document.getElementById('cancelDiv').removeAttribute('hidden');
+            document.getElementById('sendMessageDiv').removeAttribute('hidden');
+            document.getElementById("makeReviewDiv").setAttribute("hidden", "true");
+            document.getElementById("successCommDiv").setAttribute("hidden", "true");
+            document.getElementById("successRateDiv").setAttribute("hidden", "true");
+            document.getElementById("makeRatingDiv").setAttribute("hidden", "true");
+            document.getElementById("successSentDiv").setAttribute("hidden", "true");
         } 
 
     }

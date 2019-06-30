@@ -48,10 +48,10 @@ import project.besp.MegaTravel.model.User;
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="capacity" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/>
+ *         &lt;element name="capacity" type="{http://www.w3.org/2001/XMLSchema}positiveBigInteger"/>
  *         &lt;element name="size" minOccurs="0">
  *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}positiveInteger">
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}positiveBigInteger">
  *               &lt;minInclusive value="1"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
@@ -91,14 +91,21 @@ import project.besp.MegaTravel.model.User;
  * 
  * 
  */
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "AccommodationUnit", propOrder = {
-    "id",
-    "capacity",
-    "size",
-    "freeCancelation",
-    "type",
-    "defaultPrice"
+		  "id",
+		    "capacity",
+		    "size",
+		    "type",
+		    "number_of_room",
+		    "floor",
+		    "accommodation",
+		    "user",
+		    "additional_services",
+		    "reservations",
+		    "pricing",
+		    "comments",
+		    "defaultPrice"
 
 })
 @Entity
@@ -112,17 +119,17 @@ public class AccommodationUnit {
 	protected long id;
     
 	@XmlElement(required = true)
-    protected Integer capacity;
+    protected BigInteger capacity;
 	
 	@XmlElement(required = true)
-	protected Integer number_of_room;
+	protected BigInteger number_of_room;
 	
 	@XmlElement(required = true)
-	protected Integer floor;
+	protected BigInteger floor;
 	
 	@XmlElement()
 	@Column(name = "default_price")
-	protected Double defaultPrice;
+	protected double defaultPrice;
     
 	protected BigInteger size;
    
@@ -185,10 +192,10 @@ public class AccommodationUnit {
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public Integer getCapacity() {
+    public BigInteger getCapacity() {
         return capacity;
     }
 
@@ -197,10 +204,10 @@ public class AccommodationUnit {
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public void setCapacity(Integer value) {
+    public void setCapacity(BigInteger value) {
         this.capacity = value;
     }
 
@@ -209,7 +216,7 @@ public class AccommodationUnit {
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
     public BigInteger getSize() {
@@ -221,7 +228,7 @@ public class AccommodationUnit {
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
     public void setSize(BigInteger value) {
@@ -293,10 +300,10 @@ public class AccommodationUnit {
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public Integer getNumberOfRoom() {
+    public BigInteger getNumberOfRoom() {
         return number_of_room;
     }
 
@@ -305,10 +312,10 @@ public class AccommodationUnit {
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public void setNumberOfRoom(Integer value) {
+    public void setNumberOfRoom(BigInteger value) {
         this.number_of_room = value;
     }
 
@@ -317,10 +324,10 @@ public class AccommodationUnit {
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public Integer getFloor() {
+    public BigInteger getFloor() {
         return floor;
     }
 
@@ -329,20 +336,20 @@ public class AccommodationUnit {
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
     
     
-    public void setFloor(Integer value) {
+    public void setFloor(BigInteger value) {
         this.floor = value;
     }
 
-	public Integer getNumber_of_room() {
+	public BigInteger getNumber_of_room() {
 		return number_of_room;
 	}
 
-	public void setNumber_of_room(Integer number_of_room) {
+	public void setNumber_of_room(BigInteger number_of_room) {
 		this.number_of_room = number_of_room;
 	}
 
@@ -393,6 +400,14 @@ public class AccommodationUnit {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public double getDefaultPrice() {
+		return defaultPrice;
+	}
+
+	public void setDefaultPrice(double defaultPrice) {
+		this.defaultPrice = defaultPrice;
 	}
 	
 

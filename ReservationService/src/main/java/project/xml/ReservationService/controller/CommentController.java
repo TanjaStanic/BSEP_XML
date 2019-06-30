@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -61,6 +62,7 @@ public class CommentController {
 	@Autowired 
 	AccommodationRepository accommodationRepository;
 	
+	//@PreAuthorize("hasAuthority('addCommentar')")
 	@RequestMapping(value ="/addCommentar/{idUser}/{idAcc}/{text}",
 			method = RequestMethod.GET)	
 	public ResponseEntity<?> addCommentar(@PathVariable("idUser") Long idUser,
@@ -87,7 +89,8 @@ public class CommentController {
 		
 		return new ResponseEntity<Comment>(c,HttpStatus.OK);
 	}
-
+	
+	//@PreAuthorize("hasAuthority('addRating')")
 	@RequestMapping(value ="/addRating/{idAcc}/{idRes}/{ratingNum}",
 			method = RequestMethod.GET)	
 	public ResponseEntity<?> addRating(@PathVariable("idAcc") Long idAcc,
@@ -105,6 +108,7 @@ public class CommentController {
 		return new ResponseEntity<Reservation>(res,HttpStatus.OK);
 	}
 	
+	//@PreAuthorize("hasAuthority('getAllCommentsByAccommodation')")
 	@RequestMapping(value ="/getAllCommentsByAccommodation",
 			method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE,

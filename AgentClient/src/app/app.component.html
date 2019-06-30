@@ -82,6 +82,14 @@
             </span>
           </a>
         </li>
+        <li class="treeview" [hidden]="notLogged">
+          <a href="#">
+            <i class="fa fa-list-ul"></i> <span [hidden]="notLogged"><a routerLink="addAccUnit">Add unit</a></span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        </li>
 
       </ul>
     </section>

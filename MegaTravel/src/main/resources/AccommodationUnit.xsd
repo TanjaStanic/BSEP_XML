@@ -21,6 +21,7 @@
                 <xs:element name="capacity" type="xs:positiveInteger"/>
                 <xs:element name="number_of_room" type="xs:nonNegativeInteger"/>
                 <xs:element name="floor" type="xs:nonNegativeInteger"/>
+                <xs:element name="defaultPrice" type="xs:double"/>
                 <xs:element minOccurs="0" name="size">
                     <xs:simpleType>
                         <xs:restriction base="xs:positiveInteger">
@@ -69,6 +70,7 @@
                         <xs:restriction base="xs:date"/>
                     </xs:simpleType>
                 </xs:element>
+                <xs:element ref="accommodationUnit"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -107,6 +109,22 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
+                <xs:element ref="accommodationUnit"/>
+                <xs:element ref="ns2:accommodation"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AccommodationUnitRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="accommodationId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AccommodationUnitResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="accommodationUnit"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

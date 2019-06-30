@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig  extends WebSecurityConfigurerAdapter  implements WebMvcConfigurer{
-	
+
 	
 	@Bean
     public CorsFilter corsFilter() {
@@ -48,7 +48,11 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter  implements
 			// svim korisnicima dopusti da pristupe putanjama /auth/** i /h2-console/**
 			.authorizeRequests()
 			.antMatchers("/auth/**").permitAll()
-			.antMatchers("/api2/**").permitAll()
+			.antMatchers("/api/**").permitAll()
+			.antMatchers("/api/comments/**").permitAll()
+			.antMatchers("/api/messages/**").permitAll()
+			.antMatchers("/api/accommodations/**").permitAll()
+			.antMatchers("/api/reservationss/**").permitAll()
 			.antMatchers("/**").permitAll()
 			
 			// svaki zahtev mora biti autorizovan

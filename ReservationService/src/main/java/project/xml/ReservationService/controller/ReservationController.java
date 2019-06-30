@@ -7,14 +7,15 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import org.joda.time.Days;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import project.xml.ReservationService.model.Accommodation;
 import project.xml.ReservationService.model.Messages;
@@ -42,6 +43,7 @@ public class ReservationController {
 	/*
 	2019-07-10 02:00:00.0
 	**/
+	//@PreAuthorize("hasAuthority('cancelReservation')")
 	@RequestMapping(value ="/cancelReservation/{accId}/{resId}/{cancelDays}",
 			method = RequestMethod.GET)	
 	public ResponseEntity<?> cancelReservation(@PathVariable("accId") Long accId,

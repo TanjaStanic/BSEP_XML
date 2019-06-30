@@ -16,4 +16,8 @@ export class AccUnitServiceService {
   getAllAccUnits(id : number) : Observable<any>{
       return this.http.post('https://localhost:8764/api/accommodation/getAllAccUnits',id,{headers: this.auth.createAuthorizationTokenHeader()});  
       }
+  
+  addAccommodationUnit(id : number, accUnit: AccommodationUnit) : Observable<any>{
+      return this.http.post('https://localhost:8764/api/accommodationUnit/addAccommodationUnit/'+id,accUnit,{headers: this.auth.createAuthorizationTokenHeader()});  
+      }
 }

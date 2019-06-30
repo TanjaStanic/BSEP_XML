@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,6 +40,7 @@ public class MessageController {
 	@Autowired 
 	UserService userService;
 	
+	//@PreAuthorize("hasAuthority('getRecievedMessages')")
 	@RequestMapping(value ="/getRecievedMessages",
 			method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -55,7 +57,7 @@ public class MessageController {
 		}
 		return new ResponseEntity<>(newList,HttpStatus.OK);
 	}
-	
+	//@PreAuthorize("hasAuthority('getSentMessages')")
 	@RequestMapping(value ="/getSentMessages",
 			method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -73,6 +75,7 @@ public class MessageController {
 		return new ResponseEntity<>(newList,HttpStatus.OK);
 	}
 
+	//@PreAuthorize("hasAuthority('sentMessageFromInbox')")
 	@RequestMapping(value ="/sentMessageFromInbox/{content}/{title}/{sentId}/{recievedId}",
 			method = RequestMethod.GET)	
 	public ResponseEntity<?> sentMessage(@PathVariable("content") String content,

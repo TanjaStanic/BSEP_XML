@@ -33,7 +33,15 @@ insert into privilege (id,name) values (2,'login');
 insert into privilege (id,name) values (3,'loginAdmin');
 insert into privilege (id,name) values (4,'loginUser');
 insert into privilege (id,name) values (5,'loginAgent');
-insert into privilege (id,name) values (6,'myProfile');
+insert into privilege (id,name) values (6,'getReservationsFromUser');
+insert into privilege (id,name) values (7,'addCommentar');
+insert into privilege (id,name) values (8,'addRating');
+insert into privilege (id,name) values (9,'getAllCommentsByAccommodation');
+insert into privilege (id,name) values (10,'getRecievedMessages');
+insert into privilege (id,name) values (11,'getSentMessages');
+insert into privilege (id,name) values (12,'sentMessageFromInbox');
+insert into privilege (id,name) values (13,'cancelReservation');
+
 
 insert into roles_privileges(role_id,privilege_id) values (2,5);
 
@@ -42,6 +50,16 @@ insert into roles_privileges(role_id,privilege_id) values (1,2);
 insert into roles_privileges(role_id,privilege_id) values (1,3);
 insert into roles_privileges(role_id,privilege_id) values (3,4);
 insert into roles_privileges(role_id,privilege_id) values (3,6);
+
+insert into roles_privileges(role_id,privilege_id) values (3,7);
+insert into roles_privileges(role_id,privilege_id) values (3,8);
+insert into roles_privileges(role_id,privilege_id) values (3,9);
+insert into roles_privileges(role_id,privilege_id) values (3,10);
+insert into roles_privileges(role_id,privilege_id) values (3,11);
+insert into roles_privileges(role_id,privilege_id) values (3,12);
+insert into roles_privileges(role_id,privilege_id) values (3,13);
+insert into roles_privileges(role_id,privilege_id) values (3,14);
+
 
 
 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.mega-travel/soap" xmlns="http://www.mega-travel/soap"
+    xmlns:mess="http://www.mega-travel/message" xmlns:res="http://www.mega-travel/reservation"
+    xmlns:acc="http://www.mega-travel/accommodation" xmlns:user="http://www.mega-travel/user">
+    <xs:import namespace="http://www.mega-travel/user" schemaLocation="User.xsd"/>
+    <xs:import namespace="http://www.mega-travel/reservation" schemaLocation="Reservation.xsd"/>
+    <xs:import namespace="http://www.mega-travel/message" schemaLocation="Messages.xsd"/>
+    <xs:import namespace="http://www.mega-travel/accommodation" schemaLocation="Accommodation.xsd"/>
+    <xs:element name="MessageRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="email" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MessageResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="mess:messages"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ReservationRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="reservationId" type="xs:long"/>
+                <xs:element name="reservationStatus" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ReservationResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="res:reservation"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AccommodationRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="user:user"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AccommodationResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="acc:accommodation"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

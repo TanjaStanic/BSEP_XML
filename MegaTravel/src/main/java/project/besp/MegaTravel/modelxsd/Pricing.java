@@ -22,7 +22,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -66,11 +65,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "id",
-    "price",
-    "dateFrom",
-    "dateTo",
-    "accommodation_unit"
+	    "id",
+	    "price",
+	    "dateFrom",
+	    "dateTo",
+	    "accommodationUnit"
 })
 @Entity
 @Table(name="pricing")
@@ -130,7 +129,7 @@ public class Pricing {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
     public Date getDateFrom() {
@@ -142,7 +141,7 @@ public class Pricing {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
     public void setDateFrom(Date value) {
@@ -154,7 +153,7 @@ public class Pricing {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
     public Date getDateTo() {
@@ -166,7 +165,7 @@ public class Pricing {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
     public void setDateTo(Date value) {

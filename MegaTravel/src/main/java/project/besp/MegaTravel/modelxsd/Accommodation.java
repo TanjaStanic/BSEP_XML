@@ -108,20 +108,22 @@ import project.besp.MegaTravel.model.User;
  * 
  * 
  */
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "", propOrder = {
-    "id",
-    "name",
-    "cancelationDays",
-    "rating",
-    "category",
-    "description",
-    "location",
-    "address",
-    "images",
-    "additional_services",
-    "accommodation_unit",
-    "user"
+		  "id",
+		    "name",
+		    "cancelationDays",
+		    "rating",
+		    "category",
+		    "description",
+		    "location",
+		    "address",
+		    "accommodation_unit",
+		    "additional_services",
+		    "images",
+		    "user",
+		    "comments"
+		    
 })
 @Entity
 @Table(name = "accommodation")

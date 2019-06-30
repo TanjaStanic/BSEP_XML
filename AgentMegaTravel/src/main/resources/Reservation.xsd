@@ -18,17 +18,15 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
-                <xs:element name="start_date" type="xs:date"/>
-                <xs:element name="end_date" type="xs:date"/>
-                <xs:element name="total_price">
+                <xs:element name="startDate" type="xs:date"/>
+                <xs:element name="endDate" type="xs:date"/>
+                <xs:element name="totalPrice">
                     <xs:simpleType>
                         <xs:restriction base="xs:double">
                             <xs:minExclusive value="0"/>
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
-                <xs:element ref="ns2:user"/>
-                <xs:element ref="ns4:accommodationUnit"/>
                 <xs:element name="reservationStatus">
                     <xs:simpleType>
                         <xs:restriction base="xs:string">
@@ -53,6 +51,22 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
+                <xs:element ref="ns2:user"/>
+                <xs:element ref="ns4:accommodationUnit"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ReservationRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="agentId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ReservationResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="reservation"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

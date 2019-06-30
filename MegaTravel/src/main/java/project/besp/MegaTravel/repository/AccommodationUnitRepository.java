@@ -24,4 +24,5 @@ public interface AccommodationUnitRepository extends JpaRepository<Accommodation
 	public List<AccommodationUnit> findAllByUser(User user);
 	List<AccommodationUnit> findByAccommodationId(Long id);
 	
+	AccommodationUnit save(AccommodationUnit accUnit);
 }

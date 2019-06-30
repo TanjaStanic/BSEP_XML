@@ -58,9 +58,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
 		"id",
-    "geo_length",
-    "geo_width",
-    "accomodation"
+	    "geo_length",
+	    "geo_width",
+	    "accomodation"
 })
 @Entity
 @Table(name= "location")

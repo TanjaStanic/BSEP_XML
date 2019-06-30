@@ -27,6 +27,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import project.besp.MegaTravel.modelxsd.Reservation;
@@ -38,7 +42,30 @@ import project.besp.MegaTravel.modelxsd.Comment;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "User", propOrder = {
+    "id",
+    "firstName",
+    "lastName",
+    "email",
+    "password",
+    "pib",
+    "certificated",
+    "active",
+    "blocked",
+    "roles",
+    "lastPasswordResetDate",
+    "address",
+    "reservations",
+    "accommodations",
+    "accommodation_units",
+    "comments",
+    "messagesSent",
+    "messagesReceived"
+    
+    
+    
+})
 @Entity
 @Table(name="user")
 /*@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)

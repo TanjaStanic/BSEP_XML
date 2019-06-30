@@ -67,11 +67,11 @@ import project.besp.MegaTravel.model.User;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "messages", propOrder = {
 		"id",
-    "content",
-    "title",
-    "user",
-    "agent",
-    "date"
+	    "content",
+	    "title",
+	    "userSent",
+	    "userReceived",
+	    "date"
 })
 @Entity
 @Table(name= "messages")

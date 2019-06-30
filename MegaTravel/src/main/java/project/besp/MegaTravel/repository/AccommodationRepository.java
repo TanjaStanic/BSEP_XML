@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import project.besp.MegaTravel.model.User;
 import project.besp.MegaTravel.modelxsd.Accommodation;
 import project.besp.MegaTravel.modelxsd.AccommodationUnit;
 
@@ -17,4 +18,5 @@ public interface AccommodationRepository extends JpaRepository<Accommodation, Lo
      @Query(value="SELECT * FROM Accommodation acc WHERE acc.acc_address = ?1",  nativeQuery = true)
 		List<Accommodation> getByAddressId(Long id);
 
+	 List<Accommodation> findAllByUser(User u);
 }

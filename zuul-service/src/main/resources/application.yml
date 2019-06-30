@@ -1,7 +1,29 @@
+spring:
+  application:
+    name: zuul-server
+server:  
+  port: ${PORT:8081}
+  ssl:
+    enabled: true
+    key-store: classpath:zuul.jks
+    key-store-password: password
+    key-alias: zuul
+
+
+security:
+  require-ssl: true
 eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: false
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    securePort: ${server.port}
   client:
+    securePortEnabled: true
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: https://localhost:8761/eureka/ 
+
 hystrix:
   command:
     default:
@@ -14,26 +36,8 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 60000
-management:
-  security:
-    enabled: false
-ribbon:
-  ConnectTimeout: 60000
-  ReadTimeout: 60000
-security:
-  basic:
-    enable: 'false   '
-server:
-  port: 8084
-spring:
-  application:
-    name: zuul-service
+
 zuul:
-  host:
-    socket-timeout-millis: 30000
-  ribbon:
-    eager-load:
-      enabled: true
   routes:
     AdminService:
       sensitive-headers: Authorization
@@ -48,3 +52,16 @@ zuul:
       sensitive-headers: Authorization
       serviceId: ReservationService
   sensitive-headers: Authorization
+  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
+  host:
+    socket-timeout-millis: 30000
+  sslHostnameValidationEnabled: false
+  ribbon:
+    IsSecured: true
+    ConnectTimeout:  10000
+    ReadTimeout:  10000
+    eureka:
+      enabled: true
+    TrustStore: classpath:zuul.jks
+    TrustStorePassword : password
+    IsHostnameValidationRequired: false

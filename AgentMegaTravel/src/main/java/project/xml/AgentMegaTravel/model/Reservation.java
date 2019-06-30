@@ -86,7 +86,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Reservation", propOrder = {
+@XmlType(name = "", propOrder = {
 		"id",
     "startDate",
     "endDate",
@@ -94,8 +94,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "reservationStatus",
     "reservationRating",
     "user",
-    "accommodationUnit",
-    "price"
+    "accommodationUnit"
 })
 @Entity
 @Table(name="reservation")
@@ -115,7 +114,6 @@ public class Reservation {
 	@XmlElement(name = "total_price")
     protected double totalPrice;
 
-	protected double price;
     
     @XmlElement(required = true, name="reservation_status")
     protected String reservationStatus;
@@ -268,13 +266,6 @@ public class Reservation {
         this.reservationRating = value;
     }
 
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
 
 
 	public User getUser() {

@@ -3,40 +3,36 @@
   <div class="register-box-body">
     <p class="login-box-msg">Register new accommodation unit</p>
 
-    <form method="post">
+    <form method="post" (submit)="addAcc()">
      <div class="form-group has-feedback">
         <label for="floor">Floor:</label>
-        <input type="number" class="form-control" placeholder="Number of floor" min="0" required>
+        <input type="number" class="form-control" [(ngModel)]="accUnit.floor"  name="floor" id="floor"  placeholder="floor"  >
+        <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <label for="floor">Size:</label>
+        <input type="number" class="form-control" [(ngModel)]="accUnit.size" name="size" placeholder="size" >
         <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label for="numberOfRoom">Room:</label>
-        <input type="number" class="form-control" placeholder="Number of room" min="1" required> 
+        <input type="number" class="form-control" [(ngModel)]="accUnit.numberOfRoom"  name="numberOfRoom" placeholder="Number of room" > 
         <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label for="numberOfBeds">Capacity:</label>
-        <input type="number" class="form-control" placeholder="Number of beds" min="1" required>
+        <input type="number" class="form-control" [(ngModel)]="accUnit.capacity"  name="capacity" placeholder="Number of beds" >
         <span class="glyphicon glyphicon-bed form-control-feedback"></span>
       </div>
-      <div class="form-group has-feedback">                
-      	<label for="startDate" >Price start date:</label>
-        <input type="date" class="form-control" required>
-        <span class="glyphicon glyphicon-calendar form-control-feedback"></span>         
+      <div class="form-group has-feedback">
+        <label for="numberOfBeds">Type:</label>
+        <input type="text" class="form-control" [(ngModel)]="accUnit.type" name="type" placeholder="type: room" >
+        <span class="glyphicon glyphicon-bed form-control-feedback"></span>
       </div>
-      <div class="form-group has-feedback">                
-      	<label for="endDate" >Price end date:</label>
-        <input type="date" class="form-control" required>
-        <span class="glyphicon glyphicon-calendar form-control-feedback"></span>         
-      </div>
-	  <div class="form-group">
-            <label for="newPrice">Price</label> 
-            <input type="number" class="form-control" name="newPriceValue" required />
-            <span class="glyphicon glyphicon-euro form-control-feedback"></span>
-      </div>
-	  <div class="form-group">
-            <label >Additional services:</label>
-          
+      <div class="form-group has-feedback">
+        <label for="numberOfBeds">default price:</label>
+        <input type="number" class="form-control" [(ngModel)]="accUnit.defaultPrice" name="defaultPrice" placeholder="type: room" >
+        <span class="glyphicon glyphicon-bed form-control-feedback"></span>
       </div>
       <div class="row">
         <!-- /.col -->

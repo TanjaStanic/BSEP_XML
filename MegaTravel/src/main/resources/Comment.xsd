@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="http://www.mega-travel/comment"
-    xmlns="http://www.mega-travel/comment"
-    xmlns:ns1="http://www.mega-travel/accommodation-unit" xmlns:user="http://www.mega-travel/user">
+    targetNamespace="http://www.mega-travel/comment" xmlns="http://www.mega-travel/comment"
+    xmlns:ns1="http://www.mega-travel/accommodation-unit" xmlns:user="http://www.mega-travel/user"
+    xmlns:ns3="http://www.mega-travel/accommodation">
     <xs:import namespace="http://www.mega-travel/user" schemaLocation="User.xsd"/>
     <xs:import namespace="http://www.mega-travel/accommodation-unit"
         schemaLocation="AccommodationUnit.xsd"/>
+    <xs:import namespace="http://www.mega-travel/accommodation" schemaLocation="Accommodation.xsd"/>
     <xs:element name="Comment">
         <xs:complexType>
             <xs:sequence>
@@ -21,6 +22,7 @@
                 <xs:element ref="user:user"/>
                 <xs:element ref="ns1:accommodationUnit"/>
                 <xs:element name="visible" type="xs:boolean"/>
+                <xs:element ref="ns3:accommodation"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

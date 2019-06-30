@@ -2,8 +2,10 @@ package project.xml.ReservationService.model;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +17,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 
 @Entity
-public class Role implements GrantedAuthority{
+public class Role{
 	
 	/**
 	 * 
@@ -31,7 +33,7 @@ public class Role implements GrantedAuthority{
     private String name;
     
  
-    @ManyToMany
+    @ManyToMany(cascade =CascadeType.ALL , fetch = FetchType.EAGER)
     @JoinTable(
         name = "roles_privileges", 
         joinColumns = @JoinColumn(
@@ -41,11 +43,6 @@ public class Role implements GrantedAuthority{
     private Collection<Privilege> privileges;
 
 
-	@Override
-	public String getAuthority() {
-		// TODO Auto-generated method stub
-		return name;
-	}
 
 
 	public Long getId() {

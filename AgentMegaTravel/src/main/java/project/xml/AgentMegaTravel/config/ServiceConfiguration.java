@@ -4,7 +4,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
-import project.xml.AgentMegaTravel.soap.AccommodationClient;
+import project.xml.AgentMegaTravel.soap.BaseClient;
+import project.xml.AgentMegaTravel.soap.UpdateClient;
+
 
 @Configuration
 public class ServiceConfiguration {
@@ -16,19 +18,29 @@ public class ServiceConfiguration {
 		// pom.xml
 		//System.out.println("package name: " + Accommodation.class.getPackage().getName());
 		//marshaller.setContextPath(Accommodation.class.getPackage().getName());
-		marshaller.setContextPath("project.xml.AgentMegaTravel.xsd");
+		String [] packagesToScan = {"project.xml.AgentMegaTravel.xsd"};
+		marshaller.setPackagesToScan(packagesToScan);
+		//marshaller.setContextPath("project.xml.AgentMegaTravel.xsd");
 		return marshaller;
 	}
 	@Bean
-	public AccommodationClient movieClient(Jaxb2Marshaller marshaller) {
-		System.out.println("AccommodationClient in AgentConfig entered");
-		AccommodationClient client = new AccommodationClient();
-		//client.setDefaultUri("http://megatravel-xml/ws");
-		client.setDefaultUri("https://localhost:8443/ws");
-		
-		client.setMarshaller(marshaller);
-		client.setUnmarshaller(marshaller);
-		return client;
+	public BaseClient baseClient(Jaxb2Marshaller marshaller) {
+		System.out.println("baseClient in AgentConfig entered");
+		BaseClient baseClient = new BaseClient();
+		baseClient.setDefaultUri("https://localhost:8443/ws");
+		baseClient.setMarshaller(marshaller);
+		baseClient.setUnmarshaller(marshaller);
+		return baseClient;
+	}
+	
+	@Bean
+	public UpdateClient updateClient(Jaxb2Marshaller marshaller) {
+		System.out.println("updateClient in AgentConfig entered");
+		UpdateClient updateClient = new UpdateClient();
+		updateClient.setDefaultUri("https://localhost:8443/ws");
+		updateClient.setMarshaller(marshaller);
+		updateClient.setUnmarshaller(marshaller);
+		return updateClient;
 	}
 
 }

@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "User", propOrder = {
+@XmlType(name = "", propOrder = {
     "id",
     "firstName",
     "lastName",

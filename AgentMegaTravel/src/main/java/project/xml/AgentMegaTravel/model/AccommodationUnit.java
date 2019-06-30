@@ -92,7 +92,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * 
  * 
  */
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "", propOrder = {
     "id",
     "capacity",
@@ -105,7 +105,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
     "additional_services",
     "reservations",
     "pricing",
-    "comments"
+    "comments",
+    "defaultPrice"
 })
 @Entity
 @Table(name="accommodation_unit")
@@ -121,16 +122,20 @@ public class AccommodationUnit {
     protected BigInteger capacity;
 	
 	@XmlElement(required = true)
-	protected Integer number_of_room;
+	protected BigInteger numberOfRoom;
 	
 	@XmlElement(required = true)
-	protected Integer floor;
+	protected BigInteger floor;
     
 	protected BigInteger size;
    
 	@XmlElement(required = true)
     protected String type;
     
+	@XmlElement()
+	@Column(name = "default_price")
+	protected Double defaultPrice;
+	
 	/*
      * Smjestajna jedinica odgovara tacno jednom smjestaju.
      */
@@ -297,8 +302,8 @@ public class AccommodationUnit {
      *     {@link Integer }
      *     
      */
-    public Integer getNumberOfRoom() {
-        return number_of_room;
+    public BigInteger getNumberOfRoom() {
+        return numberOfRoom;
     }
 
     /**
@@ -309,8 +314,8 @@ public class AccommodationUnit {
      *     {@link Integer }
      *     
      */
-    public void setNumberOfRoom(Integer value) {
-        this.number_of_room = value;
+    public void setNumberOfRoom(BigInteger value) {
+        this.numberOfRoom = value;
     }
 
     /**
@@ -321,7 +326,7 @@ public class AccommodationUnit {
      *     {@link Integer }
      *     
      */
-    public Integer getFloor() {
+    public BigInteger getFloor() {
         return floor;
     }
 
@@ -333,17 +338,9 @@ public class AccommodationUnit {
      *     {@link Integer }
      *     
      */
-    public void setFloor(Integer value) {
+    public void setFloor(BigInteger value) {
         this.floor = value;
     }
-
-	public Integer getNumber_of_room() {
-		return number_of_room;
-	}
-
-	public void setNumber_of_room(Integer number_of_room) {
-		this.number_of_room = number_of_room;
-	}
 
 	public Accommodation getAccommodation() {
 		return accommodation;
@@ -392,6 +389,14 @@ public class AccommodationUnit {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public Double getDefaultPrice() {
+		return defaultPrice;
+	}
+
+	public void setDefaultPrice(Double defaultPrice) {
+		this.defaultPrice = defaultPrice;
 	}
 	
 

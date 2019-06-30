@@ -3,12 +3,13 @@
     targetNamespace="http://www.mega-travel/user" xmlns="http://www.mega-travel/user"
     xmlns:ns1="http://www.mega-travel/accommodation-unit"
     xmlns:ns3="http://www.mega-travel/accommodation" xmlns:ns4="http://www.mega-travel/reservation"
-    xmlns:ns5="http://www.mega-travel/comment">
+    xmlns:ns5="http://www.mega-travel/comment" xmlns:ns2="http://www.mega-travel/message">
     <xs:import namespace="http://www.mega-travel/comment" schemaLocation="Comment.xsd"/>
     <xs:import namespace="http://www.mega-travel/reservation" schemaLocation="Reservation.xsd"/>
     <xs:import namespace="http://www.mega-travel/accommodation" schemaLocation="Accommodation.xsd"/>
     <xs:import namespace="http://www.mega-travel/accommodation-unit"
         schemaLocation="AccommodationUnit.xsd"/>
+    <xs:import namespace="http://www.mega-travel/message" schemaLocation="Messages.xsd"/>
     <xs:element name="user">
         <xs:complexType>
             <xs:sequence>
@@ -37,15 +38,6 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
-                <xs:element name="userName">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:minLength value="2"/>
-                            <xs:maxLength value="20"/>
-                            <xs:pattern value="[a-zA-Z]([a-zA-Z0-9_\.])*"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:element>
                 <xs:element name="email">
                     <xs:simpleType>
                         <xs:restriction base="xs:string">
@@ -64,11 +56,11 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
+                <xs:element name="certificated" type="xs:boolean"/>
                 <xs:element name="active" type="xs:boolean"/>
                 <xs:element name="blocked" type="xs:boolean"/>
                 <xs:element ref="address"/>
-                <xs:element maxOccurs="3" ref="role"/>
-                <xs:element name="certificated" type="xs:boolean"/>
+                <xs:element maxOccurs="unbounded" ref="role" minOccurs="0"/>
                 <xs:element name="pib">
                     <xs:simpleType>
                         <xs:restriction base="xs:string">
@@ -77,10 +69,12 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
+                <xs:element name="lastPasswordResetDate" type="xs:date"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns3:accommodation"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns4:reservation"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns1:accommodationUnit"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns5:Comment"/>
+                <xs:element ref="ns2:messages"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -110,6 +104,13 @@
     <xs:element name="address">
         <xs:complexType>
             <xs:sequence>
+                <xs:element name="id">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:long">
+                            <xs:minInclusive value="0"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
                 <xs:element name="street">
                     <xs:simpleType>
                         <xs:restriction base="xs:string">
@@ -145,6 +146,7 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
+                <xs:element name="distance" type="xs:long"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

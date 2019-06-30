@@ -58,7 +58,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "image", propOrder = {
+@XmlType(name = "", propOrder = {
     "id",
     "title",
     "uri",

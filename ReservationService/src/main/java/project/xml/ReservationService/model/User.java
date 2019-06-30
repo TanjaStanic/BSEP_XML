@@ -23,7 +23,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import javax.persistence.Transient;
 
 
 @Entity
@@ -168,9 +168,20 @@ public class User  implements UserDetails{
 	}
 
 	@Override
+	@Transient
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return this.roles;
+		if(!this.roles.isEmpty()) {
+			Role r = roles.iterator().next();
+			List<Privilege> privileges = new ArrayList<Privilege>();
+			for(Privilege p : r.getPrivileges()) {
+				privileges.add(p);
+			}
+			
+			return privileges;
+		}
+		
+		return null;
 	}
 
 
