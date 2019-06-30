@@ -134,10 +134,10 @@ public class CommentController {
 	}
 	
 	
-	 @PostMapping("/rating")
+	 @PostMapping("/newRating")
 		public ResponseEntity<?> postRating(@RequestBody RatingDTO rating){		
 			HttpEntity<RatingDTO> request = new HttpEntity<RatingDTO>(rating);
-			String _return= template.postForObject("http://localhost:8135/newRating",
+			String _return= template.postForObject("http://localhost:8554/newRating",
 					request, String.class);
 			return new ResponseEntity<String>(_return, HttpStatus.OK);
 		}
